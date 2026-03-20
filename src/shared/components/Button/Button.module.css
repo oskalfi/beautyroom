@@ -1,0 +1,76 @@
+.button {
+  align-self: center;
+  outline: 1px var(--white) solid;
+  padding: 16px 62px;
+  border: none;
+  font-family: inherit;
+  background-color: rgba(253, 251, 251, 0.1);
+  backdrop-filter: blur(20px);
+  cursor: pointer;
+  font-size: var(--font-size-button);
+  border-radius: 30px;
+  color: var(--cta-button-text);
+  font-weight: 500;
+  text-transform: uppercase;
+  /*styles for icon*/
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.text {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.fingerprint {
+  color: var(--primary-color);
+  position: absolute;
+  left: 50%;
+  bottom: -80%;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+.arrowsContainer {
+  position: absolute;
+  display: flex;
+  right: -50%;
+  transition:
+    right 0.3s ease,
+    gap 0.3s ease;
+  z-index: 2;
+}
+
+/* For arrow appearance animation*/
+.arrow:first-of-type {
+  transform: translateX(11px);
+}
+
+.arrow:last-of-type {
+  transform: translateX(-11px);
+}
+
+/* Animation */
+
+.button:hover {
+  background-color: rgba(248, 148, 164, 0.5);
+  color: var(--white);
+}
+
+.button:hover .fingerprint {
+  transform: scale(70%);
+  color: white;
+}
+
+.button:hover .text {
+  transform: translateX(-16px);
+}
+
+.button:hover .arrowsContainer {
+  right: 15%;
+  gap: 10px;
+}

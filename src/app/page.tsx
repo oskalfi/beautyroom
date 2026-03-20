@@ -1,66 +1,118 @@
-import Image from "next/image";
+"use client";
+
 import styles from "./page.module.css";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import SplitText from "gsap/src/SplitText";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import { UnderlineSVG } from "@/shared/assets/svg/Underline";
+import { TopLeafSVG } from "@/shared/assets/svg/TopLeaf";
+import { BottomLeafSVG } from "@/shared/assets/svg/BottomLeaf";
 
 export default function Home() {
+  const container = useRef(null);
+
+  useGSAP(
+    () => {
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.registerPlugin(SplitText);
+
+      // Text appearance animation
+      const h1 = SplitText.create(`.${styles.h1}`, { type: " lines chars" });
+      const address = SplitText.create(`.${styles.address}`, {
+        type: "lines chars",
+      });
+      const timeline = gsap.timeline();
+      timeline
+        .from(
+          h1.chars,
+          {
+            duration: 0.5,
+            y: 10, // animate from 100px below
+            autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
+            stagger: 0.03, // 0.05 seconds between each
+          },
+          "<",
+        )
+        .from(address.chars, {
+          duration: 0.4,
+          y: 10,
+          autoAlpha: 0,
+          stagger: 0.01,
+        })
+        .to(`.${styles.clip}`, {
+          width: "100%",
+          duration: 3,
+          ease: "power1.inOut",
+        });
+
+      //Scroll animation
+      const scroll = gsap.timeline({
+        scrollTrigger: {
+          trigger: `.${styles.backgroundImage}`,
+          start: "top top",
+          end: "+=700",
+          scrub: true,
+        },
+      });
+      scroll
+        .to(
+          `.${styles.secondScreen}`,
+          {
+            y: -400,
+          },
+          "<",
+        )
+        .to(
+          `.${styles.welcomeText}`,
+          {
+            y: -400,
+          },
+          "<",
+        )
+        .to(
+          `.${styles.backgroundImage}`,
+          {
+            y: -100,
+          },
+          "<",
+        );
+    },
+    { scope: container },
+  );
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main ref={container}>
+      <div className={styles.welcomeSection}>
+        <img
+          src="/main_bg.avif"
+          alt="pretty female face"
+          className={styles.backgroundImage}
         />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+        <div className={styles.flowHeight}>
+          <div className={styles.welcomeText}>
+            <div className={styles.h1}>
+              Beautiful skin is not a dream — it's a result
+            </div>
+
+            <div className={styles.address}>
+              Facial skin care and treatment studio based{" "}
+              <span className={styles.underlinedText}>
+                in Tel Aviv - Yafo.
+                <UnderlineSVG
+                  svgClassName={styles.underline}
+                  clipClassName={styles.clip}
+                ></UnderlineSVG>
+              </span>
+            </div>
+          </div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className={styles.secondScreen}>
+          <TopLeafSVG className={styles.topLeaf} />
+          <BottomLeafSVG className={styles.bottomLeaf} />
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }

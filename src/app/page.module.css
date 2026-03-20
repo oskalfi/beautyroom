@@ -1,141 +1,86 @@
-.page {
-  --background: #fafafa;
-  --foreground: #fff;
-
-  --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
-  display: flex;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
+.welcomeSection {
+  position: relative;
 }
 
-.main {
-  display: flex;
-  min-height: 100vh;
+.backgroundImage {
+  z-index: -1;
+  display: block;
+  height: 100vh;
   width: 100%;
+  position: absolute;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.flowHeight {
+  height: 95vh;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  position: relative;
+}
+
+.welcomeText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 70px;
+  gap: 40px;
+}
+
+.h1 {
+  font-family: "MontserratAlternates";
   max-width: 800px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
+  font-size: 96px;
+  letter-spacing: 0.04em;
+  text-align: center;
 }
 
-.intro {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
+.address {
+  font-weight: 300;
+  max-width: 530px;
+  text-align: center;
+  font-size: 26px;
+  line-height: 1.5em;
 }
 
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
+.underlinedText {
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+  font-size: 30px;
 }
 
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
-}
-
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.ctas {
-  display: flex;
-  flex-direction: row;
+.underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translateY(70%);
   width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
+  height: 100%;
+  color: var(--secondary-color);
 }
 
-.ctas a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
-  cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
+.clip {
+  width: 0;
 }
 
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
+.secondScreen {
+  height: 100vh;
+  width: 100%;
+  background-color: var(--white);
+  position: absolute;
+  padding-top: 5px;
+  z-index: -1;
 }
 
-a.secondary {
-  border-color: var(--button-secondary-border);
+.topLeaf {
+  position: absolute;
+  right: 0;
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
-}
-
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
-  }
-
-  .intro {
-    gap: 16px;
-  }
-
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
-
-  .page {
-    --background: #000;
-    --foreground: #000;
-
-    --text-primary: #ededed;
-    --text-secondary: #999;
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
-  }
+.bottomLeaf {
+  position: absolute;
+  bottom: 0;
 }

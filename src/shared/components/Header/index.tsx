@@ -2,63 +2,32 @@
 
 import styles from "./Header.module.css";
 import Link from "next/link";
-import { Button } from "@/shared/components/Button";
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BeautyRoom } from "@/shared/assets/svg/BeautyRoom";
+import { BeautyRoomSVG } from "@/shared/assets/svg/BeautyRoom";
 import { SilhouetteSVG } from "@/shared/assets/svg/Silhouette";
+import { Button } from "@/shared/components/Button";
+import { collapseHeader } from "./animations/collapseHeader";
 
 export const Header = () => {
   const header = useRef(null);
 
   useGSAP(
     () => {
+      //instant logo reveal
       const logoSilhouette = `.${styles.logoSilhouette} path`;
-      const logoText = `.${styles.logoText}`;
-      const contentContainer = `.${styles.contentContainer}`;
-
       gsap.to(logoSilhouette, {
-        delay: 2.5,
         strokeDashoffset: 0,
       });
 
-      gsap.registerPlugin(ScrollTrigger);
+      const logoText = `.${styles.logoText}`;
+      const contentContainer = `.${styles.contentContainer}`;
 
-      const timeline = gsap.timeline({ paused: true });
-
-      timeline
-        .to(
-          contentContainer,
-          {
-            scale: 0.9,
-            height: "80px",
-            ease: "sine.inOut",
-          },
-          "<",
-        )
-        .to(
-          logoSilhouette,
-          {
-            strokeDashoffset: -1082,
-          },
-          "<",
-        )
-        .to(
-          logoText,
-          {
-            bottom: "5px",
-          },
-          "<",
-        );
-
-      ScrollTrigger.create({
-        trigger: logoSilhouette,
-        start: () => `${window.innerHeight * 0.5} ${window.innerHeight * 0.2}`,
-        end: () => `${window.innerHeight * 0.5} ${window.innerHeight * 0.2}`,
-        onEnter: () => timeline.play(),
-        onLeaveBack: () => timeline.reverse(),
+      collapseHeader({
+        silhouettePathClass: logoSilhouette,
+        logoTextClass: logoText,
+        headerContentContainerClass: contentContainer,
       });
     },
     { scope: header },
@@ -68,8 +37,8 @@ export const Header = () => {
     <header className={styles.header} ref={header}>
       <div className={styles.contentContainer}>
         <Link href="/" className={styles.logo}>
-          <BeautyRoom className={styles.logoText}></BeautyRoom>
-          <SilhouetteSVG className={styles.logoSilhouette}></SilhouetteSVG>
+          <BeautyRoomSVG className={styles.logoText} />
+          <SilhouetteSVG className={styles.logoSilhouette} />
         </Link>
 
         <nav className={styles.navigation}>
@@ -109,7 +78,7 @@ export const Header = () => {
                   viewBox="0 0 100 30"
                   preserveAspectRatio="none"
                 >
-                  <rect width="99" height="29" x=".5" y=".5" rx="14.5" />
+                  <rect width="100%" height="29" x=".5" y=".5" rx="14.5" />
                 </svg>
               </Link>
             </li>

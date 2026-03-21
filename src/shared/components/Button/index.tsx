@@ -10,11 +10,11 @@ export const Button = ({ children }: ButtonProps) => {
   return (
     <button type="button" className={styles.button}>
       <div className={styles.arrowsContainer}>
-        <ArrowSVG className={styles.arrow}></ArrowSVG>
-        <ArrowSVG className={styles.arrow}></ArrowSVG>
-        <ArrowSVG className={styles.arrow}></ArrowSVG>
+        <ArrowSVG className={styles.arrow} />
+        <ArrowSVG className={styles.arrow} />
+        <ArrowSVG className={styles.arrow} />
       </div>
-      <FingerprintSVG className={styles.fingerprint}></FingerprintSVG>
+      <FingerprintSVG className={styles.fingerprint} />
       <span className={styles.text}>{children}</span>
     </button>
   );

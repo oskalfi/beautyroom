@@ -3,7 +3,7 @@
   width: 100%;
   background: linear-gradient(
     to right,
-    rgba(248, 148, 164, 0.7),
+    rgb(248, 148, 164, 0.7),
     rgba(249, 209, 183, 0.7)
   );
   backdrop-filter: blur(20px);

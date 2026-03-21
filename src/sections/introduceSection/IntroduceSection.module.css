@@ -1,0 +1,23 @@
+.introduceSection {
+  height: 100vh;
+  width: 100%;
+  background-color: var(--white);
+  position: relative;
+  box-shadow: 0 -10px 100px rgba(0, 0, 0, 0.2);
+}
+
+.topFlower,
+.bottomFlower {
+  width: 320px;
+  height: auto;
+  position: absolute;
+}
+
+.topFlower {
+  left: 0;
+}
+
+.bottomFlower {
+  right: 0;
+  bottom: 0;
+}

@@ -1,38 +1,43 @@
-import styles from "./styles.module.css";
-import gsap from "gsap";
-import SplitText from "gsap/src/SplitText";
-import ScrollTrigger from "gsap/ScrollTrigger";
+"use client";
+
+import styles from "./WelcomeSection.module.css";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { UnderlineSVG } from "@/shared/assets/svg/Underline";
+import { revealWelcomeText } from "./animations/revealWelcomeText";
+import { enableScrollParallax } from "./animations/enableScrollParallax";
 
 export const WelcomeSection = () => {
   const welcomeSection = useRef(null);
 
-  useGSAP(() => {}, { scope: welcomeSection });
+  useGSAP(
+    () => {
+      revealWelcomeText({
+        titleClass: `.${styles.h1}`,
+        subtitleClass: `.${styles.address}`,
+        underlineClipPathClass: `.${styles.clip}`,
+      });
+      enableScrollParallax(`.${styles.backgroundImage}`);
+    },
+    { scope: welcomeSection },
+  );
 
   return (
-    <div ref={welcomeSection} className={styles.welcomeSection}>
-      <img
-        src="/main_bg.avif"
-        alt="pretty female face"
-        className={styles.backgroundImage}
-      />
-      <div className={styles.flowHeight}>
-        <div className={styles.welcomeText}>
-          <div className={styles.h1}>
-            Beautiful skin is not a dream — it's a result
-          </div>
-          <div className={styles.address}>
-            Facial skin care and treatment studio based
-            <span className={styles.underlinedText}>
-              in Tel Aviv - Yafo.
-              <UnderlineSVG
-                svgClassName={styles.underline}
-                clipClassName={styles.clip}
-              ></UnderlineSVG>
-            </span>
-          </div>
+    <div className={styles.welcomeSection} ref={welcomeSection}>
+      <div className={styles.backgroundImage}></div>
+      <div className={styles.welcomeText}>
+        <div className={styles.h1}>
+          Beautiful skin is not a dream — it's a result
+        </div>
+        <div className={styles.address}>
+          Facial skin care and treatment studio based{" "}
+          <span className={styles.underlinedText}>
+            in Tel Aviv - Yafo.
+            <UnderlineSVG
+              svgClassName={styles.underline}
+              clipClassName={styles.clip}
+            />
+          </span>
         </div>
       </div>
     </div>

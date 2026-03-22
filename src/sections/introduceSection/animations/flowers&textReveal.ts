@@ -31,7 +31,6 @@ export function flowersNTextReveal(
   gsap.to(`.${topFlowerClass} path`, {
     strokeDashoffset: 0,
     ease: "power1.out",
-    invalidateOnRefresh: true,
     scrollTrigger: {
       trigger: `.${topFlowerClass}`,
       start: "top 99.9%",

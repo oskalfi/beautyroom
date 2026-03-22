@@ -4,6 +4,70 @@
   background-color: var(--black);
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 50px;
+}
+
+.link {
+  padding: 30px;
+  border-bottom: 1px solid var(--primary-color);
+  border-top: 1px solid var(--primary-color);
+  width: 100%;
+  position: relative;
+  background: transparent;
+  overflow: hidden;
+}
+
+.linkText {
+  color: var(--white);
+}
+
+.blockMovingFromTop,
+.blockMovingFromBottom {
+  position: absolute;
+  inset: 0;
+  background-color: var(--primary-color);
+  top: 0;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0, 0, 0.2, 1);
+  color: var(--black);
+}
+
+.blockMovingFromTop {
+  transform: translateY(-100%);
+}
+
+.blockMovingFromBottom {
+  transform: translateY(100%);
+}
+
+.textMovingFromTop,
+.textMovingFromBottom {
+  padding: 30px;
+  inset: 0;
+  position: absolute;
+  top: 0;
+  color: var(--black);
+  transition: transform 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.textMovingFromTop {
+  transform: translateY(100%);
+}
+
+.textMovingFromBottom {
+  transform: translateY(-100%);
+}
+
+.link:hover .blockMovingFromTop.animate,
+.link:hover .blockMovingFromBottom.animate {
+  transform: translateY(0);
+  transform: scaleY(100%);
+}
+
+.link:hover .blockMovingFromTop.animate .textMovingFromTop,
+.link:hover .blockMovingFromBottom.animate .textMovingFromBottom {
+  transform: translateY(0);
 }

@@ -4,8 +4,7 @@
   padding: 16px 62px;
   border: none;
   font-family: inherit;
-  background-color: rgba(253, 251, 251, 0.1);
-  backdrop-filter: blur(20px);
+  background-color: var(--white);
   cursor: pointer;
   font-size: var(--font-size-button);
   border-radius: 30px;
@@ -57,13 +56,13 @@
 /* Animation */
 
 .button:hover {
-  background-color: rgba(248, 148, 164, 0.5);
+  background-color: var(--primary-color);
   color: var(--white);
 }
 
 .button:hover .fingerprint {
   transform: scale(70%);
-  color: white;
+  color: var(--white);
 }
 
 .button:hover .text {

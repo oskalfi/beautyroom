@@ -3,10 +3,10 @@
   width: 100%;
   background: linear-gradient(
     to right,
-    rgb(248, 148, 164, 0.7),
-    rgba(249, 209, 183, 0.7)
+    rgb(248, 148, 164, 0.9),
+    rgba(249, 209, 183, 0.9)
   );
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
   top: 0;
   position: fixed;
 }
@@ -45,7 +45,7 @@
   stroke: currentColor;
   stroke-width: 1px;
   stroke-dasharray: 1082;
-  stroke-dashoffset: -1082;
+  stroke-dashoffset: 0;
   transition: stroke-dashoffset 2s ease;
 }
 

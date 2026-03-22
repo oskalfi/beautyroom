@@ -17,10 +17,6 @@ export const Header = () => {
     () => {
       //instant logo reveal
       const logoSilhouette = `.${styles.logoSilhouette} path`;
-      gsap.to(logoSilhouette, {
-        strokeDashoffset: 0,
-      });
-
       const logoText = `.${styles.logoText}`;
       const contentContainer = `.${styles.contentContainer}`;
 

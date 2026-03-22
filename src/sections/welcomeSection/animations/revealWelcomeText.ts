@@ -23,13 +23,13 @@ export function revealWelcomeText({
   timeline
     .from(title.chars, {
       duration: 0.5,
-      y: 10, // animate from 100px below
+      y: -10, // animate from 100px below
       autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
       stagger: 0.03, // 0.05 seconds between each
     })
     .from(subtitle.chars, {
-      duration: 0.4,
-      y: 10,
+      duration: 0.5,
+      y: 3,
       autoAlpha: 0,
       stagger: 0.01,
     })

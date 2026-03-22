@@ -2,22 +2,54 @@
   height: 100vh;
   width: 100%;
   background-color: var(--white);
-  position: relative;
   box-shadow: 0 -10px 100px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  position: sticky;
+  top: 0;
 }
 
 .topFlower,
 .bottomFlower {
+  position: absolute;
   width: 320px;
   height: auto;
-  position: absolute;
 }
 
 .topFlower {
+  top: 0;
   left: 0;
 }
 
 .bottomFlower {
   right: 0;
   bottom: 0;
+}
+
+.topFlower path,
+.bottomFlower path {
+  fill: transparent;
+  stroke: var(--secondary-color);
+  stroke-width: 3px;
+}
+
+.topFlower path {
+  stroke-dasharray: 2646;
+  stroke-dashoffset: -2646;
+  transition: stroke-dashoffset 3s;
+}
+
+.bottomFlower path {
+  stroke-dasharray: 2870;
+  stroke-dashoffset: -2870;
+  transition: stroke-dashoffset 3s;
+}
+
+.heading {
+  color: var(--primary-color);
+  max-width: 1000px;
+  text-align: center;
+  font-weight: 800;
 }

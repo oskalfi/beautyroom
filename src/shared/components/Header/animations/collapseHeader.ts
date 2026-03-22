@@ -11,7 +11,7 @@ export function collapseHeader({
   silhouettePathClass,
   logoTextClass,
   headerContentContainerClass,
-}: collapseHeaderProps) {
+}: collapseHeaderProps): void {
   gsap.registerPlugin(ScrollTrigger);
   const scroll = gsap.timeline({ paused: true });
 

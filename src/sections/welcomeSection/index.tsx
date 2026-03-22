@@ -26,9 +26,9 @@ export const WelcomeSection = () => {
     <div className={styles.welcomeSection} ref={welcomeSection}>
       <div className={styles.backgroundImage}></div>
       <div className={styles.welcomeText}>
-        <div className={styles.h1}>
+        <h1 className={styles.h1}>
           Beautiful skin is not a dream — it's a result
-        </div>
+        </h1>
         <div className={styles.address}>
           Facial skin care and treatment studio based{" "}
           <span className={styles.underlinedText}>

@@ -9,7 +9,6 @@ import { useEffect } from "react";
 import { moveBlockFromTop } from "@/sections/treatmentsSection/animations/moveBlockFromTop";
 import { moveBlockFromBottom } from "@/sections/treatmentsSection/animations/moveBlockFromBottom";
 
-import { moveTextOnHover } from "@/sections/treatmentsSection/animations/moveTextOnHover";
 import { setStartingPosition } from "@/sections/treatmentsSection/utils/setStartingPosition";
 import { moveBlockToBottom } from "@/sections/treatmentsSection/animations/moveBlockToBottom";
 import { moveBlockToTop } from "@/sections/treatmentsSection/animations/moveBlockToTop";
@@ -35,7 +34,6 @@ export default function Home() {
       ) as HTMLElement;
       const linkText = link.querySelector(`.${styles.linkText}`) as HTMLElement;
       link.addEventListener("mouseenter", () => {
-        moveTextOnHover(linkText);
         const cursorEnteredFrom =
           elementTop - currentCursorYCoord > 0 ? "top" : "bottom";
         if (cursorEnteredFrom === "top") {
@@ -50,11 +48,9 @@ export default function Home() {
         if (event.y > currentCursorYCoord) {
           // курсор ушел вниз
           moveBlockToBottom(movingBlock, movingBlockText);
-          linkText.style.transform = "translateX(0)";
         } else {
           // курсор ушел вверх
           moveBlockToTop(movingBlock, movingBlockText);
-          linkText.style.transform = "translateX(0)";
         }
       });
       link.addEventListener("scroll", () => {});

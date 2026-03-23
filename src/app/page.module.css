@@ -24,10 +24,15 @@
 }
 
 .linkText {
-  color: var(--white);
-  display: inline-block;
-  z-index: 1;
   transform: translateX(0);
+  color: var(--white);
+  display: inline-flex;
+  z-index: 1;
+  transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.link:hover .linkText {
+  transform: translateX(15px);
 }
 
 .movingBlock {

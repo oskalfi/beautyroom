@@ -55,27 +55,122 @@ export const TreatmentsSection = () => {
 
       <div className={`${styles.button} ${styles.first}`}>
         <div className={styles.movingBlock}>
-          <span className={styles.text}>Ссылка</span>
+          <span className={styles.text}>Фракционный RF</span>
+          <img
+            className={styles.movingArrow}
+            src="/Vector.svg"
+            alt="moving icon"
+          />
         </div>
-        <span className={styles.buttonText}>Ссылка</span>
+        <span className={styles.buttonText}>Фракционный RF</span>
       </div>
       <div className={styles.button}>
         <div className={styles.movingBlock}>
-          <span className={styles.text}>Ссылка</span>
+          <span className={styles.text}>Химический пилинг</span>
+          <img
+            className={styles.movingArrow}
+            src="/Vector.svg"
+            alt="moving icon"
+          />
         </div>
-        <span className={styles.buttonText}>Ссылка</span>
+        <span className={styles.buttonText}>Химический пилинг</span>
+        <img
+          className={styles.movingArrow}
+          src="/Vector.svg"
+          alt="moving icon"
+        />
       </div>
       <div className={styles.button}>
         <div className={styles.movingBlock}>
-          <span className={styles.text}>Ссылка</span>
+          <span className={styles.text}>Микроигольчатый RF-термолиз</span>{" "}
+          <img
+            className={styles.movingArrow}
+            src="/Vector.svg"
+            alt="moving icon"
+          />
         </div>
-        <span className={styles.buttonText}>Ссылка</span>
+        <span className={styles.buttonText}>Микроигольчатый RF-термолиз</span>
+        <img
+          className={styles.movingArrow}
+          src="/Vector.svg"
+          alt="moving icon"
+        />
       </div>
       <div className={styles.button}>
         <div className={styles.movingBlock}>
-          <span className={styles.text}>Ссылка</span>
+          <span className={styles.text}>Чистка лица</span>
+          <img
+            className={styles.movingArrow}
+            src="/Vector.svg"
+            alt="moving icon"
+          />
         </div>
-        <span className={styles.buttonText}>Ссылка</span>
+        <span className={styles.buttonText}>Чистка лица</span>
+      </div>
+      <div className={styles.button}>
+        <div className={styles.movingBlock}>
+          <span className={styles.text}>RF-лифтинг (термолифтинг)</span>
+          <img
+            className={styles.movingArrow}
+            src="/Vector.svg"
+            alt="moving icon"
+          />
+        </div>
+        <span className={styles.buttonText}>RF-лифтинг (термолифтинг)</span>
+      </div>
+      <div className={styles.button}>
+        <div className={styles.movingBlock}>
+          <span className={styles.text}>Dr.Platon</span>
+          <img
+            className={styles.movingArrow}
+            src="/Vector.svg"
+            alt="moving icon"
+          />
+        </div>
+        <span className={styles.buttonText}>Dr.Platon</span>
+      </div>
+      <div className={styles.button}>
+        <div className={styles.movingBlock}>
+          <span className={styles.text}>Мезотерапия</span>
+          <img
+            className={styles.movingArrow}
+            src="/Vector.svg"
+            alt="moving icon"
+          />
+        </div>
+        <span className={styles.buttonText}>Мезотерапия</span>
+        <img
+          className={styles.movingArrow}
+          src="/Vector.svg"
+          alt="moving icon"
+        />
+      </div>
+      <div className={styles.button}>
+        <div className={styles.movingBlock}>
+          <span className={styles.text}>Массаж лица Тоффа</span>
+          <img
+            className={styles.movingArrow}
+            src="/Vector.svg"
+            alt="moving icon"
+          />
+        </div>
+        <span className={styles.buttonText}>Массаж лица Тоффа</span>
+        <img
+          className={styles.movingArrow}
+          src="/Vector.svg"
+          alt="moving icon"
+        />
+      </div>
+      <div className={styles.button}>
+        <div className={styles.movingBlock}>
+          <span className={styles.text}>Термолифтинг</span>
+          <img
+            className={styles.movingArrow}
+            src="/Vector.svg"
+            alt="moving icon"
+          />
+        </div>
+        <span className={styles.buttonText}>Термолифтинг</span>
       </div>
     </div>
   );

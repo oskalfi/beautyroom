@@ -21,15 +21,15 @@ export function revealWelcomeText({
 
   const timeline = gsap.timeline();
   timeline
-    .from(title.chars, {
-      duration: 0.5,
-      y: -10, // animate from 100px below
+    .from(title.lines, {
+      duration: 1,
+      y: -20, // animate from 100px below
       autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
-      stagger: 0.03, // 0.05 seconds between each
+      stagger: 0.1, // 0.05 seconds between each
     })
-    .from(subtitle.chars, {
+    .from(subtitle.lines, {
       duration: 0.5,
-      y: 3,
+      y: 5,
       autoAlpha: 0,
       stagger: 0.01,
     })

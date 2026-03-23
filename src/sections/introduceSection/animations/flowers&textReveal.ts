@@ -16,10 +16,10 @@ export function flowersNTextReveal(
   });
 
   gsap.from(heading.chars, {
-    duration: 1.5,
+    duration: 1,
     stagger: 0.01,
     autoAlpha: 0,
-    y: 50,
+    y: 70,
     ease: "bounce",
     scrollTrigger: {
       trigger: `.${topFlowerClass}`,

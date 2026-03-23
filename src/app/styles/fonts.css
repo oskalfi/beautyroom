@@ -1,4 +1,11 @@
 @font-face {
+  font-family: "Rosarium";
+  font-display: block;
+  font-style: normal;
+  src: url("/fonts/Rosarium/Rosarium.ttf") format("ttf");
+}
+
+@font-face {
   font-family: "Montserrat";
   font-display: block;
   font-style: normal;

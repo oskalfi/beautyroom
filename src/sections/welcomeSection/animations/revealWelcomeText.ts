@@ -27,12 +27,16 @@ export function revealWelcomeText({
       autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
       stagger: 0.1, // 0.05 seconds between each
     })
-    .from(subtitle.lines, {
-      duration: 0.5,
-      y: 5,
-      autoAlpha: 0,
-      stagger: 0.01,
-    })
+    .from(
+      subtitle.lines,
+      {
+        duration: 0.5,
+
+        autoAlpha: 0,
+        stagger: 0.01,
+      },
+      "<0.5",
+    )
     .to(underlineClipPathClass, {
       width: "100%",
       duration: 3,

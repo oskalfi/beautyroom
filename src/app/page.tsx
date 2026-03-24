@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { IntroduceSection } from "@/sections/introduceSection";
 import { WelcomeSection } from "@/sections/welcomeSection";

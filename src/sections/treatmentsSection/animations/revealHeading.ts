@@ -15,7 +15,6 @@ export const revealHeading = (
       trigger: `.${headingClass}`,
       start: "top bottom",
       end: "top bottom",
-      markers: true,
     },
   });
 

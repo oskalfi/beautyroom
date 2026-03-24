@@ -3,7 +3,6 @@
 import styles from "./Header.module.css";
 import Link from "next/link";
 import { useRef } from "react";
-import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { BeautyRoomSVG } from "@/shared/assets/svg/BeautyRoom";
 import { SilhouetteSVG } from "@/shared/assets/svg/Silhouette";

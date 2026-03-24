@@ -2,7 +2,7 @@ import styles from "./TreatmentsSection.module.css";
 
 import { revealHeading } from "./animations/revealHeading";
 import { revealMenu } from "./animations/revealMenu";
-import { animateButtonHover } from "./animations/menuButtonHover";
+import { animateButtonHover } from "./components/treatment/animations";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 

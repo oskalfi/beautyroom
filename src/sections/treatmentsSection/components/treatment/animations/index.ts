@@ -4,7 +4,7 @@ import { moveBlockToBottom } from "./moveBlockToBottom";
 import { moveBlockToTop } from "./moveBlockToTop";
 
 import { setStartingPosition } from "./setStartingPosition";
-import { isCursorEnteredFromTop } from "../../utils/isCursorEnteredFromTop";
+import { isCursorEnteredFromTop } from "../../../utils/isCursorEnteredFromTop";
 
 export const animateButtonHover = (
   section: HTMLDivElement | null,
@@ -23,20 +23,24 @@ export const animateButtonHover = (
   const movingBlockText = movingBlock.querySelector(
     `.${movingTextClass}`,
   ) as HTMLElement;
-  button.addEventListener("mouseenter", () => {
+
+  function handleMouseEnter() {
     if (isCursorEnteredFromTop(button, previousCursorYCoord)) {
       moveBlockFromTop(movingBlock, movingBlockText);
     } else {
       setStartingPosition(movingBlock, movingBlockText);
       moveBlockFromBottom(movingBlock, movingBlockText);
     }
-  });
+  }
 
-  button.addEventListener("mouseleave", (event: MouseEvent) => {
+  function handleMouseLeave(event: MouseEvent) {
     if (event.y > previousCursorYCoord) {
       moveBlockToBottom(movingBlock, movingBlockText);
     } else {
       moveBlockToTop(movingBlock, movingBlockText);
     }
-  });
+  }
+  button.addEventListener("mouseenter", handleMouseEnter);
+
+  button.addEventListener("mouseleave", handleMouseLeave);
 };

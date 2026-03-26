@@ -7,7 +7,6 @@
   flex-direction: column;
   justify-content: top;
   align-items: center;
-  z-index: 10;
   overflow: hidden;
 }
 

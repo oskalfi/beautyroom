@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "./styles/globals.css";
+import styles from "./layout.module.css";
 import { Header } from "@/shared/components/Header";
 import { Footer } from "@/shared/components/Footer";
+import { Modal } from "@/shared/components/Modal";
 
 export const metadata: Metadata = {
   title: "Beauty Room",
@@ -16,10 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body>
+      <body className={styles.body}>
         <Header />
         {children}
         <Footer />
+        <Modal />
       </body>
     </html>
   );

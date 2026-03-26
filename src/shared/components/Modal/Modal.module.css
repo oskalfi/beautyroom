@@ -1,0 +1,53 @@
+body:has(.modalWindow[open]) {
+  overflow: hidden;
+}
+
+.modalWindow {
+  margin: auto;
+  transition:
+    opacity 2s allow-discrete,
+    transform 0.5s allow-discrete;
+  overflow: visible;
+  /* border: none;
+  display: flex;
+  height: 500px;
+  width: 800px; */
+}
+
+/* .image {
+  flex: 1;
+  background-color: green;
+} */
+
+/* .contentContainer {
+  background-color: white;
+  flex: 1;
+} */
+
+.modalWindow[open] {
+  opacity: 1;
+  transform: translateX(0);
+  @starting-style {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+}
+
+.modalWindow::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  transition: opacity 0.5s allow-discrete;
+}
+
+.modalWindow[open]::backdrop {
+  opacity: 1;
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+.modalWindow.closingModal,
+.modalWindow.closingModal::backdrop {
+  opacity: 0;
+  transition: opacity 0.5s allow-discrete;
+}

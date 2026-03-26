@@ -1,5 +1,5 @@
 import styles from "./TreatmentsMenu.module.css";
-import { treatmentDataProps } from "../../model/types";
+import { treatmentDataProps } from "../../../../shared/model/types";
 import { TreatmentItem } from "../treatmentsItem";
 import { revealMenu } from "../../animations/revealMenu";
 import { useGSAP } from "@gsap/react";
@@ -17,7 +17,6 @@ export const TreatmentsMenu = ({ data }: { data: treatmentDataProps[] }) => {
             key={treatment.id}
             id={treatment.id}
             name={treatment.name}
-            description={treatment.description}
           />
         );
       })}

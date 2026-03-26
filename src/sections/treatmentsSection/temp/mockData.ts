@@ -1,4 +1,4 @@
-import { treatmentDataProps } from "@/sections/treatmentsSection/model/types";
+import { treatmentDataProps } from "@/shared/model/types";
 
 export const mockData: treatmentDataProps[] = [
   {

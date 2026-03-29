@@ -9,6 +9,7 @@ import { moveBlockToTop } from "../treatmentsItem/animations/moveBlockToTop";
 import { setStartingPosition } from "../treatmentsItem/animations/setStartingPosition";
 import { isCursorEnteredFromTop } from "../../utils/isCursorEnteredFromTop";
 import { treatmentDataProps } from "../../../../shared/model/types";
+import { useModalStore } from "@/shared/store/modalStore";
 
 function handleMouseEnter(event: React.MouseEvent<HTMLLIElement>) {
   const movingBlock = event.currentTarget.querySelector(
@@ -40,18 +41,15 @@ function handleMouseLeave(event: React.MouseEvent<HTMLLIElement>) {
   }
 }
 
-function handleClick() {
-  (document.getElementById("modal-window") as HTMLDialogElement).showModal();
-}
-
 export const TreatmentItem = ({ id, name }: treatmentDataProps) => {
+  const { openModal } = useModalStore();
   return (
     <li
       id={id}
       className={styles.button}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
+      onClick={() => openModal({ type: null })}
     >
       <div className={styles.movingBlock}>
         <span className={styles.text}>{name}</span>

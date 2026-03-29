@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./Modal.module.css";
+import { useModalStore } from "@/shared/store/modalStore";
 
 function animatedClose(dialog: HTMLDialogElement | null) {
   if (!dialog) return;
@@ -23,31 +24,39 @@ function handleCancel(e: React.SyntheticEvent<HTMLDialogElement>) {
 
 export const Modal = () => {
   const dialog = useRef<null | HTMLDialogElement>(null);
+  const { isOpen, modalType, closeModal } = useModalStore();
+  useEffect(() => {
+    if (isOpen) dialog.current?.showModal();
+    console.log(isOpen);
+    return;
+  }, [isOpen]);
+
   return (
     <dialog
       ref={dialog}
       id="modal-window"
       className={styles.modalWindow}
-      onClick={handleClick}
-      onCancel={handleCancel}
+      onClick={(e) => {
+        closeModal();
+        handleClick(e);
+      }}
+      onCancel={(e) => {
+        closeModal();
+        handleCancel(e);
+      }}
     >
-      <div className={styles.image} />
-      <div className={styles.contentContainer}>
-        <header>
-          <button
-            className={styles.closeButton}
-            aria-label="Закрыть"
-            onClick={() => animatedClose(dialog.current)}
-          >
-            ✕
-          </button>
-        </header>
-
-        <article id="modal-body"></article>
-
-        <footer>
-          <button className={styles.submitButton}>Подтвердить</button>
-        </footer>
+      <div id="modal-content" className={styles.modalContent}>
+        <button
+          className={styles.closeButton}
+          aria-label="Закрыть"
+          onClick={(e) => {
+            e.stopPropagation();
+            closeModal();
+            animatedClose(dialog.current);
+          }}
+        >
+          ✕
+        </button>
       </div>
     </dialog>
   );

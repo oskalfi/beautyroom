@@ -5,24 +5,27 @@ body:has(.modalWindow[open]) {
 .modalWindow {
   margin: auto;
   transition:
-    opacity 2s allow-discrete,
-    transform 0.5s allow-discrete;
+    opacity 2s ease,
+    transform 0.5s ease;
   overflow: visible;
-  /* border: none;
-  display: flex;
-  height: 500px;
-  width: 800px; */
+  border: none;
 }
 
-/* .image {
+.modalContent {
+  display: flex;
+  width: 50rem;
+  height: 30.55rem;
+  background: #030303;
+}
+
+.image {
   flex: 1;
   background-color: green;
-} */
+}
 
-/* .contentContainer {
-  background-color: white;
+.descriptionContainer {
   flex: 1;
-} */
+}
 
 .modalWindow[open] {
   opacity: 1;

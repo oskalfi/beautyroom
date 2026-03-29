@@ -33,8 +33,8 @@ export function flowersNTextReveal(
     ease: "power1.out",
     scrollTrigger: {
       trigger: `.${topFlowerClass}`,
-      start: "top 99.9%",
-      end: "top 99.9%",
+      start: "center 99.9%",
+      end: "center 99.9%",
     },
   });
   gsap.to(`.${bottomFlowerClass} path`, {

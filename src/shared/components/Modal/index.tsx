@@ -5,22 +5,33 @@ import styles from "./Modal.module.css";
 import { useModalStore } from "@/shared/store/modalStore";
 import { ModalTypes } from "./modalTypes";
 
-function animatedClose(dialog: HTMLDialogElement | null) {
+function animatedClose(dialog: HTMLDialogElement | null, closeModal: Function) {
   if (!dialog) return;
   dialog.classList.add(styles.closingModal);
   setTimeout(() => {
     dialog.classList.remove(styles.closingModal);
     dialog.close();
+    closeModal();
   }, 500);
 }
 
-function handleClick(e: React.MouseEvent<HTMLDialogElement>) {
-  if (e.target === e.currentTarget) animatedClose(e.currentTarget);
+function handleClick(
+  e: React.MouseEvent<HTMLDialogElement>,
+  closeModal: Function,
+) {
+  if (e.target === e.currentTarget) {
+    animatedClose(e.currentTarget, closeModal);
+    return true;
+  }
+  return false;
 }
 
-function handleCancel(e: React.SyntheticEvent<HTMLDialogElement>) {
+function handleCancel(
+  e: React.SyntheticEvent<HTMLDialogElement>,
+  closeModal: Function,
+) {
   e.preventDefault();
-  animatedClose(e.currentTarget);
+  animatedClose(e.currentTarget, closeModal);
 }
 
 export const Modal = () => {
@@ -41,12 +52,10 @@ export const Modal = () => {
         id="modal-window"
         className={styles.modalWindow}
         onClick={(e) => {
-          closeModal();
-          handleClick(e);
+          handleClick(e, closeModal);
         }}
         onCancel={(e) => {
-          closeModal();
-          handleCancel(e);
+          handleCancel(e, closeModal);
         }}
       >
         <div id="modal-content" className={styles.modalContent}>
@@ -55,8 +64,7 @@ export const Modal = () => {
             aria-label="Закрыть"
             onClick={(e) => {
               e.stopPropagation();
-              closeModal();
-              animatedClose(dialog.current);
+              animatedClose(dialog.current, closeModal);
             }}
           >
             ✕

@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import styles from "./Modal.module.css";
 import { useModalStore } from "@/shared/store/modalStore";
+import { ModalTypes } from "./modalTypes";
 
 function animatedClose(dialog: HTMLDialogElement | null) {
   if (!dialog) return;
@@ -26,38 +27,47 @@ export const Modal = () => {
   const dialog = useRef<null | HTMLDialogElement>(null);
   const { isOpen, modalType, closeModal } = useModalStore();
   useEffect(() => {
-    if (isOpen) dialog.current?.showModal();
-    console.log(isOpen);
+    if (isOpen) {
+      dialog.current?.showModal();
+    }
     return;
-  }, [isOpen]);
+  }, [isOpen, modalType]);
 
+  const Content = ModalTypes[modalType.type];
   return (
-    <dialog
-      ref={dialog}
-      id="modal-window"
-      className={styles.modalWindow}
-      onClick={(e) => {
-        closeModal();
-        handleClick(e);
-      }}
-      onCancel={(e) => {
-        closeModal();
-        handleCancel(e);
-      }}
-    >
-      <div id="modal-content" className={styles.modalContent}>
-        <button
-          className={styles.closeButton}
-          aria-label="Закрыть"
-          onClick={(e) => {
-            e.stopPropagation();
-            closeModal();
-            animatedClose(dialog.current);
-          }}
-        >
-          ✕
-        </button>
-      </div>
-    </dialog>
+    Content && (
+      <dialog
+        ref={dialog}
+        id="modal-window"
+        className={styles.modalWindow}
+        onClick={(e) => {
+          closeModal();
+          handleClick(e);
+        }}
+        onCancel={(e) => {
+          closeModal();
+          handleCancel(e);
+        }}
+      >
+        <div id="modal-content" className={styles.modalContent}>
+          <button
+            className={styles.closeButton}
+            aria-label="Закрыть"
+            onClick={(e) => {
+              e.stopPropagation();
+              closeModal();
+              animatedClose(dialog.current);
+            }}
+          >
+            ✕
+          </button>
+          <Suspense
+            fallback={<div className={styles.suspense}>Загрузка...</div>}
+          >
+            <Content />
+          </Suspense>
+        </div>
+      </dialog>
+    )
   );
 };

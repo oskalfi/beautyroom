@@ -54,3 +54,7 @@ body:has(.modalWindow[open]) {
   opacity: 0;
   transition: opacity 0.5s allow-discrete;
 }
+
+.suspense {
+  color: green;
+}

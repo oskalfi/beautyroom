@@ -19,7 +19,7 @@
   height: auto;
   transform: translateX(-50%) translateY(50%) rotate(-25deg);
   color: var(--secondary-color);
-  z-index: 2;
+  z-index: 1;
 }
 
 .heading {

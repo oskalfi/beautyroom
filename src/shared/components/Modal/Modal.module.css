@@ -11,20 +11,11 @@ body:has(.modalWindow[open]) {
   border: none;
 }
 
-.modalContent {
+.contentWrapper {
   display: flex;
   width: 50rem;
   height: 30.55rem;
-  background: #030303;
-}
-
-.image {
-  flex: 1;
-  background-color: green;
-}
-
-.descriptionContainer {
-  flex: 1;
+  background: var(--black);
 }
 
 .modalWindow[open] {
@@ -40,6 +31,7 @@ body:has(.modalWindow[open]) {
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
   transition: opacity 0.5s allow-discrete;
+  cursor: pointer;
 }
 
 .modalWindow[open]::backdrop {
@@ -57,4 +49,16 @@ body:has(.modalWindow[open]) {
 
 .suspense {
   color: green;
+}
+
+.closeButton {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  color: var(--primary-color);
+  background-color: transparent;
+  border: none;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
 }

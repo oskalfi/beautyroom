@@ -58,7 +58,7 @@ export const Modal = () => {
           handleCancel(e, closeModal);
         }}
       >
-        <div id="modal-content" className={styles.modalContent}>
+        <div id="modal-content" className={styles.contentWrapper}>
           <button
             className={styles.closeButton}
             aria-label="Закрыть"

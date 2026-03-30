@@ -40,6 +40,7 @@ export const Modal = () => {
   useEffect(() => {
     if (isOpen) {
       dialog.current?.showModal();
+      dialog.current?.focus();
     }
     return;
   }, [isOpen, modalType]);
@@ -51,6 +52,7 @@ export const Modal = () => {
         ref={dialog}
         id="modal-window"
         className={styles.modalWindow}
+        tabIndex={-1}
         onClick={(e) => {
           handleClick(e, closeModal);
         }}

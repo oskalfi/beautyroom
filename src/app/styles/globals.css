@@ -25,7 +25,6 @@
 
 html,
 body {
-  font-size: 1.125rem;
   max-width: 100vw;
   pointer-events: visible;
   background-color: var(--white);

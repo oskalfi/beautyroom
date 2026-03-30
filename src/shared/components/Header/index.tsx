@@ -92,7 +92,7 @@ export const Header = () => {
             </li>
           </ul>
         </nav>
-        <Button>ЗАПИСЬ</Button>
+        <Button type="primary">ЗАПИСЬ</Button>
       </div>
     </header>
   );

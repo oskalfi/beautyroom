@@ -13,8 +13,8 @@ body:has(.modalWindow[open]) {
 
 .contentWrapper {
   display: flex;
-  width: 50rem;
-  height: 30.55rem;
+  width: 56.25rem;
+  height: 34.375rem;
   background: var(--black);
 }
 
@@ -61,4 +61,8 @@ body:has(.modalWindow[open]) {
   font-size: 32px;
   line-height: 1;
   cursor: pointer;
+}
+
+dialog:focus-visible {
+  outline: none;
 }

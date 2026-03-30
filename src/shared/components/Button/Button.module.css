@@ -1,14 +1,11 @@
 .button {
   align-self: center;
-  outline: 1px var(--white) solid;
   padding: 16px 62px;
   border: none;
   font-family: inherit;
-  background-color: var(--white);
   cursor: pointer;
   font-size: var(--font-size-button);
   border-radius: 30px;
-  color: var(--cta-button-text);
   font-weight: 500;
   text-transform: uppercase;
   /*styles for icon*/
@@ -16,6 +13,18 @@
   overflow: hidden;
   transition: background-color 0.3s ease;
   text-align: center;
+}
+
+.primary {
+  outline: 1px var(--white) solid;
+  background-color: var(--white);
+  color: var(--cta-button-text);
+}
+
+.secondary {
+  outline: 1px var(--secondary-color) solid;
+  background-color: transparent;
+  color: var(--secondary-color);
 }
 
 .text {
@@ -72,4 +81,8 @@
 .button:hover .arrowsContainer {
   right: 15%;
   gap: 10px;
+}
+
+.button:focus-visible {
+  outline: var(--primary-color) 3px solid;
 }

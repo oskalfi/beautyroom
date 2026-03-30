@@ -4,11 +4,14 @@ import { ArrowSVG } from "@/shared/assets/svg/Arrow";
 
 type ButtonProps = {
   children: React.ReactNode;
+  type?: "primary" | "secondary";
 };
 
-export const Button = ({ children }: ButtonProps) => {
+export const Button = ({ children, type = "primary" }: ButtonProps) => {
+  const decor = type === "primary" ? styles.primary : styles.secondary;
+
   return (
-    <button type="button" className={styles.button}>
+    <button type="button" className={`${styles.button} ${decor} `}>
       <div className={styles.arrowsContainer}>
         <ArrowSVG className={styles.arrow} />
         <ArrowSVG className={styles.arrow} />

@@ -61,6 +61,11 @@ body:has(.modalWindow[open]) {
   font-size: 32px;
   line-height: 1;
   cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.closeButton:hover {
+  transform: scale(140%) rotate(180deg);
 }
 
 dialog:focus-visible {

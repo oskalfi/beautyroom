@@ -1,6 +1,5 @@
 .modalTreatment {
   display: flex;
-  flex-grow: 1;
 }
 
 .image {
@@ -9,20 +8,27 @@
   object-fit: cover;
 }
 
-.descriptionWrapper {
+.info {
   flex: 1 1 0px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 0 40px;
-  justify-content: center;
   gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 70px 40px;
 }
 
-.name {
+.treatmentName {
   color: var(--secondary-color);
   font-size: 32px;
   font-family: "Rosarium";
+}
+
+.descriptionWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1rem;
 }
 
 .description {
@@ -30,4 +36,39 @@
   color: var(--white);
   font-family: "Montserrat";
   letter-spacing: 0.04rem;
+}
+
+.infButton {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.buttonText {
+  font-family: "MontserratAlternates";
+  font-size: 14x;
+  color: var(--secondary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.arrow {
+  transform: translateY(1px);
+}
+
+.buttonText::after {
+  content: "";
+  width: 100%;
+  position: absolute;
+  height: 0.5px;
+  background-color: var(--secondary-color);
+  left: 0;
+  bottom: 0;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.infButton:hover .buttonText::after {
+  transform: translateX(0);
 }

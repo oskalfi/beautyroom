@@ -1,0 +1,50 @@
+.sectionContainer {
+  background-color: var(--white);
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+}
+
+.maleFace,
+.femaleFace {
+  width: 320px;
+  height: auto;
+  position: absolute;
+}
+
+.maleFace {
+  top: 0;
+  left: 0;
+}
+
+.femaleFace {
+  bottom: 0;
+  right: 0;
+}
+
+.maleFace path,
+.femaleFace path {
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 0;
+  stroke: var(--secondary-color);
+  stroke-width: 2px;
+}
+
+.headingContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.heading {
+  color: var(--primary-color);
+  text-align: center;
+  font-weight: 800;
+  max-width: 1030px;
+}

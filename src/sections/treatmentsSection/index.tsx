@@ -24,13 +24,13 @@ export const TreatmentsSection = () => {
   );
 
   return (
-    <div className={styles.treatmentsSection} ref={ref}>
+    <section className={styles.treatmentsSection} ref={ref}>
       <div className={styles.decorativeDescription}>
         In my studio, we can create an individual care plan specifically for
         you.
       </div>
       <h2 className={styles.heading}>Treatments</h2>
       <TreatmentsMenu data={mockData} />
-    </div>
+    </section>
   );
 };

@@ -65,7 +65,7 @@ body:has(.modalWindow[open]) {
 }
 
 .closeButton:hover {
-  transform: scale(140%) rotate(180deg);
+  transform: scale(130%) rotate(5deg);
 }
 
 dialog:focus-visible {

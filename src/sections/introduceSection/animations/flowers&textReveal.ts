@@ -2,8 +2,6 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import SplitText from "gsap/src/SplitText";
 
-type introduceSectionAnimProps = {};
-
 export function flowersNTextReveal(
   topFlowerClass: string,
   bottomFlowerClass: string,

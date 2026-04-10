@@ -13,8 +13,8 @@ export const revealHeading = (
   const headingRevealAnimation = gsap.timeline({
     scrollTrigger: {
       trigger: `.${headingClass}`,
-      start: "top bottom",
-      end: "top bottom",
+      start: "bottom bottom",
+      end: "bottom bottom",
     },
   });
 

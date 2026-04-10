@@ -17,13 +17,13 @@ export const IntroduceSection = () => {
   );
 
   return (
-    <div ref={introduceSection} className={styles.introduceSection}>
+    <section ref={introduceSection} className={styles.introduceSection}>
       <TopFlowerSVG className={styles.topFlower} />
       <h2 className={styles.heading}>
         Let me introduce you to professional care with clinically proven
         results.
       </h2>
       <BottomFlowerSVG className={styles.bottomFlower} />
-    </div>
+    </section>
   );
 };

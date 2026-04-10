@@ -23,7 +23,7 @@ export const WelcomeSection = () => {
   );
 
   return (
-    <div className={styles.welcomeSection} ref={welcomeSection}>
+    <section className={styles.welcomeSection} ref={welcomeSection}>
       <div className={styles.backgroundImage}></div>
       <div className={styles.welcomeText}>
         <h1 className={styles.h1}>
@@ -40,6 +40,6 @@ export const WelcomeSection = () => {
           </span>
         </div>
       </div>
-    </div>
+    </section>
   );
 };

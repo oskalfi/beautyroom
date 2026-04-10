@@ -1,7 +1,8 @@
 import { Button } from "../Button";
-import { ArrowSVG } from "@/shared/assets/svg/Arrow";
 import styles from "./ModalTreatment.module.css";
 
+// TODO: добавить пропсы данных, которые будут поступать в модалку.
+// (навесить data-id на каждый li в компоненте Treatment)
 const ModalTreatment = () => {
   return (
     <div className={styles.modalTreatment}>

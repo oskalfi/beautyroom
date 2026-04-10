@@ -1,0 +1,39 @@
+.runningLine {
+  background-color: var(--secondary-color);
+  position: relative;
+  overflow: hidden;
+  padding: 16px 0;
+}
+
+.factsWrapper {
+  display: flex;
+  animation: runningLine 25s linear infinite;
+  width: fit-content;
+}
+
+.fact {
+  color: var(--black);
+  font-size: 24px;
+  font-family: "MontserratAlternates";
+  white-space: nowrap;
+  display: inline-flex;
+}
+
+.fact::after {
+  display: inline-block;
+  content: "";
+  width: 30px;
+  height: 30px;
+  background-image: url("/star.svg");
+  margin: 0 20px;
+}
+
+@keyframes runningLine {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}

@@ -1,6 +1,6 @@
 import { Button } from "@/shared/components/Button";
 import styles from "./BeforeAfterSection.module.css";
-import { SliderSVG } from "@/shared/assets/svg/Slider";
+import { BeforeAfter } from "@/shared/components/BeforeAfter";
 
 export const BeforeAfterSection = () => {
   return (
@@ -9,17 +9,9 @@ export const BeforeAfterSection = () => {
         <h2 className={styles.heading}>Выберите процедуру</h2>
         <div className={styles.controls}>
           <Button type="secondary">Запись</Button>
-          <Button type="secondary">Запись</Button>
+          <Button type="primary">Запись</Button>
         </div>
-        <div className={styles.beforeAfterComponent}>
-          <img
-            className={styles.beforeImage}
-            src="/before.jpg"
-            alt="before «Treatment»"
-          />
-          <div className={styles.afterImage} />
-          <SliderSVG className={styles.slider} />
-        </div>
+        <BeforeAfter />
       </div>
     </section>
   );

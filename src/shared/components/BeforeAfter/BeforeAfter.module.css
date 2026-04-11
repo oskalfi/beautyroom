@@ -1,0 +1,29 @@
+.beforeAfterComponent {
+  width: 913px;
+  height: 495px;
+  position: relative;
+  outline: 2px solid var(--white);
+}
+
+.afterImage {
+  display: block;
+}
+
+.beforeImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  clip-path: inset(0 50% 0 0);
+  background-image: url("/before.jpg");
+}
+
+.slider {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+}

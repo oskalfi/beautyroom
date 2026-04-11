@@ -33,11 +33,11 @@ export const BeforeAfter = () => {
     container?.addEventListener("pointermove", (e) => {
       if (!isDragging) return;
       const rect = container?.getBoundingClientRect();
-      let x = e.clientX - rect.left;
-      x = Math.max(0, Math.min(x, rect.width));
-      const percent = (x / rect.width) * 100;
-      slider.style.left = `${percent}%`;
-      beforeImage.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+      let x = e.clientX - rect.left; // cursor X coordinate relative to the left edge of rect
+      x = Math.max(0, Math.min(x, rect.width)); // limits of acceptable values for slider movement
+      const sliderPosition = (x / rect.width) * 100;
+      slider.style.left = `${sliderPosition}%`;
+      beforeImage.style.clipPath = `inset(0 ${100 - sliderPosition}% 0 0)`;
     });
   }, []);
 

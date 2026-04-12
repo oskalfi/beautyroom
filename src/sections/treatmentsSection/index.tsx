@@ -6,7 +6,7 @@ import { revealHeading } from "./animations/revealHeading";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { TreatmentsMenu } from "./components/treatmentsMenu";
-import { mockData } from "./temp/mockData";
+import { mockData } from "./mockData";
 export let previousCursorYCoord = 0;
 
 export const TreatmentsSection = () => {

@@ -1,0 +1,64 @@
+.select {
+  position: relative;
+}
+
+.openButton {
+  font-family: inherit;
+  color: var(--white);
+  font-size: 1rem;
+  background-color: transparent;
+  border: 1px solid var(--secondary-color);
+  padding: 1rem 30px;
+  width: 350px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.openButton:hover {
+  background-color: var(--secondary-color);
+  color: var(--black);
+}
+
+.buttonArrow {
+  transform: rotate(180deg);
+  color: var(--secondary-color);
+  transition: color 0.3s ease;
+}
+
+.openButton:hover .buttonArrow {
+  color: var(--black);
+}
+
+.selectList {
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--black);
+  z-index: 1;
+  border-right: 1px solid var(--secondary-color);
+  border-left: 1px solid var(--secondary-color);
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+.selectItem {
+  font-size: 1rem;
+  padding: 8px 15px;
+  transition:
+    background-color 0.1s ease,
+    color 0.1s ease;
+}
+
+.selectItem:hover {
+  background-color: var(--secondary-color);
+  color: var(--black);
+}

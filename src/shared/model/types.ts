@@ -1,5 +1,5 @@
 export type treatmentDataProps = {
   name: string;
-  id: string;
+  id: number;
   description?: string;
 };

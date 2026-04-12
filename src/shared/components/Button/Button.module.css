@@ -4,7 +4,7 @@
   border: none;
   cursor: pointer;
   font-size: var(--font-size-button);
-  border-radius: 30px;
+  border-radius: 15px;
   text-transform: uppercase;
   /*styles for icon*/
   position: relative;

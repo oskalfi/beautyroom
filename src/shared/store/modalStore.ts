@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type modalType = { type: "none" } | { type: "TREATMENT"; treatmentId: string };
+type modalType = { type: "none" } | { type: "TREATMENT"; treatmentId: number };
 
 interface modalStore {
   isOpen: boolean;

@@ -45,11 +45,11 @@ export const TreatmentItem = ({ id, name }: treatmentDataProps) => {
   const { openModal } = useModalStore();
   return (
     <li
-      id={id}
+      id={`${id}`}
       className={styles.button}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={() => openModal({ type: "TREATMENT", treatmentId: `${id}` })}
+      onClick={() => openModal({ type: "TREATMENT", treatmentId: id })}
     >
       <div className={styles.movingBlock}>
         <span className={styles.text}>{name}</span>

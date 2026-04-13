@@ -12,6 +12,7 @@ export const WelcomeSection = () => {
 
   useGSAP(
     () => {
+      document.fonts.ready.then(() => {});
       revealWelcomeText({
         titleClass: `.${styles.h1}`,
         subtitleClass: `.${styles.address}`,

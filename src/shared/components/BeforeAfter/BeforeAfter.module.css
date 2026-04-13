@@ -26,4 +26,6 @@
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
+  touch-action: none;
+  user-select: none;
 }

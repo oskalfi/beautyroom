@@ -12,12 +12,10 @@ export const WelcomeSection = () => {
 
   useGSAP(
     () => {
-      document.fonts.ready.then(() => {
-        revealWelcomeText({
-          titleClass: `.${styles.h1}`,
-          subtitleClass: `.${styles.address}`,
-          underlineClipPathClass: `.${styles.clip}`,
-        });
+      revealWelcomeText({
+        titleClass: `.${styles.h1}`,
+        subtitleClass: `.${styles.address}`,
+        underlineClipPathClass: `.${styles.clip}`,
       });
       enableScrollParallax(`.${styles.backgroundImage}`);
     },

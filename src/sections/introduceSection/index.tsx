@@ -11,7 +11,13 @@ export const IntroduceSection = () => {
   const introduceSection = useRef(null);
   useGSAP(
     () => {
-      flowersNTextReveal(styles.topFlower, styles.bottomFlower, styles.heading);
+      document.fonts.ready.then(() => {
+        flowersNTextReveal(
+          styles.topFlower,
+          styles.bottomFlower,
+          styles.heading,
+        );
+      });
     },
     { scope: introduceSection },
   );

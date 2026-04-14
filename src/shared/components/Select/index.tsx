@@ -36,8 +36,8 @@ function selectReducer(state: TState, action: TAction): TState {
     case "MOVE":
       const next =
         action.direction === "down"
-          ? Math.min(mockData.length - 1, state.highlightedIndex + 1)
-          : Math.max(0, state.highlightedIndex - 1);
+          ? (state.highlightedIndex + 1) % mockData.length
+          : (state.highlightedIndex - 1 + mockData.length) % mockData.length;
 
       return {
         ...state,
@@ -66,21 +66,32 @@ export const Select = () => {
     (treatment) => treatment.id === state.selectedId,
   )?.name;
 
-  useEffect(() => {
-    if (state.isOpen) {
-      selectListRef.current?.focus();
-    }
-  }, [state.isOpen]);
-
   function toggle(e: React.MouseEvent) {
     dispatch({ type: state.isOpen ? "CLOSE" : "OPEN" });
   }
 
-  function handleListKeyDown(e: React.KeyboardEvent) {
+  function handleKeyDown(e: React.KeyboardEvent) {
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault();
         dispatch({ type: "MOVE", direction: "down" });
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        dispatch({ type: "MOVE", direction: "up" });
+        break;
+      case "Enter":
+        e.preventDefault();
+        if (!state.isOpen) dispatch({ type: "OPEN" });
+        else {
+          const highlightedTreatmentId = mockData[state.highlightedIndex].id;
+          dispatch({ type: "SELECT", id: highlightedTreatmentId });
+        }
+        break;
+      case "Escape":
+        e.preventDefault();
+        dispatch({ type: "CLOSE" });
+        break;
     }
   }
 
@@ -94,9 +105,13 @@ export const Select = () => {
         type="button"
         className={styles.openButton}
         aria-haspopup="listbox"
-        aria-expanded={state.isOpen}
         aria-controls="listbox"
+        aria-expanded={state.isOpen}
+        aria-activedescendant={
+          state.isOpen ? `option-${state.highlightedIndex}` : undefined
+        }
         onClick={toggle}
+        onKeyDown={handleKeyDown}
       >
         <span className={styles.buttonText}>
           {selectedTreatmentText ?? "Открыть список"}
@@ -122,16 +137,16 @@ export const Select = () => {
           aria-label="Выберите процедуру"
           ref={selectListRef}
           tabIndex={-1}
-          onKeyDown={handleListKeyDown}
         >
-          {mockData.map((treatment) => {
+          {mockData.map((treatment, index) => {
             return (
               <li
                 className={clsx(styles.selectItem, {
+                  [styles.isHighlighted]: state.highlightedIndex === index,
                   [styles.selected]: state.selectedId === treatment.id,
                 })}
                 key={treatment.id}
-                id={`${treatment.id}`}
+                id={`option-${index}`}
                 role="option"
                 aria-selected={treatment.id === state.selectedId}
                 onClick={() => {

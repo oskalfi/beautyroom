@@ -21,18 +21,24 @@
 }
 
 .openButton:hover {
-  background-color: var(--secondary-color);
+  background-color: rgba(249, 220, 196, 0.8);
   color: var(--black);
 }
 
 .buttonArrow {
   transform: rotate(180deg);
   color: var(--secondary-color);
-  transition: color 0.3s ease;
+  transition:
+    color 0.3s ease,
+    transform 0.5s ease;
 }
 
 .openButton:hover .buttonArrow {
   color: var(--black);
+}
+
+.select.isOpen .buttonArrow {
+  transform: rotate(360deg);
 }
 
 .selectList {
@@ -48,6 +54,7 @@
   border-right: 1px solid var(--secondary-color);
   border-left: 1px solid var(--secondary-color);
   border-bottom: 1px solid var(--secondary-color);
+  /* opacity: 0; */
 }
 
 .selectItem {
@@ -55,10 +62,17 @@
   padding: 8px 15px;
   transition:
     background-color 0.1s ease,
-    color 0.1s ease;
+    color 0.1s ease,
+    padding 0.2s ease;
 }
 
 .selectItem:hover {
+  background-color: rgba(249, 220, 196, 0.5);
+  padding: 8px 20px 8px 20px;
+  cursor: pointer;
+}
+
+.selected {
   background-color: var(--secondary-color);
   color: var(--black);
 }

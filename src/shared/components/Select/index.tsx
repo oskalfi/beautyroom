@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useRef } from "react";
 import styles from "./Select.module.css";
 import { mockData } from "@/sections/treatmentsSection/mockData";
+import clsx from "clsx";
 
 type TState = {
   isOpen: boolean;
@@ -59,23 +60,43 @@ export const Select = () => {
     selectedId: null,
   });
 
+  const selectListRef = useRef<HTMLUListElement | null>(null);
+
   const selectedTreatmentText = mockData.find(
     (treatment) => treatment.id === state.selectedId,
   )?.name;
 
   useEffect(() => {
-    console.log(state.selectedId);
-  }, [state.selectedId]);
+    if (state.isOpen) {
+      selectListRef.current?.focus();
+    }
+  }, [state.isOpen]);
+
+  function toggle(e: React.MouseEvent) {
+    dispatch({ type: state.isOpen ? "CLOSE" : "OPEN" });
+  }
+
+  function handleListKeyDown(e: React.KeyboardEvent) {
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        dispatch({ type: "MOVE", direction: "down" });
+    }
+  }
 
   return (
-    <div className={styles.select}>
+    <div
+      className={clsx(styles.select, {
+        [styles.isOpen]: state.isOpen,
+      })}
+    >
       <button
         type="button"
         className={styles.openButton}
         aria-haspopup="listbox"
         aria-expanded={state.isOpen}
         aria-controls="listbox"
-        onClick={() => 0}
+        onClick={toggle}
       >
         <span className={styles.buttonText}>
           {selectedTreatmentText ?? "Открыть список"}
@@ -93,30 +114,36 @@ export const Select = () => {
           />
         </svg>
       </button>
-      <ul
-        id="listbox"
-        className={styles.selectList}
-        role="listbox"
-        aria-label="Выберите процедуру"
-      >
-        {mockData.map((treatment) => {
-          return (
-            <li
-              className={styles.selectItem}
-              key={treatment.id}
-              id={`${treatment.id}`}
-              role="option"
-              aria-selected={treatment.id === state.selectedId}
-              onMouseEnter={() => 0}
-              onClick={() => {
-                dispatch({ type: "SELECT", id: treatment.id });
-              }}
-            >
-              {treatment.name}
-            </li>
-          );
-        })}
-      </ul>
+      {state.isOpen && (
+        <ul
+          id="listbox"
+          className={styles.selectList}
+          role="listbox"
+          aria-label="Выберите процедуру"
+          ref={selectListRef}
+          tabIndex={-1}
+          onKeyDown={handleListKeyDown}
+        >
+          {mockData.map((treatment) => {
+            return (
+              <li
+                className={clsx(styles.selectItem, {
+                  [styles.selected]: state.selectedId === treatment.id,
+                })}
+                key={treatment.id}
+                id={`${treatment.id}`}
+                role="option"
+                aria-selected={treatment.id === state.selectedId}
+                onClick={() => {
+                  dispatch({ type: "SELECT", id: treatment.id });
+                }}
+              >
+                {treatment.name}
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 import type { Metadata } from "next";
 import "./styles/globals.css";
 import styles from "./layout.module.css";
@@ -23,6 +25,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <Modal />
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -64,11 +64,6 @@
     background-color 0.1s ease,
     color 0.1s ease,
     padding 0.2s ease;
-}
-
-.selectItem:hover {
-  background-color: rgba(249, 220, 196, 0.5);
-  padding: 8px 20px 8px 20px;
   cursor: pointer;
 }
 
@@ -79,4 +74,5 @@
 
 .isHighlighted {
   background-color: rgba(249, 220, 196, 0.5);
+  padding: 8px 20px 8px 20px;
 }

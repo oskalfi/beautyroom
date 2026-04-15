@@ -15,7 +15,8 @@ type TAction =
   | { type: "OPEN" }
   | { type: "CLOSE" }
   | { type: "MOVE"; direction: "up" | "down" }
-  | { type: "SELECT"; id: number };
+  | { type: "SELECT"; id: number }
+  | { type: "HOVER"; index: number };
 
 function selectReducer(state: TState, action: TAction): TState {
   switch (action.type) {
@@ -43,6 +44,11 @@ function selectReducer(state: TState, action: TAction): TState {
         ...state,
         highlightedIndex: next,
       };
+    case "HOVER":
+      return {
+        ...state,
+        highlightedIndex: action.index,
+      };
     case "SELECT":
       return {
         ...state,
@@ -60,6 +66,7 @@ export const Select = () => {
     selectedId: null,
   });
 
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const selectListRef = useRef<HTMLUListElement | null>(null);
 
   const selectedTreatmentText = mockData.find(
@@ -68,6 +75,12 @@ export const Select = () => {
 
   function toggle(e: React.MouseEvent) {
     dispatch({ type: state.isOpen ? "CLOSE" : "OPEN" });
+  }
+
+  function handleClickOutside(e: MouseEvent) {
+    if (!containerRef.current?.contains(e.target as Node)) {
+      dispatch({ type: "CLOSE" });
+    }
   }
 
   function handleKeyDown(e: React.KeyboardEvent) {
@@ -95,11 +108,23 @@ export const Select = () => {
     }
   }
 
+  useEffect(() => {
+    if (!state.isOpen) return;
+    document.addEventListener("pointerdown", handleClickOutside);
+    return () => {
+      containerRef.current?.removeEventListener(
+        "pointerdown",
+        handleClickOutside,
+      );
+    };
+  }, [state.isOpen]);
+
   return (
     <div
       className={clsx(styles.select, {
         [styles.isOpen]: state.isOpen,
       })}
+      ref={containerRef}
     >
       <button
         type="button"
@@ -151,6 +176,9 @@ export const Select = () => {
                 aria-selected={treatment.id === state.selectedId}
                 onClick={() => {
                   dispatch({ type: "SELECT", id: treatment.id });
+                }}
+                onMouseEnter={() => {
+                  dispatch({ type: "HOVER", index: index });
                 }}
               >
                 {treatment.name}

@@ -1,5 +1,3 @@
-import { SpeedInsights } from "@vercel/speed-insights/next";
-
 import type { Metadata } from "next";
 import "./styles/globals.css";
 import styles from "./layout.module.css";
@@ -13,7 +11,7 @@ export const metadata: Metadata = {
     "Профессиональный уход за кожей лица. Лечение проблем кожи и anti-aging уход. Tel Aviv - Yafo",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -25,7 +23,6 @@ export default function RootLayout({
         {children}
         <Footer />
         <Modal />
-        <SpeedInsights />
       </body>
     </html>
   );

@@ -1,0 +1,16 @@
+.sectionContainer {
+  background: var(--white);
+  position: relative;
+  padding: 40px;
+  width: 100%;
+}
+
+.heading {
+  display: block;
+  color: var(--black);
+  font-size: 2rem;
+}
+
+.fallback {
+  color: black;
+}

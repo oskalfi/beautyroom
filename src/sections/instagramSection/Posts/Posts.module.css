@@ -1,0 +1,11 @@
+.imagesWrapper {
+  display: flex;
+  flex: 1;
+}
+
+.postImage {
+  display: block;
+  max-width: 325px;
+  object-fit: cover;
+  flex: 1;
+}

@@ -2,10 +2,12 @@
 
 import { SyntheticEvent, useRef } from "react";
 import styles from "./InstagramSection.module.css";
+import { ArrowSVG } from "@/shared/assets/svg/Arrow";
 
 export function InstagramSection() {
   const progressBar = useRef<HTMLDivElement | null>(null);
   const video = useRef<HTMLVideoElement | null>(null);
+  const videoContainer = useRef<HTMLDivElement | null>(null);
 
   function updateProgress() {
     const vid = video.current;
@@ -25,20 +27,65 @@ export function InstagramSection() {
   return (
     <section className={styles.sectionContainer}>
       <h2 className={styles.heading}>Остаёмся на связи</h2>
-      <div className={styles.gallery}>
-        <div className={styles.videoWrapper}>
-          <video
-            ref={video}
-            onPlay={onTimeUpdate}
-            id="video"
-            controlsList="play notimeline volume"
-            controls
-            className={styles.video}
-            src="/video/guinot.mp4"
-          />
-          <div className={styles.progressBarContainer}>
-            <div ref={progressBar} className={styles.progressBar} />
-          </div>
+      <div ref={videoContainer} className={styles.videoContainer}>
+        <button
+          onClick={() => {
+            videoContainer.current?.scrollBy({
+              left: -300,
+              behavior: "smooth",
+            });
+          }}
+          className={`${styles.button} ${styles.backButton}`}
+        >
+          <ArrowSVG className={styles.arrow} />
+        </button>
+
+        <video src="/video/pacan.mp4" className={styles.video} />
+        <video
+          ref={video}
+          onPlay={onTimeUpdate}
+          className={styles.video}
+          src="/video/guinot.mp4"
+        />
+        <video src="/video/jetpeel.mp4" className={`${styles.video}`} />
+        <video src="/video/outside.mp4" className={styles.video} />
+        <video src="/video/alena.mp4" className={styles.video} />
+        <video src="/video/alena.mp4" className={styles.video} />
+
+        <video src="/video/alena.mp4" className={styles.video} />
+        <video src="/video/alena.mp4" className={styles.video} />
+        <video src="/video/alena.mp4" className={styles.video} />
+        <video src="/video/alena.mp4" className={styles.video} />
+        <video src="/video/alena.mp4" className={styles.video} />
+
+        <button
+          onClick={() => {
+            videoContainer.current?.scrollBy({
+              left: 300,
+              behavior: "smooth",
+            });
+          }}
+          className={`${styles.button} ${styles.forwardButton}`}
+        >
+          <ArrowSVG className={styles.arrow} />
+        </button>
+      </div>
+
+      <div className={styles.progressBars}>
+        <div className={styles.progressBarContainer}>
+          <div ref={progressBar} className={styles.progressBar} />
+        </div>
+        <div className={styles.progressBarContainer}>
+          <div ref={progressBar} className={styles.progressBar} />
+        </div>
+        <div className={`${styles.progressBarContainer}`}>
+          <div ref={progressBar} className={styles.progressBar} />
+        </div>
+        <div className={styles.progressBarContainer}>
+          <div ref={progressBar} className={styles.progressBar} />
+        </div>
+        <div className={styles.progressBarContainer}>
+          <div ref={progressBar} className={styles.progressBar} />
         </div>
       </div>
     </section>

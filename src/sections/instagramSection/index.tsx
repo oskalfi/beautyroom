@@ -14,24 +14,7 @@ import { MOCKDATA } from "./mockData";
 import clsx from "clsx";
 
 export const InstagramSection = () => {
-  const progressBar = useRef<HTMLDivElement | null>(null);
-  // const video = useRef<HTMLVideoElement | null>(null);
   const videoContainer = useRef<HTMLDivElement | null>(null);
-
-  // function updateProgress() {
-  //   const vid = video.current;
-  //   const bar = progressBar.current;
-  //   if (!vid || !bar) return;
-  //   if (!vid.paused && !vid.ended) {
-  //     const percentage = -100 + (vid.currentTime / vid.duration) * 100;
-  //     bar.style.transform = `translateX(${percentage}%)`;
-  //     requestAnimationFrame(updateProgress);
-  //   }
-  // }
-
-  // function onTimeUpdate(e: SyntheticEvent<HTMLVideoElement>) {
-  //   requestAnimationFrame(updateProgress);
-  // }
 
   const [activeIndex, setActiveIndex] = useState(
     Math.floor((MOCKDATA.length - 1) / 2),
@@ -45,14 +28,11 @@ export const InstagramSection = () => {
 
     const viewportWidth = container.parentElement.offsetWidth;
 
-    // 2. Находим центр активного видео относительно начала трека
-    // (индекс * (ширина + отступ)) + половина ширины видео
-    const gap = 30;
-    const elementCenterInTrack =
-      activeIndex * (activeVideo.offsetWidth + gap) +
-      activeVideo.offsetWidth / 2;
+    const elementLeft = activeVideo.offsetLeft;
+    const elementWidth = activeVideo.offsetWidth;
+    const elementCenterInTrack = elementLeft + elementWidth / 2;
 
-    // 3. Вычисляем смещение: центр экрана минус центр элемента
+    // Вычисляем смещение
     const translateX = viewportWidth / 2 - elementCenterInTrack;
 
     container.style.transform = `translateX(${translateX}px)`;
@@ -69,7 +49,7 @@ export const InstagramSection = () => {
       <div className={styles.carousel}>
         <button
           onClick={() => {
-            setActiveIndex((prev) => prev - 1);
+            setActiveIndex((prev) => Math.max(0, prev - 1));
           }}
           className={`${styles.button} ${styles.backButton}`}
         >
@@ -80,11 +60,10 @@ export const InstagramSection = () => {
             return (
               <video
                 key={index}
-                // ref={video}
-                // onPlay={onTimeUpdate}
-                className={clsx(`${styles.video}`, {
-                  [`${styles.activeVideo}`]: index === activeIndex,
-                })}
+                className={clsx(
+                  { [styles.activeVideo]: index === activeIndex },
+                  styles.video,
+                )}
                 src={link}
               />
             );
@@ -92,30 +71,12 @@ export const InstagramSection = () => {
         </div>
         <button
           onClick={() => {
-            setActiveIndex((prev) => prev + 1);
+            setActiveIndex((prev) => Math.min(prev + 1, MOCKDATA.length - 1));
           }}
           className={`${styles.button} ${styles.forwardButton}`}
         >
           <ArrowSVG className={styles.arrow} />
         </button>
-      </div>
-
-      <div className={styles.progressBars}>
-        <div className={styles.progressBarContainer}>
-          <div ref={progressBar} className={styles.progressBar} />
-        </div>
-        <div className={styles.progressBarContainer}>
-          <div ref={progressBar} className={styles.progressBar} />
-        </div>
-        <div className={`${styles.progressBarContainer}`}>
-          <div ref={progressBar} className={styles.progressBar} />
-        </div>
-        <div className={styles.progressBarContainer}>
-          <div ref={progressBar} className={styles.progressBar} />
-        </div>
-        <div className={styles.progressBarContainer}>
-          <div ref={progressBar} className={styles.progressBar} />
-        </div>
       </div>
     </section>
   );

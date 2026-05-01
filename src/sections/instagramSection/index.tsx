@@ -57,7 +57,6 @@ export const InstagramSection = () => {
         </button>
         <div ref={videoContainer} className={styles.videoContainer}>
           {MOCKDATA.map((link, index) => {
-            //test
             return (
               <video
                 key={index}

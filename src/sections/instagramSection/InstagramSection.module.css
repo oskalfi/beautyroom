@@ -72,6 +72,7 @@
   scroll-snap-align: start;
   transition: height 0.5s ease;
   height: 640px;
+  width: auto;
 }
 
 .activeVideo {
@@ -81,6 +82,7 @@
     height 0.5s ease,
     opacity 0.5s ease;
   height: 670px;
+  width: auto;
 }
 
 .progressBars {

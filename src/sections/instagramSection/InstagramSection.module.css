@@ -55,9 +55,7 @@
   gap: 30px;
   align-items: center;
   position: relative;
-}
-
-.animated {
+  opacity: 0;
   transition: transform 0.5s ease;
 }
 
@@ -68,21 +66,20 @@
 .video {
   border-radius: 30px;
   display: block;
-  opacity: 0.7;
+  filter: grayscale(50%) brightness(0.5);
   scroll-snap-align: start;
-  transition: height 0.5s ease;
   height: 640px;
   width: 360px;
+  transition:
+    filter 0.3s ease,
+    transform 0.3s ease;
+  will-change: transform;
 }
 
 .activeVideo {
   outline: var(--primary-color) 5px solid;
-  opacity: 1;
-  transition:
-    height 0.5s ease,
-    opacity 0.5s ease;
-  height: 670px;
-  width: 376.88px;
+  filter: none;
+  transform: scale(1.05);
 }
 
 .progressBars {

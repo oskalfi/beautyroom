@@ -60,6 +60,7 @@ export const Header = () => {
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="15" />
                 </svg>
+                <span></span>
               </Link>
             </li>
             <li className={styles.navigationItem}>

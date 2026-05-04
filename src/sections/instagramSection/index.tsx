@@ -75,7 +75,6 @@ export const InstagramSection = () => {
   return (
     <section className={styles.sectionContainer}>
       <h2 className={styles.heading}>Остаёмся на связи</h2>
-
       <div className={styles.carousel}>
         <button
           onClick={() => {
@@ -89,7 +88,7 @@ export const InstagramSection = () => {
         <div ref={videoContainer} className={styles.videoContainer}>
           {MOCKDATA.map((link, index) => {
             return (
-              <div key={index} className={styles.videoScaleWrapper}>
+              <div key={index} className={styles.videoWrapper}>
                 <video
                   className={clsx(
                     { [styles.activeVideo]: index === activeIndex },
@@ -97,6 +96,9 @@ export const InstagramSection = () => {
                   )}
                   src={link}
                 />
+                {/* <svg className={styles.border}>
+                  <rect x="0" y="0" width="100%" height="100%" />
+                </svg> */}
               </div>
             );
           })}

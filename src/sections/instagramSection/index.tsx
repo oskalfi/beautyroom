@@ -80,7 +80,11 @@ export const InstagramSection = () => {
           onClick={() => {
             setActiveIndex((prev) => Math.max(0, prev - 1));
           }}
-          className={`${styles.button} ${styles.backButton}`}
+          className={clsx(
+            styles.button,
+            styles.backButton,
+            activeIndex === 0 && styles.outOfViewport,
+          )}
         >
           <ArrowSVG className={styles.arrow} />
         </button>
@@ -107,7 +111,11 @@ export const InstagramSection = () => {
           onClick={() => {
             setActiveIndex((prev) => Math.min(prev + 1, MOCKDATA.length - 1));
           }}
-          className={`${styles.button} ${styles.forwardButton}`}
+          className={clsx(
+            styles.button,
+            styles.forwardButton,
+            activeIndex === MOCKDATA.length - 1 && styles.outOfViewport,
+          )}
         >
           <ArrowSVG className={styles.arrow} />
         </button>

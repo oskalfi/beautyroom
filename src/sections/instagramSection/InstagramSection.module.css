@@ -21,6 +21,7 @@
   width: 100%;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .videoContainer {
@@ -77,6 +78,9 @@
 .backButton {
   left: 0;
   transform: translateX(100%);
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .arrow {
@@ -86,8 +90,24 @@
 .forwardButton {
   right: 0;
   transform: translateX(-100%);
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .backButton .arrow {
   transform: rotate(180deg);
+}
+
+.outOfViewport {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.forwardButton.outOfViewport {
+  transform: translateX(150%);
+}
+
+.backButton.outOfViewport {
+  transform: translateX(-150%);
 }

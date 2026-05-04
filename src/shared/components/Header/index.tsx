@@ -38,55 +38,35 @@ export const Header = () => {
 
         <nav className={styles.navigation}>
           <ul className={styles.navigationList}>
-            <li>
+            <li className={styles.navigationItem}>
               <Link href="/studio" className={styles.navigationLink}>
                 Процедуры
-                <svg
-                  className={styles.svg}
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 100 30"
-                  preserveAspectRatio="none"
-                >
-                  <rect width="99" height="29" x=".5" y=".5" rx="14.5" />
+                <svg className={styles.border}>
+                  <rect x="0" y="0" width="100%" height="100%" rx="15" />
                 </svg>
               </Link>
             </li>
-            <li>
+            <li className={styles.navigationItem}>
               <Link href="/studio" className={styles.navigationLink}>
                 Косметика
-                <svg
-                  className={styles.svg}
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 100 30"
-                  preserveAspectRatio="none"
-                >
-                  <rect width="99" height="29" x=".5" y=".5" rx="14.5" />
+                <svg className={styles.border}>
+                  <rect x="0" y="0" width="100%" height="100%" rx="15" />
                 </svg>
               </Link>
             </li>
-            <li>
+            <li className={styles.navigationItem}>
               <Link href="/studio" className={styles.navigationLink}>
                 Расположение
-                <svg
-                  className={styles.svg}
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 100 30"
-                  preserveAspectRatio="none"
-                >
-                  <rect width="100%" height="29" x=".5" y=".5" rx="14.5" />
+                <svg className={styles.border}>
+                  <rect x="0" y="0" width="100%" height="100%" rx="15" />
                 </svg>
               </Link>
             </li>
-            <li>
+            <li className={styles.navigationItem}>
               <Link href="/studio" className={styles.navigationLink}>
                 Связаться
-                <svg
-                  className={styles.svg}
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 100 30"
-                  preserveAspectRatio="none"
-                >
-                  <rect width="99" height="29" x=".5" y=".5" rx="14.5" />
+                <svg className={styles.border}>
+                  <rect x="0" y="0" width="100%" height="100%" rx="15" />
                 </svg>
               </Link>
             </li>

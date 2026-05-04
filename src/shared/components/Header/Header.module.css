@@ -81,10 +81,10 @@
 .border rect {
   fill: none;
   stroke: var(--white);
-  stroke-width: 1.5;
+  stroke-width: 1;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  transition: stroke-dashoffset 0.8s ease-out;
+  transition: stroke-dashoffset 0.7s ease;
 }
 
 .navigationLink:hover .border rect {

@@ -42,7 +42,7 @@ export const Header = () => {
               <Link href="/studio" className={styles.navigationLink}>
                 Процедуры
                 <svg className={styles.border}>
-                  <rect x="0" y="0" width="100%" height="100%" rx="15" />
+                  <rect x="0" y="0" width="100%" height="100%" rx="16" />
                 </svg>
               </Link>
             </li>
@@ -50,7 +50,7 @@ export const Header = () => {
               <Link href="/studio" className={styles.navigationLink}>
                 Косметика
                 <svg className={styles.border}>
-                  <rect x="0" y="0" width="100%" height="100%" rx="15" />
+                  <rect x="0" y="0" width="100%" height="100%" rx="16" />
                 </svg>
               </Link>
             </li>
@@ -58,16 +58,15 @@ export const Header = () => {
               <Link href="/studio" className={styles.navigationLink}>
                 Расположение
                 <svg className={styles.border}>
-                  <rect x="0" y="0" width="100%" height="100%" rx="15" />
+                  <rect x="0" y="0" width="100%" height="100%" rx="16" />
                 </svg>
-                <span></span>
               </Link>
             </li>
             <li className={styles.navigationItem}>
               <Link href="/studio" className={styles.navigationLink}>
                 Связаться
                 <svg className={styles.border}>
-                  <rect x="0" y="0" width="100%" height="100%" rx="15" />
+                  <rect x="0" y="0" width="100%" height="100%" rx="16" />
                 </svg>
               </Link>
             </li>

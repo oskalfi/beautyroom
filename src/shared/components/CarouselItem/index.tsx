@@ -10,9 +10,10 @@ type TCarouselItem = {
 
 export const CarouselItem = ({ link, isActive }: TCarouselItem) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const isRunning = useRef(false);
+
   const pathRef = useRef<SVGRectElement | null>(null);
   const totalPathLength = useRef(0);
-  const isRunning = useRef(false);
 
   const update = (_now: number, metadata: VideoFrameCallbackMetadata) => {
     const path = pathRef.current;
@@ -23,7 +24,7 @@ export const CarouselItem = ({ link, isActive }: TCarouselItem) => {
     const offset = (1 - progressPercent) * totalPathLength.current;
     path.style.strokeDashoffset = `${offset}`;
     video.requestVideoFrameCallback(update);
-  }; //test
+  };
 
   function startLoop() {
     if (!videoRef.current || isRunning.current) return;
@@ -42,6 +43,14 @@ export const CarouselItem = ({ link, isActive }: TCarouselItem) => {
   }
 
   useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (isActive) {
+      video.play();
+    } else {
+      video.pause();
+      video.currentTime = 0;
+    }
     if (!pathRef.current) return;
     totalPathLength.current = pathRef.current.getTotalLength();
     pathRef.current.style.strokeDasharray = `${totalPathLength.current}`;
@@ -50,7 +59,7 @@ export const CarouselItem = ({ link, isActive }: TCarouselItem) => {
     return () => {
       stopLoop();
     };
-  }, []);
+  }, [isActive]);
 
   return (
     <div className={styles.mediaWrapper}>
@@ -61,8 +70,8 @@ export const CarouselItem = ({ link, isActive }: TCarouselItem) => {
         )}
       >
         <video
-          controls
-          autoPlay
+          muted
+          playsInline
           ref={videoRef}
           className={styles.media}
           src={link}

@@ -1,7 +1,10 @@
 .mediaWrapper {
+  --media-width: 360px;
+  --media-height: 640px;
+
   position: relative;
-  height: 640px;
-  width: 360px;
+  width: var(--media-width);
+  height: var(--media-height);
   will-change: transform;
 }
 

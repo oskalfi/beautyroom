@@ -23,7 +23,7 @@ export const CarouselItem = ({ link, isActive }: TCarouselItem) => {
     const offset = (1 - progressPercent) * totalPathLength.current;
     path.style.strokeDashoffset = `${offset}`;
     video.requestVideoFrameCallback(update);
-  };
+  }; //test
 
   function startLoop() {
     if (!videoRef.current || isRunning.current) return;

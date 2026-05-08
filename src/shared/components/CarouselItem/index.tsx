@@ -70,6 +70,7 @@ export const CarouselItem = ({ link, isActive }: TCarouselItem) => {
         )}
       >
         <video
+          loop={isActive}
           muted
           playsInline
           ref={videoRef}

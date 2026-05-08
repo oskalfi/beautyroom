@@ -17,7 +17,7 @@ export function collapseHeader({
 
   scroll
     .to(silhouettePathClass, {
-      strokeDashoffset: -1082,
+      strokeDashoffset: 1082,
     })
     .to(
       headerContentContainerClass,

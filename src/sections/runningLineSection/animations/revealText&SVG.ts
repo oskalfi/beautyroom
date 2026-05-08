@@ -30,7 +30,7 @@ export const revealTextAndSVG = (
     .from(
       `.${topSVGClassName} path`,
       {
-        strokeDashoffset: -3000,
+        strokeDashoffset: 3000,
         ease: "power1.out",
         duration: 3,
       },
@@ -39,7 +39,7 @@ export const revealTextAndSVG = (
     .from(
       `.${bottomSVGClassName} path`,
       {
-        strokeDashoffset: -3000,
+        strokeDashoffset: 3000,
         ease: "power1.out",
         duration: 3,
       },

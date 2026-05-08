@@ -1,0 +1,64 @@
+.carousel {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.mediaContainer {
+  height: 700px;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  position: relative;
+  opacity: 0;
+  transition: transform 0.5s ease;
+}
+
+.button {
+  position: absolute;
+  border: none;
+  height: 80px;
+  width: 80px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.backButton {
+  left: 0;
+  transform: translateX(100%);
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.arrow {
+  color: var(--white);
+}
+
+.forwardButton {
+  right: 0;
+  transform: translateX(-100%);
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.backButton .arrow {
+  transform: rotate(180deg);
+}
+
+.outOfViewport {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.forwardButton.outOfViewport {
+  transform: translateX(150%);
+}
+
+.backButton.outOfViewport {
+  transform: translateX(-150%);
+}

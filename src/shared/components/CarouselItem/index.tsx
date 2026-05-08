@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import styles from "./CarouselItem.module.css";
 import { useEffect, useRef } from "react";
+import { generateRoundedRectPath } from "./generateRoundedRectPath";
 
 type TCarouselItem = {
   link: string;
@@ -9,23 +10,18 @@ type TCarouselItem = {
 
 export const CarouselItem = ({ link, isActive }: TCarouselItem) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const rectRef = useRef<SVGRectElement | null>(null);
-  const totalRectLength = useRef(0);
-
+  const pathRef = useRef<SVGRectElement | null>(null);
+  const totalPathLength = useRef(0);
   const isRunning = useRef(false);
 
   const update = (_now: number, metadata: VideoFrameCallbackMetadata) => {
-    const rect = rectRef.current;
+    const path = pathRef.current;
     const video = videoRef.current;
-
-    if (!rect || !video || !video.duration || !isRunning.current) return;
+    if (!path || !video || !video.duration || !isRunning.current) return;
 
     const progressPercent = metadata.mediaTime / video.duration;
-
-    const offset = (1 - progressPercent) * totalRectLength.current;
-
-    rect.style.strokeDashoffset = `${offset}`;
-
+    const offset = (1 - progressPercent) * totalPathLength.current;
+    path.style.strokeDashoffset = `${offset}`;
     video.requestVideoFrameCallback(update);
   };
 
@@ -41,16 +37,15 @@ export const CarouselItem = ({ link, isActive }: TCarouselItem) => {
 
   function handleEnded() {
     stopLoop();
-
-    if (!rectRef.current) return;
-    rectRef.current.style.strokeDashoffset = "0";
+    if (!pathRef.current) return;
+    pathRef.current.style.strokeDashoffset = "0";
   }
 
   useEffect(() => {
-    if (!rectRef.current) return;
-    totalRectLength.current = rectRef.current.getTotalLength();
-    rectRef.current.style.strokeDasharray = `${totalRectLength.current}`;
-    rectRef.current.style.strokeDashoffset = `${totalRectLength.current}`;
+    if (!pathRef.current) return;
+    totalPathLength.current = pathRef.current.getTotalLength();
+    pathRef.current.style.strokeDasharray = `${totalPathLength.current}`;
+    pathRef.current.style.strokeDashoffset = `${totalPathLength.current}`;
 
     return () => {
       stopLoop();
@@ -75,20 +70,17 @@ export const CarouselItem = ({ link, isActive }: TCarouselItem) => {
           onPause={stopLoop}
           onEnded={handleEnded}
         />
-        {/*video progress bar*/}
         <svg
           className={clsx(styles.border, {
             [styles.isVisible]: isActive,
           })}
+          viewBox={`0 0 ${360} ${640}`}
         >
-          <rect
-            ref={rectRef}
-            x="2.5"
-            y="2.5"
-            width="calc(100% - 5px)"
-            height="calc(100% - 5px)"
-            rx="27.5"
-            ry="27.5"
+          <path
+            ref={pathRef}
+            d={generateRoundedRectPath(360, 640, 30)}
+            strokeWidth="5"
+            stroke="currentColor"
           />
         </svg>
       </div>

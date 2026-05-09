@@ -1,10 +1,12 @@
+"use client";
+
 import clsx from "clsx";
 import styles from "./Carousel.module.css";
 import { ArrowSVG } from "@/shared/assets/svg/Arrow";
 
 import { MOCKDATA } from "./mockData";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { animateAppearance } from "./animations";
 import { CarouselItem } from "../CarouselItem";

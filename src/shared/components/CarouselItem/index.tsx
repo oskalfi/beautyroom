@@ -69,6 +69,13 @@ export const CarouselItem = ({ link, isActive }: TCarouselItem) => {
           styles.videoWrapper,
         )}
       >
+        <div className={styles.tint}>
+          <div className={styles.ripple}></div>
+          <div className={styles.ripple}></div>
+          <div className={styles.tintText}>
+            Активируйте звук двойным нажатием
+          </div>
+        </div>
         <video
           loop={isActive}
           muted

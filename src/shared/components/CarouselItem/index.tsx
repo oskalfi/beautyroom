@@ -78,50 +78,93 @@ export const CarouselItem = ({ link, isActive }: TCarouselItem) => {
 
     const tl = gsap.timeline({
       repeat: -1,
-
       repeatDelay: 2,
     });
 
-    tl.from(split.chars, {
+    tl.to(ripple1Ref.current, {
       delay: 1,
-      xPercent: -40,
-      opacity: 0,
-      duration: 0.35,
-      stagger: 0.008,
-      ease: "power2.out",
-      force3D: true,
-    }).from(
-      volumeRef.current,
-      {
-        scale: 0.85,
-        opacity: 0,
-        duration: 0.4,
-        ease: "power2.out",
-        force3D: true,
-      },
-      "<",
-    );
+      ease: "linear",
+      keyframes: [
+        {
+          duration: 0.1,
+          opacity: 1,
+        },
+        {
+          duration: 0.4,
+          scale: 1.2,
+          opacity: 0,
+        },
+      ],
+    })
+      .to(
+        ripple2Ref.current,
+        {
+          ease: "linear",
+          keyframes: [
+            {
+              duration: 0.52,
+              scale: 1.2,
+              opacity: 1,
+            },
+            {
+              duration: 2,
+            },
+          ],
+        },
+        "<+=.2",
+      )
+      .from(
+        split.chars,
+        {
+          xPercent: -40,
+          opacity: 0,
+          duration: 0.35,
+          stagger: 0.008,
+          ease: "power2.out",
+          force3D: true,
+        },
+        "<",
+      )
+      .from(
+        volumeRef.current,
+        {
+          scale: 0.85,
+          opacity: 0,
+          duration: 0.4,
+          ease: "power2.out",
+          force3D: true,
+        },
+        "<",
+      );
 
-    tl.to(split.chars, {
-      delay: 1.8,
-      xPercent: 40,
-      yPercent: -40,
+    tl.to(ripple2Ref.current, {
+      duration: 0.26,
       opacity: 0,
-      duration: 0.3,
-      stagger: 0.008,
-      ease: "power2.in",
-      force3D: true,
-    }).to(
-      volumeRef.current,
-      {
-        scale: 0.85,
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.in",
-        force3D: true,
-      },
-      "<",
-    );
+    })
+      .to(
+        split.chars,
+        {
+          xPercent: 40,
+          yPercent: -40,
+          opacity: 0,
+          duration: 0.2,
+          stagger: 0.008,
+          ease: "power2.in",
+          force3D: true,
+        },
+        "<",
+      )
+      .to(
+        volumeRef.current,
+        {
+          scale: 0.85,
+          opacity: 0,
+          duration: 0.2,
+          ease: "power2.in",
+          force3D: true,
+        },
+        "<",
+      );
 
     return () => {
       split.revert();
@@ -139,8 +182,8 @@ export const CarouselItem = ({ link, isActive }: TCarouselItem) => {
         {isActive && (
           <div className={styles.hint}>
             <div ref={ripple1Ref} className={styles.ripple} />
-
             <div ref={ripple2Ref} className={styles.ripple} />
+
             <div className={styles.wrapper}>
               <svg
                 ref={volumeRef}

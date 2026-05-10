@@ -76,7 +76,7 @@
   opacity: 0;
 }
 
-.ripple:nth-child(1) {
+/* .ripple:nth-child(1) {
   animation: ripple 500ms linear 1;
   animation-delay: 1s;
 }
@@ -118,10 +118,10 @@
   }
 
   100% {
-    transform: translate(-50%, -50%) scale(1.2);
     opacity: 0;
   }
-}
+} */
+
 .wrapper {
   display: flex;
   height: 75%;

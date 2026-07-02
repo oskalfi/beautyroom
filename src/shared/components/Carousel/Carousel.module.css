@@ -13,7 +13,11 @@
   position: relative;
   opacity: 0;
   transition: transform 0.5s ease;
-  justify-content: center;
+  justify-content: flex-start;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  padding-inline: calc(50% - 150px);
 }
 
 .button {

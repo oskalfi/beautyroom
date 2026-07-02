@@ -6,6 +6,7 @@
   width: var(--media-width);
   height: var(--media-height);
   will-change: transform;
+  flex-shrink: 0;
 }
 
 .videoWrapper {
@@ -75,52 +76,6 @@
   background-color: rgba(0, 0, 0, 0.7);
   opacity: 0;
 }
-
-/* .ripple:nth-child(1) {
-  animation: ripple 500ms linear 1;
-  animation-delay: 1s;
-}
-
-.ripple:nth-child(2) {
-  animation: holdRipple 2600ms linear 1 forwards;
-  animation-delay: 1100ms;
-}
-
-@keyframes ripple {
-  0% {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-  }
-
-  20% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(-50%, -50%) scale(1.2);
-    opacity: 0;
-  }
-}
-
-@keyframes holdRipple {
-  0% {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-  }
-
-  20% {
-    transform: translate(-50%, -50%) scale(1.2);
-    opacity: 1;
-  }
-
-  90% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-} */
 
 .wrapper {
   display: flex;

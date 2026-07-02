@@ -9,9 +9,11 @@ import { SplitText } from "gsap/SplitText";
 type TCarouselItem = {
   link: string;
   isActive: boolean;
+  ref: React.Ref<HTMLDivElement>;
+  index: number;
 };
 
-export const CarouselItem = ({ link, isActive }: TCarouselItem) => {
+export const CarouselItem = ({ link, isActive, ref, index }: TCarouselItem) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const isRunning = useRef(false);
 
@@ -174,6 +176,8 @@ export const CarouselItem = ({ link, isActive }: TCarouselItem) => {
   return (
     <div className={styles.mediaWrapper}>
       <div
+        data-index={index}
+        ref={ref}
         className={clsx(
           { [styles.activeMedia]: isActive },
           styles.videoWrapper,

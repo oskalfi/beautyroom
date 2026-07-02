@@ -3,9 +3,16 @@ import gsap from "gsap";
 
 export const animateAppearance = (
   mediaContainer: RefObject<HTMLDivElement | null>,
+  activeIndex: number,
 ) => {
   const container = mediaContainer.current;
   if (!container) return;
+
+  const middleItem = container.children[activeIndex];
+  middleItem.scrollIntoView({
+    inline: "center",
+    block: "nearest",
+  });
 
   const items = Array.from(container.children);
   const scrollTrigger = {

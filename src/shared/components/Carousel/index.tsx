@@ -6,7 +6,7 @@ import { ArrowSVG } from "@/shared/assets/svg/Arrow";
 
 import { MOCKDATA } from "./mockData";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { animateAppearance } from "./animations";
 import { CarouselItem } from "../CarouselItem";
@@ -17,51 +17,61 @@ export const Carousel = () => {
     Math.floor((MOCKDATA.length - 1) / 2),
   );
 
-  useLayoutEffect(() => {
-    const container = mediaContainer.current;
+  const carouselRef = useRef<HTMLDivElement | null>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-    if (!container || !container.parentElement) return;
+  useGSAP(() => {
+    animateAppearance(mediaContainer, activeIndex);
+  });
 
-    const updatePosition = () => {
-      const activeMedia = container.children[activeIndex] as HTMLElement;
-      if (!activeMedia) return;
-      const viewportWidth = container.parentElement!.offsetWidth;
-      const elementCenterInTrack =
-        activeMedia.offsetLeft + activeMedia.offsetWidth / 2;
-      const translateX = viewportWidth / 2 - elementCenterInTrack;
-      container.style.transform = `translate3d(${translateX}px, 0, 0)`;
-    };
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const active = Number((entry.target as HTMLElement).dataset.index);
+            setActiveIndex((prev) => (prev === active ? prev : active));
+          }
+        });
+      },
+      {
+        rootMargin: "0px -50% 0px -50%",
+        threshold: 0,
+      },
+    );
 
-    updatePosition();
+    itemRefs.current.forEach((item) => observer.observe(item as Element));
+    return () => observer.disconnect();
+  }, []);
 
-    const resizeObserver = new ResizeObserver(() => {
-      updatePosition();
-    });
-
-    resizeObserver.observe(container.parentElement);
-
-    Array.from(container.children).forEach((child) => {
-      resizeObserver.observe(child);
-    });
-
+  useEffect(() => {
+    mediaContainer.current!.addEventListener("scrollend", handler);
     return () => {
-      resizeObserver.disconnect();
+      mediaContainer.current!.removeEventListener("scrollend", handler);
     };
   }, [activeIndex]);
 
-  useGSAP(() => {
-    animateAppearance(mediaContainer);
-  });
+  function handler(e: Event) {
+    itemRefs.current[activeIndex]?.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest",
+    });
+  }
 
   return (
-    <div className={styles.carousel}>
+    <div className={styles.carousel} ref={carouselRef}>
       <div ref={mediaContainer} className={styles.mediaContainer}>
         {MOCKDATA.map((link, index) => {
           return (
             <CarouselItem
+              ref={(el) => {
+                itemRefs.current[index] = el;
+              }}
               key={index}
               link={link}
               isActive={index === activeIndex}
+              index={index}
             />
           );
         })}
@@ -69,7 +79,11 @@ export const Carousel = () => {
 
       <button
         onClick={() => {
-          setActiveIndex((prev) => Math.max(0, prev - 1));
+          itemRefs.current[Math.max(0, activeIndex - 1)]?.scrollIntoView({
+            behavior: "smooth",
+            inline: "center",
+            block: "nearest",
+          });
         }}
         className={clsx(
           styles.button,
@@ -81,7 +95,13 @@ export const Carousel = () => {
       </button>
       <button
         onClick={() => {
-          setActiveIndex((prev) => Math.min(prev + 1, MOCKDATA.length - 1));
+          itemRefs.current[
+            Math.min(activeIndex + 1, MOCKDATA.length - 1)
+          ]?.scrollIntoView({
+            behavior: "smooth",
+            inline: "center",
+            block: "nearest",
+          });
         }}
         className={clsx(
           styles.button,

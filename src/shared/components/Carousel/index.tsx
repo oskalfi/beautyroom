@@ -52,11 +52,11 @@ export const Carousel = () => {
   }, [activeIndex]);
 
   function handler(e: Event) {
-    itemRefs.current[activeIndex]?.scrollIntoView({
-      behavior: "smooth",
-      inline: "center",
-      block: "nearest",
-    });
+    // itemRefs.current[activeIndex]?.scrollIntoView({
+    //   behavior: "smooth",
+    //   inline: "center",
+    //   block: "nearest",
+    // });
   }
 
   return (

@@ -20,6 +20,8 @@ export const Carousel = () => {
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  const [isScrolling, setIsScrolling] = useState<boolean>(false);
+
   useGSAP(() => {
     animateAppearance(mediaContainer, activeIndex);
   });
@@ -45,19 +47,31 @@ export const Carousel = () => {
   }, []);
 
   useEffect(() => {
-    mediaContainer.current!.addEventListener("scrollend", handler);
-    return () => {
-      mediaContainer.current!.removeEventListener("scrollend", handler);
-    };
-  }, [activeIndex]);
+    const container = carouselRef.current;
+    let isScrollingTimer: ReturnType<typeof setTimeout> | undefined;
 
-  function handler(e: Event) {
-    // itemRefs.current[activeIndex]?.scrollIntoView({
-    //   behavior: "smooth",
-    //   inline: "center",
-    //   block: "nearest",
-    // });
-  }
+    if (!container) return;
+
+    const handleScroll = (): void => {
+      // Меняем состояние React вместо прямого ковыряния в DOM
+      setIsScrolling(true);
+
+      if (isScrollingTimer) {
+        clearTimeout(isScrollingTimer);
+      }
+
+      isScrollingTimer = setTimeout((): void => {
+        setIsScrolling(false);
+      }, 150);
+    };
+
+    container.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+      if (isScrollingTimer) clearTimeout(isScrollingTimer);
+    };
+  }, []);
 
   return (
     <div className={styles.carousel} ref={carouselRef}>

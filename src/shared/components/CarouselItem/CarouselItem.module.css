@@ -1,7 +1,8 @@
 .mediaWrapper {
+  scroll-snap-align: center;
+  min-width: 0;
   --media-width: 360px;
   --media-height: 640px;
-
   position: relative;
   width: var(--media-width);
   height: var(--media-height);

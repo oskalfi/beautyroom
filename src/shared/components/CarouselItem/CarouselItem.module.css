@@ -1,13 +1,16 @@
 .mediaWrapper {
   scroll-snap-align: center;
-  min-width: 0;
-  --media-width: 360px;
-  --media-height: 640px;
   position: relative;
-  width: var(--media-width);
-  height: var(--media-height);
+  width: 360px;
   will-change: transform;
   flex-shrink: 0;
+}
+
+@media (max-width: 700px) {
+  .mediaWrapper {
+    width: 100vw;
+    height: 100vh;
+  }
 }
 
 .videoWrapper {

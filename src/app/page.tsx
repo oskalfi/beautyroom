@@ -8,7 +8,7 @@ import { InstagramSection } from "@/sections/instagramSection";
 
 export default function Home() {
   return (
-    <main>
+    <main className={styles.mainPage}>
       <WelcomeSection />
       <IntroduceSection />
       <TreatmentsSection />

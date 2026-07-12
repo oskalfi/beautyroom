@@ -4,10 +4,11 @@
 }
 
 .backgroundImage {
-  height: 100vh;
+  height: 100svh;
   background-image: url("/main_bg.avif");
   background-attachment: fixed;
   background-size: cover;
+  will-change: transform;
 }
 
 .welcomeText {

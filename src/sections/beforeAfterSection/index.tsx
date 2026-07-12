@@ -12,7 +12,9 @@ export const BeforeAfterSection = () => {
         </h2>
         <div className={styles.controls}>
           <Select></Select>
-          <Button type="primary">Запись</Button>
+          <Button type="primary" className={styles.button}>
+            Запись
+          </Button>
         </div>
         <BeforeAfter />
       </div>

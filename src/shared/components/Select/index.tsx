@@ -59,7 +59,7 @@ function selectReducer(state: TState, action: TAction): TState {
   }
 }
 
-export const Select = () => {
+export const Select = ({ className }: { className: string }) => {
   const [state, dispatch] = useReducer(selectReducer, {
     isOpen: false,
     highlightedIndex: 0,
@@ -121,7 +121,7 @@ export const Select = () => {
 
   return (
     <div
-      className={clsx(styles.select, {
+      className={clsx(styles.select, className, {
         [styles.isOpen]: state.isOpen,
       })}
       ref={containerRef}
@@ -139,7 +139,7 @@ export const Select = () => {
         onKeyDown={handleKeyDown}
       >
         <span className={styles.buttonText}>
-          {selectedTreatmentText ?? "Открыть список"}
+          {selectedTreatmentText ?? "Выберите процедуру"}
         </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -4,7 +4,11 @@ import { SliderSVG } from "@/shared/assets/svg/Slider";
 import styles from "./BeforeAfter.module.css";
 import { useEffect, useRef } from "react";
 
-export const BeforeAfter = () => {
+type TBeforeAfterProps = {
+  className: string;
+};
+
+export const BeforeAfter = ({ className }: TBeforeAfterProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -42,7 +46,7 @@ export const BeforeAfter = () => {
   }, []);
 
   return (
-    <div className={styles.beforeAfterComponent} ref={ref}>
+    <div className={`${styles.beforeAfterComponent} ${className}`} ref={ref}>
       <img
         className={styles.afterImage}
         src="/after.jpg"

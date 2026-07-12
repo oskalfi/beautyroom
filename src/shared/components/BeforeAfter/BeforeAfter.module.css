@@ -1,7 +1,6 @@
 .beforeAfterComponent {
   overflow: hidden;
-  width: 913px;
-  height: 495px;
+  max-width: 1000px;
   position: relative;
   outline: 2px solid var(--white);
   -webkit-user-select: none; /* Safari */

@@ -8,15 +8,13 @@ export const BeforeAfterSection = () => {
     <section className={styles.sectionContainer}>
       <div className={styles.contentWrapper}>
         <h2 id="heading" className={styles.heading}>
-          Выберите процедуру
+          До / После
         </h2>
-        <div className={styles.controls}>
-          <Select></Select>
-          <Button type="primary" className={styles.button}>
-            Запись
-          </Button>
-        </div>
-        <BeforeAfter />
+        <Select className={styles.select}></Select>
+        <Button type="primary" className={styles.button}>
+          Запись
+        </Button>
+        <BeforeAfter className={styles.beforeAfter} />
       </div>
     </section>
   );

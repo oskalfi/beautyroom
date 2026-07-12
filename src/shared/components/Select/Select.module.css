@@ -54,7 +54,6 @@
   border-right: 1px solid var(--secondary-color);
   border-left: 1px solid var(--secondary-color);
   border-bottom: 1px solid var(--secondary-color);
-  /* opacity: 0; */
 }
 
 .selectItem {

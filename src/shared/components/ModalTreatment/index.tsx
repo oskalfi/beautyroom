@@ -25,7 +25,9 @@ const ModalTreatment = () => {
           </div>
         </div>
 
-        <Button type="secondary">Запись</Button>
+        <Button type="secondary" className={styles.button}>
+          Запись
+        </Button>
       </div>
     </div>
   );

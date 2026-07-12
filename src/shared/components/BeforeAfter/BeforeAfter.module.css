@@ -1,18 +1,23 @@
 .beforeAfterComponent {
+  overflow: hidden;
   width: 913px;
   height: 495px;
   position: relative;
   outline: 2px solid var(--white);
-
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10+ */
+  overflow: hidden;
 }
 
 .afterImage {
+  width: 100%;
   display: block;
+  object-fit: contain;
 }
 
 .beforeImage {
+  background-size: contain;
+  background-repeat: no-repeat;
   position: absolute;
   top: 0;
   left: 0;

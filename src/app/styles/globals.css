@@ -9,12 +9,21 @@
   --cta-button-text: #885c6a;
   /* Spacing */
   --content-container-padding: 40px;
+  --content-container-padding-phone: 20px;
 
   /* Typography */
   --font-size: 18px;
   --font-size-button: 16px;
   --font-size-links: 18px;
   --font-size-h2: 48px;
+  --hero-h1: 96px;
+}
+
+@media (max-width: 700px) {
+  :root {
+    --font-size-h2: 36px;
+    --hero-h1: 48px;
+  }
 }
 
 * {

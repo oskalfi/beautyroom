@@ -72,7 +72,9 @@ export const Header = () => {
             </li>
           </ul>
         </nav>
-        <Button type="primary">ЗАПИСЬ</Button>
+        <Button className={styles.button} type="primary">
+          ЗАПИСЬ
+        </Button>
       </div>
     </header>
   );

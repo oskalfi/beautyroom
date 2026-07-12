@@ -15,30 +15,9 @@ export function collapseHeader({
   gsap.registerPlugin(ScrollTrigger);
   const scroll = gsap.timeline({ paused: true });
 
-  scroll
-    .to(silhouettePathClass, {
-      strokeDashoffset: 1082,
-    })
-    .to(
-      headerContentContainerClass,
-      {
-        scale: 0.9,
-        height: "80px",
-        ease: "sine.inOut",
-        duration: 1,
-        delay: 0.5,
-      },
-      "<",
-    )
-    .to(
-      logoTextClass,
-      {
-        bottom: "5px",
-        duration: 0.5,
-        delay: 0.5,
-      },
-      "<",
-    );
+  scroll.to(silhouettePathClass, {
+    strokeDashoffset: 1082,
+  });
 
   ScrollTrigger.create({
     start: () => `${window.innerHeight * 0.5} top`,

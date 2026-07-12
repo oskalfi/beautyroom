@@ -47,4 +47,12 @@
   text-align: center;
   font-weight: 800;
   max-width: 1030px;
+  z-index: 2;
+}
+
+@media (max-width: 700px) {
+  .maleFace,
+  .femaleFace {
+    width: 160px;
+  }
 }

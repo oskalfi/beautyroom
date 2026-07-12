@@ -1,5 +1,6 @@
 .welcomeSection {
   position: relative;
+  overflow: hidden;
 }
 
 .backgroundImage {
@@ -24,7 +25,7 @@
 .h1 {
   font-family: "MontserratAlternates";
   max-width: 800px;
-  font-size: 96px;
+  font-size: var(--hero-h1);
   letter-spacing: 0.04em;
   text-align: center;
 }
@@ -56,4 +57,22 @@
 
 .clip {
   width: 0;
+}
+
+@media (max-width: 700px) {
+  .welcomeText {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    width: 100%;
+  }
+
+  .h1 {
+    padding: 0 52px;
+  }
+
+  .address {
+    display: none;
+  }
 }

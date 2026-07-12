@@ -3,6 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export function enableScrollParallax(backgroundImageClass: string): void {
   gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.normalizeScroll(true);
   gsap.to(backgroundImageClass, {
     y: 250,
     scrollTrigger: {

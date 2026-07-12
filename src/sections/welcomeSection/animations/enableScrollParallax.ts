@@ -5,13 +5,13 @@ export function enableScrollParallax(backgroundImageClass: string): void {
   gsap.registerPlugin(ScrollTrigger);
   gsap.to(backgroundImageClass, {
     yPercent: 42,
-    ease: "none",
+    // ease: "none",
     scrollTrigger: {
       trigger: backgroundImageClass,
       start: "top top",
       end: "bottom top",
-      scrub: 1,
-      invalidateOnRefresh: true,
+      scrub: true,
+      // invalidateOnRefresh: true,
     },
   });
 }

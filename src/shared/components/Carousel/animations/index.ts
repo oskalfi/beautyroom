@@ -8,11 +8,14 @@ export const animateAppearance = (
   const container = mediaContainer.current;
   if (!container) return;
 
-  const middleItem = container.children[activeIndex];
-  middleItem.scrollIntoView({
-    inline: "center",
-    block: "nearest",
-    container: "nearest",
+  const middleItem = container.children[activeIndex] as HTMLElement;
+
+  container.scrollTo({
+    left:
+      middleItem.offsetLeft -
+      (container.clientWidth - middleItem.clientWidth) / 2,
+
+    behavior: "smooth",
   });
 
   const items = Array.from(container.children);

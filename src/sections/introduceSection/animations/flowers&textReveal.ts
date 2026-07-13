@@ -14,11 +14,11 @@ export function flowersNTextReveal(
   });
 
   gsap.from(heading.chars, {
-    duration: 0.7,
+    duration: 1,
     stagger: 0.01,
     autoAlpha: 0,
     y: 70,
-    ease: "bounce",
+    ease: "back.out",
     scrollTrigger: {
       trigger: `.${topFlowerClass}`,
       start: "bottom 99.9%",

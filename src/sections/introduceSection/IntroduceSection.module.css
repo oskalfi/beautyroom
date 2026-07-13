@@ -38,13 +38,13 @@
 .topFlower path {
   stroke-dasharray: 2646;
   stroke-dashoffset: 2646;
-  transition: stroke-dashoffset 3s;
+  transition: stroke-dashoffset 2s;
 }
 
 .bottomFlower path {
   stroke-dasharray: 2870;
   stroke-dashoffset: 2870;
-  transition: stroke-dashoffset 3s;
+  transition: stroke-dashoffset 2s;
 }
 
 .heading {

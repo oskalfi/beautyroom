@@ -18,7 +18,7 @@ export const revealMenu = (menuClass: string, menuCoverBlock: string) => {
     .to(
       `.${menuCoverBlock}`,
       {
-        duration: 3,
+        duration: 2,
         rotate: "-3deg",
         translateY: "100%",
         ease: "none",

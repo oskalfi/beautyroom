@@ -32,7 +32,7 @@ export const revealTextAndSVG = (
       {
         strokeDashoffset: 3000,
         ease: "power1.out",
-        duration: 3,
+        duration: 2,
       },
       "<0.3",
     )
@@ -41,7 +41,7 @@ export const revealTextAndSVG = (
       {
         strokeDashoffset: 3000,
         ease: "power1.out",
-        duration: 3,
+        duration: 2,
       },
       "<",
     );

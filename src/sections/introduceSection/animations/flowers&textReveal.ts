@@ -14,7 +14,7 @@ export function flowersNTextReveal(
   });
 
   gsap.from(heading.chars, {
-    duration: 1,
+    duration: 0.7,
     stagger: 0.01,
     autoAlpha: 0,
     y: 70,

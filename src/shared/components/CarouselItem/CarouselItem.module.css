@@ -6,6 +6,14 @@
   flex-shrink: 0;
 }
 
+.mediaWrapper:first-child {
+  padding-left: 30px;
+}
+
+.mediaWrapper:last-child {
+  padding-right: 30px;
+}
+
 .videoWrapper {
   transform-origin: center;
   filter: grayscale(40%) brightness(0.6);

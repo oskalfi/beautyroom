@@ -16,7 +16,7 @@ export function revealWelcomeText({
 
   const title = SplitText.create(titleClass, { type: " lines chars" });
   const subtitle = SplitText.create(subtitleClass, {
-    type: "lines chars",
+    type: "lines words chars",
   });
 
   const timeline = gsap.timeline();

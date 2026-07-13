@@ -12,6 +12,7 @@ export const animateAppearance = (
   middleItem.scrollIntoView({
     inline: "center",
     block: "nearest",
+    container: "nearest",
   });
 
   const items = Array.from(container.children);

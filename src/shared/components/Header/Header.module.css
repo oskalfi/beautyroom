@@ -19,17 +19,19 @@
 }
 
 .logo {
+  width: clamp(133px, 14.8vw, 200px);
   display: flex;
   position: relative;
   align-items: center;
   justify-content: center;
-  padding: 33px;
+  padding: 33px 0;
 }
 
 .logoSilhouette {
   width: 32px;
   position: absolute;
   transform: translateX(12px);
+  height: clamp(60px, 6.74vw, 91px);
 }
 
 .logoSilhouette path {
@@ -53,7 +55,7 @@
 .navigationList {
   display: flex;
   align-items: center;
-  font-size: var(--font-size-links);
+  font-size: var(--font-size-nav-links);
   gap: 35px;
 }
 
@@ -89,7 +91,33 @@
   stroke-dashoffset: 0;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1350px) {
+  .navigationList {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .contentContainer {
+    padding: 0 var(--content-container-padding-phone);
+  }
+}
+
+@media (max-width: 1024px) {
+  .navigationLink {
+    font-size: 16px;
+  }
+
+  .button {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 960px) {
+  .header {
+    position: fixed;
+  }
+
   .contentContainer {
     padding: 0 var(--content-container-padding-phone);
   }

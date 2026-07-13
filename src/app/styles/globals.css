@@ -14,7 +14,7 @@
   /* Typography */
   --font-size: 18px;
   --font-size-button: 16px;
-  --font-size-links: 18px;
+  --font-size-nav-links: 18px;
   --font-size-h2: 48px;
   --hero-h1: 96px;
 }
@@ -23,6 +23,7 @@
   :root {
     --font-size-h2: 36px;
     --hero-h1: 48px;
+    /* --font-size-nav-links: 16px; */
   }
 }
 

@@ -67,3 +67,32 @@
 .backButton.outOfViewport {
   transform: translateX(-150%);
 }
+
+@media (max-width: 720px) {
+  .button {
+    height: 50px;
+    width: 50px;
+  }
+
+  .arrow {
+    width: 8px;
+  }
+}
+
+@media (max-width: 590px) {
+  .backButton {
+    transform: translateX(20%);
+  }
+  .forwardButton {
+    transform: translateX(-20%);
+  }
+}
+
+@media (max-width: 590px) {
+  .backButton {
+    transform: translateX(5px);
+  }
+  .forwardButton {
+    transform: translateX(-5px);
+  }
+}

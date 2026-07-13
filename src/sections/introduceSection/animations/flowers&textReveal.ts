@@ -19,7 +19,7 @@ export function flowersNTextReveal(
     duration: 1,
     stagger: 0.01,
     autoAlpha: 0,
-    y: 70,
+    y: 20,
     ease: "back.out",
     scrollTrigger: {
       trigger: `.${topFlowerClass}`,

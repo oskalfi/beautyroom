@@ -14,9 +14,9 @@ export function revealWelcomeText({
 }: revealWelcomeTextProps): void {
   gsap.registerPlugin(SplitText);
 
-  const title = SplitText.create(titleClass, { type: " lines chars" });
+  const title = SplitText.create(titleClass, { type: " lines" });
   const subtitle = SplitText.create(subtitleClass, {
-    type: "lines words chars",
+    type: "lines words",
   });
 
   const timeline = gsap.timeline();

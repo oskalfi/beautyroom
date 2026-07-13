@@ -29,10 +29,12 @@ export const WelcomeSection = () => {
       <div className={styles.backgroundImage}></div>
       <div className={styles.welcomeText}>
         <h1 className={styles.h1}>
-          Beautiful skin is not a dream — it's a result
+          <span className={styles.nowrap}>Beautiful skin</span>{" "}
+          <span className={styles.nowrap}>is not a dream</span> — it's a result
         </h1>
         <div className={styles.address}>
-          Facial skin care and treatment studio based{" "}
+          Facial skin care and{" "}
+          <span className={styles.nowrap}>treatment studio</span> based{" "}
           <span className={styles.underlinedText}>
             in Tel Aviv - Yafo.
             <UnderlineSVG

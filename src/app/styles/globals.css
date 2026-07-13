@@ -22,8 +22,6 @@
 @media (max-width: 700px) {
   :root {
     --font-size-h2: 36px;
-    --hero-h1: 48px;
-    /* --font-size-nav-links: 16px; */
   }
 }
 

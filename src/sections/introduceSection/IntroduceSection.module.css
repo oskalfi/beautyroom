@@ -60,3 +60,8 @@
     width: 190px;
   }
 }
+
+.letter {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}

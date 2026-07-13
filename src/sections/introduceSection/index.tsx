@@ -16,6 +16,7 @@ export const IntroduceSection = () => {
           styles.topFlower,
           styles.bottomFlower,
           styles.heading,
+          styles.letter,
         );
       });
     },

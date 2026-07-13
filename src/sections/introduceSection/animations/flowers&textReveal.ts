@@ -6,11 +6,13 @@ export function flowersNTextReveal(
   topFlowerClass: string,
   bottomFlowerClass: string,
   headingTextClass: string,
+  charsClass: string,
 ): void {
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(SplitText);
   const heading = SplitText.create(`.${headingTextClass}`, {
     type: "lines chars",
+    charsClass: charsClass,
   });
 
   gsap.from(heading.chars, {

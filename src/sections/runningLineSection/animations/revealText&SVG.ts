@@ -24,7 +24,7 @@ export const revealTextAndSVG = (
       duration: 1,
       autoAlpha: 0,
       stagger: 0.01,
-      y: 100,
+      y: -30,
       ease: "back.out",
     })
     .from(

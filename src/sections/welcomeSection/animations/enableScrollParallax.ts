@@ -10,7 +10,7 @@ export function enableScrollParallax(backgroundImageClass: string): void {
       trigger: backgroundImageClass,
       start: "top top",
       end: "bottom top",
-      scrub: 0.5,
+      scrub: true,
       invalidateOnRefresh: true,
     },
   });

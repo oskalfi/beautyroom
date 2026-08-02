@@ -97,6 +97,10 @@
 }
 
 @media (max-width: 770px) {
+  .backgroundImage {
+    height: 100svh;
+  }
+
   .welcomeText {
     position: absolute;
     left: 50%;

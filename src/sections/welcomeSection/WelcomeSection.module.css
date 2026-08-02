@@ -4,7 +4,7 @@
 }
 
 .backgroundImage {
-  height: 100svh;
+  height: 96svh;
   background-image: url("/main_bg.avif");
   background-attachment: fixed;
   background-size: cover;

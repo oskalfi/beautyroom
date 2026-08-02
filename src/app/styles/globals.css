@@ -29,6 +29,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  -webkit-tap-highlight-color: rgba(248, 148, 164, 0.2);
 }
 
 html,

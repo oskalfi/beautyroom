@@ -23,9 +23,9 @@ export function revealWelcomeText({
   timeline
     .from(title.lines, {
       duration: 1,
-      x: 10, // animate from 100px below
-      autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
-      stagger: 0.1, // 0.05 seconds between each
+      x: 10,
+      autoAlpha: 0,
+      stagger: 0.1,
     })
     .from(
       subtitle.lines,
@@ -36,9 +36,13 @@ export function revealWelcomeText({
       },
       "<1",
     )
-    .to(underlineClipPathClass, {
-      width: "100%",
-      duration: 3,
-      ease: "power1.inOut",
-    });
+    .to(
+      underlineClipPathClass,
+      {
+        width: "100%",
+        duration: 3,
+        ease: "power1.inOut",
+      },
+      "<",
+    );
 }

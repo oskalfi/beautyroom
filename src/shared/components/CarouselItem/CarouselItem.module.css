@@ -1,7 +1,7 @@
 .mediaWrapper {
   scroll-snap-align: center;
   position: relative;
-  width: 300px;
+  width: 330px;
   will-change: transform;
   flex-shrink: 0;
 }

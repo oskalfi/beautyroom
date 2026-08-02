@@ -34,7 +34,7 @@ export function revealWelcomeText({
         autoAlpha: 0,
         stagger: 0.01,
       },
-      "<1",
+      "<0.5",
     )
     .to(
       underlineClipPathClass,

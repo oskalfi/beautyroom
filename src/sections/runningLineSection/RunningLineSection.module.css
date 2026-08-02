@@ -1,7 +1,7 @@
 .sectionContainer {
   background-color: var(--white);
   position: relative;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -50,9 +50,35 @@
   z-index: 2;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1250px) {
+  .maleFace,
+  .femaleFace {
+    width: 230px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .maleFace,
+  .femaleFace {
+    width: 190px;
+  }
+}
+
+@media (max-width: 930px) {
+  .heading {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 800px) {
   .maleFace,
   .femaleFace {
     width: 160px;
+  }
+}
+
+@media (max-width: 800px) {
+  .heading {
+    font-size: 28px;
   }
 }

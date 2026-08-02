@@ -11,11 +11,11 @@ export function flowersNTextReveal(
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(SplitText);
   const heading = SplitText.create(`.${headingTextClass}`, {
-    type: "lines chars",
+    type: "lines words",
     charsClass: charsClass,
   });
 
-  gsap.from(heading.chars, {
+  gsap.from(heading.words, {
     duration: 1,
     stagger: 0.01,
     autoAlpha: 0,

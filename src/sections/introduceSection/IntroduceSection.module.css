@@ -1,5 +1,5 @@
 .introduceSection {
-  height: 100vh;
+  height: 90vh;
   width: 100%;
   background-color: var(--white);
   box-shadow: 0 -10px 100px rgba(0, 0, 0, 0.2);
@@ -54,6 +54,18 @@
   font-weight: 800;
 }
 
+.letter {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+@media (max-width: 1250px) {
+  .topFlower,
+  .bottomFlower {
+    width: 250px;
+  }
+}
+
 @media (max-width: 700px) {
   .topFlower,
   .bottomFlower {
@@ -61,7 +73,8 @@
   }
 }
 
-.letter {
-  will-change: transform, opacity;
-  backface-visibility: hidden;
+@media (max-width: 450px) {
+  .heading {
+    font-size: 28px;
+  }
 }

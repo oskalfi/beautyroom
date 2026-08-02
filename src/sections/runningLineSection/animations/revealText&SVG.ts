@@ -16,11 +16,11 @@ export const revealTextAndSVG = (
   });
 
   const text = SplitText.create(`.${textClassName}`, {
-    type: "lines chars",
+    type: "lines words",
   });
 
   timeline
-    .from(text.chars, {
+    .from(text.words, {
       duration: 1,
       autoAlpha: 0,
       stagger: 0.01,

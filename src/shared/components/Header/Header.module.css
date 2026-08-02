@@ -12,14 +12,18 @@
 }
 
 .contentContainer {
-  position: relative;
   display: flex;
   justify-content: space-between;
+  height: fit-content;
   padding: 0 var(--content-container-padding);
+  transition: height 1s ease;
+  position: relative;
+  height: 129px;
 }
 
 .logo {
   width: clamp(133px, 14.8vw, 200px);
+  height: fit-content;
   display: flex;
   position: relative;
   align-items: center;
@@ -120,6 +124,8 @@
 
   .contentContainer {
     padding: 0 var(--content-container-padding-phone);
+    /* height: 63px; */
+    height: 100vh;
   }
 
   .logo {
@@ -135,10 +141,24 @@
     display: none;
   }
 
-  .navigation {
-    display: none;
-  }
   .button {
     display: none;
+  }
+
+  .navigation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .navigationList {
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  .navigationLink {
+    font-weight: 400;
+    font-size: 21px;
   }
 }

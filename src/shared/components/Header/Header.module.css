@@ -14,7 +14,7 @@
 .contentContainer {
   display: flex;
   justify-content: space-between;
-  height: fit-content;
+  align-items: center;
   padding: 0 var(--content-container-padding);
   transition: height 1s ease;
   position: relative;
@@ -23,7 +23,6 @@
 
 .logo {
   width: clamp(133px, 14.8vw, 200px);
-  height: fit-content;
   display: flex;
   position: relative;
   align-items: center;
@@ -95,6 +94,27 @@
   stroke-dashoffset: 0;
 }
 
+.mobileLayout {
+  display: flex;
+  display: none;
+  width: 100%;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.headerTitle {
+  opacity: 0;
+}
+
+.menuButton {
+  background-color: transparent;
+  border: none;
+  border: 1px solid var(--white);
+  border-radius: 20px;
+  height: fit-content;
+  padding: 10px;
+}
+
 @media (max-width: 1350px) {
   .navigationList {
     gap: 15px;
@@ -124,17 +144,27 @@
 
   .contentContainer {
     padding: 0 var(--content-container-padding-phone);
-    /* height: 63px; */
-    height: 100vh;
+    height: 67.5px;
+    /* height: 100vh; */
   }
 
   .logo {
-    padding: 0 10px;
+    display: none;
+  }
+
+  .mobileLayout {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 15px 0;
+  }
+
+  .headerTitle {
+    opacity: 1;
   }
 
   .logoText {
-    width: 150px;
-    transform: translateY(0px);
+    display: none;
   }
 
   .logoSilhouette {
@@ -160,5 +190,6 @@
   .navigationLink {
     font-weight: 400;
     font-size: 21px;
+    opacity: 0;
   }
 }

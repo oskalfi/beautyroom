@@ -31,6 +31,18 @@ export const Header = () => {
   return (
     <header className={styles.header} ref={header}>
       <div className={styles.contentContainer}>
+        <div className={styles.mobileLayout}>
+          <img
+            src="headerTitle.svg"
+            alt="Beauty Room"
+            className={styles.headerTitle}
+          />
+
+          <button className={styles.menuButton}>
+            <img src="Menu.svg" alt="Menu" />
+          </button>
+        </div>
+
         <Link href="/" className={styles.logo}>
           <BeautyRoomSVG className={styles.logoText} />
           <SilhouetteSVG className={styles.logoSilhouette} />

@@ -99,20 +99,13 @@
   display: none;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
   padding: 20px 0;
 }
 
 .headerTitle {
+  font-size: 0;
   opacity: 0;
-}
-
-.menuButton {
-  background-color: transparent;
-  border: none;
-  border: 1px solid var(--white);
-  border-radius: 20px;
-  height: fit-content;
-  padding: 10px;
 }
 
 @media (max-width: 1350px) {

@@ -1,0 +1,15 @@
+.menuButton {
+  background-color: transparent;
+  border: 1px solid var(--white);
+  border-radius: 20px;
+  height: fit-content;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.burgerSvg {
+  display: flex;
+}

@@ -8,6 +8,7 @@ import { BeautyRoomSVG } from "@/shared/assets/svg/BeautyRoom";
 import { SilhouetteSVG } from "@/shared/assets/svg/Silhouette";
 import { Button } from "@/shared/components/Button";
 import { collapseHeader } from "./animations/collapseHeader";
+import { MenuButton } from "../menuButton";
 
 export const Header = () => {
   const header = useRef(null);
@@ -32,15 +33,10 @@ export const Header = () => {
     <header className={styles.header} ref={header}>
       <div className={styles.contentContainer}>
         <div className={styles.mobileLayout}>
-          <img
-            src="headerTitle.svg"
-            alt="Beauty Room"
-            className={styles.headerTitle}
-          />
-
-          <button className={styles.menuButton}>
-            <img src="Menu.svg" alt="Menu" />
-          </button>
+          <Link href="/" className={styles.headerTitle}>
+            <img src="headerTitle.svg" alt="Beauty Room" />
+          </Link>
+          <MenuButton />
         </div>
 
         <Link href="/" className={styles.logo}>

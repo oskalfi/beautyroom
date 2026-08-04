@@ -180,8 +180,13 @@
   }
 
   .navigationList {
+    display: none;
     flex-direction: column;
     gap: 60px;
+  }
+
+  .isOpen .navigationList {
+    display: flex;
   }
 
   .navigationLink {

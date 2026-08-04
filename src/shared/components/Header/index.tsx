@@ -2,7 +2,7 @@
 
 import styles from "./Header.module.css";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Flip } from "gsap/all";
@@ -48,20 +48,15 @@ export const Header = () => {
 
       if (!container) return;
 
-      // 1. FIRST: Запоминаем текущие размеры контейнера
       const state = Flip.getState(container);
 
-      // 2. LAST: Применяем или убираем класс, меняющий height в DOM
       container.classList.toggle(styles.openContainer, isOpen);
 
-      // 3. INVERT & PLAY: GSAP анимирует разницу через GPU transform (scaleY)
       Flip.from(state, {
         duration: 0.5,
         ease: "power2.inOut",
-        // Включаем трансформацию масштаба
         scale: true,
         onStart: () => {
-          // Анимация ссылок внутри
           if (isOpen) {
             gsap.to(links, {
               opacity: 1,
@@ -82,6 +77,39 @@ export const Header = () => {
     },
     { dependencies: [isOpen], scope: header },
   );
+
+  useEffect(() => {
+    if (!isOpen) return;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+
+      if (e.key === "Tab") {
+        const navList = header.current?.querySelector(
+          `.${styles.navigationList}`,
+        );
+        const links = navList?.querySelectorAll<HTMLElement>("a, button");
+
+        if (!links || links.length === 0) return;
+
+        const firstLink = links[0];
+        const lastLink = links[links.length - 1];
+
+        // Если фокус на последней ссылке — принудительно переносим на ПЕРВУЮ ссылку списка
+        if (document.activeElement === lastLink) {
+          e.preventDefault();
+          firstLink.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
 
   return (
     <header

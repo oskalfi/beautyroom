@@ -7,10 +7,8 @@ type collapseHeaderProps = {
   headerContentContainerClass: string;
 };
 
-export function collapseHeader({
+export function paintSilhouette({
   silhouettePathClass,
-  logoTextClass,
-  headerContentContainerClass,
 }: collapseHeaderProps): void {
   gsap.registerPlugin(ScrollTrigger);
   const scroll = gsap.timeline({ paused: true });

@@ -138,7 +138,11 @@
   .contentContainer {
     padding: 0 var(--content-container-padding-phone);
     height: 67.5px;
-    /* height: 100vh; */
+    align-items: start;
+  }
+
+  .isOpen .contentContainer {
+    height: 100vh;
   }
 
   .logo {

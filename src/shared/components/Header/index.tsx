@@ -2,41 +2,73 @@
 
 import styles from "./Header.module.css";
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useEffect } from "react";
 import { BeautyRoomSVG } from "@/shared/assets/svg/BeautyRoom";
 import { SilhouetteSVG } from "@/shared/assets/svg/Silhouette";
 import { Button } from "@/shared/components/Button";
-import { collapseHeader } from "./animations/collapseHeader";
+import { paintSilhouette } from "./animations/collapseHeader";
 import { MenuButton } from "../menuButton";
+import clsx from "clsx";
 
 export const Header = () => {
-  const header = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const header = useRef<HTMLElement | null>(null);
+
+  // Флаг, чтобы пропустить анимацию закрытия при первом рендере
+  const isFirstRender = useRef(true);
 
   useGSAP(
     () => {
-      //instant logo reveal
-      const logoSilhouette = `.${styles.logoSilhouette} path`;
-      const logoText = `.${styles.logoText}`;
-      const contentContainer = `.${styles.contentContainer}`;
+      if (isFirstRender.current) {
+        const logoSilhouette = `.${styles.logoSilhouette} path`;
+        const logoText = `.${styles.logoText}`;
+        const contentContainer = `.${styles.contentContainer}`;
 
-      collapseHeader({
-        silhouettePathClass: logoSilhouette,
-        logoTextClass: logoText,
-        headerContentContainerClass: contentContainer,
-      });
+        paintSilhouette({
+          silhouettePathClass: logoSilhouette,
+          logoTextClass: logoText,
+          headerContentContainerClass: contentContainer,
+        });
+      }
+
+      if (isFirstRender.current) {
+        isFirstRender.current = false;
+        return;
+      }
+
+      if (isOpen) {
+        gsap.to(`.${styles.navigationLink}`, {
+          opacity: 1,
+          stagger: 0.15,
+          duration: 0.5,
+          ease: "power2.out",
+          delay: 0.5,
+        });
+      } else {
+        gsap.to(`.${styles.navigationLink}`, {
+          opacity: 0,
+          duration: 0.2,
+          ease: "power2.in",
+        });
+      }
     },
-    { scope: header },
+    { dependencies: [isOpen], scope: header },
   );
 
   return (
-    <header className={styles.header} ref={header}>
+    <header
+      className={clsx(styles.header, { [styles.isOpen]: isOpen })}
+      ref={header}
+    >
       <div className={styles.contentContainer}>
         <div className={styles.mobileLayout}>
           <Link href="/" className={styles.headerTitle}>
             <img src="headerTitle.svg" alt="Beauty Room" />
           </Link>
-          <MenuButton />
+          <MenuButton isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
 
         <Link href="/" className={styles.logo}>

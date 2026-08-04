@@ -17,8 +17,13 @@ const HAMBURGER_PATH =
 const CROSS_PATH =
   "M66 1Q63 2 61 5v8q-1 1 38 39l38 38-38 38Q60 166 61 167v8q4 7 11 4c2 0 5-3 40-38l38-38 37 38 40 38a9 9 0 0 0 13-11l-39-40-38-38 38-38 39-40c2-8-6-15-13-11l-40 38-37 38-38-38C77 4 74 1 72 1z";
 
-export const MenuButton = () => {
-  const [isOpen, setIsOpen] = useState(false);
+export const MenuButton = ({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: Function;
+}) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const morphPathRef = useRef<SVGPathElement | null>(null);
 

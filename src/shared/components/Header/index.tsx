@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useEffect } from "react";
 import { BeautyRoomSVG } from "@/shared/assets/svg/BeautyRoom";
 import { SilhouetteSVG } from "@/shared/assets/svg/Silhouette";
 import { Button } from "@/shared/components/Button";
@@ -16,11 +17,11 @@ export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const header = useRef<HTMLElement | null>(null);
 
+  // Флаг, чтобы пропустить анимацию закрытия при первом рендере
   const isFirstRender = useRef(true);
 
   useGSAP(
     () => {
-      // Инициализация при первом рендере
       if (isFirstRender.current) {
         const logoSilhouette = `.${styles.logoSilhouette} path`;
         const logoText = `.${styles.logoText}`;
@@ -31,38 +32,26 @@ export const Header = () => {
           logoTextClass: logoText,
           headerContentContainerClass: contentContainer,
         });
+      }
 
+      if (isFirstRender.current) {
         isFirstRender.current = false;
         return;
       }
 
-      const container = `.${styles.contentContainer}`;
-      const links = `.${styles.navigationLink}`;
-
-      const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
-
       if (isOpen) {
-        tl.to(container, {
-          height: "100dvh",
+        gsap.to(`.${styles.navigationLink}`, {
+          opacity: 1,
+          stagger: 0.15,
           duration: 0.5,
-        }).to(
-          links,
-          {
-            opacity: 1,
-            stagger: 0.1,
-            duration: 0.35,
-            ease: "power2.out",
-          },
-          "-=0.2",
-        );
+          ease: "power2.out",
+          delay: 0.5,
+        });
       } else {
-        tl.to(links, {
+        gsap.to(`.${styles.navigationLink}`, {
           opacity: 0,
           duration: 0.2,
           ease: "power2.in",
-        }).to(container, {
-          height: "63px",
-          duration: 0.4,
         });
       }
     },

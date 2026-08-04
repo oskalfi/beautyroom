@@ -5,13 +5,17 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useEffect } from "react";
+import { Flip } from "gsap/all";
 import { BeautyRoomSVG } from "@/shared/assets/svg/BeautyRoom";
 import { SilhouetteSVG } from "@/shared/assets/svg/Silhouette";
 import { Button } from "@/shared/components/Button";
 import { paintSilhouette } from "./animations/collapseHeader";
 import { MenuButton } from "../menuButton";
 import clsx from "clsx";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(Flip);
+}
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,21 +43,42 @@ export const Header = () => {
         return;
       }
 
-      if (isOpen) {
-        gsap.to(`.${styles.navigationLink}`, {
-          opacity: 1,
-          stagger: 0.15,
-          duration: 0.5,
-          ease: "power2.out",
-          delay: 0.5,
-        });
-      } else {
-        gsap.to(`.${styles.navigationLink}`, {
-          opacity: 0,
-          duration: 0.2,
-          ease: "power2.in",
-        });
-      }
+      const container = document.querySelector(`.${styles.contentContainer}`);
+      const links = `.${styles.navigationLink}`;
+
+      if (!container) return;
+
+      // 1. FIRST: Запоминаем текущие размеры контейнера
+      const state = Flip.getState(container);
+
+      // 2. LAST: Применяем или убираем класс, меняющий height в DOM
+      container.classList.toggle(styles.openContainer, isOpen);
+
+      // 3. INVERT & PLAY: GSAP анимирует разницу через GPU transform (scaleY)
+      Flip.from(state, {
+        duration: 0.5,
+        ease: "power2.inOut",
+        // Включаем трансформацию масштаба
+        scale: true,
+        onStart: () => {
+          // Анимация ссылок внутри
+          if (isOpen) {
+            gsap.to(links, {
+              opacity: 1,
+              stagger: 0.1,
+              duration: 0.35,
+              delay: 0.15,
+              ease: "power2.out",
+            });
+          } else {
+            gsap.to(links, {
+              opacity: 0,
+              duration: 0.2,
+              ease: "power2.in",
+            });
+          }
+        },
+      });
     },
     { dependencies: [isOpen], scope: header },
   );

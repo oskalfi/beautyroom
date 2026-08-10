@@ -22,23 +22,28 @@ export const BeforeAfter = ({ className }: TBeforeAfterProps) => {
     slider?.addEventListener("pointerdown", (e) => {
       isDragging = true;
       slider.setPointerCapture(e.pointerId);
+      slider.classList.add(styles.isDragging);
     });
 
     slider?.addEventListener("pointerup", (e) => {
       isDragging = false;
       slider.releasePointerCapture(e.pointerId);
+      slider.classList.remove(styles.isDragging);
     });
 
     slider?.addEventListener("pointercancel", (e) => {
       isDragging = false;
       slider.releasePointerCapture(e.pointerId);
+      slider.classList.remove(styles.isDragging);
     });
 
     container?.addEventListener("pointermove", (e) => {
       if (!isDragging) return;
-      const rect = container?.getBoundingClientRect();
-      let x = e.clientX - rect.left; // cursor X coordinate relative to the left edge of rect
-      x = Math.max(0, Math.min(x, rect.width)); // limits of acceptable values for slider movement
+
+      const rect = container.getBoundingClientRect();
+      const padding = 15;
+      let x = e.clientX - rect.left;
+      x = Math.max(padding, Math.min(x, rect.width - padding));
       const sliderPosition = (x / rect.width) * 100;
       slider.style.left = `${sliderPosition}%`;
       beforeImage.style.clipPath = `inset(0 ${100 - sliderPosition}% 0 0)`;

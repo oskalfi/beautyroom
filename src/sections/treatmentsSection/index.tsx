@@ -26,8 +26,7 @@ export const TreatmentsSection = () => {
   return (
     <section className={styles.treatmentsSection} ref={ref}>
       <div className={styles.decorativeDescription}>
-        In my studio, we can create an individual care plan specifically for
-        you.
+        During your consultation, we’ll create a personalized care plan.
       </div>
       <h2 className={styles.heading}>Treatments</h2>
       <TreatmentsMenu data={mockData} />

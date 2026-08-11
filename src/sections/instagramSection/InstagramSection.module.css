@@ -18,17 +18,17 @@
 
 .wrapper {
   display: flex;
-  gap: 6px;
+  gap: 12px;
   align-items: center;
 }
 
 @media (max-width: 480px) {
   .heading {
-    font-size: 24px;
+    font-size: 30px;
   }
 
   .instIcon {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
   }
 }

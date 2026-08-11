@@ -8,7 +8,7 @@ export const InstagramSection = () => {
     <section className={styles.sectionContainer}>
       <div className={styles.wrapper}>
         {" "}
-        <h2 className={styles.heading}>Загляните в Instagram</h2>
+        <h2 className={styles.heading}>Мы в Instagram</h2>
         <Image
           src="/instagram.png"
           width={42}

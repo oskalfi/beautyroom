@@ -9,7 +9,13 @@ export const InstagramSection = () => {
       <div className={styles.wrapper}>
         {" "}
         <h2 className={styles.heading}>Загляните в Instagram</h2>
-        <Image src="/instagram.png" width={42} height={42} alt="Instagram" />
+        <Image
+          src="/instagram.png"
+          width={42}
+          height={42}
+          alt="Instagram"
+          className={styles.instIcon}
+        />
       </div>
 
       <Carousel />

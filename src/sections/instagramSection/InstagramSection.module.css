@@ -11,13 +11,24 @@
 }
 
 .heading {
-  display: inline-block;
   color: var(--black);
-  font-size: 2rem;
   text-align: center;
+  display: inline;
 }
 
 .wrapper {
   display: flex;
   gap: 6px;
+  align-items: center;
+}
+
+@media (max-width: 480px) {
+  .heading {
+    font-size: 24px;
+  }
+
+  .instIcon {
+    width: 24px;
+    height: 24px;
+  }
 }

@@ -1,0 +1,42 @@
+.hint {
+  position: absolute;
+  inset: 0;
+  background-color: transparent;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ripple {
+  position: absolute;
+  padding: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+}
+
+.wrapper {
+  display: flex;
+  height: 75%;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+  gap: 24px;
+}
+
+.hintText {
+  font-weight: 600;
+  text-align: center;
+  width: 210px;
+}
+
+.volumeSvg {
+  color: rgba(255, 255, 255, 0.8);
+  z-index: 1;
+}

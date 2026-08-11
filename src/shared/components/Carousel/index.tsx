@@ -44,6 +44,18 @@ export const Carousel = () => {
     return () => observer.disconnect();
   }, []);
 
+  const [hintTrigger, setHintTrigger] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHintTrigger((prev) => prev + 1);
+    }, 10000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [activeIndex]);
+
   return (
     <div className={styles.carousel} ref={carouselRef}>
       <div ref={mediaContainer} className={styles.mediaContainer}>
@@ -57,6 +69,7 @@ export const Carousel = () => {
               link={link}
               isActive={index === activeIndex}
               index={index}
+              hintTrigger={hintTrigger}
             />
           );
         })}

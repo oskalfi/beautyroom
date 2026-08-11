@@ -11,8 +11,13 @@
 }
 
 .heading {
-  display: block;
+  display: inline-block;
   color: var(--black);
   font-size: 2rem;
   text-align: center;
+}
+
+.wrapper {
+  display: flex;
+  gap: 6px;
 }

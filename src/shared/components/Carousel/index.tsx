@@ -21,6 +21,7 @@ export const Carousel = () => {
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const [soundEnabled, setSoundEnabled] = useState(false);
+  const [isCarouselVisible, setIsCarouselVisible] = useState(false);
 
   useGSAP(() => {
     animateAppearance(mediaContainer, activeIndex);
@@ -43,6 +44,7 @@ export const Carousel = () => {
     );
 
     itemRefs.current.forEach((item) => observer.observe(item as Element));
+
     return () => observer.disconnect();
   }, []);
 

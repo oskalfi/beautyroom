@@ -3,12 +3,23 @@
   position: relative;
   overflow: hidden;
   padding: 16px 0;
+
+  /* Создаем изолированный контекст рендеринга для Safari */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .factsWrapper {
   display: flex;
   animation: runningLine 25s linear infinite;
-  width: fit-content;
+
+  /*  max-content вместо fit-content убирает баг с обрезкой слоя в WebKit */
+  width: max-content;
+
+  /* Включаем GPU-ускорение и фиксируем слой в памяти Safari */
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .fact {
@@ -17,6 +28,10 @@
   font-family: "MontserratAlternates";
   white-space: nowrap;
   display: inline-flex;
+  align-items: center;
+
+  /* Предотвращаем любые попытки Safari ужать текст */
+  flex-shrink: 0;
 }
 
 .fact::after {
@@ -26,14 +41,16 @@
   height: 30px;
   background-image: url("/star.svg");
   margin: 0 20px;
+  flex-shrink: 0;
 }
 
+/* Переводим анимацию на 3D-трансформацию (GPU) с помощью translate3d, а не translate*/
 @keyframes runningLine {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }

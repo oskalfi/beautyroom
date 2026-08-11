@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import styles from "./CarouselItem.module.css";
-import { useEffect, useRef } from "react";
+import { MouseEventHandler, useEffect, useRef } from "react";
 import { generateRoundedRectPath } from "./generateRoundedRectPath";
 import { SoundHint } from "./soundHint";
 
@@ -10,6 +10,8 @@ type TCarouselItem = {
   ref: React.Ref<HTMLDivElement>;
   index: number;
   hintTrigger: number;
+  soundEnabled: boolean;
+  onEnableSound: Function;
 };
 
 export const CarouselItem = ({
@@ -18,6 +20,8 @@ export const CarouselItem = ({
   ref,
   index,
   hintTrigger,
+  soundEnabled,
+  onEnableSound,
 }: TCarouselItem) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const isRunning = useRef(false);
@@ -52,6 +56,26 @@ export const CarouselItem = ({
     pathRef.current.style.strokeDashoffset = "0";
   }
 
+  let lastClickTime = 0;
+  const DOUBLE_CLICK_DELAY = 300; // Окно времени в миллисекундах
+
+  const handleVideoClick = (e: React.SyntheticEvent) => {
+    if (!isActive || !videoRef.current) return;
+
+    const currentTime = Date.now();
+    const timeDifference = currentTime - lastClickTime;
+
+    if (timeDifference < DOUBLE_CLICK_DELAY && timeDifference > 0) {
+      // Сработал двойной тап / клик
+      videoRef.current.muted = false;
+      onEnableSound();
+      // Сбрасываем таймер, чтобы тройной клик не засчитался как два двойных
+      lastClickTime = 0;
+    } else {
+      lastClickTime = currentTime;
+    }
+  };
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -72,7 +96,7 @@ export const CarouselItem = ({
   }, [isActive]);
 
   return (
-    <div className={styles.mediaWrapper}>
+    <div className={styles.mediaWrapper} onClick={handleVideoClick}>
       <div
         data-index={index}
         ref={ref}
@@ -87,7 +111,7 @@ export const CarouselItem = ({
 
         <video
           loop={isActive}
-          muted
+          muted={!soundEnabled}
           playsInline
           ref={videoRef}
           className={styles.media}

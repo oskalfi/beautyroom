@@ -12,6 +12,7 @@
 
 .heading {
   color: var(--black);
+  font-size: 30px;
   text-align: center;
   display: inline;
 }
@@ -23,10 +24,6 @@
 }
 
 @media (max-width: 480px) {
-  .heading {
-    font-size: 30px;
-  }
-
   .instIcon {
     width: 30px;
     height: 30px;

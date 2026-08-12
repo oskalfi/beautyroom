@@ -21,7 +21,6 @@ export const Carousel = () => {
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const [soundEnabled, setSoundEnabled] = useState(false);
-  const [isCarouselVisible, setIsCarouselVisible] = useState(false);
 
   useGSAP(() => {
     animateAppearance(mediaContainer, activeIndex);
@@ -60,14 +59,14 @@ export const Carousel = () => {
       timeoutId = setTimeout(triggerHint, 20000);
     };
 
-    // первый запуск через 6 секунд, последующие через 20
+    // первый запуск через 3 секунды, последующие через 20
 
-    timeoutId = setTimeout(triggerHint, 6000);
+    timeoutId = setTimeout(triggerHint, 3000);
 
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [activeIndex]);
+  }, [activeIndex, soundEnabled]);
 
   return (
     <div className={styles.carousel} ref={carouselRef}>
@@ -84,7 +83,9 @@ export const Carousel = () => {
               index={index}
               hintTrigger={hintTrigger}
               soundEnabled={soundEnabled}
-              onEnableSound={() => setSoundEnabled(true)}
+              onEnableSound={() => {
+                soundEnabled ? setSoundEnabled(false) : setSoundEnabled(true);
+              }}
             />
           );
         })}

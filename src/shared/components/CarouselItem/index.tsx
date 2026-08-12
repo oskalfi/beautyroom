@@ -1,8 +1,9 @@
 import clsx from "clsx";
 import styles from "./CarouselItem.module.css";
-import { MouseEventHandler, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { generateRoundedRectPath } from "./generateRoundedRectPath";
 import { SoundHint } from "./soundHint";
+import gsap from "gsap/all";
 
 type TCarouselItem = {
   link: string;
@@ -23,6 +24,8 @@ export const CarouselItem = ({
   soundEnabled,
   onEnableSound,
 }: TCarouselItem) => {
+  const volumeRef = useRef<HTMLImageElement>(null);
+
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const isRunning = useRef(false);
 
@@ -58,6 +61,7 @@ export const CarouselItem = ({
 
   let lastClickTime = 0;
   const DOUBLE_CLICK_DELAY = 300; // Окно времени в миллисекундах
+  const tl = gsap.timeline();
 
   const handleVideoClick = (e: React.SyntheticEvent) => {
     if (!isActive || !videoRef.current) return;
@@ -71,6 +75,28 @@ export const CarouselItem = ({
       onEnableSound();
       // Сбрасываем таймер, чтобы тройной клик не засчитался как два двойных
       lastClickTime = 0;
+      tl.fromTo(
+        volumeRef.current,
+        {
+          scale: 0.85,
+          opacity: 0,
+        },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.4,
+          ease: "power2.out",
+        },
+      ).to(
+        volumeRef.current,
+        {
+          opacity: 0,
+          scale: 0.85,
+          duration: 0.4,
+          ease: "power2.in",
+        },
+        "+=1",
+      );
     } else {
       lastClickTime = currentTime;
     }
@@ -106,7 +132,12 @@ export const CarouselItem = ({
         )}
       >
         {isActive && (
-          <SoundHint hintTrigger={hintTrigger} isActive={isActive} />
+          <SoundHint
+            hintTrigger={hintTrigger}
+            isActive={isActive}
+            soundIconRef={volumeRef}
+            soundEnabled={soundEnabled}
+          />
         )}
 
         <video

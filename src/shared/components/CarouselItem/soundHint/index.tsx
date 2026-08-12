@@ -3,16 +3,20 @@ import styles from "./SoundHint.module.css";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/all";
 import gsap from "gsap";
+import Image from "next/image";
 
 export const SoundHint = ({
   isActive,
   hintTrigger,
+  soundIconRef,
+  soundEnabled,
 }: {
   isActive: boolean;
   hintTrigger: number;
+  soundIconRef: React.RefObject<HTMLImageElement | null>;
+  soundEnabled: boolean;
 }) => {
   const hintTextRef = useRef<HTMLParagraphElement>(null);
-  const volumeRef = useRef<SVGSVGElement>(null);
   const ripple1Ref = useRef<HTMLDivElement>(null);
   const ripple2Ref = useRef<HTMLDivElement>(null);
 
@@ -21,7 +25,7 @@ export const SoundHint = ({
   useGSAP(() => {
     if (!isActive) return;
 
-    if (!hintTextRef.current || !volumeRef.current) return;
+    if (!hintTextRef.current || !soundIconRef.current) return;
 
     const split = SplitText.create(hintTextRef.current, {
       type: "chars lines",
@@ -65,50 +69,33 @@ export const SoundHint = ({
       )
       .fromTo(
         split.chars,
-
         {
           xPercent: -40,
-
           opacity: 0,
         },
-
         {
           xPercent: 0,
-
           opacity: 1,
-
           duration: 0.35,
-
           stagger: 0.008,
-
           ease: "power2.out",
-
           force3D: true,
         },
-
         "<",
       )
       .fromTo(
-        volumeRef.current,
-
+        soundIconRef.current,
         {
           scale: 0.85,
-
           opacity: 0,
         },
-
         {
           scale: 1,
-
           opacity: 1,
-
           duration: 0.4,
-
           ease: "power2.out",
-
           force3D: true,
         },
-
         "<",
       )
       .to(ripple2Ref.current, {
@@ -129,7 +116,7 @@ export const SoundHint = ({
         "<",
       )
       .to(
-        volumeRef.current,
+        soundIconRef.current,
         {
           scale: 0.85,
           opacity: 0,
@@ -154,6 +141,7 @@ export const SoundHint = ({
 
   useEffect(() => {
     if (!isActive) return;
+    console.log(soundEnabled);
 
     // Запускаем анимацию только если hintTrigger реально изменился
     // по сравнению с предыдущим известным значением
@@ -169,20 +157,25 @@ export const SoundHint = ({
       <div ref={ripple2Ref} className={styles.ripple} />
 
       <div className={styles.wrapper}>
-        <svg
-          ref={volumeRef}
-          className={styles.volumeSvg}
-          width="90"
-          height="82"
-          viewBox="0 0 800 722"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill="currentColor"
-            d="M490.323 0V52.9801C641.858 82.1672 748.387 205.754 748.387 360.903C748.387 515.174 645.161 634.684 490.323 668.826V721.832C665.187 696.232 800 545.238 800 360.903C800 176.567 665.187 25.5742 490.323 0ZM361.29 51.2254L180.645 171.664V550.142L361.29 670.58C389.781 670.58 412.903 647.458 412.903 618.967V102.838C412.903 74.348 389.781 51.2254 361.29 51.2254ZM645.161 360.903C645.161 269.987 577.755 195.484 490.323 182.864V234.477C549.213 246.426 593.548 298.477 593.548 360.903C593.548 423.329 549.213 475.38 490.323 487.328V538.941C577.755 526.322 645.161 451.819 645.161 360.903ZM0 257.677V464.129C0 492.619 23.1226 515.742 51.6129 515.742H129.032V206.064H51.6129C23.1226 206.064 0 229.187 0 257.677Z"
+        <div ref={soundIconRef} className={styles.soundIcon}>
+          <Image
+            style={{ display: soundEnabled ? "block" : "none" }}
+            src="/volume.svg"
+            width={90}
+            height={82}
+            alt="Иконка звука"
+            className={styles.volumeSvg}
           />
-        </svg>
+          <Image
+            style={{ display: soundEnabled ? "none" : "block" }}
+            src="/volume_mute.svg"
+            width={90}
+            height={82}
+            alt="Иконка выключеного звука"
+            className={styles.volumeSvg}
+          />
+        </div>
+
         <div ref={hintTextRef} className={styles.hintText}>
           Активируйте звук двойным нажатием
         </div>

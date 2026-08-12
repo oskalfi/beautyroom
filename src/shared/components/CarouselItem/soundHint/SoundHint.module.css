@@ -36,7 +36,11 @@
   width: 210px;
 }
 
+.soundIcon {
+  position: relative;
+}
+
 .volumeSvg {
-  color: rgba(255, 255, 255, 0.8);
+  opacity: 0.8;
   z-index: 1;
 }

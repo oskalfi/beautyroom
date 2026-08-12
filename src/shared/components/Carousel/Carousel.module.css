@@ -108,8 +108,25 @@
   .backButton {
     transform: translateX(20%);
   }
+
+  .backButton:hover {
+    transform: translateX(20%) scale(1.2);
+  }
+
+  .backButton:active {
+    transform: translateX(20%) scale(0.9);
+  }
+
   .forwardButton {
     transform: translateX(-20%);
+  }
+
+  .forwardButton:hover {
+    transform: translateX(-20%) scale(1.2);
+  }
+
+  .forwardButton:active {
+    transform: translateX(-20%) scale(0.9);
   }
 }
 
@@ -117,7 +134,24 @@
   .backButton {
     transform: translateX(5px);
   }
+
+  .backButton:hover {
+    transform: translateX(5px) scale(1.2);
+  }
+
+  .backButton:active {
+    transform: translateX(5px) scale(0.9);
+  }
+
   .forwardButton {
     transform: translateX(-5px);
+  }
+
+  .forwardButton:hover {
+    transform: translateX(-5px) scale(1.2);
+  }
+
+  .forwardButton:active {
+    transform: translateX(-5px) scale(0.9);
   }
 }

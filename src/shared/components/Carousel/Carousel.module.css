@@ -30,7 +30,15 @@
   border-radius: 50%;
   z-index: 1;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
+
+.button:active {
+}
+
+/* .isPressed {
+  background-color: rgba(248, 148, 164, 0.5);
+} */
 
 .backButton {
   left: 0;
@@ -38,6 +46,14 @@
   transition:
     transform 0.3s ease,
     opacity 0.3s ease;
+}
+
+.backButton:hover {
+  transform: translateX(100%) scale(1.2);
+}
+
+.backButton:active {
+  transform: translateX(100%) scale(0.9);
 }
 
 .arrow {
@@ -50,6 +66,14 @@
   transition:
     transform 0.3s ease,
     opacity 0.3s ease;
+}
+
+.forwardButton:hover {
+  transform: translateX(-100%) scale(1.2);
+}
+
+.forwardButton:active {
+  transform: translateX(-100%) scale(0.9);
 }
 
 .backButton .arrow {

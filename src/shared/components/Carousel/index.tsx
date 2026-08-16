@@ -59,9 +59,9 @@ export const Carousel = () => {
       timeoutId = setTimeout(triggerHint, 20000);
     };
 
-    // первый запуск через 3 секунды, последующие через 20
+    // первый запуск через 2 секунды, последующие через 20
 
-    timeoutId = setTimeout(triggerHint, 3000);
+    timeoutId = setTimeout(triggerHint, 2000);
 
     return () => {
       clearTimeout(timeoutId);

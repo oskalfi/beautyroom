@@ -12,7 +12,7 @@
 
 .heading {
   color: var(--black);
-  font-size: 30px;
+  font-size: 27px;
   text-align: center;
   display: inline;
 }
@@ -21,6 +21,65 @@
   display: flex;
   gap: 12px;
   align-items: center;
+}
+
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  font-size: var(--font-size-button);
+  position: relative;
+  width: 262.8px;
+  height: 42px;
+  cursor: pointer;
+  --button-start-width: 51px;
+}
+
+.toInstButton {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background-color: var(--primary-color);
+  overflow: hidden;
+  width: var(--button-start-width);
+  padding: 12px;
+  will-change: width;
+  transition: width 0.6s ease;
+}
+
+.buttonTextWrapper {
+  position: relative;
+}
+
+.buttonTextWhite,
+.buttonTextBlack {
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  letter-spacing: 0px;
+  font-weight: 400;
+}
+
+.buttonTextWhite {
+  color: white;
+}
+
+.buttonTextBlack {
+  color: black;
+  position: absolute;
+  transform: translateX(var(--button-start-width));
+}
+
+.buttonWrapper:hover .toInstButton {
+  width: 100%;
+}
+
+.buttonWrapper:active .toInstButton,
+.buttonWrapper:focus .toInstButton {
+  width: 100%;
 }
 
 @media (max-width: 480px) {

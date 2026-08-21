@@ -26,6 +26,7 @@ export const Carousel = () => {
     animateAppearance(mediaContainer, activeIndex);
   });
 
+  // определение активного видео (активное то, что ближе к центру)
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -46,6 +47,35 @@ export const Carousel = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  // пауза на активном видео, когда карусель выходит из области видимости
+  useEffect(() => {
+    const container = mediaContainer.current;
+
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          itemRefs.current.forEach((item) => {
+            item?.querySelector("video")?.pause();
+          });
+        } else {
+          itemRefs.current[activeIndex]
+            ?.querySelector("video")
+            ?.play()
+            .catch(() => {});
+        }
+      },
+      {
+        threshold: 0,
+      },
+    );
+
+    observer.observe(container);
+
+    return () => observer.disconnect();
+  }, [activeIndex]);
 
   const [hintTrigger, setHintTrigger] = useState(0);
 

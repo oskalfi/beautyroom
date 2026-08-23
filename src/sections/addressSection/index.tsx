@@ -19,7 +19,7 @@ export const AddressSection = () => {
           height={230}
         />
         <address className={styles.address}>
-          <a href="moovit://directions?dest_line1=Jerusalem Blvd 33, Tel Aviv-Yafo">
+          <a href="moovit://directions?dest_line1=Jerusalem%20Blvd%2033%2C%20Tel%20Aviv-Yafo">
             Jerusalem Blvd 33, Tel Aviv-Yafo
           </a>
         </address>

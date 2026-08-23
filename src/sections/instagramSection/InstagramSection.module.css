@@ -37,7 +37,7 @@
 
 .toInstButton {
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   display: flex;
   gap: 12px;
   align-items: center;

@@ -5,6 +5,7 @@ import { TreatmentsSection } from "@/sections/treatmentsSection";
 import { RunningLineSection } from "@/sections/runningLineSection";
 import { BeforeAfterSection } from "@/sections/beforeAfterSection";
 import { InstagramSection } from "@/sections/instagramSection";
+import { AddressSection } from "@/sections/addressSection";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <RunningLineSection />
       <BeforeAfterSection />
       <InstagramSection />
+      <AddressSection />
     </main>
   );
 }

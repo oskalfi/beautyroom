@@ -115,7 +115,7 @@
   border-radius: 50%;
 
   /* выдвигаем лицевую сторону вперед по оси Z для создания объёма */
-  transform: translateZ(36px);
+  transform: translateZ(24px);
 
   background-color: #fdfbfb;
   border: 1px solid #f894a4;

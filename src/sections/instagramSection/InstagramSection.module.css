@@ -41,12 +41,19 @@
   display: flex;
   gap: 12px;
   align-items: center;
-  background-color: var(--primary-color);
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   overflow: hidden;
   width: var(--button-start-width);
   padding: 12px;
   will-change: width;
-  transition: width 0.6s ease;
+  border-radius: 9px;
+  transition:
+    width 0.6s ease,
+    transform 0.3s ease;
 }
 
 .buttonTextWrapper {
@@ -73,13 +80,17 @@
   transform: translateX(var(--button-start-width));
 }
 
-.buttonWrapper:hover .toInstButton {
-  width: 100%;
-}
-
+.buttonWrapper:hover .toInstButton,
 .buttonWrapper:active .toInstButton,
 .buttonWrapper:focus .toInstButton {
   width: 100%;
+}
+.buttonWrapper:hover .toInstButton {
+  transform: scale(1.05);
+}
+
+.buttonWrapper:active .toInstButton {
+  transform: scale(1);
 }
 
 @media (max-width: 480px) {

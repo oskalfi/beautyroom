@@ -76,33 +76,11 @@
   position: relative;
   width: 230px;
   height: 230px;
+  min-width: 230px;
+  min-height: 230px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* тень под перекатывающимся элементом */
-.plateWrapper::after {
-  content: "";
-  position: absolute;
-  width: 210px;
-  height: 45px;
-  bottom: -20px;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(0, 0, 0, 0) 70%
-  );
-  border-radius: 50%;
-  z-index: 0;
-
-  /* динамическое смещение тени вслед за точкой опоры */
-  transform: translateX(calc(15px * sin(var(--angle))))
-    translateY(calc(15px * cos(var(--angle))))
-    scaleX(calc(0.85 + 0.15 * cos(var(--angle))));
-
-  animation: rollCircle 2.4s linear infinite;
-  pointer-events: none;
 }
 
 /* анимируемый 3D-контейнер */
@@ -140,7 +118,7 @@
   transform: translateZ(12px);
 
   background-color: #fdfbfb;
-  border: 6px solid #f894a4;
+  border: 3px solid #f894a4;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -217,6 +195,13 @@
     white-space: wrap;
     text-align: center;
   }
+
+  .plateWrapper {
+    width: 180px;
+    height: 180px;
+    min-width: 180px;
+    min-height: 180px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -244,7 +229,10 @@
     font-size: 18px;
   }
 
-  .logo {
-    width: 180px;
+  .plateWrapper {
+    width: 150px;
+    height: 150px;
+    min-width: 150px;
+    min-height: 150px;
   }
 }

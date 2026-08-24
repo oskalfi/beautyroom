@@ -95,7 +95,7 @@
   transform: rotateX(calc(22deg * cos(var(--angle))))
     rotateY(calc(22deg * sin(var(--angle))));
 
-  animation: rollCircle 3.3s linear infinite;
+  animation: rollCircle 6s linear infinite;
 }
 
 /* задняя сторона (дно) */
@@ -104,8 +104,8 @@
   inset: 0;
   border-radius: 50%;
   transform: translateZ(0px);
-  background-color: #f9dcc4;
-  border: 2px solid #f894a4;
+  background: linear-gradient(to bottom right, #ffcfca, #d78c8f);
+  border: 1px solid #f894a4;
 }
 
 /* лицевая сторона с логотипом */
@@ -115,10 +115,10 @@
   border-radius: 50%;
 
   /* выдвигаем лицевую сторону вперед по оси Z для создания объёма */
-  transform: translateZ(12px);
+  transform: translateZ(36px);
 
   background-color: #fdfbfb;
-  border: 3px solid #f894a4;
+  border: 1px solid #f894a4;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -85,12 +85,9 @@
 .buttonWrapper:focus .toInstButton {
   width: 100%;
 }
-.buttonWrapper:hover .toInstButton {
-  transform: scale(1.05);
-}
 
 .buttonWrapper:active .toInstButton {
-  transform: scale(1);
+  transform: scale(0.95);
 }
 
 @media (max-width: 480px) {

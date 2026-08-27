@@ -10,36 +10,14 @@ import { ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);
 
 export const AddressSection = () => {
-  const addressRef = useRef<HTMLElement | null>(null);
+  const headingRef = useRef(null);
   const rectRef = useRef(null);
   const containerRef = useRef(null);
+  const mapRef = useRef(null);
+  const addressRef = useRef(null);
 
   useGSAP(
     () => {
-      if (!addressRef.current) return;
-      const pulse = gsap.timeline({
-        repeat: -1,
-        repeatDelay: 6,
-      });
-
-      pulse.to(addressRef.current, {
-        scale: 1.1,
-        duration: 0.15,
-        ease: "power2.out",
-        repeat: 3,
-        yoyo: true,
-      });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: addressRef.current,
-          start: "bottom 99.9%",
-          toggleActions: "restart pause restart pause",
-        },
-      });
-
-      tl.delay(1).add(pulse);
-
       const rect = rectRef.current as any;
       if (!rect) return;
       const length = rect.getTotalLength();
@@ -61,15 +39,31 @@ export const AddressSection = () => {
         .to(rect, { opacity: 1, duration: 0.05 })
         .to(rect, {
           strokeDashoffset: 0,
-          duration: 0.6,
+          duration: 0.5,
           ease: "power4.in",
         })
         .to(rect, {
           strokeDashoffset: -length, // Линия уходит дальше вперед на всю длину
-          duration: 0.6,
+          duration: 0.5,
           ease: "power2.out",
         })
-        .to(rect, { opacity: 0, duration: 0.05 }, "-=0.05");
+        .to(rect, { opacity: 0, duration: 0.05 }, "-=0.05")
+        .from(
+          mapRef.current,
+          {
+            opacity: 0,
+            duration: 3,
+          },
+          "<-=0.3",
+        )
+        .from(
+          addressRef.current,
+          {
+            opacity: 0,
+            duration: 3,
+          },
+          "<+=0.5",
+        );
     },
     { scope: containerRef },
   );
@@ -77,7 +71,9 @@ export const AddressSection = () => {
   return (
     <section className={styles.section}>
       <div className={styles.headerWrapper} ref={containerRef}>
-        <h2 className={styles.heading}>Расположение</h2>
+        <h2 className={styles.heading} ref={headingRef}>
+          Расположение
+        </h2>
 
         <svg className={styles.borderSvg}>
           <rect
@@ -91,10 +87,10 @@ export const AddressSection = () => {
           />
         </svg>
       </div>
-
       <a
         href="https://waze.com/ul?q=Jerusalem%20Blvd%2033%2C%20Tel%20Aviv-Yafo&navigate=yes"
         className={styles.contentWrapper}
+        ref={addressRef}
       >
         <div className={styles.plateWrapper}>
           <div className={styles.plate}>
@@ -111,12 +107,12 @@ export const AddressSection = () => {
           </div>
         </div>
 
-        <address className={styles.address} ref={addressRef}>
+        <address className={styles.address}>
           <img src="/waze.svg" alt="Waze icon" className={styles.wazeIcon} />
           Jerusalem Blvd 33, Tel Aviv-Yafo
         </address>
       </a>
-      <img className={styles.map} src="/map.png" alt="Map" />
+      <img className={styles.map} src="/map.png" alt="Map" ref={mapRef} />
     </section>
   );
 };

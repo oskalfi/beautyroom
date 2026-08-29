@@ -28,12 +28,15 @@
   transition: transform 0.3s ease;
 }
 
-.map {
-  display: block;
+.mapWrapper {
   grid-area: map;
-  width: 100%;
-  max-width: 815px;
+}
+
+.map {
   min-width: 0;
+  max-width: 815px;
+  width: 100%;
+  display: block;
   justify-self: center;
   align-self: center;
   object-fit: cover;

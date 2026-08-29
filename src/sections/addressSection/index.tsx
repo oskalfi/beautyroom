@@ -87,7 +87,9 @@ export const AddressSection = () => {
           />
         </svg>
       </div>
+
       <a
+        target="_blank"
         href="https://waze.com/ul?q=Jerusalem%20Blvd%2033%2C%20Tel%20Aviv-Yafo&navigate=yes"
         className={styles.contentWrapper}
         ref={addressRef}
@@ -112,7 +114,13 @@ export const AddressSection = () => {
           Jerusalem Blvd 33, Tel Aviv-Yafo
         </address>
       </a>
-      <img className={styles.map} src="/map.png" alt="Map" ref={mapRef} />
+      <a
+        target="_blank"
+        className={styles.mapWrapper}
+        href="https://www.google.com/maps/place/Sderot+Yerushalayim+33,+Tel+Aviv-Jaffa/@32.052698,34.7595119,17z/data=!4m15!1m8!3m7!1s0x151d4cbb88b981eb:0x85d48da1e6c9386!2sSderot+Yerushalayim+33,+Tel+Aviv-Jaffa!3b1!8m2!3d32.052698!4d34.7595119!16s%2Fg%2F11t3d1c8sf!3m5!1s0x151d4cbb88b981eb:0x85d48da1e6c9386!8m2!3d32.052698!4d34.7595119!16s%2Fg%2F11t3d1c8sf?entry=ttu&g_ep=EgoyMDI2MDgyNS4wIKXMDSoASAFQAw%3D%3D"
+      >
+        <img src="/map.png" alt="Map" ref={mapRef} className={styles.map} />
+      </a>
     </section>
   );
 };

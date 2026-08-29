@@ -155,3 +155,18 @@
     padding: 21px 0;
   }
 }
+
+@media (max-width: 479px) {
+  .logo {
+    width: 112px;
+    position: absolute;
+  }
+
+  .linksList {
+    font-size: 14px;
+  }
+
+  .heading {
+    font-size: 14px;
+  }
+}

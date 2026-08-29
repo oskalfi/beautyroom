@@ -4,7 +4,7 @@ import Link from "next/link";
 export const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <img src="/flag.svg"></img>
+      <img src="/flag.svg" alt="Logo" className={styles.logo} />
       <div className={styles.linksWrapper}>
         <nav aria-labelledby="site-navigation-title">
           <h2 className={styles.heading} id="site-navigation-title">
@@ -50,17 +50,28 @@ export const Footer = () => {
             For any questions
           </h2>
           <ul className={styles.linksList}>
-            <li>
-              <a className={styles.contact} href="tel:+972532258055">
+            <li className={styles.navigationItem}>
+              <a href="tel:+972532258055" className={styles.navigationLink}>
                 +972-53-225-80-55
+                <svg className={styles.border}>
+                  <rect x="0" y="0" width="100%" height="100%" rx="16" />
+                </svg>
               </a>
             </li>
-            <li>
-              <a href="mailto:beautyroom@gmail.com">beautyroom@gmail.com</a>
+            <li className={styles.navigationItem}>
+              <a
+                href="mailto:beautyroom@gmail.com"
+                className={styles.navigationLink}
+              >
+                beautyroom@gmail.com
+                <svg className={styles.border}>
+                  <rect x="0" y="0" width="100%" height="100%" rx="16" />
+                </svg>
+              </a>
             </li>
           </ul>
         </section>
-        <section aria-labelledby="social-title">
+        <section aria-labelledby="social-title" className={styles.socialWebs}>
           <h2 className={styles.heading} id="social-title">
             Social webs
           </h2>

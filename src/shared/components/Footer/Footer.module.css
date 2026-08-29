@@ -19,7 +19,8 @@
 .heading {
   font-size: 26px;
   text-transform: uppercase;
-  font-weight: 600;
+  font-family: "MontserratAlternates";
+  font-weight: 500;
   padding: 21px;
 }
 
@@ -36,6 +37,7 @@
   bottom: 9px;
   left: 50%;
   transform: translateX(-50%);
+  white-space: nowrap;
 }
 
 .navigationItem {
@@ -67,4 +69,89 @@
 
 .navigationLink:hover .border rect {
   stroke-dashoffset: 0;
+}
+
+@media (max-width: 1350px) {
+  .footer {
+    gap: 90px;
+  }
+
+  .logo {
+    width: 160px;
+  }
+
+  .heading {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 1120px) {
+  .footer {
+    gap: 60px;
+  }
+  .heading {
+    font-size: 18px;
+  }
+
+  .linksWrapper {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 950px) {
+  .footer {
+    gap: 30px;
+  }
+  .heading {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .linksWrapper {
+    gap: 21px;
+  }
+
+  .linksList {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 800px) {
+  .footer {
+    gap: 30px;
+  }
+  .heading {
+    font-size: 16px;
+  }
+
+  .linksWrapper {
+    gap: 21px;
+  }
+
+  .linksList {
+    font-size: 15px;
+  }
+
+  .socialWebs {
+    display: none;
+  }
+}
+
+@media (max-width: 624px) {
+  .logo {
+    align-self: flex-start;
+  }
+  .linksWrapper {
+    flex-direction: column;
+    align-items: end;
+  }
+
+  .linksList {
+    align-items: flex-end;
+  }
+
+  .heading {
+    text-align: end;
+    padding: 21px 0;
+  }
 }

@@ -45,7 +45,7 @@
 .heading {
   color: var(--primary-color);
   text-align: center;
-  font-weight: 800;
+  font-weight: 400;
   max-width: 1030px;
   z-index: 2;
 }

@@ -1,10 +1,34 @@
+"use client";
+
 import styles from "./Footer.module.css";
 import Link from "next/link";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const Footer = () => {
+  const logoRef = useRef(null);
+  const footerRef = useRef(null);
+
+  useGSAP(() => {
+    gsap.from(logoRef.current, {
+      y: "-100%",
+      duration: 2,
+      ease: "bounce.inOut",
+      scrollTrigger: {
+        trigger: footerRef.current,
+        start: "center bottom",
+        toggleActions: "play none none none",
+      },
+    });
+  });
+
   return (
-    <footer className={styles.footer}>
-      <img src="/flag.svg" alt="Logo" className={styles.logo} />
+    <footer className={styles.footer} ref={footerRef}>
+      <img src="/flag.svg" alt="Logo" className={styles.logo} ref={logoRef} />
       <div className={styles.linksWrapper}>
         <nav aria-labelledby="site-navigation-title">
           <h2 className={styles.heading} id="site-navigation-title">

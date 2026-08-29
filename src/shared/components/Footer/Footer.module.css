@@ -6,6 +6,7 @@
   background-color: var(--white);
   display: flex;
   gap: 150px;
+  overflow: hidden;
 }
 
 .linksWrapper {

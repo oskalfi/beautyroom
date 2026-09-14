@@ -141,7 +141,6 @@ export const SoundHint = ({
 
   useEffect(() => {
     if (!isActive) return;
-    console.log(soundEnabled);
 
     // Запускаем анимацию только если hintTrigger реально изменился
     // по сравнению с предыдущим известным значением

@@ -14,7 +14,7 @@ body:has(.modalWindow[open]) {
 .contentWrapper {
   display: flex;
   width: 56.25rem;
-  height: 34.375rem;
+  max-height: 100vh;
   background: var(--black);
 }
 

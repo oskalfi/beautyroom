@@ -36,48 +36,45 @@ function handleCancel(
 
 export const Modal = () => {
   const dialog = useRef<null | HTMLDialogElement>(null);
-  const { isOpen, modalType, closeModal } = useModalStore();
+  const { modalType, closeModal, contentId } = useModalStore();
   useEffect(() => {
-    if (isOpen) {
+    if (modalType) {
       dialog.current?.showModal();
       dialog.current?.focus();
     }
     return;
-  }, [isOpen, modalType]);
+  }, [modalType]);
 
-  const Content = ModalTypes[modalType.type];
+  const Content = modalType ? ModalTypes[modalType] : null;
+  if (!Content || !contentId) return null;
   return (
-    Content && (
-      <dialog
-        ref={dialog}
-        id="modal-window"
-        className={styles.modalWindow}
-        tabIndex={-1}
-        onClick={(e) => {
-          handleClick(e, closeModal);
-        }}
-        onCancel={(e) => {
-          handleCancel(e, closeModal);
-        }}
-      >
-        <div id="modal-content" className={styles.contentWrapper}>
-          <button
-            className={styles.closeButton}
-            aria-label="Закрыть"
-            onClick={(e) => {
-              e.stopPropagation();
-              animatedClose(dialog.current, closeModal);
-            }}
-          >
-            ✕
-          </button>
-          <Suspense
-            fallback={<div className={styles.suspense}>Загрузка...</div>}
-          >
-            <Content />
-          </Suspense>
-        </div>
-      </dialog>
-    )
+    <dialog
+      ref={dialog}
+      id="modal-window"
+      className={styles.modalWindow}
+      tabIndex={-1}
+      onClick={(e) => {
+        handleClick(e, closeModal);
+      }}
+      onCancel={(e) => {
+        handleCancel(e, closeModal);
+      }}
+    >
+      <div id="modal-content" className={styles.contentWrapper}>
+        <button
+          className={styles.closeButton}
+          aria-label="Закрыть"
+          onClick={(e) => {
+            e.stopPropagation();
+            animatedClose(dialog.current, closeModal);
+          }}
+        >
+          ✕
+        </button>
+        <Suspense fallback={<div className={styles.suspense}>Загрузка...</div>}>
+          <Content id={contentId} />
+        </Suspense>
+      </div>
+    </dialog>
   );
 };

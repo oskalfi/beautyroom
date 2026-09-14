@@ -1,21 +1,23 @@
 import { create } from "zustand";
 
-type modalType = { type: "none" } | { type: "TREATMENT"; treatmentId: number };
+type modalType = null | "TREATMENT";
 
 interface modalStore {
   isOpen: boolean;
   modalType: modalType;
-  openModal: (type: modalType) => void;
+  contentId: number | undefined;
+  openModal: (type: modalType, contentId: number) => void;
   closeModal: () => void;
 }
 
 export const useModalStore = create<modalStore>((set) => ({
   isOpen: false,
-  modalType: { type: "none" },
-  openModal: (type: modalType) => {
-    set({ isOpen: true, modalType: type });
+  modalType: null,
+  contentId: undefined,
+  openModal: (type: modalType, contentId) => {
+    set({ isOpen: true, modalType: type, contentId: contentId });
   },
   closeModal: () => {
-    set({ isOpen: false, modalType: { type: "none" } });
+    set({ isOpen: false, modalType: null });
   },
 }));

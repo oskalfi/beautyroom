@@ -1,26 +1,32 @@
+import { mockData } from "@/shared/store/mockTreatments";
 import { Button } from "../Button";
 import styles from "./ModalTreatment.module.css";
 
-// TODO: добавить пропсы данных, которые будут поступать в модалку.
-// (навесить data-id на каждый li в компоненте Treatment)
-const ModalTreatment = () => {
+interface ModalTreatmentProps {
+  id: number;
+}
+
+const ModalTreatment = ({ id }: ModalTreatmentProps) => {
+  const treatmentInfo = mockData.find((mockTreatment) => {
+    return mockTreatment.id === id;
+  });
+
+  console.log(treatmentInfo);
   return (
     <div className={styles.modalTreatment}>
-      <img className={styles.image} src="/mockImage.jpg" alt="фотка заглушка" />
+      <img
+        className={styles.image}
+        src={treatmentInfo?.imgPath}
+        alt="фотка заглушка"
+      />
       <div className={styles.info}>
-        <h2 className={styles.treatmentName}>Название процедуры</h2>
+        <h2 className={styles.treatmentName}>{treatmentInfo?.name}</h2>
         <div className={styles.descriptionWrapper}>
-          <p className={styles.description}>
-            Целенаправленная процедура для глубокой очистки пор, снижения
-            воспалений и профилактики высыпаний. Включает мягкое отшелушивание,
-            распаривание, ручную чистку (удаление комедонов) и успокаивающий
-            завершающий этап.
-          </p>
+          <p className={styles.description}>{treatmentInfo?.description}</p>
           <div className={styles.infButton}>
             <a className={styles.buttonText} type="button">
               Узнать подробнее
             </a>
-            {/*TODO: ЗАМЕНИТЬ текущую анимацию на движущуюся стрелку или смену opacity каждой буквы*/}
             <img className={styles.arrow} src="/arrow.svg" alt="icon" />
           </div>
         </div>

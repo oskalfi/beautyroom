@@ -1,6 +1,6 @@
 export type treatmentDataProps = {
   name: string;
   id: number;
-  imgPath?: string;
+  imgPath: string;
   description?: string;
 };

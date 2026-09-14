@@ -1,6 +1,7 @@
 import { mockData } from "@/shared/store/mockTreatments";
 import { Button } from "../Button";
 import styles from "./ModalTreatment.module.css";
+import Image from "next/image";
 
 interface ModalTreatmentProps {
   id: number;
@@ -14,9 +15,11 @@ const ModalTreatment = ({ id }: ModalTreatmentProps) => {
   console.log(treatmentInfo);
   return (
     <div className={styles.modalTreatment}>
-      <img
+      <Image
+        width={1000}
+        height={1500}
         className={styles.image}
-        src={treatmentInfo?.imgPath}
+        src={treatmentInfo!.imgPath}
         alt="фотка заглушка"
       />
       <div className={styles.info}>

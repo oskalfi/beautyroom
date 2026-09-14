@@ -12,16 +12,17 @@ const ModalTreatment = ({ id }: ModalTreatmentProps) => {
     return mockTreatment.id === id;
   });
 
-  console.log(treatmentInfo);
   return (
     <div className={styles.modalTreatment}>
-      <Image
-        width={1000}
-        height={1500}
-        className={styles.image}
-        src={treatmentInfo!.imgPath}
-        alt="фотка заглушка"
-      />
+      {treatmentInfo?.imgPath && (
+        <Image
+          width={1000}
+          height={1500}
+          className={styles.image}
+          src={treatmentInfo!.imgPath}
+          alt="Treatment image"
+        />
+      )}
       <div className={styles.info}>
         <h2 className={styles.treatmentName}>{treatmentInfo?.name}</h2>
         <div className={styles.descriptionWrapper}>

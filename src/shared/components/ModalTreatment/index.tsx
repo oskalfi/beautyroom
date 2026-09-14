@@ -16,8 +16,8 @@ const ModalTreatment = ({ id }: ModalTreatmentProps) => {
     <div className={styles.modalTreatment}>
       {treatmentInfo?.imgPath && (
         <Image
-          width={1000}
-          height={1500}
+          width={1575}
+          height={2100}
           className={styles.image}
           src={treatmentInfo!.imgPath}
           alt="Treatment image"

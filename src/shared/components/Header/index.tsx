@@ -119,7 +119,7 @@ export const Header = () => {
       <div className={styles.contentContainer}>
         <div className={styles.mobileLayout}>
           <Link href="/" className={styles.headerTitle}>
-            <img src="headerTitle.svg" alt="Beauty Room" />
+            <img src="/headerTitle.svg" alt="Beauty Room" />
           </Link>
           <MenuButton isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>

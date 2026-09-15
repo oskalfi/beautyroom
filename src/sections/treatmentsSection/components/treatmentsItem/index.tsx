@@ -9,7 +9,7 @@ import { moveBlockToTop } from "../treatmentsItem/animations/moveBlockToTop";
 import { setStartingPosition } from "../treatmentsItem/animations/setStartingPosition";
 import { isCursorEnteredFromTop } from "../../utils/isCursorEnteredFromTop";
 import { treatmentDataProps } from "../../../../shared/model/types";
-import { useModalStore } from "@/shared/store/modalStore";
+import { useRouter } from "next/navigation";
 
 function handleMouseEnter(event: React.MouseEvent<HTMLLIElement>) {
   const movingBlock = event.currentTarget.querySelector(
@@ -42,16 +42,31 @@ function handleMouseLeave(event: React.MouseEvent<HTMLLIElement>) {
 }
 
 export const TreatmentItem = ({ id, name }: treatmentDataProps) => {
-  const { openModal } = useModalStore();
+  const router = useRouter();
+  const href = `/treatments/${id}`;
   return (
     <li
       id={`${id}`}
       className={styles.button}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={() => openModal("TREATMENT", id)}
     >
-      <div className={styles.movingBlock}>
+      <a
+        href={href}
+        className={styles.link}
+        onClick={(event) => {
+          if (
+            event.defaultPrevented || event.button !== 0 ||
+            event.metaKey || event.ctrlKey || event.shiftKey || event.altKey
+          ) return;
+          // Full navigation on phones opens the standalone treatment page.
+          if (window.matchMedia("(min-width: 768px)").matches) {
+            event.preventDefault();
+            router.push(href, { scroll: false });
+          }
+        }}
+      >
+      <div className={styles.movingBlock} aria-hidden="true">
         <span className={styles.text}>{name}</span>
         <img
           className={styles.movingArrow}
@@ -60,6 +75,7 @@ export const TreatmentItem = ({ id, name }: treatmentDataProps) => {
         />
       </div>
       <span className={styles.buttonText}>{name}</span>
+      </a>
     </li>
   );
 };

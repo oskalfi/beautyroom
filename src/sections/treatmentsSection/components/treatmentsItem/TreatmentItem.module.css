@@ -1,5 +1,4 @@
 .button {
-  padding: 20px;
   border-bottom: 1px solid var(--primary-color);
   width: 100%;
   position: relative;
@@ -69,4 +68,14 @@
   100% {
     transform: translateX(-50px) translateY(-50%);
   }
+}
+
+.link {
+  display: block;
+  padding: 20px;
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: -4px;
 }

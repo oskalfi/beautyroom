@@ -4,7 +4,7 @@ export const mockData: treatmentDataProps[] = [
   {
     id: 5,
     name: "Мануальная чистка лица",
-    imgPath: "/treatmentsPhoto/facialCleansing.jpg",
+    imgPath: "/treatmentsPhoto/facialСleansing.jpg",
     description:
       "Чёрные точки, забитые поры и неровная поверхность кожи мешают лицу выглядеть ухоженным. Мануальная чистка освобождает поры от комедонов, а завершающий успокаивающий уход увлажняет кожу. Для ощущения чистоты, более гладкой кожи и свежего вида лица.",
   },

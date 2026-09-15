@@ -21,6 +21,7 @@ export const Carousel = () => {
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const [soundEnabled, setSoundEnabled] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useGSAP(() => {
     animateAppearance(mediaContainer, activeIndex);
@@ -56,16 +57,7 @@ export const Carousel = () => {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) {
-          itemRefs.current.forEach((item) => {
-            item?.querySelector("video")?.pause();
-          });
-        } else {
-          itemRefs.current[activeIndex]
-            ?.querySelector("video")
-            ?.play()
-            .catch(() => {});
-        }
+        setIsVisible(entry.isIntersecting);
       },
       {
         threshold: 0,
@@ -75,7 +67,7 @@ export const Carousel = () => {
     observer.observe(container);
 
     return () => observer.disconnect();
-  }, [activeIndex]);
+  }, []);
 
   const [hintTrigger, setHintTrigger] = useState(0);
 
@@ -110,11 +102,12 @@ export const Carousel = () => {
               key={index}
               link={link}
               isActive={index === activeIndex}
+              isVisible={isVisible}
               index={index}
               hintTrigger={hintTrigger}
               soundEnabled={soundEnabled}
               onEnableSound={() => {
-                soundEnabled ? setSoundEnabled(false) : setSoundEnabled(true);
+                setSoundEnabled((enabled) => !enabled);
               }}
             />
           );

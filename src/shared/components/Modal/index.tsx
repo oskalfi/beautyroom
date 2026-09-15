@@ -1,78 +1,66 @@
 "use client";
 
 import { Suspense, useEffect, useRef } from "react";
+import type { ReactNode } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./Modal.module.css";
-import { useModalStore } from "@/shared/store/modalStore";
-import { ModalTypes } from "./modalTypes";
 
-function animatedClose(dialog: HTMLDialogElement | null, closeModal: Function) {
-  if (!dialog) return;
-  dialog.classList.add(styles.closingModal);
-  setTimeout(() => {
-    dialog.classList.remove(styles.closingModal);
-    dialog.close();
-    closeModal();
-  }, 500);
-}
+export const Modal = ({ children, label }: { children: ReactNode; label: string }) => {
+  const dialog = useRef<HTMLDialogElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const router = useRouter();
 
-function handleClick(
-  e: React.MouseEvent<HTMLDialogElement>,
-  closeModal: Function,
-) {
-  if (e.target === e.currentTarget) {
-    animatedClose(e.currentTarget, closeModal);
-    return true;
-  }
-  return false;
-}
-
-function handleCancel(
-  e: React.SyntheticEvent<HTMLDialogElement>,
-  closeModal: Function,
-) {
-  e.preventDefault();
-  animatedClose(e.currentTarget, closeModal);
-}
-
-export const Modal = () => {
-  const dialog = useRef<null | HTMLDialogElement>(null);
-  const { modalType, closeModal, contentId } = useModalStore();
   useEffect(() => {
-    if (modalType) {
-      dialog.current?.showModal();
-      dialog.current?.focus();
-    }
-    return;
-  }, [modalType]);
+    const element = dialog.current;
+    if (!element) return;
+    if (!element.open) element.showModal();
 
-  const Content = modalType ? ModalTypes[modalType] : null;
-  if (!Content || !contentId) return null;
+    return () => {
+      if (closeTimer.current !== null) clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+      element.close();
+    };
+  }, []);
+
+  const close = () => {
+    const element = dialog.current;
+    if (!element || closeTimer.current !== null) return;
+    element.classList.add(styles.closingModal);
+    closeTimer.current = setTimeout(() => {
+      router.back();
+    }, 500);
+  };
+
   return (
     <dialog
       ref={dialog}
       id="modal-window"
       className={styles.modalWindow}
       tabIndex={-1}
-      onClick={(e) => {
-        handleClick(e, closeModal);
+      aria-label={label}
+      onClick={(event) => {
+        if (event.target !== event.currentTarget) return;
+        const rect = event.currentTarget.getBoundingClientRect();
+        if (
+          event.clientX < rect.left || event.clientX > rect.right ||
+          event.clientY < rect.top || event.clientY > rect.bottom
+        ) close();
       }}
-      onCancel={(e) => {
-        handleCancel(e, closeModal);
+      onCancel={(event) => {
+        event.preventDefault();
+        close();
       }}
     >
       <div id="modal-content" className={styles.contentWrapper}>
         <button
           className={styles.closeButton}
           aria-label="Закрыть"
-          onClick={(e) => {
-            e.stopPropagation();
-            animatedClose(dialog.current, closeModal);
-          }}
+          onClick={close}
         >
           ✕
         </button>
         <Suspense fallback={<div className={styles.suspense}>Загрузка...</div>}>
-          <Content id={contentId} />
+          {children}
         </Suspense>
       </div>
     </dialog>

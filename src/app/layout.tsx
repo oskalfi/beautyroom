@@ -3,7 +3,6 @@ import "./styles/globals.css";
 import styles from "./layout.module.css";
 import { Header } from "@/shared/components/Header";
 import { Footer } from "@/shared/components/Footer";
-import { Modal } from "@/shared/components/Modal";
 
 export const metadata: Metadata = {
   title: "Beauty Room",
@@ -13,8 +12,10 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="ru">
@@ -22,7 +23,7 @@ export default async function RootLayout({
         <Header />
         {children}
         <Footer />
-        <Modal />
+        {modal}
       </body>
     </html>
   );

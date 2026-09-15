@@ -8,16 +8,18 @@ import gsap from "gsap/all";
 type TCarouselItem = {
   link: string;
   isActive: boolean;
+  isVisible: boolean;
   ref: React.Ref<HTMLDivElement>;
   index: number;
   hintTrigger: number;
   soundEnabled: boolean;
-  onEnableSound: Function;
+  onEnableSound: () => void;
 };
 
 export const CarouselItem = ({
   link,
   isActive,
+  isVisible,
   ref,
   index,
   hintTrigger,
@@ -59,22 +61,22 @@ export const CarouselItem = ({
     pathRef.current.style.strokeDashoffset = "0";
   }
 
-  let lastClickTime = 0;
+  const lastClickTime = useRef(0);
   const DOUBLE_CLICK_DELAY = 300; // Окно времени в миллисекундах
   const tl = gsap.timeline();
 
-  const handleVideoClick = (e: React.SyntheticEvent) => {
+  const handleVideoClick = () => {
     if (!isActive || !videoRef.current) return;
 
     const currentTime = Date.now();
-    const timeDifference = currentTime - lastClickTime;
+    const timeDifference = currentTime - lastClickTime.current;
 
     if (timeDifference < DOUBLE_CLICK_DELAY && timeDifference > 0) {
       // Сработал двойной тап / клик
       videoRef.current.muted = false;
       onEnableSound();
       // Сбрасываем таймер, чтобы тройной клик не засчитался как два двойных
-      lastClickTime = 0;
+      lastClickTime.current = 0;
       tl.fromTo(
         volumeRef.current,
         {
@@ -98,19 +100,34 @@ export const CarouselItem = ({
         "+=1",
       );
     } else {
-      lastClickTime = currentTime;
+      lastClickTime.current = currentTime;
     }
   };
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    if (isActive) {
-      video.play();
+    if (isActive && isVisible) {
+      void video.play().catch((error: unknown) => {
+        // A pause/navigation can cancel a pending play; autoplay may be blocked.
+        if (
+          error instanceof DOMException &&
+          (error.name === "AbortError" || error.name === "NotAllowedError")
+        ) return;
+        console.warn("Не удалось запустить видео карусели:", error);
+      });
     } else {
       video.pause();
-      video.currentTime = 0;
+      if (!isActive) video.currentTime = 0;
     }
+
+    return () => {
+      video.pause();
+      stopLoop();
+    };
+  }, [isActive, isVisible]);
+
+  useEffect(() => {
     if (!pathRef.current) return;
     totalPathLength.current = pathRef.current.getTotalLength();
     pathRef.current.style.strokeDasharray = `${totalPathLength.current}`;

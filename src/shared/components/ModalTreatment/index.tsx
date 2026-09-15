@@ -5,9 +5,10 @@ import Image from "next/image";
 
 interface ModalTreatmentProps {
   id: number;
+  headingLevel?: "h1" | "h2";
 }
 
-const ModalTreatment = ({ id }: ModalTreatmentProps) => {
+const ModalTreatment = ({ id, headingLevel: Heading = "h2" }: ModalTreatmentProps) => {
   const treatmentInfo = mockData.find((mockTreatment) => {
     return mockTreatment.id === id;
   });
@@ -19,12 +20,12 @@ const ModalTreatment = ({ id }: ModalTreatmentProps) => {
           width={1575}
           height={2100}
           className={styles.image}
-          src={treatmentInfo!.imgPath}
-          alt="Treatment image"
+          src={treatmentInfo.imgPath}
+          alt={treatmentInfo.name}
         />
       )}
       <div className={styles.info}>
-        <h2 className={styles.treatmentName}>{treatmentInfo?.name}</h2>
+        <Heading className={styles.treatmentName}>{treatmentInfo?.name}</Heading>
         <div className={styles.descriptionWrapper}>
           <p className={styles.description}>{treatmentInfo?.description}</p>
           <div className={styles.infButton}>

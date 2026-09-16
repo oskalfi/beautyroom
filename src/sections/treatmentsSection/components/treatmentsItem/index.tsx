@@ -12,7 +12,11 @@ import { treatmentDataProps } from "../../../../shared/model/types";
 import { useRouter } from "next/navigation";
 
 function handleMouseEnter(event: React.MouseEvent<HTMLLIElement>) {
-  if (window.matchMedia("(any-pointer: coarse)").matches || navigator.maxTouchPoints > 0) return;
+  if (
+    window.matchMedia("(any-pointer: coarse)").matches ||
+    navigator.maxTouchPoints > 0
+  )
+    return;
   const movingBlock = event.currentTarget.querySelector(
     `.${styles.movingBlock}`,
   ) as HTMLElement;
@@ -29,7 +33,11 @@ function handleMouseEnter(event: React.MouseEvent<HTMLLIElement>) {
 }
 
 function handleMouseLeave(event: React.MouseEvent<HTMLLIElement>) {
-  if (window.matchMedia("(any-pointer: coarse)").matches || navigator.maxTouchPoints > 0) return;
+  if (
+    window.matchMedia("(any-pointer: coarse)").matches ||
+    navigator.maxTouchPoints > 0
+  )
+    return;
   const movingBlock = event.currentTarget.querySelector(
     `.${styles.movingBlock}`,
   ) as HTMLElement;
@@ -59,9 +67,14 @@ export const TreatmentItem = ({ id, name }: treatmentDataProps) => {
         className={styles.link}
         onClick={(event) => {
           if (
-            event.defaultPrevented || event.button !== 0 ||
-            event.metaKey || event.ctrlKey || event.shiftKey || event.altKey
-          ) return;
+            event.defaultPrevented ||
+            event.button !== 0 ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey
+          )
+            return;
           // Full navigation on phones opens the standalone treatment page.
           if (window.matchMedia("(min-width: 768px)").matches) {
             event.preventDefault();
@@ -69,15 +82,16 @@ export const TreatmentItem = ({ id, name }: treatmentDataProps) => {
           }
         }}
       >
-      <div className={styles.movingBlock} aria-hidden="true">
-        <span className={styles.text}>{name}</span>
-        <img
-          className={styles.movingArrow}
-          src="/Vector.svg"
-          alt="moving icon"
-        />
-      </div>
-      <span className={styles.buttonText}>{name}</span>
+        <div className={styles.movingBlock} aria-hidden="true">
+          <span className={styles.text}>{name}</span>
+          <img
+            className={styles.movingArrow}
+            src="/Vector.svg"
+            alt="moving icon"
+          />
+        </div>
+        <span className={styles.buttonText}>{name}</span>
+        <div className={styles.invisibleBlock} />
       </a>
     </li>
   );

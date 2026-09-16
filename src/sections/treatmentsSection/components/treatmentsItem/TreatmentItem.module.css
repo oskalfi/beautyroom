@@ -43,10 +43,12 @@
 }
 
 .movingArrow {
+  --anim-start: -50px;
+  --anim-mid: 10px;
+
   position: absolute;
   right: 50px;
   top: 50%;
-  /* transform: translateY(-50%); */
   opacity: 0;
 }
 
@@ -56,13 +58,14 @@
   animation: rightNLeft 1.3s ease-in-out infinite;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .button:hover .buttonText { transform: translateX(15px); }
-  .button:hover .movingArrow {
-    transition: opacity 0.7s ease;
-    opacity: 1;
-    animation: rightNLeft 1.3s ease-in-out infinite;
-  }
+.link {
+  display: block;
+  padding: 20px;
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: -4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -76,25 +79,52 @@
 }
 
 @keyframes rightNLeft {
-  0% {
-    transform: translateX(-50px) translateY(-50%);
-  }
-
-  50% {
-    transform: translateX(10px) translateY(-50%);
-  }
-
+  0%,
   100% {
-    transform: translateX(-50px) translateY(-50%);
+    transform: translateX(var(--anim-start)) translateY(-50%);
+  }
+  50% {
+    transform: translateX(var(--anim-mid)) translateY(-50%);
   }
 }
 
-.link {
-  display: block;
-  padding: 20px;
+/* 3. Десктопный hover */
+@media (hover: hover) and (pointer: fine) {
+  .button:hover .buttonText {
+    transform: translateX(15px);
+  }
+  .button:hover .movingArrow {
+    transition: opacity 0.7s ease;
+    opacity: 1;
+    animation: rightNLeft 1.3s ease-in-out infinite;
+  }
 }
 
-.link:focus-visible {
-  outline: 2px solid var(--secondary-color);
-  outline-offset: -4px;
+/* 4. Планшеты и крупные мобильные (до 580px) */
+@media (max-width: 580px) {
+  .movingArrow {
+    width: 25px;
+    right: 21px;
+    /* Просто переопределяем переменные амплитуды */
+    --anim-start: -20px;
+    --anim-mid: 5px;
+  }
+
+  /* Группируем селекторы (скролл + hover для узких окон на ПК) */
+  .button[data-scroll-active="true"] .movingArrow,
+  .button:hover .movingArrow {
+    animation: rightNLeft 1.3s ease-in-out infinite;
+  }
+}
+
+/* 5. Мелкие мобильные (до 470px) */
+@media (max-width: 470px) {
+  .movingArrow {
+    width: 18px;
+    left: 6px;
+    right: auto; /* ВАЖНО: сбрасываем right, заданный в 580px */
+
+    /* Переопределяем только старт, --anim-mid: 5px унаследуется из 580px */
+    --anim-start: -3px;
+  }
 }

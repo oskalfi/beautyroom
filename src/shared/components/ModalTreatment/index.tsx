@@ -1,7 +1,8 @@
+import { LazyImage } from "@/shared/components/LazyImage";
 import { mockTreatments as mockData } from "@/shared/mocks/treatments";
 import { Button } from "../Button";
 import styles from "./ModalTreatment.module.css";
-import Image from "next/image";
+import { TreatmentPhoto } from "./TreatmentPhoto";
 
 interface ModalTreatmentProps {
   id: number;
@@ -19,10 +20,8 @@ const ModalTreatment = ({
   return (
     <div className={styles.modalTreatment}>
       {treatmentInfo?.imgPath && (
-        <Image
-          width={1575}
-          height={2100}
-          className={styles.image}
+        <TreatmentPhoto
+          key={treatmentInfo.imgPath}
           src={treatmentInfo.imgPath}
           alt={treatmentInfo.name}
         />
@@ -37,7 +36,7 @@ const ModalTreatment = ({
             <a href={`/treatments/${id}`} className={styles.buttonText}>
               Узнать подробнее
             </a>
-            <img className={styles.arrow} src="/arrow.svg" alt="icon" />
+            <LazyImage className={styles.arrow} src="/arrow.svg" alt="icon" />
           </div>
         </div>
 

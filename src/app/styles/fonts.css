@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Rosarium";
-  font-display: block;
+  font-display: swap;
   font-style: normal;
   src:
     url("/fonts/Rosarium/Rosarium.woff2") format("woff2"),
@@ -10,7 +10,8 @@
 
 @font-face {
   font-family: "Montserrat";
-  font-display: block;
+  font-weight: 100 900;
+  font-display: swap;
   font-style: normal;
   src:
     url("/fonts/MontserratVariable/Montserrat-Variable.woff2") format("woff2"),
@@ -20,7 +21,7 @@
 
 @font-face {
   font-family: "MontserratAlternates";
-  font-display: block;
+  font-display: swap;
   font-weight: 300;
   src:
     url("/fonts/MontserratAlternates/MontserratAlternates-Light.woff2")
@@ -33,7 +34,7 @@
 
 @font-face {
   font-family: "MontserratAlternates";
-  font-display: block;
+  font-display: swap;
   font-weight: 400;
   src:
     url("/fonts/MontserratAlternates/MontserratAlternates-Regular.woff2")
@@ -46,7 +47,7 @@
 
 @font-face {
   font-family: "MontserratAlternates";
-  font-display: block;
+  font-display: swap;
   font-weight: 500;
   src:
     url("/fonts/MontserratAlternates/MontserratAlternates-Medium.woff2")
@@ -59,7 +60,7 @@
 
 @font-face {
   font-family: "MontserratAlternates";
-  font-display: block;
+  font-display: swap;
   font-weight: 600;
   src:
     url("/fonts/MontserratAlternates/MontserratAlternates-SemiBold.woff2")

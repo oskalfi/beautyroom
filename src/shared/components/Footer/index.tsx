@@ -1,4 +1,6 @@
 "use client";
+import { LazyImage } from "@/shared/components/LazyImage";
+
 
 import styles from "./Footer.module.css";
 import Link from "next/link";
@@ -28,7 +30,7 @@ export const Footer = () => {
 
   return (
     <footer className={styles.footer} ref={footerRef}>
-      <img src="/flag.svg" alt="Logo" className={styles.logo} ref={logoRef} />
+      <LazyImage src="/flag.svg" alt="Logo" className={styles.logo} ref={logoRef} />
       <div className={styles.linksWrapper}>
         <nav aria-labelledby="site-navigation-title">
           <h2 className={styles.heading} id="site-navigation-title">

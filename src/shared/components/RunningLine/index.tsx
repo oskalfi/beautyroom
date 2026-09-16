@@ -1,3 +1,6 @@
+"use client";
+import { useRef } from "react";
+import { useNearViewport } from "@/shared/hooks/useNearViewport";
 import styles from "./RunningLine.module.css";
 
 type RunningLineProps = {
@@ -5,8 +8,10 @@ type RunningLineProps = {
 };
 
 export const RunningLine = ({ facts }: RunningLineProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const near = useNearViewport(ref);
   return (
-    <div className={styles.runningLine}>
+    <div ref={ref} className={styles.runningLine} data-media-ready={near}>
       <div className={styles.factsWrapper}>
         {[...facts, ...facts].map((fact, index) => {
           return (

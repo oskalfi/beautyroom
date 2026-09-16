@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import SplitText from "gsap/src/SplitText";
+import SplitText from "gsap/SplitText";
 
 type revealWelcomeTextProps = {
   titleClass: string;
@@ -19,6 +19,7 @@ export function revealWelcomeText({
     type: "lines words",
   });
 
+  gsap.set([titleClass, subtitleClass], { visibility: "visible" });
   const timeline = gsap.timeline();
   timeline
     .from(title.lines, {

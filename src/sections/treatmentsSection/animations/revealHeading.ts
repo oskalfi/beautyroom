@@ -1,5 +1,7 @@
 import gsap from "gsap";
-import SplitText from "gsap/src/SplitText";
+import SplitText from "gsap/SplitText";
+import ScrollTrigger from "gsap/ScrollTrigger";
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
 export const revealHeading = (
   headingClass: string,
@@ -18,6 +20,7 @@ export const revealHeading = (
     },
   });
 
+  gsap.set([`.${headingClass}`, `.${descriptionClass}`], { visibility: "visible" });
   headingRevealAnimation
     .from(heading.chars, {
       autoAlpha: 0,
@@ -27,7 +30,7 @@ export const revealHeading = (
       ease: "power3",
     })
     .from(decorativeDescription.words, {
-      opacity: 0,
+      autoAlpha: 0,
       duration: 2,
       stagger: 0.05,
     });

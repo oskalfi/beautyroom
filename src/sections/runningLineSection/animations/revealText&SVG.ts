@@ -1,6 +1,8 @@
 import gsap from "gsap";
-import ScrollTrigger from "gsap/src/ScrollTrigger";
-import SplitText from "gsap/src/SplitText";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import SplitText from "gsap/SplitText";
+
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export const revealTextAndSVG = (
   textClassName: string,
@@ -19,6 +21,7 @@ export const revealTextAndSVG = (
     type: "lines words",
   });
 
+  gsap.set(`.${textClassName}`, { visibility: "visible" });
   timeline
     .from(text.words, {
       duration: 1,

@@ -10,8 +10,10 @@ import { flowersNTextReveal } from "./animations/flowers&textReveal";
 export const IntroduceSection = () => {
   const introduceSection = useRef(null);
   useGSAP(
-    () => {
-      document.fonts.ready.then(() => {
+    (_context, contextSafe) => {
+      let cancelled = false;
+      const reveal = contextSafe!(() => {
+        if (cancelled) return;
         flowersNTextReveal(
           styles.topFlower,
           styles.bottomFlower,
@@ -19,6 +21,8 @@ export const IntroduceSection = () => {
           styles.letter,
         );
       });
+      void document.fonts.load('400 48px "MontserratAlternates"').then(reveal, reveal);
+      return () => { cancelled = true; };
     },
     { scope: introduceSection },
   );

@@ -1,4 +1,6 @@
 "use client";
+import { LazyImage } from "@/shared/components/LazyImage";
+
 
 import Image from "next/image";
 import styles from "./AddressSection.module.css";
@@ -11,14 +13,14 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const AddressSection = () => {
   const headingRef = useRef(null);
-  const rectRef = useRef(null);
+  const rectRef = useRef<SVGRectElement>(null);
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const addressRef = useRef(null);
 
   useGSAP(
     () => {
-      const rect = rectRef.current as any;
+      const rect = rectRef.current;
       if (!rect) return;
       const length = rect.getTotalLength();
       gsap.set(rect, {
@@ -36,8 +38,8 @@ export const AddressSection = () => {
       });
 
       headingStroke
-        .from(headingRef.current, {
-          opacity: 0,
+        .fromTo(headingRef.current, { autoAlpha: 0 }, {
+          autoAlpha: 1,
           duration: 1,
         })
         .to(rect, { opacity: 1, duration: 0.05 }, 0)
@@ -118,7 +120,7 @@ export const AddressSection = () => {
         </div>
 
         <address className={styles.address}>
-          <img src="/waze.svg" alt="Waze icon" className={styles.wazeIcon} />
+          <LazyImage src="/waze.svg" alt="Waze icon" className={styles.wazeIcon} />
           Jerusalem Blvd 33, Tel Aviv-Yafo
         </address>
       </a>
@@ -127,7 +129,7 @@ export const AddressSection = () => {
         className={styles.mapWrapper}
         href="https://maps.app.goo.gl/WLxLtpTQESe6Jx4C7"
       >
-        <img src="/map.png" alt="Map" ref={mapRef} className={styles.map} />
+        <LazyImage src="/map.png" alt="Map" ref={mapRef} className={styles.map} />
       </a>
     </section>
   );

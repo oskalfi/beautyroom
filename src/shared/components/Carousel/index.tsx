@@ -9,6 +9,7 @@ import { mockVideos as MOCKDATA } from "@/shared/mocks/videos";
 import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { animateAppearance } from "./animations";
+import { useNearViewport } from "@/shared/hooks/useNearViewport";
 import { CarouselItem } from "../CarouselItem";
 
 export const Carousel = () => {
@@ -20,6 +21,8 @@ export const Carousel = () => {
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  const isNear = useNearViewport(mediaContainer, false);
+
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -27,26 +30,33 @@ export const Carousel = () => {
     animateAppearance(mediaContainer, activeIndex);
   });
 
-  // определение активного видео (активное то, что ближе к центру)
+  // Determine the nearest item horizontally, even while preparing offscreen.
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const active = Number((entry.target as HTMLElement).dataset.index);
-            setActiveIndex((prev) => (prev === active ? prev : active));
-          }
-        });
-      },
-      {
-        rootMargin: "0px -50% 0px -50%",
-        threshold: 0,
-      },
-    );
-
-    itemRefs.current.forEach((item) => observer.observe(item as Element));
-
-    return () => observer.disconnect();
+    const container = mediaContainer.current;
+    if (!container) return;
+    const updateActive = () => {
+      const bounds = container.getBoundingClientRect();
+      const center = bounds.left + bounds.width / 2;
+      let nearest = 0;
+      let distance = Infinity;
+      itemRefs.current.forEach((item, index) => {
+        if (!item) return;
+        const rect = item.getBoundingClientRect();
+        const nextDistance = Math.abs(rect.left + rect.width / 2 - center);
+        if (nextDistance < distance) {
+          distance = nextDistance;
+          nearest = index;
+        }
+      });
+      setActiveIndex(nearest);
+    };
+    container.addEventListener("scroll", updateActive, { passive: true });
+    window.addEventListener("resize", updateActive);
+    updateActive();
+    return () => {
+      container.removeEventListener("scroll", updateActive);
+      window.removeEventListener("resize", updateActive);
+    };
   }, []);
 
   // пауза на активном видео, когда карусель выходит из области видимости
@@ -103,6 +113,7 @@ export const Carousel = () => {
               link={link}
               isActive={index === activeIndex}
               isVisible={isVisible}
+              isNear={isNear}
               index={index}
               hintTrigger={hintTrigger}
               soundEnabled={soundEnabled}

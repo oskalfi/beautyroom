@@ -11,6 +11,7 @@
 }
 
 .decorativeDescription {
+  visibility: hidden;
   position: absolute;
   right: 0;
   font-family: "Rosarium", "Arial", sans-serif;
@@ -23,6 +24,7 @@
 }
 
 .heading {
+  visibility: hidden;
   margin: 70px 0 100px 0;
   position: relative;
 }

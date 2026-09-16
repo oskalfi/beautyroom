@@ -48,6 +48,7 @@
 }
 
 .heading {
+  visibility: hidden;
   color: var(--primary-color);
   max-width: 1000px;
   text-align: center;

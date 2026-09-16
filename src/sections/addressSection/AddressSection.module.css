@@ -13,6 +13,7 @@
 }
 
 .heading {
+  visibility: hidden;
   font-weight: 500;
   grid-area: heading;
   justify-self: center;

@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import styles from "./CarouselItem.module.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { VideoBufferingLoader } from "./VideoBufferingLoader";
 import { generateRoundedRectPath } from "./generateRoundedRectPath";
 import { SoundHint } from "./soundHint";
 import gsap from "gsap/all";
@@ -9,6 +10,7 @@ type TCarouselItem = {
   link: string;
   isActive: boolean;
   isVisible: boolean;
+  isNear: boolean;
   ref: React.Ref<HTMLDivElement>;
   index: number;
   hintTrigger: number;
@@ -20,6 +22,7 @@ export const CarouselItem = ({
   link,
   isActive,
   isVisible,
+  isNear,
   ref,
   index,
   hintTrigger,
@@ -29,6 +32,7 @@ export const CarouselItem = ({
   const volumeRef = useRef<HTMLImageElement>(null);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isBuffering, setIsBuffering] = useState(true);
   const isRunning = useRef(false);
 
   const pathRef = useRef<SVGRectElement | null>(null);
@@ -104,28 +108,45 @@ export const CarouselItem = ({
     }
   };
 
+  const shouldLoad = isActive && isNear;
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    if (isActive && isVisible) {
+    if (shouldLoad) video.src = link;
+    else video.removeAttribute("src");
+    video.load();
+    return () => {
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
+    };
+  }, [shouldLoad, link]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (shouldLoad && isVisible) {
       void video.play().catch((error: unknown) => {
         // A pause/navigation can cancel a pending play; autoplay may be blocked.
         if (
           error instanceof DOMException &&
-          (error.name === "AbortError" || error.name === "NotAllowedError")
+          error.name === "AbortError"
         ) return;
+        setIsBuffering(false);
+        if (error instanceof DOMException && error.name === "NotAllowedError") return;
         console.warn("Не удалось запустить видео карусели:", error);
       });
     } else {
       video.pause();
-      if (!isActive) video.currentTime = 0;
+
     }
 
     return () => {
       video.pause();
       stopLoop();
     };
-  }, [isActive, isVisible]);
+  }, [shouldLoad, isVisible]);
 
   useEffect(() => {
     if (!pathRef.current) return;
@@ -163,11 +184,31 @@ export const CarouselItem = ({
           playsInline
           ref={videoRef}
           className={styles.media}
-          src={link}
+          preload={shouldLoad ? "auto" : "none"}
+          poster={isNear ? link.replace(/\.mp4$/, ".jpg") : undefined}
+          onLoadStart={() => setIsBuffering(true)}
+          onEmptied={() => setIsBuffering(true)}
+          onWaiting={() => setIsBuffering(true)}
+          onSeeking={() => setIsBuffering(true)}
+          onStalled={(event) => {
+            // A stalled request may still have enough buffered frames to play.
+            if (event.currentTarget.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) {
+              setIsBuffering(true);
+            }
+          }}
+          onCanPlay={() => setIsBuffering(false)}
+          onPlaying={() => setIsBuffering(false)}
+          onSeeked={(event) => {
+            setIsBuffering(event.currentTarget.readyState < HTMLMediaElement.HAVE_FUTURE_DATA);
+          }}
+          onError={() => setIsBuffering(false)}
           onPlay={startLoop}
           onPause={stopLoop}
           onEnded={handleEnded}
         />
+        {shouldLoad && isVisible && isBuffering && (
+          <VideoBufferingLoader videoRef={videoRef} />
+        )}
         <svg
           className={clsx(styles.border, {
             [styles.isVisible]: isActive,

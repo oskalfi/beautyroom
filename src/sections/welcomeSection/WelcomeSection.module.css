@@ -24,6 +24,7 @@
 }
 
 .h1 {
+  visibility: hidden;
   font-family: "MontserratAlternates";
   max-width: 800px;
   font-size: var(--hero-h1);
@@ -36,6 +37,7 @@
 }
 
 .address {
+  visibility: hidden;
   font-weight: 300;
   max-width: 530px;
   text-align: center;

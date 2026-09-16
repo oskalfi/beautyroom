@@ -1,3 +1,4 @@
+import { LazyImage } from "@/shared/components/LazyImage";
 import styles from "./TreatmentItem.module.css";
 
 import { previousCursorYCoord } from "../..";
@@ -84,7 +85,7 @@ export const TreatmentItem = ({ id, name }: treatmentDataProps) => {
       >
         <div className={styles.movingBlock} aria-hidden="true">
           <span className={styles.text}>{name}</span>
-          <img
+          <LazyImage
             className={styles.movingArrow}
             src="/Vector.svg"
             alt="moving icon"

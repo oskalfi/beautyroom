@@ -1,8 +1,10 @@
 "use client";
+import { LazyImage } from "@/shared/components/LazyImage";
+
 import { Carousel } from "@/shared/components/Carousel";
+import { RevealHeading } from "@/shared/components/RevealHeading";
 import styles from "./InstagramSection.module.css";
 import Image from "next/image";
-import Link from "next/link";
 import { useRef } from "react";
 import gsap from "gsap";
 import { SplitText } from "gsap/all";
@@ -43,7 +45,7 @@ export const InstagramSection = () => {
   return (
     <section className={styles.sectionContainer}>
       <div className={styles.wrapper}>
-        <h2 className={styles.heading}>Следите за нами в Instagram</h2>
+        <RevealHeading className={styles.heading}>Следите за нами в Instagram</RevealHeading>
         <Image
           src="/instagram.png"
           width={36}
@@ -62,7 +64,7 @@ export const InstagramSection = () => {
         rel="noopener noreferrer"
       >
         <div className={styles.toInstButton}>
-          <img src="arrowInst.svg" alt="arrow" className={styles.arrow} />
+          <LazyImage src="arrowInst.svg" alt="arrow" className={styles.arrow} />
           <div className={styles.buttonTextWrapper}>
             <span className={styles.buttonTextWhite} ref={refWhiteText}>
               Перейти в instagram

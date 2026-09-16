@@ -1,6 +1,6 @@
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import SplitText from "gsap/src/SplitText";
+import SplitText from "gsap/SplitText";
 
 export function flowersNTextReveal(
   topFlowerClass: string,
@@ -15,6 +15,7 @@ export function flowersNTextReveal(
     charsClass: charsClass,
   });
 
+  gsap.set(`.${headingTextClass}`, { visibility: "visible" });
   gsap.from(heading.words, {
     duration: 1,
     stagger: 0.01,

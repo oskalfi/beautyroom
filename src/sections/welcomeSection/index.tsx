@@ -1,8 +1,8 @@
 "use client";
 
 import styles from "./WelcomeSection.module.css";
-import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import gsap from "gsap";
+import { useEffect, useRef } from "react";
 import { UnderlineSVG } from "@/shared/assets/svg/Underline";
 import { revealWelcomeText } from "./animations/revealWelcomeText";
 import { enableScrollParallax } from "./animations/enableScrollParallax";
@@ -10,19 +10,29 @@ import { enableScrollParallax } from "./animations/enableScrollParallax";
 export const WelcomeSection = () => {
   const welcomeSection = useRef(null);
 
-  useGSAP(
-    () => {
-      document.fonts.ready.then(() => {
+  useEffect(() => {
+    let cancelled = false;
+    const context = gsap.context(() => {
+      enableScrollParallax(`.${styles.backgroundImage}`);
+    }, welcomeSection);
+    void Promise.allSettled([
+      document.fonts.load('400 48px "MontserratAlternates"'),
+      document.fonts.load('300 26px "Montserrat"'),
+    ]).then(() => {
+      if (cancelled) return;
+      context.add(() => {
         revealWelcomeText({
           titleClass: `.${styles.h1}`,
           subtitleClass: `.${styles.address}`,
           underlineClipPathClass: `.${styles.clip}`,
         });
       });
-      enableScrollParallax(`.${styles.backgroundImage}`);
-    },
-    { scope: welcomeSection },
-  );
+    });
+    return () => {
+      cancelled = true;
+      context.revert();
+    };
+  }, []);
 
   return (
     <section className={styles.welcomeSection} ref={welcomeSection}>
@@ -30,7 +40,8 @@ export const WelcomeSection = () => {
       <div className={styles.welcomeText}>
         <h1 className={styles.h1}>
           <span className={styles.nowrap}>Beautiful skin</span>{" "}
-          <span className={styles.nowrap}>is not a dream</span> — it's a result
+          <span className={styles.nowrap}>is not a dream</span>{" "}
+          <span>— it&apos;s a result</span>
         </h1>
         <div className={styles.address}>
           Facial skin care and{" "}

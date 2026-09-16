@@ -1,0 +1,28 @@
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid rgb(248 148 164 / 25%);
+  border-top-color: var(--primary-color, #f894a4);
+  border-right-color: var(--primary-color, #f894a4);
+  border-radius: 50%;
+  background: rgb(3 3 3 / 20%);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: none; }
+}

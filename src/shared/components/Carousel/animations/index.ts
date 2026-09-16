@@ -15,7 +15,7 @@ export const animateAppearance = (
       middleItem.offsetLeft -
       (container.clientWidth - middleItem.clientWidth) / 2,
 
-    behavior: "smooth",
+    behavior: "instant",
   });
 
   const items = Array.from(container.children);

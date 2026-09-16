@@ -4,8 +4,8 @@ export const revealMenu = (menuClass: string, menuCoverBlock: string) => {
   const menuRevealAnimation = gsap.timeline({
     scrollTrigger: {
       trigger: `.${menuClass}`,
-      start: "70% bottom",
-      end: "70% bottom",
+      start: "20% bottom",
+      end: "20% bottom",
     },
   });
 

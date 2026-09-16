@@ -20,7 +20,7 @@ export const Footer = () => {
       ease: "bounce.inOut",
       scrollTrigger: {
         trigger: footerRef.current,
-        start: "center bottom",
+        start: "start bottom",
         toggleActions: "play none none none",
       },
     });

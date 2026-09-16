@@ -1,5 +1,7 @@
 "use client";
 
+import { mockFacts } from "@/shared/mocks/facts";
+
 import { MaleFaceSilhouetteSVG } from "@/shared/assets/svg/MaleFaceSilhouette";
 import styles from "./RunningLineSection.module.css";
 import { FemaleFaceSilhouetteSVG } from "@/shared/assets/svg/FemaleFaceSilhouette";
@@ -8,13 +10,7 @@ import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { revealTextAndSVG } from "./animations/revealText&SVG";
 
-const mockFacts = [
-  "12 лет в сфере эстетики и ухода за кожей в Израиле",
-  "Клинический подход",
-  "Профессиональные инструменты",
-  "Сертифицированные препараты",
-  "Экспертное сопровождение",
-];
+
 
 export const RunningLineSection = () => {
   const ref = useRef<HTMLElement | null>(null);

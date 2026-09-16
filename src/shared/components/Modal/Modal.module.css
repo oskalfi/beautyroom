@@ -11,12 +11,12 @@ body:has(.modalWindow[open]) {
   max-height: calc(100dvh - 32px);
   overflow: auto;
   border: none;
+  background: var(--modal-background);
 }
 
 .contentWrapper {
   display: flex;
   width: min(56.25rem, calc(100vw - 32px));
-  background: var(--black);
 }
 
 .modalWindow[open] {

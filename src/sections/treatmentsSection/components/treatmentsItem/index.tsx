@@ -12,6 +12,7 @@ import { treatmentDataProps } from "../../../../shared/model/types";
 import { useRouter } from "next/navigation";
 
 function handleMouseEnter(event: React.MouseEvent<HTMLLIElement>) {
+  if (window.matchMedia("(any-pointer: coarse)").matches || navigator.maxTouchPoints > 0) return;
   const movingBlock = event.currentTarget.querySelector(
     `.${styles.movingBlock}`,
   ) as HTMLElement;
@@ -28,6 +29,7 @@ function handleMouseEnter(event: React.MouseEvent<HTMLLIElement>) {
 }
 
 function handleMouseLeave(event: React.MouseEvent<HTMLLIElement>) {
+  if (window.matchMedia("(any-pointer: coarse)").matches || navigator.maxTouchPoints > 0) return;
   const movingBlock = event.currentTarget.querySelector(
     `.${styles.movingBlock}`,
   ) as HTMLElement;
@@ -47,6 +49,7 @@ export const TreatmentItem = ({ id, name }: treatmentDataProps) => {
   return (
     <li
       id={`${id}`}
+      data-treatment-item
       className={styles.button}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

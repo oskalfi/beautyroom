@@ -1,4 +1,4 @@
-import { mockData } from "@/shared/store/mockTreatments";
+import { mockTreatments as mockData } from "@/shared/mocks/treatments";
 import { Button } from "../Button";
 import styles from "./ModalTreatment.module.css";
 import Image from "next/image";
@@ -8,7 +8,10 @@ interface ModalTreatmentProps {
   headingLevel?: "h1" | "h2";
 }
 
-const ModalTreatment = ({ id, headingLevel: Heading = "h2" }: ModalTreatmentProps) => {
+const ModalTreatment = ({
+  id,
+  headingLevel: Heading = "h2",
+}: ModalTreatmentProps) => {
   const treatmentInfo = mockData.find((mockTreatment) => {
     return mockTreatment.id === id;
   });
@@ -25,11 +28,13 @@ const ModalTreatment = ({ id, headingLevel: Heading = "h2" }: ModalTreatmentProp
         />
       )}
       <div className={styles.info}>
-        <Heading className={styles.treatmentName}>{treatmentInfo?.name}</Heading>
+        <Heading className={styles.treatmentName}>
+          {treatmentInfo?.name}
+        </Heading>
         <div className={styles.descriptionWrapper}>
           <p className={styles.description}>{treatmentInfo?.description}</p>
           <div className={styles.infButton}>
-            <a className={styles.buttonText} type="button">
+            <a href={`/treatments/${id}`} className={styles.buttonText}>
               Узнать подробнее
             </a>
             <img className={styles.arrow} src="/arrow.svg" alt="icon" />

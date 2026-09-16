@@ -15,7 +15,7 @@
   transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1);
 }
 
-.button:hover .buttonText {
+.button[data-scroll-active="true"] .buttonText {
   transform: translateX(15px);
 }
 
@@ -50,10 +50,29 @@
   opacity: 0;
 }
 
-.button:hover .movingBlock .movingArrow {
+.button[data-scroll-active="true"] .movingArrow {
   transition: opacity 0.7s ease;
   opacity: 1;
   animation: rightNLeft 1.3s ease-in-out infinite;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover .buttonText { transform: translateX(15px); }
+  .button:hover .movingArrow {
+    transition: opacity 0.7s ease;
+    opacity: 1;
+    animation: rightNLeft 1.3s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button .movingBlock,
+  .button .text,
+  .button .buttonText,
+  .button .movingArrow {
+    transition: none !important;
+    animation: none !important;
+  }
 }
 
 @keyframes rightNLeft {

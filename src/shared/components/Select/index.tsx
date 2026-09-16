@@ -2,7 +2,7 @@
 
 import { useEffect, useReducer, useRef } from "react";
 import styles from "./Select.module.css";
-import { mockData } from "@/shared/store/mockTreatments";
+import { mockTreatments as mockData } from "@/shared/mocks/treatments";
 import clsx from "clsx";
 
 type TState = {

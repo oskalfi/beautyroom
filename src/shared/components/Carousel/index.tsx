@@ -4,7 +4,7 @@ import clsx from "clsx";
 import styles from "./Carousel.module.css";
 import { ArrowSVG } from "@/shared/assets/svg/Arrow";
 
-import { MOCKDATA } from "./mockData";
+import { mockVideos as MOCKDATA } from "@/shared/mocks/videos";
 
 import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";

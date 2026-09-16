@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Modal } from "@/shared/components/Modal";
 import ModalTreatment from "@/shared/components/ModalTreatment";
-import { mockData } from "@/shared/store/mockTreatments";
+import { mockTreatments as mockData } from "@/shared/mocks/treatments";
 
 export default async function TreatmentModalPage({
   params,

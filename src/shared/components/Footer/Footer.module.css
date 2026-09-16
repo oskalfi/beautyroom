@@ -4,6 +4,12 @@
   padding: 0 30px 90px 30px;
   width: 100%;
   background-color: var(--white);
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--white), var(--white)) padding-box,
+    linear-gradient(to right, rgba(248, 148, 164, 0.9), rgba(249, 209, 183, 0.9)) border-box;
+  box-shadow: 0 -16px 40px -12px rgba(22, 22, 22, 0.25);
+  z-index: 1;
   display: flex;
   gap: 150px;
   overflow: hidden;

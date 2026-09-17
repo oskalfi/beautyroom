@@ -1,4 +1,3 @@
-import { LazyImage } from "@/shared/components/LazyImage";
 import styles from "./TreatmentItem.module.css";
 
 import { previousCursorYCoord } from "../..";
@@ -13,6 +12,7 @@ import { treatmentDataProps } from "../../../../shared/model/types";
 import { useRouter } from "next/navigation";
 
 function handleMouseEnter(event: React.MouseEvent<HTMLLIElement>) {
+  if (event.currentTarget.dataset.focusActive === "true") return;
   if (
     window.matchMedia("(any-pointer: coarse)").matches ||
     navigator.maxTouchPoints > 0
@@ -34,6 +34,7 @@ function handleMouseEnter(event: React.MouseEvent<HTMLLIElement>) {
 }
 
 function handleMouseLeave(event: React.MouseEvent<HTMLLIElement>) {
+  if (event.currentTarget.dataset.focusActive === "true") return;
   if (
     window.matchMedia("(any-pointer: coarse)").matches ||
     navigator.maxTouchPoints > 0
@@ -64,6 +65,7 @@ export const TreatmentItem = ({ id, name }: treatmentDataProps) => {
       onMouseLeave={handleMouseLeave}
     >
       <a
+        data-treatment-link
         href={href}
         className={styles.link}
         onClick={(event) => {
@@ -85,11 +87,23 @@ export const TreatmentItem = ({ id, name }: treatmentDataProps) => {
       >
         <div className={styles.movingBlock} aria-hidden="true">
           <span className={styles.text}>{name}</span>
-          <LazyImage
+          <svg
             className={styles.movingArrow}
-            src="/Vector.svg"
-            alt="moving icon"
-          />
+            width="43"
+            height="23"
+            viewBox="0 0 43 23"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M1.5 11.5H41.5M41.5 11.5L31.5 1.5M41.5 11.5L31.5 21.5"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </div>
         <span className={styles.buttonText}>{name}</span>
         <div className={styles.invisibleBlock} />

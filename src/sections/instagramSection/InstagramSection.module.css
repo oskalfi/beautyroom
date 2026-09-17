@@ -1,5 +1,5 @@
 .sectionContainer {
-  background: var(--white);
+  background: var(--instagram-section-background-color);
   position: relative;
   width: 100%;
   padding: 40px 0;
@@ -11,8 +11,8 @@
 }
 
 .heading {
-  color: var(--black);
-  font-size: 27px;
+  color: var(--instagram-heading-text-color);
+  font-size: var(--instagram-heading-font-size);
   text-align: center;
   display: inline;
 }
@@ -27,7 +27,7 @@
   display: flex;
   align-items: center;
   background: transparent;
-  font-size: var(--font-size-button);
+  font-size: var(--instagram-button-wrapper-font-size);
   position: relative;
   width: 262.8px;
   height: 42px;
@@ -43,8 +43,8 @@
   align-items: center;
   background: linear-gradient(
     to right,
-    var(--primary-color),
-    var(--secondary-color)
+    var(--instagram-button-gradient-start-color),
+    var(--instagram-button-gradient-end-color)
   );
   overflow: hidden;
   width: var(--button-start-width);
@@ -62,20 +62,20 @@
 
 .buttonTextWhite,
 .buttonTextBlack {
-  font-family: "Montserrat", Arial, sans-serif;
-  font-size: 16px;
+  font-family: var(--instagram-button-font-family);
+  font-size: var(--instagram-button-font-size);
   text-transform: uppercase;
   white-space: nowrap;
   letter-spacing: 0px;
-  font-weight: 400;
+  font-weight: var(--instagram-button-font-weight);
 }
 
 .buttonTextWhite {
-  color: white;
+  color: var(--instagram-button-text-white-text-color);
 }
 
 .buttonTextBlack {
-  color: black;
+  color: var(--instagram-button-text-black-text-color);
   position: absolute;
   transform: translateX(var(--button-start-width));
 }
@@ -97,6 +97,6 @@
   }
 
   .heading {
-    font-size: 18px;
+    font-size: var(--instagram-heading-font-size-to-480);
   }
 }

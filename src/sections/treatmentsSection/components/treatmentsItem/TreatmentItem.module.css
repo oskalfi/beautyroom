@@ -1,5 +1,5 @@
 .button {
-  border-bottom: 1px solid var(--primary-color);
+  border-bottom: 1px solid var(--treatment-item-button-border-bottom-color);
   width: 100%;
   position: relative;
   background: transparent;
@@ -9,12 +9,13 @@
 
 .buttonText {
   transform: translateX(0);
-  color: var(--white);
+  color: var(--treatment-item-label-color);
   display: inline-flex;
   z-index: 1;
   transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1);
 }
 
+.button[data-focus-active="true"] .buttonText,
 .button[data-scroll-active="true"] .buttonText {
   transform: translateX(15px);
 }
@@ -22,36 +23,38 @@
 .movingBlock {
   position: absolute;
   inset: 0;
-  background-color: var(--primary-color);
+  background-color: var(--treatment-item-moving-block-background-color);
   top: 0;
   overflow: hidden;
   transition: transform 0.6s cubic-bezier(0, 0, 0.2, 1);
   transform: translateY(-100%);
-  color: var(--black);
+  color: var(--treatment-item-moving-block-text-color);
   z-index: 2;
 }
 
 .movingBlock .text {
-  font-weight: 600;
+  font-weight: var(--treatment-item-moving-block-text-font-weight);
   padding: 20px;
   inset: 0;
   position: absolute;
   top: 0;
-  color: var(--black);
+  color: var(--treatment-item-active-label-color);
   transition: transform 0.6s cubic-bezier(0, 0, 0.2, 1);
   transform: translateY(100%) translateX(0);
 }
 
 .movingArrow {
+  color: var(--treatment-item-moving-arrow-color);
+  height: auto;
   --anim-start: -50px;
   --anim-mid: 10px;
-
   position: absolute;
   right: 50px;
   top: 50%;
   opacity: 0;
 }
 
+.button[data-focus-active="true"] .movingArrow,
 .button[data-scroll-active="true"] .movingArrow {
   transition: opacity 0.7s ease;
   opacity: 1;
@@ -64,7 +67,7 @@
 }
 
 .link:focus-visible {
-  outline: 2px solid var(--secondary-color);
+  outline: 2px solid var(--treatment-item-link-focus-visible-outline-color);
   outline-offset: -4px;
 }
 

@@ -17,7 +17,7 @@
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: var(--video-sound-ripple-background-color);
   opacity: 0;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .hintText {
-  font-weight: 600;
+  font-weight: var(--video-sound-hint-text-font-weight);
   text-align: center;
   width: 210px;
 }

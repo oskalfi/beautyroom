@@ -3,7 +3,7 @@
   padding: 16px 62px;
   border: none;
   cursor: pointer;
-  font-size: var(--font-size-button);
+  font-size: var(--button-font-size);
   border-radius: 15px;
   text-transform: uppercase;
   /*styles for icon*/
@@ -11,22 +11,22 @@
   overflow: hidden;
   transition: background-color 0.3s ease;
   text-align: center;
-  font-family: "MontserratAlternates";
-  font-weight: 600;
+  font-family: var(--button-font-family);
+  font-weight: var(--button-font-weight);
 }
 
 .primary {
-  outline: 1px var(--white) solid;
-  background-color: var(--white);
-  color: var(--cta-button-text);
+  outline: 1px var(--button-primary-outline-color) solid;
+  background-color: var(--button-primary-background-color);
+  color: var(--button-primary-text-color);
 }
 
 .secondary {
-  outline: 1px var(--secondary-color) solid;
+  outline: 1px var(--button-secondary-outline-color) solid;
   background-color: transparent;
-  color: var(--secondary-color);
+  color: var(--button-secondary-text-color);
   padding: 16px 38px;
-  font-size: 14px;
+  font-size: var(--button-secondary-font-size);
 }
 
 .text {
@@ -36,7 +36,7 @@
 }
 
 .fingerprint {
-  color: var(--primary-color);
+  color: var(--button-fingerprint-color);
   position: absolute;
   left: 50%;
   bottom: -80%;
@@ -67,13 +67,13 @@
 /* Animation */
 
 .button:hover {
-  background-color: var(--primary-color);
-  color: var(--white);
+  background-color: var(--button-hover-background-color);
+  color: var(--button-hover-text-color);
 }
 
 .button:hover .fingerprint {
   transform: scale(70%);
-  color: var(--white);
+  color: var(--button-hover-fingerprint-text-color);
 }
 
 .button:hover .text {
@@ -86,5 +86,5 @@
 }
 
 .button:focus-visible {
-  outline: var(--primary-color) 3px solid;
+  outline: var(--button-focus-visible-outline-color) 3px solid;
 }

@@ -59,7 +59,7 @@ export const MenuButton = ({
         height="12"
         viewBox="0 0 300 180"
       >
-        <path ref={morphPathRef} fill="#ffffff" d={HAMBURGER_PATH} />
+        <path ref={morphPathRef} fill="var(--menu-toggle-icon-color)" d={HAMBURGER_PATH} />
       </svg>
     </button>
   );

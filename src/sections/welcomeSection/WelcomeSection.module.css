@@ -25,9 +25,9 @@
 
 .h1 {
   visibility: hidden;
-  font-family: "MontserratAlternates";
+  font-family: var(--welcome-title-font-family);
   max-width: 800px;
-  font-size: var(--hero-h1);
+  font-size: var(--welcome-title-font-size);
   letter-spacing: 0.04em;
   text-align: center;
 }
@@ -38,10 +38,10 @@
 
 .address {
   visibility: hidden;
-  font-weight: 300;
+  font-weight: var(--welcome-address-font-weight);
   max-width: 530px;
   text-align: center;
-  font-size: 26px;
+  font-size: var(--welcome-address-font-size);
   line-height: 1.5em;
 }
 
@@ -49,7 +49,7 @@
   display: inline-block;
   position: relative;
   white-space: nowrap;
-  font-size: 30px;
+  font-size: var(--welcome-underlined-text-font-size);
 }
 
 .underline {
@@ -59,7 +59,7 @@
   transform: translateY(70%);
   width: 100%;
   height: 100%;
-  color: var(--secondary-color);
+  color: var(--welcome-underline-color);
 }
 
 .clip {
@@ -68,33 +68,33 @@
 
 @media (max-width: 1500px) {
   .h1 {
-    font-size: 80px;
+    font-size: var(--welcome-title-font-size-to-1500);
   }
 }
 
 @media (max-width: 1250px) {
   .h1 {
-    font-size: 72px;
+    font-size: var(--welcome-title-font-size-to-1250);
   }
 }
 
 @media (max-width: 1140px) {
   .h1 {
-    font-size: 60px;
+    font-size: var(--welcome-title-font-size-to-1140);
   }
 }
 
 @media (max-width: 1024px) {
   .h1 {
-    font-size: 48px;
+    font-size: var(--welcome-title-font-size-to-1024);
   }
 
   .address {
-    font-size: 22px;
+    font-size: var(--welcome-address-font-size-to-1024);
   }
 
   .underlinedText {
-    font-size: 24px;
+    font-size: var(--welcome-underlined-text-font-size-to-1024);
   }
 }
 
@@ -118,14 +118,14 @@
 
 @media (max-width: 380px) {
   .h1 {
-    font-size: 36px;
+    font-size: var(--welcome-title-font-size-to-380);
   }
 
   .address {
-    font-size: 20px;
+    font-size: var(--welcome-address-font-size-to-380);
   }
 
   .underlinedText {
-    font-size: 22px;
+    font-size: var(--welcome-underlined-text-font-size-to-380);
   }
 }

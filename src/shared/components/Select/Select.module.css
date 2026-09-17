@@ -4,10 +4,10 @@
 
 .openButton {
   font-family: inherit;
-  color: var(--white);
-  font-size: 1rem;
+  color: var(--select-open-button-text-color);
+  font-size: var(--select-open-button-font-size);
   background-color: transparent;
-  border: 1px solid var(--secondary-color);
+  border: 1px solid var(--select-open-button-border-color);
   padding: 1rem 30px;
   width: 350px;
   border-radius: 15px;
@@ -21,20 +21,20 @@
 }
 
 .openButton:hover {
-  background-color: rgba(249, 220, 196, 0.8);
-  color: var(--black);
+  background-color: var(--select-open-button-hover-background-color);
+  color: var(--select-open-button-hover-text-color);
 }
 
 .buttonArrow {
   transform: rotate(180deg);
-  color: var(--secondary-color);
+  color: var(--select-button-arrow-text-color);
   transition:
     color 0.3s ease,
     transform 0.5s ease;
 }
 
 .openButton:hover .buttonArrow {
-  color: var(--black);
+  color: var(--select-open-button-hover-button-arrow-text-color);
 }
 
 .select.isOpen .buttonArrow {
@@ -49,15 +49,15 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  background-color: var(--black);
+  background-color: var(--select-list-background-color);
   z-index: 1;
-  border-right: 1px solid var(--secondary-color);
-  border-left: 1px solid var(--secondary-color);
-  border-bottom: 1px solid var(--secondary-color);
+  border-right: 1px solid var(--select-list-border-right-color);
+  border-left: 1px solid var(--select-list-border-left-color);
+  border-bottom: 1px solid var(--select-list-border-bottom-color);
 }
 
 .selectItem {
-  font-size: 1rem;
+  font-size: var(--select-item-font-size);
   padding: 8px 15px;
   transition:
     background-color 0.1s ease,
@@ -67,11 +67,11 @@
 }
 
 .selectItem.selected {
-  background-color: var(--secondary-color);
-  color: var(--black);
+  background-color: var(--select-item-selected-background-color);
+  color: var(--select-item-selected-text-color);
 }
 
 .isHighlighted {
-  background-color: rgba(249, 220, 196, 0.5);
+  background-color: var(--select-is-highlighted-background-color);
   padding: 8px 20px 8px 20px;
 }

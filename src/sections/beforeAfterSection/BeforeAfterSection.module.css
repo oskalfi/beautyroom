@@ -1,6 +1,6 @@
 .sectionContainer {
   padding: 40px 10px;
-  background-color: var(--black);
+  background-color: var(--before-after-section-background-color);
   position: relative;
   display: flex;
   justify-content: center;

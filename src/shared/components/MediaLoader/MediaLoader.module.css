@@ -11,11 +11,11 @@
 .spinner {
   width: 44px;
   height: 44px;
-  border: 3px solid rgb(248 148 164 / 25%);
-  border-top-color: var(--primary-color, #f894a4);
-  border-right-color: var(--primary-color, #f894a4);
+  border: 3px solid var(--media-loader-spinner-border-color);
+  border-top-color: var(--media-loader-spinner-border-top-color);
+  border-right-color: var(--media-loader-spinner-border-right-color);
   border-radius: 50%;
-  background: rgb(3 3 3 / 20%);
+  background: var(--media-loader-spinner-background-color);
   animation: spin 0.8s linear infinite;
 }
 

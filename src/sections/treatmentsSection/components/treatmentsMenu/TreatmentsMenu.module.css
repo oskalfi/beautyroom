@@ -2,14 +2,14 @@
   width: 100%;
   overflow: hidden;
   opacity: 0;
-  border-top: 1px solid var(--primary-color);
+  border-top: 1px solid var(--treatments-menu-border-top-color);
 }
 
 .menuCoverBlock {
   position: absolute;
   width: 200%;
   height: 100%;
-  background-color: var(--black);
+  background-color: var(--treatments-menu-cover-background-color);
   right: 0;
   z-index: 1;
   transform-origin: top right;

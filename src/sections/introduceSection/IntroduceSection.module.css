@@ -1,18 +1,20 @@
 .introduceSection {
   height: 85vh;
   width: 100%;
-  background-color: var(--white);
-  box-shadow: 0 -10px 100px rgba(0, 0, 0, 0.2);
+  background-color: var(--introduce-section-background-color);
+  box-shadow: 0 -10px 100px var(--introduce-section-box-shadow-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: black;
+  color: var(--introduce-section-text-color);
   position: sticky;
   top: 0;
+  overflow: hidden;
 }
 
 .topFlower,
 .bottomFlower {
+  overflow: visible;
   position: absolute;
   width: 320px;
   height: auto;
@@ -31,7 +33,7 @@
 .topFlower path,
 .bottomFlower path {
   fill: transparent;
-  stroke: var(--secondary-color);
+  stroke: var(--introduce-flowers-stroke-color);
   stroke-width: 3px;
 }
 
@@ -49,10 +51,10 @@
 
 .heading {
   visibility: hidden;
-  color: var(--primary-color);
+  color: var(--introduce-heading-text-color);
   max-width: 1000px;
   text-align: center;
-  font-weight: 400;
+  font-weight: var(--introduce-heading-font-weight);
 }
 
 .letter {
@@ -76,6 +78,6 @@
 
 @media (max-width: 450px) {
   .heading {
-    font-size: 28px;
+    font-size: var(--introduce-heading-font-size-to-450);
   }
 }

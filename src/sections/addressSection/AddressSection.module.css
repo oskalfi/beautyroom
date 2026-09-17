@@ -1,6 +1,6 @@
 .section {
   position: relative;
-  background-color: var(--black);
+  background-color: var(--address-section-background-color);
   padding: 130px 10px;
   display: grid;
   grid-template-columns: max-content minmax(0, 815px);
@@ -14,7 +14,7 @@
 
 .heading {
   visibility: hidden;
-  font-weight: 500;
+  font-weight: var(--address-heading-font-weight);
   grid-area: heading;
   justify-self: center;
   align-self: flex-end;
@@ -46,9 +46,9 @@
 }
 
 .address {
-  font-family: "MontserratAlternates";
-  font-size: 24px;
-  font-weight: 500;
+  font-family: var(--address-text-font-family);
+  font-size: var(--address-text-font-size);
+  font-weight: var(--address-text-font-weight);
   white-space: nowrap;
   position: relative;
   animation: addressPulse 6.6s cubic-bezier(0.33, 1, 0.68, 1) 1s infinite;
@@ -117,8 +117,8 @@
   inset: 0;
   border-radius: 50%;
   transform: translateZ(0px);
-  background: linear-gradient(to bottom right, #ffcfca, #d78c8f);
-  border: 1px solid #f894a4;
+  background: linear-gradient(to bottom right, var(--address-plate-back-gradient-start-color), var(--address-plate-back-gradient-end-color));
+  border: 1px solid var(--address-sticker-back-border-color);
 }
 
 /* лицевая сторона с логотипом */
@@ -130,13 +130,13 @@
   /* выдвигаем лицевую сторону вперед по оси Z для создания объёма */
   transform: translateZ(24px);
 
-  background-color: #fdfbfb;
-  border: 1px solid #f894a4;
+  background-color: var(--address-plate-content-background-color);
+  border: 1px solid var(--address-plate-content-border-color);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 0 12px var(--address-plate-content-box-shadow-color);
 }
 
 /* световой блик поверх логотипа */
@@ -147,9 +147,9 @@
   border-radius: 50%;
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.5) 0%,
-    rgba(255, 255, 255, 0) 50%,
-    rgba(0, 0, 0, 0.05) 100%
+    var(--address-plate-highlight-start-color) 0%,
+    var(--address-plate-highlight-middle-color) 50%,
+    var(--address-plate-highlight-end-color) 100%
   );
   pointer-events: none;
 }
@@ -176,7 +176,7 @@
 
 .borderRect {
   fill: none;
-  stroke: var(--primary-color);
+  stroke: var(--address-border-rect-stroke-color);
   stroke-width: 2px;
   stroke-linecap: round;
   opacity: 0;
@@ -195,11 +195,11 @@
   }
 
   .heading {
-    font-size: 36px;
+    font-size: var(--address-heading-font-size-to-900);
   }
 
   .address {
-    font-size: 18px;
+    font-size: var(--address-text-font-size-to-900);
   }
 
   .wazeIcon {
@@ -226,7 +226,7 @@
   }
 
   .address {
-    font-size: 24px;
+    font-size: var(--address-text-font-size-to-768);
     white-space: wrap;
     text-align: center;
   }
@@ -251,7 +251,7 @@
   }
 
   .heading {
-    font-weight: 400;
+    font-weight: var(--address-heading-font-weight-to-480);
   }
 
   .contentWrapper {
@@ -261,7 +261,7 @@
   }
 
   .address {
-    font-size: 18px;
+    font-size: var(--address-text-font-size-to-480);
   }
 
   .plateWrapper {

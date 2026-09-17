@@ -1,6 +1,6 @@
 .treatmentsSection {
   width: 100%;
-  background-color: var(--black);
+  background-color: var(--treatments-section-background-color);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -14,12 +14,12 @@
   visibility: hidden;
   position: absolute;
   right: 0;
-  font-family: "Rosarium", "Arial", sans-serif;
-  font-size: 24px;
+  font-family: var(--treatments-decorative-description-font-family);
+  font-size: var(--treatments-decorative-description-font-size);
   max-width: 8.772em;
   height: auto;
   transform: translateX(-50%) translateY(50%) rotate(-25deg);
-  color: var(--secondary-color);
+  color: var(--treatments-decorative-description-text-color);
   z-index: 1;
 }
 
@@ -27,6 +27,7 @@
   visibility: hidden;
   margin: 70px 0 100px 0;
   position: relative;
+  color: var(--brown);
 }
 
 @media (max-width: 935px) {
@@ -37,7 +38,7 @@
 
 @media (max-width: 720px) {
   .decorativeDescription {
-    font-size: 20px;
+    font-size: var(--treatments-decorative-description-font-size-to-720);
     transform: translateX(0%) translateY(100%) rotate(-25deg);
   }
 }
@@ -50,13 +51,13 @@
 @media (max-width: 470px) {
   .decorativeDescription {
     transform: translateX(0%) translateY(130%) rotate(-25deg);
-    font-size: 16px;
+    font-size: var(--treatments-decorative-description-font-size-to-470);
   }
 }
 
 @media (max-width: 425px) {
   .decorativeDescription {
     transform: translateX(0%) translateY(160%) rotate(-25deg);
-    font-size: 16px;
+    font-size: var(--treatments-decorative-description-font-size-to-425);
   }
 }

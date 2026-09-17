@@ -50,7 +50,7 @@
   transition: opacity 0.5s ease;
   pointer-events: none;
   fill: transparent;
-  color: var(--primary-color);
+  color: var(--video-progress-border-color);
 }
 
 .border rect {

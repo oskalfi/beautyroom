@@ -11,7 +11,7 @@ body:has(.modalWindow[open]) {
   max-height: calc(100dvh - 32px);
   overflow: auto;
   border: none;
-  background: var(--modal-background);
+  background: var(--modal-surface-color);
 }
 
 .contentWrapper {
@@ -29,7 +29,7 @@ body:has(.modalWindow[open]) {
 }
 
 .modalWindow::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--modal-backdrop-color);
   backdrop-filter: blur(2px);
   transition: opacity 0.5s allow-discrete;
   cursor: pointer;
@@ -49,17 +49,17 @@ body:has(.modalWindow[open]) {
 }
 
 .suspense {
-  color: green;
+  color: var(--modal-suspense-text-color);
 }
 
 .closeButton {
   position: absolute;
   right: 15px;
   top: 10px;
-  color: var(--primary-color);
+  color: var(--modal-close-button-text-color);
   background-color: transparent;
   border: none;
-  font-size: 32px;
+  font-size: var(--modal-close-button-font-size);
   line-height: 1;
   cursor: pointer;
   transition: transform 0.3s ease;

@@ -59,6 +59,11 @@ export const TreatmentsSection = () => {
         lastScrollY = nextY;
       };
       const updateActive = () => {
+        // External keyboards on touch devices must not fight scroll activation.
+        if (section.querySelector("[data-treatment-link]:focus")) {
+          active = undefined;
+          return;
+        }
         trackScroll();
         const viewport = window.visualViewport;
         const center = viewport
@@ -112,6 +117,13 @@ export const TreatmentsSection = () => {
         items.forEach((item) => observer.observe(item));
         updateActive();
       };
+      let focusFrame = 0;
+      const syncAfterFocus = () => {
+        cancelAnimationFrame(focusFrame);
+        focusFrame = requestAnimationFrame(updateActive);
+      };
+      section.addEventListener("focusin", syncAfterFocus);
+      section.addEventListener("focusout", syncAfterFocus);
       window.addEventListener("scroll", trackScroll, { passive: true });
       window.addEventListener("resize", observeCenter);
       window.visualViewport?.addEventListener("resize", observeCenter);
@@ -119,6 +131,9 @@ export const TreatmentsSection = () => {
       observeCenter();
 
       stopObserving = () => {
+        cancelAnimationFrame(focusFrame);
+        section.removeEventListener("focusin", syncAfterFocus);
+        section.removeEventListener("focusout", syncAfterFocus);
         observer.disconnect();
         window.removeEventListener("scroll", trackScroll);
         window.removeEventListener("resize", observeCenter);

@@ -1,6 +1,6 @@
 .modalTreatment {
   display: flex;
-  background: var(--modal-background);
+  background: var(--treatment-modal-background-color);
 }
 
 .imageWrapper {
@@ -18,7 +18,7 @@
   place-items: center;
   padding: 24px;
   text-align: center;
-  color: var(--primary-color);
+  color: var(--treatment-modal-image-error-text-color);
 }
 
 .image {
@@ -43,9 +43,9 @@
 }
 
 .treatmentName {
-  color: var(--secondary-color);
-  font-size: 32px;
-  font-family: "Rosarium";
+  color: var(--treatment-modal-title-text-color);
+  font-size: var(--treatment-modal-title-font-size);
+  font-family: var(--treatment-modal-title-font-family);
 }
 
 .descriptionWrapper {
@@ -56,9 +56,9 @@
 }
 
 .description {
-  font-size: 1.125rem;
-  color: var(--white);
-  font-family: "Montserrat";
+  font-size: var(--treatment-modal-description-font-size);
+  color: var(--treatment-modal-description-text-color);
+  font-family: var(--treatment-modal-description-font-family);
   letter-spacing: 0.04rem;
 }
 
@@ -68,14 +68,14 @@
   align-items: center;
   cursor: pointer;
   transition: opacity 0.4s ease;
-  font-weight: 600;
+  font-weight: var(--treatment-modal-details-link-font-weight);
   opacity: 0.3;
 }
 
 .buttonText {
-  font-family: "MontserratAlternates";
-  font-size: 14x;
-  color: var(--secondary-color);
+  font-family: var(--treatment-modal-details-link-font-family);
+  font-size: var(--treatment-modal-details-link-font-size);
+  color: var(--treatment-modal-details-link-color);
   position: relative;
   overflow: hidden;
 }
@@ -103,6 +103,6 @@
     gap: 24px;
   }
   .treatmentName {
-    font-size: 28px;
+    font-size: var(--treatment-modal-title-font-size-to-767);
   }
 }

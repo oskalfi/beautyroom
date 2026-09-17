@@ -1,28 +1,477 @@
 @import "./fonts.css";
 
 :root {
-  /* Colors */
-  --primary-color: #f894a4;
-  --secondary-color: #f9dcc4;
-  --white: #fdfbfb;
-  --black: #161616;
-  --cta-button-text: #885c6a;
-  --modal-background: #030303;
-  /* Spacing */
-  --content-container-padding: 40px;
-  --content-container-padding-phone: 20px;
+  /* РЕДАКТОР ТЕМЫ
+     Общая палитра меняет сайт целиком; переменные ниже — конкретные элементы.
+     Суффикс -to-N означает ширину экрана до N px включительно.
+     Адаптивные значения собраны здесь; media-правила компонентов выбирают их.
+     transparent / currentColor / inherit / none оставлены в компонентах как поведение.
+     @font-face в fonts.css регистрирует файлы; семейства для текста выбираются здесь.
+  */
 
-  /* Typography */
-  --font-size: 18px;
-  --font-size-button: 16px;
-  --font-size-nav-links: 18px;
-  --font-size-h2: 48px;
-  --hero-h1: 96px;
+  /* Общая палитра, базовые размеры и существующие настройки темы */
+  --primary-color: #ffc0c9; /* Основной розовый: акценты, активные элементы и обводки */
+  --secondary-color: #ffefdd; /* Светлый кремовый: декор, вторичные кнопки, бегущая строка */
+  --secondary-gradient-color: #f9d1b7; /* Персиковый: дополнительный оттенок градиентов и цветов */
+  --white: #fdfbfb; /* Тёплый белый: светлые поверхности и текст на тёмном фоне */
+  --black: #161616; /* Почти чёрный: тёмные секции и текст на светлом фоне */
+  --brown: #7b4f37; /* Коричневый: базовый оттенок */
+  --cta-button-text: var(--brown); /* Коричневый текст кнопок записи и ссылок */
+  --modal-background: #030303; /* Фон модальных окон */
+  --content-container-padding: 40px; /* Отступ контейнера шапки */
+  --content-container-padding-phone: 20px; /* Отступ контейнера шапки на узких экранах */
+  --font-size-button: 16px; /* Базовый размер текста общих кнопок */
+  --font-size-nav-links: 18px; /* Базовый размер ссылок шапки */
+  --font-size-h2: 48px; /* Базовый размер заголовков секций */
+  --hero-h1: 96px; /* Базовый размер главного заголовка Welcome */
+
+  /* Общая типографика: корневой rem, основной текст и заголовки */
+  --font-size-root: 16px;
+  --font-size-body: 16px;
+  --font-family-sans: "Montserrat"; /* Основной шрифт: текст и навигация */
+  --font-family-display: "MontserratAlternates"; /* Заголовки, кнопки, адрес */
+  --font-family-decorative: "Rosarium"; /* Декоративные подписи и заголовок модалки */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-navigation: 450;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-family-body: var(--font-family-sans), system-ui;
+  --font-family-heading: var(--font-family-display), "Arial", sans-serif;
+  --font-weight-body: var(--font-weight-regular);
+  --font-weight-heading: var(--font-weight-light);
+  --font-size-h2-to-700: 36px;
+
+  /* Страница: фон, основной текст и выделение */
+  --page-background-color: var(--white);
+  --page-text-color: var(--white);
+  --selection-background-color: rgba(248, 148, 164, 0.8);
+  --selection-text-color: var(--white);
+  --tap-highlight-color: rgba(248, 148, 164, 0.2);
+
+  /* Общие цвета текста и разделителей отдельной страницы процедуры */
+  --treatment-page-muted-text-color: #655b60;
+  --treatment-page-divider-color: #e6dce0;
+
+  /* Встроенные SVG: заливка цветов и иконки мобильного меню */
+  --flower-fill-color: var(--secondary-gradient-color);
+  --menu-toggle-icon-color: #ffffff;
+
+  /* Шапка: фон, навигация, кнопка записи */
+  /* Градиент шапки — .header */
+  --header-gradient-start-color-noRGBa: rgb(255, 192, 164);
+  --header-gradient-start-color: rgb(255, 192, 164, 0.9);
+  --header-gradient-end-color: rgba(249, 209, 183, 0.9);
+  /* Ссылки навигации — .navigationList */
+  --header-navigation-list-font-size: var(--font-size-nav-links);
+  /* Отдельная ссылка навигации — .navigationLink */
+  --header-navigation-link-font-weight: var(--font-weight-navigation);
+  /* Обводка ссылки при наведении — .border rect */
+  --header-border-rect-stroke-color: var(--white);
+  /* Отдельная ссылка навигации — .navigationLink · (max-width: 1024px) */
+  --header-navigation-link-font-size-to-1024: 16px;
+  /* Общая кнопка — .button · (max-width: 1024px) */
+  --header-button-font-size-to-1024: 8px;
+  /* Отдельная ссылка навигации — .navigationLink · (max-width: 960px) */
+  --header-navigation-link-font-weight-to-960: var(--font-weight-regular);
+  --header-navigation-link-font-size-to-960: 21px;
+
+  /* Кнопка мобильного меню: рамка и иконка */
+  /* Рамка кнопки мобильного меню — .menuButton */
+  --menu-toggle-border-color: var(--white);
+
+  /* Первый экран: заголовок, адрес, подчёркивание */
+  /* Главный заголовок Welcome — .h1 */
+  --welcome-title-font-family: var(--font-family-display);
+  --welcome-title-font-size: var(--hero-h1);
+  /* Текст адреса — .address */
+  --welcome-address-font-weight: var(--font-weight-regular);
+  --welcome-address-font-size: 26px;
+  /* Подчёркнутая часть адреса — .underlinedText */
+  --welcome-underlined-text-font-size: 30px;
+  /* Декоративное подчёркивание — .underline */
+  --welcome-underline-color: var(--secondary-color);
+  /* Главный заголовок Welcome — .h1 · (max-width: 1500px) */
+  --welcome-title-font-size-to-1500: 80px;
+  /* Главный заголовок Welcome — .h1 · (max-width: 1250px) */
+  --welcome-title-font-size-to-1250: 72px;
+  /* Главный заголовок Welcome — .h1 · (max-width: 1140px) */
+  --welcome-title-font-size-to-1140: 60px;
+  /* Главный заголовок Welcome — .h1 · (max-width: 1024px) */
+  --welcome-title-font-size-to-1024: 48px;
+  /* Текст адреса — .address · (max-width: 1024px) */
+  --welcome-address-font-size-to-1024: 22px;
+  /* Подчёркнутая часть адреса — .underlinedText · (max-width: 1024px) */
+  --welcome-underlined-text-font-size-to-1024: 24px;
+  /* Главный заголовок Welcome — .h1 · (max-width: 380px) */
+  --welcome-title-font-size-to-380: 36px;
+  /* Текст адреса — .address · (max-width: 380px) */
+  --welcome-address-font-size-to-380: 20px;
+  /* Подчёркнутая часть адреса — .underlinedText · (max-width: 380px) */
+  --welcome-underlined-text-font-size-to-380: 22px;
+
+  /* Знакомство: фон, заголовок и цветочные орнаменты */
+  /* Фон, тень и основной текст секции — .introduceSection */
+  --introduce-section-background-color: var(--white);
+  --introduce-section-box-shadow-color: rgba(0, 0, 0, 0.2);
+  --introduce-section-text-color: var(--brown);
+  /* .topFlower path,
+.bottomFlower path */
+  --introduce-flowers-stroke-color: var(--header-gradient-start-color-noRGBa);
+  /* Заголовок — .heading */
+  --introduce-heading-text-color: var(--brown);
+  --introduce-heading-font-weight: var(--font-weight-light);
+  /* Заголовок — .heading · (max-width: 450px) */
+  --introduce-heading-font-size-to-450: 28px;
+
+  /* Процедуры: фон секции, декоративная подпись */
+  /* Фон секции процедур — .treatmentsSection */
+  --treatments-section-background-color: var(--secondary-color);
+  /* Декоративная подпись — .decorativeDescription */
+  --treatments-decorative-description-font-family:
+    var(--font-family-decorative), "Arial", sans-serif;
+  --treatments-decorative-description-font-size: 24px;
+  --treatments-decorative-description-text-color: var(--brown);
+  /* Декоративная подпись — .decorativeDescription · (max-width: 720px) */
+  --treatments-decorative-description-font-size-to-720: 20px;
+  /* Декоративная подпись — .decorativeDescription · (max-width: 470px) */
+  --treatments-decorative-description-font-size-to-470: 16px;
+  /* Декоративная подпись — .decorativeDescription · (max-width: 425px) */
+  --treatments-decorative-description-font-size-to-425: 16px;
+
+  /* Список процедур: фон и верхняя граница */
+  /* Верхняя граница списка — .menu */
+  --treatments-menu-border-top-color: var(--header-gradient-start-color-noRGBa);
+  /* Фон перекрывающей плашки списка — .menuCoverBlock */
+  --treatments-menu-cover-background-color: var(--secondary-color);
+
+  /* Строка процедуры: текст, граница и активное состояние */
+  /* Общая кнопка — .button */
+  --treatment-item-button-border-bottom-color: var(
+    --header-gradient-start-color-noRGBa
+  );
+  /* Текст кнопки — .buttonText */
+  --treatment-item-label-color: var(--brown);
+  /* Активная плашка процедуры — .movingBlock */
+  --treatment-item-moving-block-background-color: var(
+    --header-gradient-start-color-noRGBa
+  );
+  --treatment-item-moving-block-text-color: var(--black);
+  /* Текст активной плашки — .movingBlock .text */
+  --treatment-item-moving-block-text-font-weight: var(--font-weight-semibold);
+  --treatment-item-active-label-color: var(--white);
+  /* Анимированная стрелка в активной строке процедуры */
+  --treatment-item-moving-arrow-color: var(--white);
+  /* Контур фокуса ссылки — .link:focus-visible */
+  --treatment-item-link-focus-visible-outline-color: var(--brown);
+
+  /* Бегущая строка: фон и текст фактов */
+  /* Фон бегущей строки — .runningLine */
+  --running-line-background-color: var(--secondary-color);
+  /* Текст фактов — .fact */
+  --running-line-fact-text-color: var(--black);
+  --running-line-fact-font-size: 24px;
+  --running-line-fact-font-family: var(--font-family-display);
+
+  /* Вступление к результатам: заголовок и силуэты */
+  /* Фон секции — .sectionContainer */
+  --results-intro-section-background-color: var(--white);
+  /* .maleFace path,
+.femaleFace path */
+  --results-intro-silhouettes-stroke-color: var(--secondary-color);
+  /* Заголовок — .heading */
+  --results-intro-heading-text-color: var(--primary-color);
+  --results-intro-heading-font-weight: var(--font-weight-regular);
+  /* Заголовок — .heading · (max-width: 930px) */
+  --results-intro-heading-font-size-to-930: 36px;
+  /* Заголовок — .heading · (max-width: 800px) */
+  --results-intro-heading-font-size-to-800: 28px;
+
+  /* Секция «До / После»: фон */
+  /* Фон секции — .sectionContainer */
+  --before-after-section-background-color: var(--black);
+
+  /* Сравнение фотографий: ползунок */
+  /* Ползунок сравнения — .slider */
+  --before-after-slider-color: var(--secondary-color);
+
+  /* Instagram: заголовок, фон секции и кнопка перехода */
+  /* Фон секции — .sectionContainer */
+  --instagram-section-background-color: var(--white);
+  /* Заголовок — .heading */
+  --instagram-heading-text-color: var(--black);
+  --instagram-heading-font-size: 27px;
+  /* Обёртка кнопки — .buttonWrapper */
+  --instagram-button-wrapper-font-size: var(--font-size-button);
+  /* Градиент кнопки Instagram — .toInstButton */
+  --instagram-button-gradient-start-color: var(--primary-color);
+  --instagram-button-gradient-end-color: var(--secondary-color);
+  /* .buttonTextWhite,
+.buttonTextBlack */
+  --instagram-button-font-family: var(--font-family-sans), Arial, sans-serif;
+  --instagram-button-font-size: 16px;
+  --instagram-button-font-weight: var(--font-weight-regular);
+  /* Светлый текст кнопки — .buttonTextWhite */
+  --instagram-button-text-white-text-color: white;
+  /* Тёмный текст кнопки — .buttonTextBlack */
+  --instagram-button-text-black-text-color: black;
+  /* Заголовок — .heading · (max-width: 480px) */
+  --instagram-heading-font-size-to-480: 18px;
+
+  /* Карусель*/
+  /* Общая кнопка — .button */
+  --carousel-button-background-color: rgba(0, 0, 0, 0.5);
+  /* Стрелка — .arrow */
+  --carousel-arrow-color: var(--white);
+
+  /* Рамка прогресса у видео */
+  --video-progress-border-color: var(--primary-color);
+
+  /* Видео: подсказка о звуке и затемнение */
+  /* Затемнение подсказки — .ripple */
+  --video-sound-ripple-background-color: rgba(0, 0, 0, 0.7);
+  /* Текст подсказки о звуке — .hintText */
+  --video-sound-hint-text-font-weight: var(--font-weight-medium);
+
+  /* Расположение: адрес, заголовок, табличка и её блик */
+  /* Фон секции — .section */
+  --address-section-background-color: var(--black);
+  /* Заголовок — .heading */
+  --address-heading-font-weight: var(--font-weight-light);
+  /* Текст адреса — .address */
+  --address-text-font-family: var(--font-family-display);
+  --address-text-font-size: 24px;
+  --address-text-font-weight: var(--font-weight-regular);
+  /* Обратная сторона таблички — .stickerBack */
+  --address-plate-back-gradient-start-color: #ffcfca;
+  --address-plate-back-gradient-end-color: #d78c8f;
+  --address-sticker-back-border-color: #f894a4;
+  /* Лицевая сторона таблички — .plateContent */
+  --address-plate-content-background-color: #fdfbfb;
+  --address-plate-content-border-color: #f894a4;
+  --address-plate-content-box-shadow-color: rgba(0, 0, 0, 0.05);
+  /* Блик поверх таблички — .plateContent::after */
+  --address-plate-highlight-start-color: rgba(255, 255, 255, 0.5);
+  --address-plate-highlight-middle-color: rgba(255, 255, 255, 0);
+  --address-plate-highlight-end-color: rgba(0, 0, 0, 0.05);
+  /* Рамка заголовка — .borderRect */
+  --address-border-rect-stroke-color: var(--primary-color);
+  /* Заголовок — .heading · (max-width: 900px) */
+  --address-heading-font-size-to-900: 36px;
+  /* Текст адреса — .address · (max-width: 900px) */
+  --address-text-font-size-to-900: 18px;
+  /* Текст адреса — .address · (max-width: 768px) */
+  --address-text-font-size-to-768: 24px;
+  /* Заголовок — .heading · (max-width: 480px) */
+  --address-heading-font-weight-to-480: var(--font-weight-regular);
+  /* Текст адреса — .address · (max-width: 480px) */
+  --address-text-font-size-to-480: 18px;
+
+  /* Подвал: фон и рамка, заголовки, ссылки, copyright */
+  /* Фон, текст, градиенты рамки и тень подвала — .footer */
+  --footer-text-color: var(--black);
+  --footer-background-color: var(--white);
+  --footer-surface-gradient-start-color: var(--white);
+  --footer-surface-gradient-end-color: var(--white);
+  --footer-border-gradient-start-color: rgba(248, 148, 164, 0.9);
+  --footer-border-gradient-end-color: rgba(249, 209, 183, 0.9);
+  --footer-box-shadow-color: rgba(22, 22, 22, 0.25);
+  /* Заголовок — .heading */
+  --footer-heading-font-size: 26px;
+  --footer-heading-font-family: var(--font-family-display);
+  --footer-heading-font-weight: var(--font-weight-medium);
+  /* Авторские права — .copyright */
+  --footer-copyright-font-size: 12px;
+  /* Обводка ссылки при наведении — .border rect */
+  --footer-border-rect-stroke-color: var(--black);
+  /* Заголовок — .heading · (max-width: 1350px) */
+  --footer-heading-font-size-to-1350: 20px;
+  /* Заголовок — .heading · (max-width: 1120px) */
+  --footer-heading-font-size-to-1120: 18px;
+  /* Заголовок — .heading · (max-width: 950px) */
+  --footer-heading-font-size-to-950: 16px;
+  --footer-heading-font-weight-to-950: var(--font-weight-semibold);
+  /* Список ссылок — .linksList · (max-width: 950px) */
+  --footer-links-list-font-size-to-950: 15px;
+  /* Заголовок — .heading · (max-width: 800px) */
+  --footer-heading-font-size-to-800: 16px;
+  /* Список ссылок — .linksList · (max-width: 800px) */
+  --footer-links-list-font-size-to-800: 15px;
+  /* Список ссылок — .linksList · (max-width: 479px) */
+  --footer-links-list-font-size-to-479: 14px;
+  /* Заголовок — .heading · (max-width: 479px) */
+  --footer-heading-font-size-to-479: 14px;
+
+  /* Общие кнопки: основной и вторичный вид, hover и focus */
+  /* Общая кнопка — .button */
+  --button-font-size: var(--font-size-button);
+  --button-font-family: var(--font-family-display);
+  --button-font-weight: var(--font-weight-regular);
+  /* Основная кнопка — .primary */
+  --button-primary-outline-color: var(--white);
+  --button-primary-background-color: var(--white);
+  --button-primary-text-color: var(--cta-button-text);
+  /* Вторичная кнопка — .secondary */
+  --button-secondary-outline-color: var(--secondary-color);
+  --button-secondary-text-color: var(--secondary-color);
+  --button-secondary-font-size: 14px;
+  /* Иконка отпечатка — .fingerprint */
+  --button-fingerprint-color: var(--primary-color);
+  /* Кнопка при наведении — .button:hover */
+  --button-hover-background-color: var(--primary-color);
+  --button-hover-text-color: var(--white);
+  /* Отпечаток при наведении — .button:hover .fingerprint */
+  --button-hover-fingerprint-text-color: var(--white);
+  /* Контур фокуса кнопки — .button:focus-visible */
+  --button-focus-visible-outline-color: var(--primary-color);
+
+  /* Выбор процедуры: кнопка, список, выбранный и подсвеченный пункт */
+  /* Кнопка раскрытия списка — .openButton */
+  --select-open-button-text-color: var(--white);
+  --select-open-button-font-size: 1rem;
+  --select-open-button-border-color: var(--secondary-color);
+  /* Кнопка списка при наведении — .openButton:hover */
+  --select-open-button-hover-background-color: rgba(249, 220, 196, 0.8);
+  --select-open-button-hover-text-color: var(--black);
+  /* Стрелка раскрытия — .buttonArrow */
+  --select-button-arrow-text-color: var(--secondary-color);
+  /* Стрелка при наведении — .openButton:hover .buttonArrow */
+  --select-open-button-hover-button-arrow-text-color: var(--black);
+  /* Фон и границы выпадающего списка — .selectList */
+  --select-list-background-color: var(--black);
+  --select-list-border-right-color: var(--secondary-color);
+  --select-list-border-left-color: var(--secondary-color);
+  --select-list-border-bottom-color: var(--secondary-color);
+  /* Пункт списка — .selectItem */
+  --select-item-font-size: 1rem;
+  /* Выбранный пункт — .selectItem.selected */
+  --select-item-selected-background-color: var(--secondary-color);
+  --select-item-selected-text-color: var(--black);
+  /* Подсвеченный пункт — .isHighlighted */
+  --select-is-highlighted-background-color: rgba(249, 220, 196, 0.5);
+
+  /* Модальное окно: фон, затемнение, закрытие и ожидание */
+  /* Фон окна — .modalWindow */
+  --modal-surface-color: var(--modal-background);
+  /* Затемнение страницы под окном — .modalWindow::backdrop */
+  --modal-backdrop-color: rgba(0, 0, 0, 0.5);
+  /* Текст ожидания содержимого — .suspense */
+  --modal-suspense-text-color: green;
+  /* Кнопка закрытия — .closeButton */
+  --modal-close-button-text-color: var(--primary-color);
+  --modal-close-button-font-size: 32px;
+
+  /* Карточка процедуры в модальном окне: заголовок, описание, ссылка, ошибка фото */
+  /* Фон карточки процедуры — .modalTreatment */
+  --treatment-modal-background-color: var(--modal-background);
+  /* Сообщение об ошибке фотографии — .imageError */
+  --treatment-modal-image-error-text-color: var(--primary-color);
+  /* Название процедуры — .treatmentName */
+  --treatment-modal-title-text-color: var(--secondary-color);
+  --treatment-modal-title-font-size: 32px;
+  --treatment-modal-title-font-family: var(--font-family-decorative);
+  /* Описание — .description */
+  --treatment-modal-description-font-size: 1.125rem;
+  --treatment-modal-description-text-color: var(--white);
+  --treatment-modal-description-font-family: var(--font-family-sans);
+  /* Ссылка «Узнать подробнее» — .infButton */
+  --treatment-modal-details-link-font-weight: var(--font-weight-semibold);
+  /* Текст кнопки — .buttonText */
+  --treatment-modal-details-link-font-family: var(--font-family-display);
+  --treatment-modal-details-link-font-size: var(--font-size-body);
+  --treatment-modal-details-link-color: var(--secondary-color);
+  /* Название процедуры — .treatmentName · (max-width: 767px) */
+  --treatment-modal-title-font-size-to-767: 28px;
+
+  /* Лоадер фото и видео: кольцо, активная дуга и подложка */
+  /* Кольцо загрузки и его подложка — .spinner */
+  --media-loader-spinner-border-color: rgb(248 148 164 / 25%);
+  --media-loader-spinner-border-top-color: var(--primary-color);
+  --media-loader-spinner-border-right-color: var(--primary-color);
+  --media-loader-spinner-background-color: rgb(3 3 3 / 20%);
+
+  /* Отдельная страница процедуры: текст, навигация, разделы и блок записи */
+  /* Основной текст страницы — .page */
+  --treatment-page-text-color: var(--black);
+  /* Контур фокуса ссылок — .page a:focus-visible */
+  --treatment-page-a-focus-visible-outline-color: var(--cta-button-text);
+  /* Хлебные крошки — .breadcrumbs */
+  --treatment-page-breadcrumbs-font-size: 12px;
+  /* Фон вместо фотографии — .photoPlaceholder */
+  --treatment-page-photo-placeholder-background-color: var(--secondary-color);
+  /* Надзаголовок — .eyebrow */
+  --treatment-page-eyebrow-text-color: var(--cta-button-text);
+  --treatment-page-eyebrow-font-size: 11px;
+  --treatment-page-eyebrow-font-weight: var(--font-weight-medium);
+  /* Главный заголовок — .title */
+  --treatment-page-title-font-size: clamp(36px, 4.2vw, 58px);
+  /* Описание — .description */
+  --treatment-page-description-font-size: 16px;
+  /* Основная ссылка записи — .primaryLink */
+  --treatment-page-primary-link-background-color: var(--primary-color);
+  --treatment-page-primary-link-text-color: var(--black);
+  --treatment-page-primary-link-font-size: 14px;
+  --treatment-page-primary-link-font-weight: var(--font-weight-medium);
+  /* Ссылка записи при наведении — .primaryLink:hover */
+  --treatment-page-primary-link-hover-background-color: var(--secondary-color);
+  /* Стрелка ссылки записи — .primaryLink span */
+  --treatment-page-primary-link-span-font-size: 22px;
+  /* Подпись фотографии — .caption */
+  --treatment-page-caption-font-size: 12px;
+  /* Навигация по разделам — .sectionNav */
+  --treatment-page-section-nav-font-size: 13px;
+  /* Навигация при наведении — .sectionNav a:hover */
+  --treatment-page-section-nav-a-hover-text-color: var(--cta-button-text);
+  /* Заголовки разделов — .page h2 */
+  --treatment-page-h2-font-size: clamp(28px, 3vw, 38px);
+  /* Вводный текст раздела — .sectionHeading > p */
+  --treatment-page-section-heading-p-font-size: 15px;
+  /* Номер пункта — .number */
+  --treatment-page-number-font-size: 12px;
+  --treatment-page-number-text-color: var(--cta-button-text);
+  /* Заголовки пунктов — .page h3 */
+  --treatment-page-h3-font-size: 17px;
+  --treatment-page-h3-font-weight: var(--font-weight-medium);
+  /* Текст проблем и этапов — .concern p, .step p */
+  --treatment-page-concern-p-font-size: 14px;
+  /* Номер этапа — .stepNumber */
+  --treatment-page-step-number-font-size: 28px;
+  --treatment-page-step-number-text-color: var(--cta-button-text);
+  --treatment-page-step-number-font-family:
+    var(--font-family-display), sans-serif;
+  /* Заголовок «Кому подходит» — .suitability h2 */
+  --treatment-page-suitability-h2-font-size: clamp(26px, 2.6vw, 32px);
+  /* Метки типов кожи — .skinTypes li */
+  --treatment-page-skin-types-li-font-size: 13px;
+  /* Примечание — .note */
+  --treatment-page-note-font-size: 14px;
+  /* Ограничения — .limitations */
+  --treatment-page-limitations-font-size: 14px;
+  /* Блок записи — .booking */
+  --treatment-page-booking-background-color: #faeee9;
+  /* Заголовок блока записи — .booking h2 */
+  --treatment-page-booking-h2-font-size: 30px;
+  /* Описание в блоке записи — .booking p:last-child */
+  --treatment-page-booking-p-last-child-font-size: 14px;
+  /* Главный заголовок — .title · (max-width: 1000px) */
+  --treatment-page-title-font-size-to-1000: 38px;
+  /* Хлебные крошки — .breadcrumbs · (max-width: 767px) */
+  --treatment-page-breadcrumbs-font-size-to-767: 11px;
+  /* Главный заголовок — .title · (max-width: 767px) */
+  --treatment-page-title-font-size-to-767: clamp(32px, 7.5vw, 46px);
+  /* Описание — .description · (max-width: 767px) */
+  --treatment-page-description-font-size-to-767: 15px;
+  /* Навигация по разделам — .sectionNav · (max-width: 767px) */
+  --treatment-page-section-nav-font-size-to-767: 12px;
+  /* Заголовок блока записи — .booking h2 · (max-width: 767px) */
+  --treatment-page-booking-h2-font-size-to-767: 28px;
+  /* Основная ссылка записи — .primaryLink · (max-width: 767px) */
+  --treatment-page-primary-link-font-size-to-767: 13px;
 }
 
 @media (max-width: 700px) {
   :root {
-    --font-size-h2: 36px;
+    --font-size-h2: var(--font-size-h2-to-700);
   }
 }
 
@@ -30,24 +479,26 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  -webkit-tap-highlight-color: rgba(248, 148, 164, 0.2);
+  -webkit-tap-highlight-color: var(--tap-highlight-color);
 }
 
 ::selection {
-  background: rgba(248, 148, 164, 0.8);
-  color: var(--white);
+  background: var(--selection-background-color);
+  color: var(--selection-text-color);
 }
 
 html,
 body {
   max-width: 100vw;
-  background-color: var(--white);
+  background-color: var(--page-background-color);
   scrollbar-width: none;
 }
 
 body {
-  color: var(--white);
-  font-family: "Montserrat", system-ui;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+  color: var(--page-text-color);
+  font-family: var(--font-family-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 0.5px;
@@ -66,10 +517,14 @@ ul {
 
 h1,
 h2 {
-  font-family: "MontserratAlternates", "Arial", sans-serif;
-  font-weight: 400;
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-heading);
 }
 
 h2 {
   font-size: var(--font-size-h2);
+}
+
+html {
+  font-size: var(--font-size-root);
 }

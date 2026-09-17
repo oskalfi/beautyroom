@@ -2,13 +2,14 @@
 
 import styles from "./WelcomeSection.module.css";
 import gsap from "gsap";
+import { loadElementFont } from "@/shared/utils/loadElementFont";
 import { useEffect, useRef } from "react";
 import { UnderlineSVG } from "@/shared/assets/svg/Underline";
 import { revealWelcomeText } from "./animations/revealWelcomeText";
 import { enableScrollParallax } from "./animations/enableScrollParallax";
 
 export const WelcomeSection = () => {
-  const welcomeSection = useRef(null);
+  const welcomeSection = useRef<HTMLElement>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -16,8 +17,8 @@ export const WelcomeSection = () => {
       enableScrollParallax(`.${styles.backgroundImage}`);
     }, welcomeSection);
     void Promise.allSettled([
-      document.fonts.load('400 48px "MontserratAlternates"'),
-      document.fonts.load('300 26px "Montserrat"'),
+      loadElementFont(welcomeSection.current?.querySelector(`.${styles.h1}`) ?? null),
+      loadElementFont(welcomeSection.current?.querySelector(`.${styles.address}`) ?? null),
     ]).then(() => {
       if (cancelled) return;
       context.add(() => {

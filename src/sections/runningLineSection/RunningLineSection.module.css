@@ -1,5 +1,5 @@
 .sectionContainer {
-  background-color: var(--white);
+  background-color: var(--results-intro-section-background-color);
   position: relative;
   height: 85vh;
   display: flex;
@@ -29,7 +29,7 @@
 .femaleFace path {
   stroke-dasharray: 3000;
   stroke-dashoffset: 0;
-  stroke: var(--secondary-color);
+  stroke: var(--results-intro-silhouettes-stroke-color);
   stroke-width: 2px;
 }
 
@@ -44,9 +44,9 @@
 
 .heading {
   visibility: hidden;
-  color: var(--primary-color);
+  color: var(--results-intro-heading-text-color);
   text-align: center;
-  font-weight: 400;
+  font-weight: var(--results-intro-heading-font-weight);
   max-width: 1030px;
   z-index: 2;
 }
@@ -67,7 +67,7 @@
 
 @media (max-width: 930px) {
   .heading {
-    font-size: 36px;
+    font-size: var(--results-intro-heading-font-size-to-930);
   }
 }
 
@@ -80,6 +80,6 @@
 
 @media (max-width: 800px) {
   .heading {
-    font-size: 28px;
+    font-size: var(--results-intro-heading-font-size-to-800);
   }
 }

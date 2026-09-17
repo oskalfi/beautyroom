@@ -1,14 +1,14 @@
 .footer {
   position: relative;
-  color: var(--black);
+  color: var(--footer-text-color);
   padding: 0 30px 90px 30px;
   width: 100%;
-  background-color: var(--white);
+  background-color: var(--footer-background-color);
   border: 2px solid transparent;
   background:
-    linear-gradient(var(--white), var(--white)) padding-box,
-    linear-gradient(to right, rgba(248, 148, 164, 0.9), rgba(249, 209, 183, 0.9)) border-box;
-  box-shadow: 0 -16px 40px -12px rgba(22, 22, 22, 0.25);
+    linear-gradient(var(--footer-surface-gradient-start-color), var(--footer-surface-gradient-end-color)) padding-box,
+    linear-gradient(to right, var(--footer-border-gradient-start-color), var(--footer-border-gradient-end-color)) border-box;
+  box-shadow: 0 -16px 40px -12px var(--footer-box-shadow-color);
   z-index: 1;
   display: flex;
   gap: 150px;
@@ -24,10 +24,10 @@
 }
 
 .heading {
-  font-size: 26px;
+  font-size: var(--footer-heading-font-size);
   text-transform: uppercase;
-  font-family: "MontserratAlternates";
-  font-weight: 500;
+  font-family: var(--footer-heading-font-family);
+  font-weight: var(--footer-heading-font-weight);
   padding: 21px;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .copyright {
-  font-size: 12px;
+  font-size: var(--footer-copyright-font-size);
   position: absolute;
   bottom: 9px;
   left: 50%;
@@ -67,7 +67,7 @@
 
 .border rect {
   fill: none;
-  stroke: var(--black);
+  stroke: var(--footer-border-rect-stroke-color);
   stroke-width: 1;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
@@ -88,7 +88,7 @@
   }
 
   .heading {
-    font-size: 20px;
+    font-size: var(--footer-heading-font-size-to-1350);
   }
 }
 
@@ -97,7 +97,7 @@
     gap: 60px;
   }
   .heading {
-    font-size: 18px;
+    font-size: var(--footer-heading-font-size-to-1120);
   }
 
   .linksWrapper {
@@ -110,8 +110,8 @@
     gap: 30px;
   }
   .heading {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: var(--footer-heading-font-size-to-950);
+    font-weight: var(--footer-heading-font-weight-to-950);
   }
 
   .linksWrapper {
@@ -119,7 +119,7 @@
   }
 
   .linksList {
-    font-size: 15px;
+    font-size: var(--footer-links-list-font-size-to-950);
   }
 }
 
@@ -128,7 +128,7 @@
     gap: 30px;
   }
   .heading {
-    font-size: 16px;
+    font-size: var(--footer-heading-font-size-to-800);
   }
 
   .linksWrapper {
@@ -136,7 +136,7 @@
   }
 
   .linksList {
-    font-size: 15px;
+    font-size: var(--footer-links-list-font-size-to-800);
   }
 
   .socialWebs {
@@ -170,10 +170,10 @@
   }
 
   .linksList {
-    font-size: 14px;
+    font-size: var(--footer-links-list-font-size-to-479);
   }
 
   .heading {
-    font-size: 14px;
+    font-size: var(--footer-heading-font-size-to-479);
   }
 }

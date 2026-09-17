@@ -26,7 +26,7 @@
   border: none;
   height: 80px;
   width: 80px;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--carousel-button-background-color);
   border-radius: 50%;
   z-index: 1;
   cursor: pointer;
@@ -35,10 +35,6 @@
 
 .button:active {
 }
-
-/* .isPressed {
-  background-color: rgba(248, 148, 164, 0.5);
-} */
 
 .backButton {
   left: 0;
@@ -57,7 +53,7 @@
 }
 
 .arrow {
-  color: var(--white);
+  color: var(--carousel-arrow-color);
 }
 
 .forwardButton {

@@ -1,5 +1,5 @@
 .runningLine {
-  background-color: var(--secondary-color);
+  background-color: var(--running-line-background-color);
   position: relative;
   overflow: hidden;
   padding: 16px 0;
@@ -23,9 +23,9 @@
 }
 
 .fact {
-  color: var(--black);
-  font-size: 24px;
-  font-family: "MontserratAlternates";
+  color: var(--running-line-fact-text-color);
+  font-size: var(--running-line-fact-font-size);
+  font-family: var(--running-line-fact-font-family);
   white-space: nowrap;
   display: inline-flex;
   align-items: center;

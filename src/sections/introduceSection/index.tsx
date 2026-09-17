@@ -3,12 +3,13 @@
 import styles from "./IntroduceSection.module.css";
 import { TopFlowerSVG } from "@/shared/assets/svg/TopFlower";
 import { BottomFlowerSVG } from "@/shared/assets/svg/BottomFlower";
+import { loadElementFont } from "@/shared/utils/loadElementFont";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { flowersNTextReveal } from "./animations/flowers&textReveal";
 
 export const IntroduceSection = () => {
-  const introduceSection = useRef(null);
+  const introduceSection = useRef<HTMLElement>(null);
   useGSAP(
     (_context, contextSafe) => {
       let cancelled = false;
@@ -21,7 +22,7 @@ export const IntroduceSection = () => {
           styles.letter,
         );
       });
-      void document.fonts.load('400 48px "MontserratAlternates"').then(reveal, reveal);
+      void loadElementFont(introduceSection.current?.querySelector(`.${styles.heading}`) ?? null).then(reveal, reveal);
       return () => { cancelled = true; };
     },
     { scope: introduceSection },

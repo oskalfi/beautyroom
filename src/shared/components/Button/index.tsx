@@ -29,7 +29,7 @@ export const Button = ({
       <span className={styles.text}>{children}</span>
     </button>
   ) : (
-    <button type="button" className={`${styles.button} ${decor} `}>
+    <button type="button" className={`${styles.button} ${decor} ${className}`}>
       <FingerprintSVG className={styles.fingerprint} />
       <span className={styles.text}>{children}</span>
     </button>

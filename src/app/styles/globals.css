@@ -17,7 +17,7 @@
   --black: #161616; /* Почти чёрный: тёмные секции и текст на светлом фоне */
   --brown: #7b4f37; /* Коричневый: базовый оттенок */
   --cta-button-text: var(--brown); /* Коричневый текст кнопок записи и ссылок */
-  --modal-background: #030303; /* Фон модальных окон */
+  --modal-background: var(--secondary-color); /* Фон модальных окон */
   --content-container-padding: 40px; /* Отступ контейнера шапки */
   --content-container-padding-phone: 20px; /* Отступ контейнера шапки на узких экранах */
   --font-size-button: 16px; /* Базовый размер текста общих кнопок */
@@ -53,7 +53,7 @@
   --treatment-page-muted-text-color: #655b60;
   --treatment-page-divider-color: #e6dce0;
 
-  /* Встроенные SVG: заливка цветов и иконки мобильного меню */
+  /* Встроенные SVG: заливка иконки мобильного меню */
   --flower-fill-color: var(--secondary-gradient-color);
   --menu-toggle-icon-color: #ffffff;
 
@@ -193,7 +193,6 @@
   /* Фон секции — .sectionContainer */
   --before-after-section-background-color: var(--secondary-color);
 
-  /* Сравнение фотографий: ползунок */
   /* Ползунок сравнения — .slider */
   --before-after-slider-color: var(--secondary-color);
 
@@ -201,13 +200,15 @@
   /* Фон секции — .sectionContainer */
   --instagram-section-background-color: var(--white);
   /* Заголовок — .heading */
-  --instagram-heading-text-color: var(--black);
+  --instagram-heading-text-color: var(--brown);
   --instagram-heading-font-size: 27px;
   /* Обёртка кнопки — .buttonWrapper */
   --instagram-button-wrapper-font-size: var(--font-size-button);
   /* Градиент кнопки Instagram — .toInstButton */
-  --instagram-button-gradient-start-color: var(--primary-color);
-  --instagram-button-gradient-end-color: var(--secondary-color);
+  --instagram-button-gradient-start-color: var(
+    --header-gradient-start-color-noRGBa
+  );
+  --instagram-button-gradient-end-color: var(--primary-color);
   /* .buttonTextWhite,
 .buttonTextBlack */
   --instagram-button-font-family: var(--font-family-sans), Arial, sans-serif;
@@ -216,7 +217,7 @@
   /* Светлый текст кнопки — .buttonTextWhite */
   --instagram-button-text-white-text-color: white;
   /* Тёмный текст кнопки — .buttonTextBlack */
-  --instagram-button-text-black-text-color: black;
+  --instagram-button-text-black-text-color: var(--brown);
   /* Заголовок — .heading · (max-width: 480px) */
   --instagram-heading-font-size-to-480: 18px;
 
@@ -237,7 +238,7 @@
 
   /* Расположение: адрес, заголовок, табличка и её блик */
   /* Фон секции — .section */
-  --address-section-background-color: var(--black);
+  --address-section-background-color: var(--secondary-color);
   /* Заголовок — .heading */
   --address-heading-font-weight: var(--font-weight-light);
   /* Текст адреса — .address */
@@ -247,17 +248,17 @@
   /* Обратная сторона таблички — .stickerBack */
   --address-plate-back-gradient-start-color: #ffcfca;
   --address-plate-back-gradient-end-color: #d78c8f;
-  --address-sticker-back-border-color: #f894a4;
+  --address-sticker-back-border-color: var(--primary-color);
   /* Лицевая сторона таблички — .plateContent */
   --address-plate-content-background-color: #fdfbfb;
-  --address-plate-content-border-color: #f894a4;
+  --address-plate-content-border-color: var(--primary-color);
   --address-plate-content-box-shadow-color: rgba(0, 0, 0, 0.05);
   /* Блик поверх таблички — .plateContent::after */
   --address-plate-highlight-start-color: rgba(255, 255, 255, 0.5);
   --address-plate-highlight-middle-color: rgba(255, 255, 255, 0);
   --address-plate-highlight-end-color: rgba(0, 0, 0, 0.05);
   /* Рамка заголовка — .borderRect */
-  --address-border-rect-stroke-color: var(--primary-color);
+  --address-border-rect-stroke-color: #f894a4;
   /* Заголовок — .heading · (max-width: 900px) */
   --address-heading-font-size-to-900: 36px;
   /* Текст адреса — .address · (max-width: 900px) */
@@ -358,30 +359,40 @@
   /* Затемнение страницы под окном — .modalWindow::backdrop */
   --modal-backdrop-color: rgba(0, 0, 0, 0.5);
   /* Текст ожидания содержимого — .suspense */
-  --modal-suspense-text-color: green;
+  --modal-suspense-text-color: var(--brown);
   /* Кнопка закрытия — .closeButton */
-  --modal-close-button-text-color: var(--primary-color);
+  --modal-close-button-text-color: var(--brown);
   --modal-close-button-font-size: 32px;
 
   /* Карточка процедуры в модальном окне: заголовок, описание, ссылка, ошибка фото */
   /* Фон карточки процедуры — .modalTreatment */
   --treatment-modal-background-color: var(--modal-background);
   /* Сообщение об ошибке фотографии — .imageError */
-  --treatment-modal-image-error-text-color: var(--primary-color);
+  --treatment-modal-image-error-text-color: var(--brown);
   /* Название процедуры — .treatmentName */
-  --treatment-modal-title-text-color: var(--secondary-color);
+  --treatment-modal-title-text-color: var(--brown);
   --treatment-modal-title-font-size: 32px;
   --treatment-modal-title-font-family: var(--font-family-decorative);
   /* Описание — .description */
   --treatment-modal-description-font-size: 1.125rem;
-  --treatment-modal-description-text-color: var(--white);
+  --treatment-modal-description-text-color: var(--brown);
   --treatment-modal-description-font-family: var(--font-family-sans);
   /* Ссылка «Узнать подробнее» — .infButton */
-  --treatment-modal-details-link-font-weight: var(--font-weight-semibold);
+  --treatment-modal-details-link-font-weight: var(--font-weight-light);
   /* Текст кнопки — .buttonText */
   --treatment-modal-details-link-font-family: var(--font-family-display);
   --treatment-modal-details-link-font-size: var(--font-size-body);
-  --treatment-modal-details-link-color: var(--secondary-color);
+  --treatment-modal-details-link-color: var(--brown);
+  /* Кнопка записи в модалке: коричневый контур и персиковый отпечаток */
+  --treatment-modal-button-text-color: var(--brown);
+  --treatment-modal-button-outline-color: var(--brown);
+  --treatment-modal-button-accent-color: #efa889;
+  --treatment-modal-button-hover-background-color: var(
+    --secondary-gradient-color
+  );
+  --treatment-modal-button-hover-text-color: var(--brown);
+  --treatment-modal-button-hover-accent-color: var(--brown);
+
   /* Название процедуры — .treatmentName · (max-width: 767px) */
   --treatment-modal-title-font-size-to-767: 28px;
 

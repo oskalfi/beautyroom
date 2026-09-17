@@ -69,7 +69,7 @@
   cursor: pointer;
   transition: opacity 0.4s ease;
   font-weight: var(--treatment-modal-details-link-font-weight);
-  opacity: 0.3;
+  opacity: 1;
 }
 
 .buttonText {
@@ -81,6 +81,7 @@
 }
 
 .arrow {
+  color: var(--treatment-modal-details-link-color);
   transform: translateY(1px);
 }
 
@@ -105,4 +106,15 @@
   .treatmentName {
     font-size: var(--treatment-modal-title-font-size-to-767);
   }
+}
+
+/* Scoped palette: shared buttons elsewhere keep their own colors. */
+.button {
+  --button-secondary-text-color: var(--treatment-modal-button-text-color);
+  --button-secondary-outline-color: var(--treatment-modal-button-outline-color);
+  --button-fingerprint-color: var(--treatment-modal-button-accent-color);
+  --button-hover-background-color: var(--treatment-modal-button-hover-background-color);
+  --button-hover-text-color: var(--treatment-modal-button-hover-text-color);
+  --button-hover-fingerprint-text-color: var(--treatment-modal-button-hover-accent-color);
+  --button-focus-visible-outline-color: var(--treatment-modal-button-outline-color);
 }

@@ -60,7 +60,7 @@ export const TreatmentsSection = () => {
       };
       const updateActive = () => {
         // External keyboards on touch devices must not fight scroll activation.
-        if (section.querySelector("[data-treatment-link]:focus")) {
+        if (section.querySelector('[data-focus-active="true"] [data-treatment-link]:focus')) {
           active = undefined;
           return;
         }
@@ -124,6 +124,9 @@ export const TreatmentsSection = () => {
       };
       section.addEventListener("focusin", syncAfterFocus);
       section.addEventListener("focusout", syncAfterFocus);
+      document.addEventListener("pointerdown", syncAfterFocus);
+      // Back/forward cache may restore the old DOM and focused link without mounting.
+      window.addEventListener("pageshow", observeCenter);
       window.addEventListener("scroll", trackScroll, { passive: true });
       window.addEventListener("resize", observeCenter);
       window.visualViewport?.addEventListener("resize", observeCenter);
@@ -134,6 +137,8 @@ export const TreatmentsSection = () => {
         cancelAnimationFrame(focusFrame);
         section.removeEventListener("focusin", syncAfterFocus);
         section.removeEventListener("focusout", syncAfterFocus);
+        document.removeEventListener("pointerdown", syncAfterFocus);
+        window.removeEventListener("pageshow", observeCenter);
         observer.disconnect();
         window.removeEventListener("scroll", trackScroll);
         window.removeEventListener("resize", observeCenter);

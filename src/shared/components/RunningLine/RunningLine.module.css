@@ -3,10 +3,10 @@
   position: relative;
   overflow: hidden;
   padding: 16px 0;
-
   /* Создаем изолированный контекст рендеринга для Safari */
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
+  z-index: 2;
 }
 
 .factsWrapper {
@@ -39,7 +39,6 @@
   content: "";
   width: 30px;
   height: 30px;
-
   margin: 0 20px;
   flex-shrink: 0;
 }

@@ -163,13 +163,13 @@
   /* Анимированная стрелка в активной строке процедуры */
   --treatment-item-moving-arrow-color: var(--white);
   /* Контур фокуса ссылки — .link:focus-visible */
-  --treatment-item-link-focus-visible-outline-color: var(--brown);
+  --treatment-item-link-focus-visible-outline-color: var(--secondary-color);
 
   /* Бегущая строка: фон и текст фактов */
   /* Фон бегущей строки — .runningLine */
-  --running-line-background-color: var(--secondary-color);
+  --running-line-background-color: var(--header-gradient-start-color-noRGBa);
   /* Текст фактов — .fact */
-  --running-line-fact-text-color: var(--black);
+  --running-line-fact-text-color: var(--white);
   --running-line-fact-font-size: 24px;
   --running-line-fact-font-family: var(--font-family-display);
 
@@ -178,10 +178,12 @@
   --results-intro-section-background-color: var(--white);
   /* .maleFace path,
 .femaleFace path */
-  --results-intro-silhouettes-stroke-color: var(--secondary-color);
+  --results-intro-silhouettes-stroke-color: var(
+    --header-gradient-start-color-noRGBa
+  );
   /* Заголовок — .heading */
-  --results-intro-heading-text-color: var(--primary-color);
-  --results-intro-heading-font-weight: var(--font-weight-regular);
+  --results-intro-heading-text-color: var(--brown);
+  --results-intro-heading-font-weight: var(--font-weight-light);
   /* Заголовок — .heading · (max-width: 930px) */
   --results-intro-heading-font-size-to-930: 36px;
   /* Заголовок — .heading · (max-width: 800px) */
@@ -189,7 +191,7 @@
 
   /* Секция «До / После»: фон */
   /* Фон секции — .sectionContainer */
-  --before-after-section-background-color: var(--black);
+  --before-after-section-background-color: var(--secondary-color);
 
   /* Сравнение фотографий: ползунок */
   /* Ползунок сравнения — .slider */
@@ -327,28 +329,28 @@
 
   /* Выбор процедуры: кнопка, список, выбранный и подсвеченный пункт */
   /* Кнопка раскрытия списка — .openButton */
-  --select-open-button-text-color: var(--white);
+  --select-open-button-text-color: var(--brown);
   --select-open-button-font-size: 1rem;
-  --select-open-button-border-color: var(--secondary-color);
+  --select-open-button-border-color: var(--brown);
   /* Кнопка списка при наведении — .openButton:hover */
-  --select-open-button-hover-background-color: rgba(249, 220, 196, 0.8);
+  --select-open-button-hover-background-color: rgba(255, 192, 164, 0.8);
   --select-open-button-hover-text-color: var(--black);
   /* Стрелка раскрытия — .buttonArrow */
-  --select-button-arrow-text-color: var(--secondary-color);
+  --select-button-arrow-text-color: var(--brown);
   /* Стрелка при наведении — .openButton:hover .buttonArrow */
-  --select-open-button-hover-button-arrow-text-color: var(--black);
+  --select-open-button-hover-button-arrow-text-color: var(--brown);
   /* Фон и границы выпадающего списка — .selectList */
-  --select-list-background-color: var(--black);
-  --select-list-border-right-color: var(--secondary-color);
-  --select-list-border-left-color: var(--secondary-color);
-  --select-list-border-bottom-color: var(--secondary-color);
+  --select-list-background-color: var(--header-gradient-start-color-noRGBa);
+  --select-list-border-right-color: var(--brown);
+  --select-list-border-left-color: var(--brown);
+  --select-list-border-bottom-color: var(--brown);
   /* Пункт списка — .selectItem */
   --select-item-font-size: 1rem;
   /* Выбранный пункт — .selectItem.selected */
   --select-item-selected-background-color: var(--secondary-color);
-  --select-item-selected-text-color: var(--black);
+  --select-item-selected-text-color: var(--brown);
   /* Подсвеченный пункт — .isHighlighted */
-  --select-is-highlighted-background-color: rgba(249, 220, 196, 0.5);
+  --select-is-highlighted-background-color: rgba(249, 239, 221, 0.5);
 
   /* Модальное окно: фон, затемнение, закрытие и ожидание */
   /* Фон окна — .modalWindow */

@@ -20,6 +20,10 @@
   align-items: center;
 }
 
+.openButton:focus {
+  outline: 6px var(--header-gradient-start-color-noRGBa) solid;
+}
+
 .openButton:hover {
   background-color: var(--select-open-button-hover-background-color);
   color: var(--select-open-button-hover-text-color);
@@ -58,6 +62,7 @@
 
 .selectItem {
   font-size: var(--select-item-font-size);
+  font-weight: var(--font-weight-medium);
   padding: 8px 15px;
   transition:
     background-color 0.1s ease,

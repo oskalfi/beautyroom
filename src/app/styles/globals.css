@@ -59,7 +59,9 @@
 
   /* Шапка: фон, навигация, кнопка записи */
   /* Градиент шапки — .header */
-  --header-gradient-start-color-noRGBa: rgb(255, 192, 164);
+  /* --header-gradient-start-color-noRGBa: rgb(255, 192, 164);
+   */
+  --header-gradient-start-color-noRGBa: var(--primary-color);
   --header-gradient-start-color: rgb(255, 192, 164, 0.9);
   --header-gradient-end-color: rgba(249, 209, 183, 0.9);
   /* Ссылки навигации — .navigationList */

@@ -17,8 +17,12 @@ export const WelcomeSection = () => {
       enableScrollParallax(`.${styles.backgroundImage}`);
     }, welcomeSection);
     void Promise.allSettled([
-      loadElementFont(welcomeSection.current?.querySelector(`.${styles.h1}`) ?? null),
-      loadElementFont(welcomeSection.current?.querySelector(`.${styles.address}`) ?? null),
+      loadElementFont(
+        welcomeSection.current?.querySelector(`.${styles.h1}`) ?? null,
+      ),
+      loadElementFont(
+        welcomeSection.current?.querySelector(`.${styles.address}`) ?? null,
+      ),
     ]).then(() => {
       if (cancelled) return;
       context.add(() => {
@@ -37,7 +41,7 @@ export const WelcomeSection = () => {
 
   return (
     <section className={styles.welcomeSection} ref={welcomeSection}>
-      <div className={styles.backgroundImage}></div>
+      <div className={styles.backgroundImage} />
       <div className={styles.welcomeText}>
         <h1 className={styles.h1}>
           <span className={styles.nowrap}>Beautiful skin</span>{" "}

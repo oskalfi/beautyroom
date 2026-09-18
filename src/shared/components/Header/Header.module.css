@@ -1,10 +1,11 @@
 .header {
   width: 100%;
-  background: linear-gradient(
+  /* background: linear-gradient(
     to right,
     var(--header-gradient-start-color),
     var(--header-gradient-end-color)
-  );
+  ); */
+  background: rgba(255, 192, 201, 0.9);
   backdrop-filter: blur(10px);
   overflow: hidden;
   position: absolute;

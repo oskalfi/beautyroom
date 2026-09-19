@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useRef, type Dispatch, type SetStateAction } from "react";
 import Image from "next/image";
 import styles from "./MenuButton.module.css";
 import gsap from "gsap";
@@ -22,29 +22,33 @@ export const MenuButton = ({
   setIsOpen,
 }: {
   isOpen: boolean;
-  setIsOpen: Function;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const morphPathRef = useRef<SVGPathElement | null>(null);
 
-  const { contextSafe } = useGSAP({ scope: svgRef });
+  useGSAP(
+    () => {
+      if (!morphPathRef.current) return;
 
-  const toggleMenu = contextSafe(() => {
-    if (!morphPathRef.current) return;
+      // Animate every state change, including closing via a link or Escape.
+      const tween = gsap.to(morphPathRef.current, {
+        duration: 0.4,
+        morphSVG: isOpen ? CROSS_PATH : HAMBURGER_PATH,
+        ease: "power2.inOut",
+        overwrite: true,
+      });
 
-    const nextState = !isOpen;
+      return () => { tween.kill(); };
+    },
+    { dependencies: [isOpen], scope: svgRef },
+  );
 
-    gsap.to(morphPathRef.current, {
-      duration: 0.4,
-      morphSVG: nextState ? CROSS_PATH : HAMBURGER_PATH,
-      ease: "power2.inOut",
-    });
-
-    setIsOpen(nextState);
-  });
+  const toggleMenu = () => setIsOpen(current => !current);
 
   return (
     <button
+      type="button"
       className={styles.menuButton}
       onClick={toggleMenu}
       aria-expanded={isOpen}

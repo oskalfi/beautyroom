@@ -1,0 +1,13 @@
+
+.page { padding: 200px 40px 100px; background: var(--catalog-background-color); color: var(--catalog-text-color); }
+.container { max-width: 1360px; margin: 0 auto; }
+.title { margin: 0 0 60px; font-family: var(--catalog-font-family); font-size: var(--catalog-title-font-size); font-weight: var(--catalog-font-weight); line-height: 1.2; }
+.filter { width: 350px; max-width: 100%; margin-bottom: 66px; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px 40px; }
+.status { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 767px) {
+ .page { padding: 120px 20px 64px; }
+ .title { font-size: var(--catalog-title-font-size-mobile); margin-bottom: 32px; }
+ .filter { margin-bottom: 40px; }
+ .grid { grid-template-columns: 1fr; gap: 48px; }
+}

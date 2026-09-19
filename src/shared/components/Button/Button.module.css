@@ -88,3 +88,28 @@
 .button:focus-visible {
   outline: var(--button-focus-visible-outline-color) 3px solid;
 }
+
+/* Кнопка выбора процедуры в каталоге */
+.treatmentCard {
+  flex-shrink: 0;
+  padding: 16px 38px;
+  min-width: 168px;
+  background: var(--treatment-card-button-background);
+  color: var(--treatment-card-button-text);
+  font-size: var(--treatment-card-button-font-size);
+  font-weight: var(--font-weight-medium);
+}
+.treatmentCard .fingerprint {
+  color: var(--treatment-card-button-fingerprint);
+}
+.treatmentCard:hover {
+  background: var(--treatment-card-button-hover-background);
+  color: var(--treatment-card-button-text);
+}
+.treatmentCard:hover .fingerprint {
+  color: var(--treatment-card-button-fingerprint);
+  transform: scale(0.7);
+}
+.treatmentCard:hover .text {
+  transform: none;
+}

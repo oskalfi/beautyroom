@@ -4,6 +4,9 @@ import type { Treatment } from "@/shared/model/types";
 export const mockTreatments: Treatment[] = [
   {
     "id": 5,
+    // Временные значения для макета.
+    "priceILS": 300,
+    "durationMinutes": 20,
     "name": "Мануальная чистка лица",
     "imgPath": "/treatmentsPhoto/facialСleansing.jpg",
     "description": "Точечное очищение пор для более ровной поверхности кожи. Специалист удаляет подходящие комедоны и подбирает завершающий уход, чтобы кожа выглядела ухоженной.",
@@ -64,6 +67,9 @@ export const mockTreatments: Treatment[] = [
   },
   {
     "id": 4,
+    // Временные значения для макета.
+    "priceILS": 550,
+    "durationMinutes": 35,
     "name": "Микротоковый массаж лица",
     "imgPath": "/treatmentsPhoto/MicrocurrentLymphaticDrainage.jpg",
     "description": "Деликатный аппаратный уход для тех, кто предпочитает процедуры без инъекций. Микротоковое воздействие сочетают с контактным уходом, подбирая режим по состоянию кожи.",
@@ -123,6 +129,9 @@ export const mockTreatments: Treatment[] = [
   },
   {
     "id": 1,
+    // Временные значения для макета.
+    "priceILS": 500,
+    "durationMinutes": 30,
     "name": "La Fontaine / Bloomea",
     "imgPath": "/treatmentsPhoto/lafontaine.jpg",
     "description": "Уход с механическим отшелушиванием, микровибрацией и LED-светом для более гладкой поверхности кожи. Интенсивность подбирают индивидуально, а завершающие средства помогают сохранить комфорт.",
@@ -185,6 +194,9 @@ export const mockTreatments: Treatment[] = [
   },
   {
     "id": 3,
+    // Временные значения для макета.
+    "priceILS": 300,
+    "durationMinutes": 60,
     "name": "Электропорация",
     "imgPath": "/treatmentsPhoto/electroporation.jpg",
     "description": "Безынъекционный уход с индивидуально подобранной сывороткой и электрическими импульсами. Процедуру рассматривают для увлажнения и комфорта кожи с учётом состава средства и возможностей аппарата.",
@@ -244,6 +256,9 @@ export const mockTreatments: Treatment[] = [
   },
   {
     "id": 2,
+    // Временные значения для макета.
+    "priceILS": 250,
+    "durationMinutes": 50,
     "name": "Микротоковая терапия",
     "imgPath": "/treatmentsPhoto/microcurrent.jpg",
     "description": "Аппаратный уход с электрическими импульсами малой силы для тех, кто выбирает неинвазивный подход. Режим подбирают индивидуально, заранее обсуждая реалистичный результат.",
@@ -303,6 +318,9 @@ export const mockTreatments: Treatment[] = [
   },
   {
     "id": 6,
+    // Временные значения для макета.
+    "priceILS": 200,
+    "durationMinutes": 20,
     "name": "Криотерапия лица",
     "imgPath": "/treatmentsPhoto/crio.jpg",
     "description": "Освежающий уход с контролируемым охлаждением для кратковременного уменьшения припухлости. Подходит тем, кто ценит ощущение прохлады и хочет обсудить мягкий уход без инъекций.",
@@ -361,6 +379,9 @@ export const mockTreatments: Treatment[] = [
   },
   {
     "id": 7,
+    // Временные значения для макета.
+    "priceILS": 250,
+    "durationMinutes": 35,
     "name": "Неинвазивная карбокситерапия CO₂",
     "imgPath": "/treatmentsPhoto/carboxi.jpg",
     "description": "Безынъекционный уход с CO₂ для тех, кто хочет попробовать дополнительную косметическую процедуру. Специалист оценит кожу и объяснит, каких результатов можно ожидать от конкретного протокола.",
@@ -419,6 +440,9 @@ export const mockTreatments: Treatment[] = [
   },
   {
     "id": 8,
+    // Временные значения для макета.
+    "priceILS": 500,
+    "durationMinutes": 60,
     "name": "Мезотерапия",
     "imgPath": "/treatmentsPhoto/mesotherapy.jpg",
     "description": "Инъекционный подход к уходу за кожей с подбором конкретного препарата врачом. На консультации обсуждают состав, возможную пользу и риски, чтобы решение соответствовало вашим задачам.",
@@ -477,6 +501,9 @@ export const mockTreatments: Treatment[] = [
   },
   {
     "id": 9,
+    // Временные значения для макета.
+    "priceILS": 150,
+    "durationMinutes": 60,
     "name": "Jet Peel",
     "imgPath": "/treatmentsPhoto/jetpeel.jpg",
     "description": "Газожидкостный уход для очищения и более мягкой поверхности кожи. Специалист подбирает раствор и интенсивность обработки, ориентируясь на её состояние и чувствительность.",
@@ -540,6 +567,9 @@ export const mockTreatments: Treatment[] = [
   },
   {
     "id": 10,
+    // Временные значения для макета.
+    "priceILS": 450,
+    "durationMinutes": 60,
     "name": "IPL — фототерапия",
     "imgPath": "/treatmentsPhoto/venusviva.jpg",
     "description": "Импульсный свет для уменьшения заметности подходящих пигментных пятен и поверхностных сосудов. После осмотра специалист подбирает параметры для более ровного тона кожи.",
@@ -602,6 +632,9 @@ export const mockTreatments: Treatment[] = [
   },
   {
     "id": 11,
+    // Временные значения для макета.
+    "priceILS": 800,
+    "durationMinutes": 35,
     "name": "RF-терапия — радиочастотный лифтинг",
     "imgPath": "/treatmentsPhoto/RF.jpg",
     "description": "Неинвазивное радиочастотное воздействие для умеренного улучшения упругости кожи. Контролируемый прогрев может постепенно сделать её более подтянутой без хирургической операции.",
@@ -661,6 +694,9 @@ export const mockTreatments: Treatment[] = [
   },
   {
     "id": 12,
+    // Временные значения для макета.
+    "priceILS": 850,
+    "durationMinutes": 40,
     "name": "Микроигольчатый RF-лифтинг",
     "imgPath": "/treatmentsPhoto/rf-needle.jpg",
     "description": "Медицинская процедура, сочетающая микроиглы и радиочастотную энергию для работы с текстурой и рубцами. Врач оценит ожидаемую пользу и риски и подберёт подходящий вариант лечения.",
@@ -725,6 +761,9 @@ export const mockTreatments: Treatment[] = [
   },
   {
     "id": 14,
+    // Временные значения для макета.
+    "priceILS": 150,
+    "durationMinutes": 30,
     "name": "Электрокоагуляция (удаление папилом)",
     "imgPath": "/treatmentsPhoto/electrocoagulation.jpg",
     "description": "Точечное удаление подходящих доброкачественных образований после осмотра врача. Метод помогает устранить выступающие элементы, которые цепляются за одежду или мешают уходу за кожей.",

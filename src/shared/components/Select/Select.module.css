@@ -61,6 +61,7 @@
 }
 
 .selectItem {
+  color: white;
   font-size: var(--select-item-font-size);
   font-weight: var(--font-weight-medium);
   padding: 8px 15px;
@@ -79,4 +80,20 @@
 .isHighlighted {
   background-color: var(--select-is-highlighted-background-color);
   padding: 8px 20px 8px 20px;
+}
+
+.openButton {
+  max-width: 100%;
+  gap: 16px;
+  text-align: left;
+}
+.buttonArrow {
+  flex-shrink: 0;
+}
+.selectList {
+  top: 100%;
+  max-height: min(320px, 50vh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 5;
 }

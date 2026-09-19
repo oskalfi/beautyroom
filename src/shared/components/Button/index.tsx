@@ -4,22 +4,28 @@ import { ArrowSVG } from "@/shared/assets/svg/Arrow";
 
 type ButtonProps = {
   children: React.ReactNode;
-  type?: "primary" | "secondary";
+  type?: "primary" | "secondary" | "treatmentCard";
   className: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  "aria-label"?: string;
 };
 
 export const Button = ({
   children,
   type = "primary",
   className,
+  onClick,
+  "aria-label": ariaLabel,
 }: ButtonProps) => {
-  const decor = type === "primary" ? styles.primary : styles.secondary;
-
-  //TODO: сделать чтобы стрелки были равны высоте текста (обернуть в общий контейнер)
-  // TODO: убрать условие в return
+  const decor = styles[type];
 
   return type === "primary" ? (
-    <button type="button" className={`${styles.button} ${decor} ${className}`}>
+    <button
+      onClick={onClick}
+      aria-label={ariaLabel}
+      type="button"
+      className={`${styles.button} ${decor} ${className}`}
+    >
       <div className={styles.arrowsContainer}>
         <ArrowSVG className={styles.arrow} />
         <ArrowSVG className={styles.arrow} />
@@ -29,7 +35,12 @@ export const Button = ({
       <span className={styles.text}>{children}</span>
     </button>
   ) : (
-    <button type="button" className={`${styles.button} ${decor} ${className}`}>
+    <button
+      onClick={onClick}
+      aria-label={ariaLabel}
+      type="button"
+      className={`${styles.button} ${decor} ${className}`}
+    >
       <FingerprintSVG className={styles.fingerprint} />
       <span className={styles.text}>{children}</span>
     </button>

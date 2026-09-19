@@ -1,0 +1,88 @@
+.card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  color: var(--treatment-card-text-color);
+}
+.imageWrapper {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--treatment-card-image-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--treatment-card-image-background);
+}
+.image {
+  object-fit: cover;
+}
+.headingRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 38px;
+}
+.title {
+  flex: 1 1 250px;
+  margin: 0;
+  font-family: var(--catalog-font-family);
+  font-size: var(--treatment-card-title-font-size);
+  font-weight: var(--treatment-card-title-font-weight);
+  line-height: 1.3;
+}
+.button {
+  margin-left: auto;
+}
+.description {
+  margin: 30px 0 24px;
+  font-family: var(--catalog-font-family);
+  font-size: var(--treatment-card-description-font-size);
+  line-height: 1.5;
+}
+.footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: auto;
+  font-size: var(--treatment-card-details-font-size);
+}
+.details {
+  color: inherit;
+  text-decoration: none;
+}
+.details span {
+  color: var(--treatment-card-link-arrow);
+  font-size: var(--treatment-card-arrow-font-size);
+}
+.details:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.details:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+}
+.meta {
+  margin: 0;
+  text-align: right;
+}
+@media (max-width: 767px) {
+  .headingRow {
+    margin-top: 24px;
+    gap: 16px;
+  }
+  .title {
+    font-size: var(--treatment-card-title-font-size-mobile);
+  }
+  .description {
+    margin-top: 24px;
+  }
+  .meta {
+    text-align: left;
+  }
+}
+.button:focus {
+  outline: 3px solid var(--brown);
+}

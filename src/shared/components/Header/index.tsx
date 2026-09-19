@@ -132,7 +132,7 @@ export const Header = () => {
         <nav className={styles.navigation}>
           <ul className={styles.navigationList}>
             <li className={styles.navigationItem}>
-              <Link href="/studio" className={styles.navigationLink}>
+              <Link href="/procedures" className={styles.navigationLink} onClick={() => setIsOpen(false)}>
                 Процедуры
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />

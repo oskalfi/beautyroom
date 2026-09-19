@@ -1,6 +1,33 @@
 @import "./fonts.css";
 
 :root {
+  /* Каталог /procedures: фон страницы, текст, заголовок и типографика карточек */
+  --catalog-background-color: #ffffff;
+  --catalog-text-color: var(--brown);
+  --catalog-font-family: var(--font-family-display), sans-serif;
+  --catalog-font-weight: var(--font-weight-regular);
+  --catalog-title-font-size: 48px;
+  --catalog-title-font-size-mobile: 32px;
+  --treatment-card-text-color: var(--brown);
+  --treatment-card-title-font-weight: var(
+    --font-weight-light
+  ); /* Заголовки h2 карточек процедур */
+  --treatment-card-title-font-size: 32px;
+  --treatment-card-title-font-size-mobile: 24px;
+  --treatment-card-description-font-size: 16px;
+  --treatment-card-details-font-size: 14px;
+  --treatment-card-arrow-font-size: 22px;
+  /* Карточка процедуры: рамка и фон фотографии, стрелка ссылки подробностей */
+  --treatment-card-image-border: var(--primary-color);
+  --treatment-card-image-background: var(--white);
+  --treatment-card-link-arrow: var(--secondary-color);
+  /* Кнопка treatmentCard: фон, наведение, текст и отпечаток пальца */
+  --treatment-card-button-background: var(--primary-color);
+  --treatment-card-button-hover-background: #f4a9b5;
+  --treatment-card-button-text: var(--white);
+  --treatment-card-button-fingerprint: var(--white);
+  --treatment-card-button-font-size: 14px;
+
   /* РЕДАКТОР ТЕМЫ
      Общая палитра меняет сайт целиком; переменные ниже — конкретные элементы.
      Суффикс -to-N означает ширину экрана до N px включительно.
@@ -268,7 +295,7 @@
   /* Текст адреса — .address · (max-width: 768px) */
   --address-text-font-size-to-768: 24px;
   /* Заголовок — .heading · (max-width: 480px) */
-  --address-heading-font-weight-to-480: var(--font-weight-regular);
+  --address-heading-font-weight-to-480: var(--font-weight-light);
   /* Текст адреса — .address · (max-width: 480px) */
   --address-text-font-size-to-480: 18px;
 
@@ -284,7 +311,7 @@
   /* Заголовок — .heading */
   --footer-heading-font-size: 26px;
   --footer-heading-font-family: var(--font-family-display);
-  --footer-heading-font-weight: var(--font-weight-medium);
+  --footer-heading-font-weight: var(--font-weight-light);
   /* Авторские права — .copyright */
   --footer-copyright-font-size: 12px;
   /* Обводка ссылки при наведении — .border rect */
@@ -295,7 +322,7 @@
   --footer-heading-font-size-to-1120: 18px;
   /* Заголовок — .heading · (max-width: 950px) */
   --footer-heading-font-size-to-950: 16px;
-  --footer-heading-font-weight-to-950: var(--font-weight-semibold);
+  --footer-heading-font-weight-to-950: var(--font-weight-light);
   /* Список ссылок — .linksList · (max-width: 950px) */
   --footer-links-list-font-size-to-950: 15px;
   /* Заголовок — .heading · (max-width: 800px) */
@@ -336,7 +363,7 @@
   --select-open-button-font-size: 1rem;
   --select-open-button-border-color: var(--brown);
   /* Кнопка списка при наведении — .openButton:hover */
-  --select-open-button-hover-background-color: rgba(255, 192, 164, 0.8);
+  --select-open-button-hover-background-color: var(--secondary-gradient-color);
   --select-open-button-hover-text-color: var(--black);
   /* Стрелка раскрытия — .buttonArrow */
   --select-button-arrow-text-color: var(--brown);

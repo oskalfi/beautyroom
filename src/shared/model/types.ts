@@ -13,6 +13,8 @@ export type Treatment = {
   name: string;
   imgPath: string;
   description: string;
+  priceILS?: number;
+  durationMinutes?: number;
   concernsDescription: string;
   concerns: TreatmentTextPair[];
   stepsDescription: string;

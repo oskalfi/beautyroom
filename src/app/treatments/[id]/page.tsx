@@ -17,7 +17,7 @@ export default async function TreatmentPage({
     <main className={styles.page}>
       <nav aria-label="Хлебные крошки" className={styles.breadcrumbs}>
         <Link href="/">Главная</Link><span aria-hidden="true">/</span>
-        <Link href="/#treatmentsList">Процедуры</Link><span aria-hidden="true">/</span>
+        <Link href="/procedures">Процедуры</Link><span aria-hidden="true">/</span>
         <span aria-current="page">{treatment.name}</span>
       </nav>
 

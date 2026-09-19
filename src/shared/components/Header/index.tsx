@@ -132,7 +132,11 @@ export const Header = () => {
         <nav className={styles.navigation}>
           <ul className={styles.navigationList}>
             <li className={styles.navigationItem}>
-              <Link href="/procedures" className={styles.navigationLink} onClick={() => setIsOpen(false)}>
+              <Link
+                href="/procedures"
+                className={styles.navigationLink}
+                onClick={() => setIsOpen(false)}
+              >
                 Процедуры
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
@@ -148,7 +152,11 @@ export const Header = () => {
               </Link>
             </li>
             <li className={styles.navigationItem}>
-              <Link href="/studio" className={styles.navigationLink}>
+              <Link
+                href="/address"
+                className={styles.navigationLink}
+                onClick={() => setIsOpen(false)}
+              >
                 Расположение
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
@@ -156,7 +164,7 @@ export const Header = () => {
               </Link>
             </li>
             <li className={styles.navigationItem}>
-              <Link href="/studio" className={styles.navigationLink}>
+              <Link href="/contacts" className={styles.navigationLink} onClick={() => setIsOpen(false)}>
                 Связаться
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />

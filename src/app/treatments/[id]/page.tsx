@@ -1,8 +1,24 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTreatmentById } from "@/shared/api/treatments";
 import styles from "./page.module.css";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const treatment = await getTreatmentById(id);
+  if (!treatment) notFound();
+
+  return {
+    title: `${treatment.name} | Beauty Room`,
+    description: treatment.description,
+  };
+}
 
 export default async function TreatmentPage({
   params,

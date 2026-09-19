@@ -6,87 +6,369 @@
   line-height: 1.65;
 }
 
-.page section { scroll-margin-top: 140px; }
-.page a:focus-visible { outline: 2px solid var(--treatment-page-a-focus-visible-outline-color); outline-offset: 6px; }
-.back { display: inline-block; margin-bottom: 24px; }
-.breadcrumbs { display: flex; flex-wrap: wrap; gap: 8px 12px; margin-bottom: 36px; color: var(--treatment-page-muted-text-color); font-size: var(--treatment-page-breadcrumbs-font-size); }
-.breadcrumbs a:hover { text-decoration: underline; }
-.hero { display: grid; grid-template-columns: minmax(0, 525px) minmax(0, 1fr); align-items: center; gap: 6%; padding-bottom: 64px; }
-.photo { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; }
-.heroCopy { min-width: 0; }
-.photoPlaceholder { display: grid; place-items: center; background: var(--treatment-page-photo-placeholder-background-color); color: var(--treatment-page-muted-text-color); }
-.eyebrow { color: var(--treatment-page-eyebrow-text-color); font-size: var(--treatment-page-eyebrow-font-size); font-weight: var(--treatment-page-eyebrow-font-weight); text-transform: uppercase; letter-spacing: 1.8px; margin-bottom: 20px; }
-.title { font-size: var(--treatment-page-title-font-size); line-height: 1.12; letter-spacing: -1.8px; margin-bottom: 28px; overflow-wrap: break-word; }
-.description { font-size: var(--treatment-page-description-font-size); color: var(--treatment-page-muted-text-color); margin-bottom: 32px; }
-.primaryLink { display: inline-flex; justify-content: space-between; align-items: center; gap: 24px; padding: 16px 22px; border: 1px solid transparent; border-radius: 12px; background: var(--treatment-page-primary-link-background-color); color: var(--treatment-page-primary-link-text-color); font-size: var(--treatment-page-primary-link-font-size); font-weight: var(--treatment-page-primary-link-font-weight); transition: background-color 160ms ease; }
-.primaryLink:hover { background: var(--treatment-page-primary-link-hover-background-color); }
-.primaryLink span { font-size: var(--treatment-page-primary-link-span-font-size); line-height: 1; }
-.caption { margin-top: 14px; font-size: var(--treatment-page-caption-font-size); color: var(--treatment-page-muted-text-color); }
-.sectionNav { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; padding: 16px 0; border-block: 1px solid var(--treatment-page-divider-color); font-size: var(--treatment-page-section-nav-font-size); }
-.sectionNav a { display: inline-flex; align-items: center; min-height: 44px; }
-.sectionNav a:hover { color: var(--treatment-page-section-nav-a-hover-text-color); }
-.section { padding: 64px 0; border-bottom: 1px solid var(--treatment-page-divider-color); }
-.sectionHeading { display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: start; margin-bottom: 36px; }
-.page h2 { font-size: var(--treatment-page-h2-font-size); line-height: 1.22; letter-spacing: -1px; overflow-wrap: break-word; }
-.sectionHeading > p { max-width: 490px; color: var(--treatment-page-muted-text-color); font-size: var(--treatment-page-section-heading-p-font-size); }
-.concerns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
-.concern { display: flex; gap: 16px; padding-top: 24px; border-top: 1px solid var(--treatment-page-divider-color); }
-.number { flex-shrink: 0; font-size: var(--treatment-page-number-font-size); color: var(--treatment-page-number-text-color); padding-top: 3px; }
-.page h3 { font-size: var(--treatment-page-h3-font-size); font-weight: var(--treatment-page-h3-font-weight); line-height: 1.4; margin-bottom: 10px; }
-.concern p, .step p { font-size: var(--treatment-page-concern-p-font-size); color: var(--treatment-page-muted-text-color); }
-.steps { margin-left: 30%; list-style: none; }
-.step { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 20px; padding: 28px 0; border-top: 1px solid var(--treatment-page-divider-color); }
-.step:last-child { padding-bottom: 0; }
-.stepNumber { font-size: var(--treatment-page-step-number-font-size); color: var(--treatment-page-step-number-text-color); font-family: var(--treatment-page-step-number-font-family); line-height: 1.2; }
-.suitability { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; padding: 64px 0; }
-.suitability h2 { font-size: var(--treatment-page-suitability-h2-font-size); margin-bottom: 24px; }
-.skinTypes { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
-.skinTypes li { padding: 9px 14px; border: 1px solid var(--treatment-page-divider-color); border-radius: 30px; font-size: var(--treatment-page-skin-types-li-font-size); }
-.note { color: var(--treatment-page-muted-text-color); font-size: var(--treatment-page-note-font-size); }
-.contraindications { border-left: 1px solid var(--treatment-page-divider-color); padding-left: 48px; }
-.limitations { list-style: disc; padding-left: 18px; margin-bottom: 20px; color: var(--treatment-page-muted-text-color); font-size: var(--treatment-page-limitations-font-size); }
-.limitations li + li { margin-top: 12px; }
-.booking { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 40px; border-radius: 20px; background: var(--treatment-page-booking-background-color); }
-.booking .eyebrow { margin-bottom: 12px; }
-.booking h2 { font-size: var(--treatment-page-booking-h2-font-size); }
-.booking p:last-child { color: var(--treatment-page-muted-text-color); font-size: var(--treatment-page-booking-p-last-child-font-size); margin-top: 12px; }
-.booking .primaryLink { flex-shrink: 0; }
+.page section {
+  scroll-margin-top: 140px;
+}
+.page a:focus-visible {
+  outline: 2px solid var(--treatment-page-a-focus-visible-outline-color);
+  outline-offset: 6px;
+}
+.back {
+  display: inline-block;
+  margin-bottom: 24px;
+}
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-bottom: 36px;
+  color: var(--treatment-page-muted-text-color);
+  font-size: var(--treatment-page-breadcrumbs-font-size);
+}
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 525px) minmax(0, 1fr);
+  align-items: center;
+  gap: 6%;
+  padding-bottom: 64px;
+}
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 16px;
+}
+.heroCopy {
+  min-width: 0;
+}
+.photoPlaceholder {
+  display: grid;
+  place-items: center;
+  background: var(--treatment-page-photo-placeholder-background-color);
+  color: var(--treatment-page-muted-text-color);
+}
+.eyebrow {
+  color: var(--treatment-page-eyebrow-text-color);
+  font-size: var(--treatment-page-eyebrow-font-size);
+  font-weight: var(--treatment-page-eyebrow-font-weight);
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  margin-bottom: 20px;
+}
+.title {
+  font-size: var(--treatment-page-title-font-size);
+  line-height: 1.12;
+  letter-spacing: -1.8px;
+  margin-bottom: 28px;
+  overflow-wrap: break-word;
+}
+.description {
+  font-size: var(--treatment-page-description-font-size);
+  color: var(--treatment-page-muted-text-color);
+  margin-bottom: 32px;
+}
+.primaryLink {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 22px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: var(--treatment-page-primary-link-background-color);
+  color: var(--treatment-page-primary-link-text-color);
+  font-size: var(--treatment-page-primary-link-font-size);
+  font-weight: var(--treatment-page-primary-link-font-weight);
+  transition: background-color 160ms ease;
+}
+.primaryLink:hover {
+  background: var(--treatment-page-primary-link-hover-background-color);
+}
+.primaryLink span {
+  font-size: var(--treatment-page-primary-link-span-font-size);
+  line-height: 1;
+}
+.caption {
+  margin-top: 14px;
+  font-size: var(--treatment-page-caption-font-size);
+  color: var(--treatment-page-muted-text-color);
+}
+.sectionNav {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  padding: 16px 0;
+  border-block: 1px solid var(--treatment-page-divider-color);
+  font-size: var(--treatment-page-section-nav-font-size);
+}
+.sectionNav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.sectionNav a:hover {
+  color: var(--treatment-page-section-nav-a-hover-text-color);
+}
+.section {
+  padding: 64px 0;
+  border-bottom: 1px solid var(--treatment-page-divider-color);
+}
+.sectionHeading {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+  align-items: start;
+  margin-bottom: 36px;
+}
+.page h2 {
+  font-size: var(--treatment-page-h2-font-size);
+  line-height: 1.22;
+  letter-spacing: -1px;
+  overflow-wrap: break-word;
+}
+.sectionHeading > p {
+  max-width: 490px;
+  color: var(--treatment-page-muted-text-color);
+  font-size: var(--treatment-page-section-heading-p-font-size);
+}
+.concerns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+.concern {
+  display: flex;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--treatment-page-divider-color);
+}
+.number {
+  flex-shrink: 0;
+  font-size: var(--treatment-page-number-font-size);
+  color: var(--treatment-page-number-text-color);
+  padding-top: 3px;
+}
+.page h3 {
+  font-size: var(--treatment-page-h3-font-size);
+  font-weight: var(--treatment-page-h3-font-weight);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+.concern p,
+.step p {
+  font-size: var(--treatment-page-concern-p-font-size);
+  color: var(--treatment-page-muted-text-color);
+}
+.steps {
+  margin-left: 30%;
+  list-style: none;
+}
+.step {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 20px;
+  padding: 28px 0;
+  border-top: 1px solid var(--treatment-page-divider-color);
+}
+.step:last-child {
+  padding-bottom: 0;
+}
+.stepNumber {
+  font-size: var(--treatment-page-step-number-font-size);
+  color: var(--treatment-page-step-number-text-color);
+  font-family: var(--treatment-page-step-number-font-family);
+  line-height: 1.2;
+}
+.suitability {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px;
+  padding: 64px 0;
+}
+.suitability h2 {
+  font-size: var(--treatment-page-suitability-h2-font-size);
+  margin-bottom: 24px;
+}
+.skinTypes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.skinTypes li {
+  padding: 9px 14px;
+  border: 1px solid var(--treatment-page-divider-color);
+  border-radius: 30px;
+  font-size: var(--treatment-page-skin-types-li-font-size);
+}
+.note {
+  color: var(--treatment-page-muted-text-color);
+  font-size: var(--treatment-page-note-font-size);
+}
+.contraindications {
+  border-left: 1px solid var(--treatment-page-divider-color);
+  padding-left: 48px;
+}
+.limitations {
+  list-style: disc;
+  padding-left: 18px;
+  margin-bottom: 20px;
+  color: var(--treatment-page-muted-text-color);
+  font-size: var(--treatment-page-limitations-font-size);
+}
+.limitations li + li {
+  margin-top: 12px;
+}
+.booking {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 40px;
+  border-radius: 20px;
+  background: var(--treatment-page-booking-background-color);
+}
+.booking .eyebrow {
+  margin-bottom: 12px;
+}
+.booking h2 {
+  font-size: var(--treatment-page-booking-h2-font-size);
+}
+.booking p:last-child {
+  color: var(--treatment-page-muted-text-color);
+  font-size: var(--treatment-page-booking-p-last-child-font-size);
+  margin-top: 12px;
+}
+.booking .primaryLink {
+  flex-shrink: 0;
+}
 
 @media (max-width: 1000px) {
-  .page { padding-inline: 28px; }
-  .hero { gap: 32px; }
-  .title { font-size: var(--treatment-page-title-font-size-to-1000); }
-  .concerns { gap: 20px; }
-  .concern { display: block; }
-  .number { display: block; margin-bottom: 12px; }
-  .suitability { gap: 28px; }
-  .contraindications { padding-left: 28px; }
-  .booking { align-items: flex-start; flex-direction: column; }
+  .page {
+    padding-inline: 28px;
+  }
+  .hero {
+    gap: 32px;
+  }
+  .title {
+    font-size: var(--treatment-page-title-font-size-to-1000);
+  }
+  .concerns {
+    gap: 20px;
+  }
+  .concern {
+    display: block;
+  }
+  .number {
+    display: block;
+    margin-bottom: 12px;
+  }
+  .suitability {
+    gap: 28px;
+  }
+  .contraindications {
+    padding-left: 28px;
+  }
+  .booking {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 767px) {
-  .page { padding: 120px 20px 48px; }
-  .breadcrumbs { margin-bottom: 28px; font-size: var(--treatment-page-breadcrumbs-font-size-to-767); }
-  .hero { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-bottom: 40px; }
-  .heroCopy { grid-row: 1; }
-  .title { font-size: var(--treatment-page-title-font-size-to-767); letter-spacing: -1px; margin-bottom: 20px; }
-  .description { font-size: var(--treatment-page-description-font-size-to-767); margin-bottom: 24px; }
-  .photo { max-width: 525px; margin-inline: auto; }
-  .sectionNav { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; font-size: var(--treatment-page-section-nav-font-size-to-767); }
-  .section { padding: 40px 0; }
-  .sectionHeading { grid-template-columns: 1fr; gap: 18px; margin-bottom: 28px; }
-  .concerns { grid-template-columns: 1fr; gap: 20px; }
-  .concern { display: flex; padding-top: 20px; }
-  .number { margin-bottom: 0; }
-  .steps { margin-left: 0; }
-  .step { grid-template-columns: 36px minmax(0, 1fr); gap: 16px; padding: 24px 0; }
-  .suitability { grid-template-columns: 1fr; gap: 32px; padding: 40px 0; }
-  .contraindications { padding: 32px 0 0; border-left: 0; border-top: 1px solid var(--treatment-page-divider-color); }
-  .booking { padding: 28px 22px; gap: 24px; }
-  .booking h2 { font-size: var(--treatment-page-booking-h2-font-size-to-767); }
-  .primaryLink { max-width: 100%; font-size: var(--treatment-page-primary-link-font-size-to-767); gap: 16px; }
+  .page {
+    padding: 120px 20px 48px;
+  }
+  .breadcrumbs {
+    margin-bottom: 28px;
+    font-size: var(--treatment-page-breadcrumbs-font-size-to-767);
+  }
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    padding-bottom: 40px;
+  }
+  .heroCopy {
+    grid-row: 1;
+  }
+  .title {
+    font-size: var(--treatment-page-title-font-size-to-767);
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+  .description {
+    font-size: var(--treatment-page-description-font-size-to-767);
+    margin-bottom: 24px;
+  }
+  .photo {
+    max-width: 525px;
+    margin-inline: auto;
+  }
+  .sectionNav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 16px;
+    font-size: var(--treatment-page-section-nav-font-size-to-767);
+  }
+  .section {
+    padding: 40px 0;
+  }
+  .sectionHeading {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+  .concerns {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .concern {
+    display: flex;
+    padding-top: 20px;
+  }
+  .number {
+    margin-bottom: 0;
+  }
+  .steps {
+    margin-left: 0;
+  }
+  .step {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 16px;
+    padding: 24px 0;
+  }
+  .suitability {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 40px 0;
+  }
+  .contraindications {
+    padding: 32px 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--treatment-page-divider-color);
+  }
+  .booking {
+    padding: 28px 22px;
+    gap: 24px;
+  }
+  .booking h2 {
+    font-size: var(--treatment-page-booking-h2-font-size-to-767);
+  }
+  .primaryLink {
+    max-width: 100%;
+    font-size: var(--treatment-page-primary-link-font-size-to-767);
+    gap: 16px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .primaryLink { transition: none; }
+  .primaryLink {
+    transition: none;
+  }
 }

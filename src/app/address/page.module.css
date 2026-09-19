@@ -1,0 +1,11 @@
+.page {
+  --address-section-background-color: var(--white);
+  background-color: var(--white);
+  padding-top: 129px;
+}
+
+@media (max-width: 960px) {
+  .page {
+    padding-top: 67.5px;
+  }
+}

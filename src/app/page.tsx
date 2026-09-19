@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import styles from "./page.module.css";
 import { IntroduceSection } from "@/sections/introduceSection";
 import { WelcomeSection } from "@/sections/welcomeSection";
@@ -6,6 +7,12 @@ import { RunningLineSection } from "@/sections/runningLineSection";
 import { BeforeAfterSection } from "@/sections/beforeAfterSection";
 import { InstagramSection } from "@/sections/instagramSection";
 import { AddressSection } from "@/sections/addressSection";
+
+export const metadata: Metadata = {
+  title: "Beauty Room — уход за лицом в Тель-Авиве — Яффо",
+  description:
+    "Студия Beauty Room в Тель-Авиве — Яффо: процедуры для ухода за лицом, описание услуг, результаты и запись. Ждём вас по адресу Jerusalem Blvd 33.",
+};
 
 export default function Home() {
   return (

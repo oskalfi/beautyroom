@@ -1,6 +1,26 @@
 @import "./fonts.css";
 
 :root {
+  /* Контакты /contacts: фон страницы, текст и заголовок */
+  --contacts-page-background: var(--white);
+  --contacts-text-color: var(--brown);
+  --contacts-font-family: var(--font-family-display), sans-serif;
+  --contacts-title-font-size: 48px;
+  --contacts-title-font-size-mobile: 32px;
+  --contacts-title-font-weight: var(--font-weight-light);
+  /* Ссылки на телефон и чаты: поверхность, обводка, наведение и фокус */
+  --contacts-link-background: var(--secondary-color);
+  --contacts-link-border: var(--primary-color);
+  --contacts-link-hover-background: var(--primary-color);
+  --contacts-focus-color: var(--brown);
+  --contacts-link-font-size: 22px;
+  --contacts-link-font-size-mobile: 16px;
+  --contacts-link-font-weight: var(--font-weight-regular);
+  /* Иконки телефона, WhatsApp, Instagram и стрелки перехода */
+  --contacts-icon-background: var(--white);
+  --contacts-icon-color: var(--brown);
+  --contacts-arrow-font-size: 28px;
+
   /* Каталог /procedures: фон страницы, текст, заголовок и типографика карточек */
   --catalog-background-color: #ffffff;
   --catalog-text-color: var(--brown);

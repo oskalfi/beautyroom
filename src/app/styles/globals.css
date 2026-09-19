@@ -1,6 +1,25 @@
 @import "./fonts.css";
 
 :root {
+  /* Косметика /cosmetics: фон страницы, текст и информационные блоки */
+  --cosmetics-page-background: var(--white);
+  --cosmetics-text-color: var(--brown);
+  --cosmetics-panel-background: var(--secondary-color);
+  --cosmetics-border-color: var(--primary-color);
+  --cosmetics-font-family: var(--font-family-display), sans-serif;
+  --cosmetics-text-weight: var(--font-weight-regular);
+  --cosmetics-text-size: 16px;
+  --cosmetics-eyebrow-size: 14px;
+  --cosmetics-title-size: 48px;
+  --cosmetics-title-size-mobile: 32px;
+  --cosmetics-lead-size: 20px;
+  --cosmetics-heading-size: 30px;
+  --cosmetics-heading-size-mobile: 26px;
+  /* Косметика: ссылки-кнопки для консультации */
+  --cosmetics-button-background: var(--primary-color);
+  --cosmetics-button-hover-background: var(--secondary-gradient-color);
+  --cosmetics-button-size: 16px;
+
   /* Контакты /contacts: фон страницы, текст и заголовок */
   --contacts-page-background: var(--white);
   --contacts-text-color: var(--brown);

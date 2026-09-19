@@ -54,7 +54,7 @@ export const Footer = () => {
               </Link>
             </li>
             <li className={styles.navigationItem}>
-              <Link href="/treatments" className={styles.navigationLink}>
+              <Link href="/cosmetics" className={styles.navigationLink}>
                 Косметика
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />

@@ -1,0 +1,122 @@
+.page {
+  padding: 209px 40px 100px;
+  background: var(--cosmetics-page-background);
+  color: var(--cosmetics-text-color);
+  font-family: var(--cosmetics-font-family);
+  font-size: var(--cosmetics-text-size);
+  font-weight: var(--cosmetics-text-weight);
+  line-height: 1.7;
+}
+.link {
+  color: pink;
+}
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.hero {
+  max-width: 880px;
+  margin-bottom: 64px;
+}
+.eyebrow {
+  margin: 0 0 20px;
+  font-size: var(--cosmetics-eyebrow-size);
+}
+.title {
+  margin: 0 0 28px;
+  font-size: var(--cosmetics-title-size);
+  font-weight: var(--font-weight-light);
+  line-height: 1.2;
+}
+.lead {
+  margin-bottom: 32px;
+  font-size: var(--cosmetics-lead-size);
+}
+.sections {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+.panel {
+  background: var(--cosmetics-panel-background);
+  border: 1px solid var(--cosmetics-border-color);
+  border-radius: 24px;
+  padding: 36px;
+}
+.page h2 {
+  margin: 0 0 24px;
+  font-size: var(--cosmetics-heading-size);
+  font-weight: var(--font-weight-light);
+  line-height: 1.3;
+}
+.page p + p {
+  margin-top: 16px;
+}
+.page p a {
+  color: var(--primary-color);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.booking {
+  max-width: 880px;
+  margin-top: 64px;
+}
+.booking .button {
+  margin-top: 28px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px 28px;
+  border-radius: 999px;
+  background: var(--cosmetics-button-background);
+  color: var(--cosmetics-text-color);
+  font-size: var(--cosmetics-button-size);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+.button:hover {
+  background: var(--cosmetics-button-hover-background);
+}
+.page a:focus-visible {
+  outline: 2px solid var(--cosmetics-text-color);
+  outline-offset: 5px;
+}
+@media (max-width: 960px) {
+  .page {
+    padding-top: 127.5px;
+  }
+}
+@media (max-width: 767px) {
+  .page {
+    padding: 111.5px 20px 64px;
+  }
+  .title {
+    font-size: var(--cosmetics-title-size-mobile);
+  }
+  .lead {
+    font-size: var(--cosmetics-text-size);
+  }
+  .page h2 {
+    font-size: var(--cosmetics-heading-size-mobile);
+  }
+  .sections {
+    grid-template-columns: 1fr;
+  }
+  .panel {
+    padding: 28px 24px;
+  }
+  .hero {
+    margin-bottom: 40px;
+  }
+  .booking {
+    margin-top: 40px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}

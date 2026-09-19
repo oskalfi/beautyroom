@@ -144,7 +144,7 @@ export const Header = () => {
               </Link>
             </li>
             <li className={styles.navigationItem}>
-              <Link href="/studio" className={styles.navigationLink}>
+              <Link href="/cosmetics" className={styles.navigationLink} onClick={() => setIsOpen(false)}>
                 Косметика
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />

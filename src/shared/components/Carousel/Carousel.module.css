@@ -21,6 +21,10 @@
   overflow-x: scroll;
 }
 
+.mediaContainer:focus-visible {
+  outline: 12px solid var(--primary-color);
+}
+
 .button {
   position: absolute;
   border: none;
@@ -33,7 +37,8 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.button:active {
+.button:focus-visible {
+  outline: 6px solid var(--primary-color);
 }
 
 .backButton {

@@ -3,9 +3,7 @@
 import styles from "./Header.module.css";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Flip } from "gsap/all";
 import { BeautyRoomSVG } from "@/shared/assets/svg/BeautyRoom";
 import { SilhouetteSVG } from "@/shared/assets/svg/Silhouette";
 import { Button } from "@/shared/components/Button";
@@ -13,70 +11,29 @@ import { paintSilhouette } from "./animations/collapseHeader";
 import { MenuButton } from "../menuButton";
 import clsx from "clsx";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(Flip);
-}
-
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const header = useRef<HTMLElement | null>(null);
 
-  // Флаг, чтобы пропустить анимацию закрытия при первом рендере
-  const isFirstRender = useRef(true);
-
   useGSAP(
     () => {
-      if (isFirstRender.current) {
-        const logoSilhouette = `.${styles.logoSilhouette} path`;
-        const logoText = `.${styles.logoText}`;
-        const contentContainer = `.${styles.contentContainer}`;
-
-        paintSilhouette({
-          silhouettePathClass: logoSilhouette,
-          logoTextClass: logoText,
-          headerContentContainerClass: contentContainer,
-        });
-      }
-
-      if (isFirstRender.current) {
-        isFirstRender.current = false;
-        return;
-      }
-
-      const container = document.querySelector(`.${styles.contentContainer}`);
-      const links = `.${styles.navigationLink}`;
-
-      if (!container) return;
-
-      const state = Flip.getState(container);
-
-      container.classList.toggle(styles.openContainer, isOpen);
-
-      Flip.from(state, {
-        duration: 0.5,
-        ease: "power2.inOut",
-        scale: true,
-        onStart: () => {
-          if (isOpen) {
-            gsap.to(links, {
-              opacity: 1,
-              stagger: 0.1,
-              duration: 0.35,
-              delay: 0.15,
-              ease: "power2.out",
-            });
-          } else {
-            gsap.to(links, {
-              opacity: 0,
-              duration: 0.2,
-              ease: "power2.in",
-            });
-          }
-        },
+      paintSilhouette({
+        silhouettePathClass: `.${styles.logoSilhouette} path`,
+        logoTextClass: `.${styles.logoText}`,
+        headerContentContainerClass: `.${styles.contentContainer}`,
       });
     },
-    { dependencies: [isOpen], scope: header },
+    { scope: header },
   );
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 960px)");
+    const handleBreakpointChange = (event: MediaQueryListEvent) => {
+      if (!event.matches) setIsOpen(false);
+    };
+    mobileQuery.addEventListener("change", handleBreakpointChange);
+    return () => mobileQuery.removeEventListener("change", handleBreakpointChange);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -118,13 +75,13 @@ export const Header = () => {
     >
       <div className={styles.contentContainer}>
         <div className={styles.mobileLayout}>
-          <Link href="/" className={styles.headerTitle}>
+          <Link href="/" className={styles.headerTitle} onClick={() => setIsOpen(false)}>
             <img src="/headerTitle.svg" alt="Beauty Room" />
           </Link>
           <MenuButton isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
 
-        <Link href="/" className={styles.logo}>
+        <Link href="/" className={styles.logo} onClick={() => setIsOpen(false)}>
           <BeautyRoomSVG className={styles.logoText} />
           <SilhouetteSVG className={styles.logoSilhouette} />
         </Link>

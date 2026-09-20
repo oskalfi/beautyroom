@@ -30,6 +30,10 @@
   transition: transform 0.3s ease;
 }
 
+.contentWrapper:focus-visible {
+  outline: 3px solid var(--primary-color);
+}
+
 .mapWrapper {
   grid-area: map;
 }
@@ -44,6 +48,10 @@
   object-fit: cover;
   object-position: center;
   height: 500px;
+}
+
+.mapWrapper:focus-visible {
+  outline: 12px solid var(--primary-color);
 }
 
 .address {

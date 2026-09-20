@@ -1,7 +1,6 @@
 "use client";
 import { LazyImage } from "@/shared/components/LazyImage";
 
-
 import Image from "next/image";
 import styles from "./AddressSection.module.css";
 import gsap from "gsap";
@@ -38,10 +37,14 @@ export const AddressSection = () => {
       });
 
       headingStroke
-        .fromTo(headingRef.current, { autoAlpha: 0 }, {
-          autoAlpha: 1,
-          duration: 1,
-        })
+        .fromTo(
+          headingRef.current,
+          { autoAlpha: 0 },
+          {
+            autoAlpha: 1,
+            duration: 1,
+          },
+        )
         .to(rect, { opacity: 1, duration: 0.05 }, 0)
         .to(
           rect,
@@ -99,6 +102,7 @@ export const AddressSection = () => {
       </div>
 
       <a
+        aria-label="Построить маршрут в Waze"
         target="_blank"
         href="https://waze.com/ul?q=Jerusalem%20Blvd%2033%2C%20Tel%20Aviv-Yafo&navigate=yes"
         className={styles.contentWrapper}
@@ -110,7 +114,7 @@ export const AddressSection = () => {
               <Image
                 className={styles.logo}
                 src="/logoKY.svg"
-                alt="Logo"
+                alt="«Beauty Room» salon street sign"
                 width={230}
                 height={230}
               />
@@ -120,16 +124,26 @@ export const AddressSection = () => {
         </div>
 
         <address className={styles.address}>
-          <LazyImage src="/waze.svg" alt="Waze icon" className={styles.wazeIcon} />
+          <LazyImage
+            src="/waze.svg"
+            alt="Waze icon"
+            className={styles.wazeIcon}
+          />
           Jerusalem Blvd 33, Tel Aviv-Yafo
         </address>
       </a>
       <a
+        aria-label="Открыть карту в Google Maps"
         target="_blank"
         className={styles.mapWrapper}
         href="https://maps.app.goo.gl/WLxLtpTQESe6Jx4C7"
       >
-        <LazyImage src="/map.png" alt="Map" ref={mapRef} className={styles.map} />
+        <LazyImage
+          src="/map.png"
+          alt="«Beauty Room» salon on map"
+          ref={mapRef}
+          className={styles.map}
+        />
       </a>
     </section>
   );

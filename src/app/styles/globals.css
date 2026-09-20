@@ -394,7 +394,7 @@
   /* Отпечаток при наведении — .button:hover .fingerprint */
   --button-hover-fingerprint-text-color: var(--white);
   /* Контур фокуса кнопки — .button:focus-visible */
-  --button-focus-visible-outline-color: var(--primary-color);
+  --button-focus-visible-outline-color: var(--white);
 
   /* Выбор процедуры: кнопка, список, выбранный и подсвеченный пункт */
   /* Кнопка раскрытия списка — .openButton */

@@ -66,21 +66,25 @@
 
 /* Animation */
 
-.button:hover {
+.button:hover,
+.button:focus-visible {
   background-color: var(--button-hover-background-color);
   color: var(--button-hover-text-color);
 }
 
-.button:hover .fingerprint {
+.button:hover .fingerprint,
+.button:focus-visible .fingerprint {
   transform: scale(70%);
   color: var(--button-hover-fingerprint-text-color);
 }
 
-.button:hover .text {
+.button:hover .text,
+.button:focus-visible .text {
   transform: translateX(-16px);
 }
 
-.button:hover .arrowsContainer {
+.button:hover .arrowsContainer,
+.button:focus-visible .arrowsContainer {
   right: 15%;
   gap: 10px;
 }

@@ -7,9 +7,10 @@
   ); */
   background: rgba(255, 192, 201, 0.9);
   backdrop-filter: blur(10px);
-  overflow: hidden;
+  /* overflow: hidden; */
   position: absolute;
   z-index: 3;
+  --button-focus-visible-outline-color: var(--white);
 }
 
 .contentContainer {
@@ -29,6 +30,10 @@
   align-items: center;
   justify-content: center;
   padding: 33px 0;
+}
+
+.logo:focus {
+  outline: 3px solid var(--white);
 }
 
 .logoSilhouette {
@@ -95,6 +100,13 @@
   stroke-dashoffset: 0;
 }
 
+.navigationLink:focus .border rect {
+  stroke-dashoffset: 0;
+}
+.navigationLink:focus {
+  outline: none;
+}
+
 .mobileLayout {
   display: flex;
   display: none;
@@ -107,6 +119,10 @@
 .headerTitle {
   font-size: 0;
   opacity: 0;
+}
+
+.headerTitle:focus-visible {
+  outline: 3px solid var(--brown);
 }
 
 @media (max-width: 1350px) {
@@ -194,5 +210,39 @@
     font-weight: var(--header-navigation-link-font-weight-to-960);
     font-size: var(--header-navigation-link-font-size-to-960);
     opacity: 0;
+  }
+
+  .isOpen .navigationLink {
+    opacity: 1;
+    animation: revealMenuLink 0.35s ease-out both;
+    animation-delay: 0.15s;
+  }
+
+  .isOpen .navigationItem:nth-child(2) .navigationLink {
+    animation-delay: 0.25s;
+  }
+  .isOpen .navigationItem:nth-child(3) .navigationLink {
+    animation-delay: 0.35s;
+  }
+  .isOpen .navigationItem:nth-child(4) .navigationLink {
+    animation-delay: 0.45s;
+  }
+}
+
+@keyframes revealMenuLink {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contentContainer {
+    transition: none;
+  }
+  .isOpen .navigationLink {
+    animation: none;
   }
 }

@@ -33,9 +33,11 @@
   height: 42px;
   cursor: pointer;
   --button-start-width: 51px;
+  border-radius: 9px;
 }
 
 .toInstButton {
+  border-radius: 9px;
   position: absolute;
   z-index: 1;
   display: flex;
@@ -50,7 +52,6 @@
   width: var(--button-start-width);
   padding: 12px;
   will-change: width;
-  border-radius: 9px;
   transition:
     width 0.6s ease,
     transform 0.3s ease;
@@ -82,8 +83,12 @@
 
 .buttonWrapper:hover .toInstButton,
 .buttonWrapper:active .toInstButton,
-.buttonWrapper:focus .toInstButton {
+.buttonWrapper:focus-visible .toInstButton {
   width: 100%;
+}
+
+.buttonWrapper:focus-visible {
+  outline: 1px solid var(--brown);
 }
 
 .buttonWrapper:active .toInstButton {

@@ -11,9 +11,10 @@ type SelectProps = {
   onChange?: (id: number | null) => void;
   options?: { id: number; name: string }[];
   allLabel?: string;
+  label?: string;
 };
 
-export const Select = ({ className, value, onChange, options = mockTreatments, allLabel }: SelectProps) => {
+export const Select = ({ className, value, onChange, options = mockTreatments, allLabel, label = "Выберите процедуру" }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const [internalValue, setInternalValue] = useState<number | null>(null);
@@ -68,16 +69,16 @@ export const Select = ({ className, value, onChange, options = mockTreatments, a
   return (
     <div ref={containerRef} className={clsx(styles.select, className, { [styles.isOpen]: isOpen })}
       onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setIsOpen(false); }}>
-      <button ref={buttonRef} type="button" role="combobox" aria-label="Выберите процедуру"
+      <button ref={buttonRef} type="button" role="combobox" aria-label={label}
         aria-haspopup="listbox" aria-controls={listId} aria-expanded={isOpen}
         aria-activedescendant={isOpen && items.length ? `${listId}-${highlightedIndex}` : undefined}
         className={styles.openButton} onClick={() => isOpen ? setIsOpen(false) : open()} onKeyDown={handleKeyDown}>
-        <span className={styles.buttonText}>{items[selectedIndex]?.name ?? "Выберите процедуру"}</span>
+        <span className={styles.buttonText}>{items[selectedIndex]?.name ?? label}</span>
         <svg aria-hidden="true" width="15" height="8" viewBox="0 0 15 8" className={styles.buttonArrow}>
           <path d="M1 7L7.5 1L14 7" fill="none" stroke="currentColor" />
         </svg>
       </button>
-      {isOpen && <ul ref={listRef} id={listId} role="listbox" aria-label="Выберите процедуру" className={styles.selectList}>
+      {isOpen && <ul ref={listRef} id={listId} role="listbox" aria-label={label} className={styles.selectList}>
         {items.map((item, index) => <li key={item.id ?? "all"} id={`${listId}-${index}`} role="option"
           aria-selected={item.id === selectedId}
           className={clsx(styles.selectItem, { [styles.isHighlighted]: index === highlightedIndex, [styles.selected]: item.id === selectedId })}

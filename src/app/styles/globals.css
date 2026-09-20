@@ -262,7 +262,7 @@
   --before-after-section-background-color: var(--secondary-color);
 
   /* Ползунок сравнения — .slider */
-  --before-after-slider-color: var(--secondary-color);
+  --before-after-slider-color: var(--primary-color);
 
   /* Instagram: заголовок, фон секции и кнопка перехода */
   /* Фон секции — .sectionContainer */

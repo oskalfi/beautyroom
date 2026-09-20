@@ -1,5 +1,7 @@
 .select {
   position: relative;
+  width: 100%;
+  max-width: 350px;
 }
 
 .openButton {
@@ -9,7 +11,8 @@
   background-color: transparent;
   border: 1px solid var(--select-open-button-border-color);
   padding: 1rem 30px;
-  width: 350px;
+  width: 100%;
+  max-width: 350px;
   border-radius: 15px;
   cursor: pointer;
   transition:

@@ -5,7 +5,7 @@
   aspect-ratio: 9 / 16;
   justify-self: center;
   position: relative;
-  /* outline: 2px solid var(--white); */
+  outline: 3px solid var(--primary-color);
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10+ */
 }
@@ -49,5 +49,13 @@
 }
 
 .isDragging {
-  transform: translateX(-50%) scaleX(1.5);
+  transform: translateX(-50%);
+}
+
+@media (max-width: 370px) {
+  .beforeAfterComponent {
+    width: 100%;
+    max-width: 520px;
+    aspect-ratio: 9 / 16;
+  }
 }

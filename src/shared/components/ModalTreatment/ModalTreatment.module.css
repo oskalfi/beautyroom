@@ -80,6 +80,10 @@
   overflow: hidden;
 }
 
+.buttonText:focus-visible {
+  outline: 3px solid var(--brown);
+}
+
 .arrow {
   color: var(--treatment-modal-details-link-color);
   transform: translateY(1px);
@@ -113,8 +117,14 @@
   --button-secondary-text-color: var(--treatment-modal-button-text-color);
   --button-secondary-outline-color: var(--treatment-modal-button-outline-color);
   --button-fingerprint-color: var(--treatment-modal-button-accent-color);
-  --button-hover-background-color: var(--treatment-modal-button-hover-background-color);
+  --button-hover-background-color: var(
+    --treatment-modal-button-hover-background-color
+  );
   --button-hover-text-color: var(--treatment-modal-button-hover-text-color);
-  --button-hover-fingerprint-text-color: var(--treatment-modal-button-hover-accent-color);
-  --button-focus-visible-outline-color: var(--treatment-modal-button-outline-color);
+  --button-hover-fingerprint-text-color: var(
+    --treatment-modal-button-hover-accent-color
+  );
+  --button-focus-visible-outline-color: var(
+    --treatment-modal-button-outline-color
+  );
 }

@@ -112,6 +112,7 @@ export const Carousel = () => {
               key={index}
               link={link}
               isActive={index === activeIndex}
+              shouldPreload={Math.abs(index - activeIndex) <= 1}
               isVisible={isVisible}
               isNear={isNear}
               index={index}

@@ -37,7 +37,8 @@
 }
 
 .activeMedia {
-  filter: none;
+  /* Keep the same filter chain while switching Safari video compositing layers. */
+  filter: grayscale(0%) brightness(1);
   transform: scale(1.05);
 }
 

@@ -9,6 +9,7 @@ import gsap from "gsap/all";
 type TCarouselItem = {
   link: string;
   isActive: boolean;
+  shouldPreload: boolean;
   isVisible: boolean;
   isNear: boolean;
   ref: React.Ref<HTMLDivElement>;
@@ -21,6 +22,7 @@ type TCarouselItem = {
 export const CarouselItem = ({
   link,
   isActive,
+  shouldPreload,
   isVisible,
   isNear,
   ref,
@@ -108,25 +110,33 @@ export const CarouselItem = ({
     }
   };
 
-  const shouldLoad = isActive && isNear;
+  const shouldLoad = shouldPreload && isNear;
 
+  // Release media only when its URL changes or the item unmounts. Leaving
+  // the preload window must not clear a still-visible frame in Safari.
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
-    if (shouldLoad) video.src = link;
-    else video.removeAttribute("src");
-    video.load();
     return () => {
+      if (!video) return;
       video.pause();
       video.removeAttribute("src");
       video.load();
     };
+  }, [link]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !shouldLoad || video.getAttribute("src") === link) return;
+    video.src = link;
+    video.load();
+    // Already prepared items retain their source; preload="none" is used
+    // outside the active item and its two immediate neighbours.
   }, [shouldLoad, link]);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    if (shouldLoad && isVisible) {
+    if (shouldLoad && isActive && isVisible) {
       void video.play().catch((error: unknown) => {
         // A pause/navigation can cancel a pending play; autoplay may be blocked.
         if (
@@ -139,14 +149,18 @@ export const CarouselItem = ({
       });
     } else {
       video.pause();
-
+      // Rewind inactive items without reloading their preloaded source.
+      // Merely scrolling the carousel offscreen should only pause playback.
+      if (!isActive && video.currentTime > 0) {
+        video.currentTime = 0;
+      }
     }
 
     return () => {
       video.pause();
       stopLoop();
     };
-  }, [shouldLoad, isVisible]);
+  }, [shouldLoad, isActive, isVisible]);
 
   useEffect(() => {
     if (!pathRef.current) return;
@@ -206,7 +220,7 @@ export const CarouselItem = ({
           onPause={stopLoop}
           onEnded={handleEnded}
         />
-        {shouldLoad && isVisible && isBuffering && (
+        {isActive && shouldLoad && isVisible && isBuffering && (
           <VideoBufferingLoader videoRef={videoRef} />
         )}
         <svg

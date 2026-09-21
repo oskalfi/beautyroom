@@ -2,10 +2,12 @@
 
 import { LiquidGlass } from "simple-liquid-glass";
 import type { RefObject } from "react";
+import styles from "./WelcomeSection.module.css";
 
 export default function WelcomeGlassSurface({ backdropRef }: { backdropRef: RefObject<HTMLDivElement | null> }) {
   return (
     <LiquidGlass
+      className={styles.glassRenderer}
       backdropRef={backdropRef}
       renderer="webgl"
       quality="standard"

@@ -216,3 +216,14 @@
     transform: scale(0.8);
   }
 }
+
+/* Оставляем постоянный CSS-фон на время загрузки. Матовый fallback
+   библиотеки не показываем: проявляем только готовый кадр WebGL. */
+.glassRenderer {
+  opacity: 0;
+  transition: opacity 240ms ease-out;
+}
+
+.glassRenderer[data-glass-strategy="webgl"] {
+  opacity: 1;
+}

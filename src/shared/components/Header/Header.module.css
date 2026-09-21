@@ -32,7 +32,7 @@
   padding: 33px 0;
 }
 
-.logo:focus {
+.logo:focus-visible {
   outline: 3px solid var(--white);
 }
 
@@ -104,10 +104,10 @@
   stroke-dashoffset: 0;
 }
 
-.navigationLink:focus .border rect {
+.navigationLink:focus-visible .border rect {
   stroke-dashoffset: 0;
 }
-.navigationLink:focus {
+.navigationLink:focus-visible {
   outline: none;
 }
 

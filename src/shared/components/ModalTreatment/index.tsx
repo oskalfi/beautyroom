@@ -1,3 +1,4 @@
+import { BOOKING_URL } from "@/shared/config/booking";
 import { mockTreatments as mockData } from "@/shared/mocks/treatments";
 import { Button } from "../Button";
 import styles from "./ModalTreatment.module.css";
@@ -41,7 +42,7 @@ const ModalTreatment = ({
           </div>
         </div>
 
-        <Button type="secondary" className={styles.button}>
+        <Button href={BOOKING_URL} type="secondary" className={styles.button}>
           Запись
         </Button>
       </div>

@@ -1,6 +1,15 @@
 @import "./fonts.css";
 
 :root {
+  /* WelcomeSection: стеклянная кнопка записи при ширине до 960px */
+  --welcome-booking-glass-tint: rgb(255 255 255 / 6%);
+  --welcome-booking-glass-highlight: rgb(255 255 255 / 90%);
+  --welcome-booking-glass-shadow: rgb(255 255 255 / 25%);
+  --welcome-booking-glass-text: var(--white);
+  --welcome-booking-glass-fingerprint: #f58eb2;
+  --welcome-booking-glass-font-size: 16px;
+  --welcome-booking-glass-blur: 4px;
+
   /* Косметика /cosmetics: фон страницы, текст и информационные блоки */
   --cosmetics-page-background: var(--white);
   --cosmetics-text-color: var(--brown);

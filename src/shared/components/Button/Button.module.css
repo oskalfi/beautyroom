@@ -1,4 +1,6 @@
 .button {
+  display: inline-block;
+  text-decoration: none;
   align-self: center;
   padding: 16px 62px;
   border: none;

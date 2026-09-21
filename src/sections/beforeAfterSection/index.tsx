@@ -1,5 +1,6 @@
 "use client";
 
+import { BOOKING_URL } from "@/shared/config/booking";
 import { useState } from "react";
 import { skinProblems } from "@/shared/mocks/skinProblems";
 import { Button } from "@/shared/components/Button";
@@ -19,7 +20,7 @@ export const BeforeAfterSection = () => {
         </RevealHeading>
         <Select className={styles.select} options={skinProblems}
           value={selectedProblem.id} onChange={setSelectedId} label="Выберите проблему кожи" />
-        <Button type="primary" className={styles.button}>
+        <Button href={BOOKING_URL} type="primary" className={styles.button}>
           Запись
         </Button>
         <BeforeAfter key={selectedProblem.id} className={styles.beforeAfter}

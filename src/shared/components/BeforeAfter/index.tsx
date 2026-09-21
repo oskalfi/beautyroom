@@ -5,7 +5,6 @@ import { LazyImage } from "@/shared/components/LazyImage";
 import { SliderSVG } from "@/shared/assets/svg/Slider";
 import styles from "./BeforeAfter.module.css";
 import { useEffect, useRef } from "react";
-import { useNearViewport } from "@/shared/hooks/useNearViewport";
 
 type TBeforeAfterProps = {
   className: string;
@@ -17,7 +16,6 @@ type TBeforeAfterProps = {
 export const BeforeAfter = ({ className, beforeSrc, afterSrc, name }: TBeforeAfterProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
-  const near = useNearViewport(ref);
 
   useEffect(() => {
     const container = ref.current;
@@ -73,9 +71,13 @@ export const BeforeAfter = ({ className, beforeSrc, afterSrc, name }: TBeforeAft
       <LazyImage
         className={styles.afterImage}
         src={afterSrc}
+        width={941} height={1672} sizes="(max-width: 540px) calc(100vw - 20px), 520px" quality={90}
         alt={`${name}: после`}
       />
-      <div className={styles.beforeImage} role="img" aria-label={`${name}: до`} style={{ backgroundImage: near ? `url("${beforeSrc}")` : undefined }} />
+      <div className={styles.beforeImage}>
+        <LazyImage className={styles.afterImage} src={beforeSrc} alt={`${name}: до`}
+          width={941} height={1672} sizes="(max-width: 540px) calc(100vw - 20px), 520px" quality={90} />
+      </div>
       <SliderSVG className={styles.slider} />
     </div>
   );

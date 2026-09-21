@@ -32,6 +32,7 @@ export const TreatmentCard = ({
           src={treatment.imgPath}
           alt={treatment.name}
           fill
+          quality={85}
           sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1440px) calc((100vw - 120px) / 2), 660px"
           className={styles.image}
         />

@@ -129,3 +129,90 @@
     font-size: var(--welcome-underlined-text-font-size-to-380);
   }
 }
+
+/* Та же точка слома, при которой Header показывает MenuButton. */
+.bookingButton {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .backgroundImage {
+    /* Совпадение координат фотографии и её снимка для WebGL. */
+    background-attachment: scroll;
+  }
+
+  .bookingButton {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 176px;
+    height: 52px;
+    border-radius: 999px;
+    color: var(--welcome-booking-glass-text);
+    font-family: var(--button-font-family);
+    font-weight: var(--button-font-weight);
+    font-size: var(--welcome-booking-glass-font-size);
+    text-transform: uppercase;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .glassSurface {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    overflow: hidden;
+    pointer-events: none;
+    background: var(--welcome-booking-glass-tint);
+    -webkit-backdrop-filter: blur(var(--welcome-booking-glass-blur));
+    backdrop-filter: blur(var(--welcome-booking-glass-blur));
+  }
+
+  .bookingButton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow:
+      inset 0 1px 1px var(--welcome-booking-glass-highlight),
+      inset 1px 0 1px var(--welcome-booking-glass-highlight),
+      inset 0 -1px 1px var(--welcome-booking-glass-shadow);
+  }
+
+  .bookingFingerprint {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .fingerprint {
+    position: absolute;
+    width: 88px;
+    height: 99px;
+    right: -6px;
+    top: -12px;
+    color: var(--welcome-booking-glass-fingerprint);
+    will-change: transform;
+    transition: transform 0.3s ease;
+  }
+
+  .bookingLabel {
+    position: relative;
+  }
+
+  .bookingButton:focus-visible {
+    outline: 3px solid var(--welcome-booking-glass-text);
+    outline-offset: 4px;
+  }
+
+  .bookingButton:hover .fingerprint,
+  .bookingButton:focus-visible .fingerprint,
+  .bookingButton:active .fingerprint {
+    transform: scale(0.8);
+  }
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { BOOKING_URL } from "@/shared/config/booking";
 import styles from "./Header.module.css";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -128,11 +129,18 @@ export const Header = () => {
                 </svg>
               </Link>
             </li>
+            <li className={clsx(styles.navigationItem, styles.mobileBooking)}>
+              <Button href={BOOKING_URL} className={styles.button} type="primary" onClick={() => setIsOpen(false)}>
+                ЗАПИСЬ
+              </Button>
+            </li>
           </ul>
         </nav>
-        <Button className={styles.button} type="primary">
-          ЗАПИСЬ
-        </Button>
+        <div className={styles.desktopBooking}>
+          <Button href={BOOKING_URL} className={styles.button} type="primary">
+            ЗАПИСЬ
+          </Button>
+        </div>
       </div>
     </header>
   );

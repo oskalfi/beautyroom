@@ -1,5 +1,6 @@
 "use client";
 
+import { WelcomeBookingButton } from "./WelcomeBookingButton";
 import styles from "./WelcomeSection.module.css";
 import gsap from "gsap";
 import { loadElementFont } from "@/shared/utils/loadElementFont";
@@ -10,6 +11,7 @@ import { enableScrollParallax } from "./animations/enableScrollParallax";
 
 export const WelcomeSection = () => {
   const welcomeSection = useRef<HTMLElement>(null);
+  const background = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -41,7 +43,7 @@ export const WelcomeSection = () => {
 
   return (
     <section className={styles.welcomeSection} ref={welcomeSection}>
-      <div className={styles.backgroundImage} />
+      <div ref={background} className={styles.backgroundImage} />
       <div className={styles.welcomeText}>
         <h1 className={styles.h1}>
           <span className={styles.nowrap}>Beautiful skin</span>{" "}
@@ -59,6 +61,7 @@ export const WelcomeSection = () => {
             />
           </span>
         </div>
+        <WelcomeBookingButton backdropRef={background} />
       </div>
     </section>
   );

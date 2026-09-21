@@ -1,4 +1,5 @@
 "use client";
+import { BOOKING_URL } from "@/shared/config/booking";
 import { LazyImage } from "@/shared/components/LazyImage";
 
 
@@ -38,12 +39,12 @@ export const Footer = () => {
           </h2>
           <ul className={styles.linksList}>
             <li className={styles.navigationItem}>
-              <Link href="/book" className={styles.navigationLink}>
+              <a href={BOOKING_URL} className={styles.navigationLink}>
                 Запись
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
                 </svg>
-              </Link>
+              </a>
             </li>
             <li className={styles.navigationItem}>
               <Link href="/procedures" className={styles.navigationLink}>

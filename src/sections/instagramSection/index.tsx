@@ -64,7 +64,7 @@ export const InstagramSection = () => {
         rel="noopener noreferrer"
       >
         <div className={styles.toInstButton}>
-          <LazyImage src="arrowInst.svg" alt="arrow" className={styles.arrow} />
+          <LazyImage src="/arrowInst.svg" alt="arrow" className={styles.arrow} />
           <div className={styles.buttonTextWrapper}>
             <span className={styles.buttonTextWhite} ref={refWhiteText}>
               Перейти в instagram

@@ -1,3 +1,4 @@
+import { BOOKING_URL } from "@/shared/config/booking";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -40,12 +41,12 @@ export default async function TreatmentPage({
       <section className={styles.hero} aria-labelledby="treatment-title">
         {treatment.imgPath ? <Image src={treatment.imgPath} alt={treatment.name} width={525} height={700}
           sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1180px) 45vw, 525px"
-          preload className={styles.photo} /> : <div className={`${styles.photo} ${styles.photoPlaceholder}`}>Фото процедуры</div>}
+          quality={85} preload className={styles.photo} /> : <div className={`${styles.photo} ${styles.photoPlaceholder}`}>Фото процедуры</div>}
         <div className={styles.heroCopy}>
           <p className={styles.eyebrow}>Beauty Room / Уход за лицом</p>
           <h1 id="treatment-title" className={styles.title}>{treatment.name}</h1>
           <p className={styles.description}>{treatment.description}</p>
-          <a href="#treatment-booking" className={styles.primaryLink}>Записаться на процедуру <span aria-hidden="true">↗</span></a>
+          <a href={BOOKING_URL} className={styles.primaryLink}>Записаться на процедуру <span aria-hidden="true">↗</span></a>
           <p className={styles.caption}>Начинаем с оценки состояния вашей кожи</p>
         </div>
       </section>
@@ -109,7 +110,7 @@ export default async function TreatmentPage({
           <h2 id="booking-title">Начнём со знакомства</h2>
           <p>Обсудим вашу кожу и подберём подходящий уход.</p>
         </div>
-        <a href="tel:+972532258055" className={styles.primaryLink}>Позвонить для записи <span aria-hidden="true">↗</span></a>
+        <a href={BOOKING_URL} className={styles.primaryLink}>Записаться в WhatsApp <span aria-hidden="true">↗</span></a>
       </section>
     </main>
   );

@@ -23,7 +23,7 @@
   align-items: center;
 }
 
-.openButton:focus {
+.openButton:focus-visible {
   outline: 6px var(--header-gradient-start-color-noRGBa) solid;
 }
 

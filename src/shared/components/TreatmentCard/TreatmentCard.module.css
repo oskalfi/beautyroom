@@ -83,6 +83,6 @@
     text-align: left;
   }
 }
-.button:focus {
+.button:focus-visible {
   outline: 3px solid var(--brown);
 }

@@ -8,12 +8,15 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const Footer = () => {
   const logoRef = useRef(null);
   const footerRef = useRef(null);
+  const pathname = usePathname();
 
   useGSAP(() => {
     gsap.from(logoRef.current, {
@@ -51,7 +54,13 @@ export const Footer = () => {
               </a>
             </li>
             <li className={styles.navigationItem}>
-              <Link href="/procedures" className={styles.navigationLink}>
+              <Link
+                href="/procedures"
+                className={clsx(
+                  styles.navigationLink,
+                  pathname === "/procedures" && styles.activeLink,
+                )}
+              >
                 Процедуры
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
@@ -59,7 +68,13 @@ export const Footer = () => {
               </Link>
             </li>
             <li className={styles.navigationItem}>
-              <Link href="/cosmetics" className={styles.navigationLink}>
+              <Link
+                href="/cosmetics"
+                className={clsx(
+                  styles.navigationLink,
+                  pathname === "/cosmetics" && styles.activeLink,
+                )}
+              >
                 Косметика
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
@@ -67,7 +82,13 @@ export const Footer = () => {
               </Link>
             </li>
             <li className={styles.navigationItem}>
-              <Link href="/address" className={styles.navigationLink}>
+              <Link
+                href="/address"
+                className={clsx(
+                  styles.navigationLink,
+                  pathname === "/address" && styles.activeLink,
+                )}
+              >
                 Расположение
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
@@ -75,7 +96,13 @@ export const Footer = () => {
               </Link>
             </li>
             <li className={styles.navigationItem}>
-              <Link href="/accessibility" className={styles.navigationLink}>
+              <Link
+                href="/accessibility"
+                className={clsx(
+                  styles.navigationLink,
+                  pathname === "/accessibility" && styles.activeLink,
+                )}
+              >
                 Доступность
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />

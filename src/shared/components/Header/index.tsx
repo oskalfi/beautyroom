@@ -11,10 +11,12 @@ import { Button } from "@/shared/components/Button";
 import { paintSilhouette } from "./animations/collapseHeader";
 import { MenuButton } from "../menuButton";
 import clsx from "clsx";
+import { usePathname } from "next/navigation";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const header = useRef<HTMLElement | null>(null);
+  const pathname = usePathname();
 
   useGSAP(
     () => {
@@ -33,7 +35,8 @@ export const Header = () => {
       if (!event.matches) setIsOpen(false);
     };
     mobileQuery.addEventListener("change", handleBreakpointChange);
-    return () => mobileQuery.removeEventListener("change", handleBreakpointChange);
+    return () =>
+      mobileQuery.removeEventListener("change", handleBreakpointChange);
   }, []);
 
   useEffect(() => {
@@ -79,7 +82,11 @@ export const Header = () => {
     >
       <div className={styles.contentContainer}>
         <div className={styles.mobileLayout}>
-          <Link href="/" className={styles.headerTitle} onClick={() => setIsOpen(false)}>
+          <Link
+            href="/"
+            className={styles.headerTitle}
+            onClick={() => setIsOpen(false)}
+          >
             <img src="/headerTitle.svg" alt="Beauty Room" />
           </Link>
           <MenuButton isOpen={isOpen} setIsOpen={setIsOpen} />
@@ -95,7 +102,10 @@ export const Header = () => {
             <li className={styles.navigationItem}>
               <Link
                 href="/procedures"
-                className={styles.navigationLink}
+                className={clsx(
+                  styles.navigationLink,
+                  pathname === "/procedures" && styles.activeLink,
+                )}
                 onClick={() => setIsOpen(false)}
               >
                 Процедуры
@@ -105,7 +115,14 @@ export const Header = () => {
               </Link>
             </li>
             <li className={styles.navigationItem}>
-              <Link href="/cosmetics" className={styles.navigationLink} onClick={() => setIsOpen(false)}>
+              <Link
+                href="/cosmetics"
+                className={clsx(
+                  styles.navigationLink,
+                  pathname === "/cosmetics" && styles.activeLink,
+                )}
+                onClick={() => setIsOpen(false)}
+              >
                 Косметика
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
@@ -115,7 +132,10 @@ export const Header = () => {
             <li className={styles.navigationItem}>
               <Link
                 href="/address"
-                className={styles.navigationLink}
+                className={clsx(
+                  styles.navigationLink,
+                  pathname === "/address" && styles.activeLink,
+                )}
                 onClick={() => setIsOpen(false)}
               >
                 Расположение
@@ -125,7 +145,14 @@ export const Header = () => {
               </Link>
             </li>
             <li className={styles.navigationItem}>
-              <Link href="/contacts" className={styles.navigationLink} onClick={() => setIsOpen(false)}>
+              <Link
+                href="/contacts"
+                className={clsx(
+                  styles.navigationLink,
+                  pathname === "/contacts" && styles.activeLink,
+                )}
+                onClick={() => setIsOpen(false)}
+              >
                 Связаться
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
@@ -133,7 +160,12 @@ export const Header = () => {
               </Link>
             </li>
             <li className={clsx(styles.navigationItem, styles.mobileBooking)}>
-              <Button href={BOOKING_URL} className={styles.button} type="primary" onClick={() => setIsOpen(false)}>
+              <Button
+                href={BOOKING_URL}
+                className={styles.button}
+                type="primary"
+                onClick={() => setIsOpen(false)}
+              >
                 ЗАПИСЬ
               </Button>
             </li>

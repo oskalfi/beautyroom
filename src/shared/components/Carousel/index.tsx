@@ -130,7 +130,10 @@ export const Carousel = () => {
         aria-label="Предыдущее видео"
         onClick={() => {
           itemRefs.current[Math.max(0, activeIndex - 1)]?.scrollIntoView({
-            behavior: document.documentElement.dataset.a11yMotion === "true" ? "instant" : "smooth",
+            behavior:
+              document.documentElement.dataset.a11yMotion === "true"
+                ? "instant"
+                : "smooth",
             inline: "center",
             block: "nearest",
           });
@@ -149,7 +152,10 @@ export const Carousel = () => {
           itemRefs.current[
             Math.min(activeIndex + 1, MOCKDATA.length - 1)
           ]?.scrollIntoView({
-            behavior: document.documentElement.dataset.a11yMotion === "true" ? "instant" : "smooth",
+            behavior:
+              document.documentElement.dataset.a11yMotion === "true"
+                ? "instant"
+                : "smooth",
             inline: "center",
             block: "nearest",
           });

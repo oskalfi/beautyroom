@@ -66,6 +66,10 @@
   white-space: nowrap;
 }
 
+.activeLink .border rect {
+  stroke-dashoffset: 0;
+}
+
 .border {
   position: absolute;
   inset: 0;

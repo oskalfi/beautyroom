@@ -1,7 +1,7 @@
 .trigger {
   position: fixed;
-  inset-inline-start: 16px;
-  bottom: max(64px, env(safe-area-inset-bottom));
+  inset-inline-end: 16px;
+  bottom: max(32px, env(safe-area-inset-bottom));
   z-index: 10000;
   width: 56px;
   height: 56px;
@@ -144,4 +144,12 @@
     transparent calc(var(--reading-y) + 44px),
     #0009 calc(var(--reading-y) + 44px)
   );
+}
+
+@media (max-width: 769px) {
+  .trigger {
+    bottom: max(21px, env(safe-area-inset-bottom));
+    width: 42px;
+    height: 42px;
+  }
 }

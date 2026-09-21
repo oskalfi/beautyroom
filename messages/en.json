@@ -1,0 +1,24 @@
+{
+  "Navigation": {
+    "procedures": "Treatments",
+    "cosmetics": "Skincare",
+    "address": "Location",
+    "contacts": "Contact",
+    "booking": "Book",
+    "accessibility": "Accessibility",
+    "navigation": "Navigation",
+    "questions": "For any questions",
+    "social": "Social media",
+    "copyright": "Copyright © {year} Beauty Room. All rights reserved.",
+    "language": "Language",
+    "menu": "Menu",
+    "toggleMenu": "Open or close menu",
+    "loading": "Loading…",
+    "preparing": "Preparing…",
+    "imageDownload": "Image download"
+  },
+  "Metadata": {
+    "title": "Beauty Room — facial skincare in Tel Aviv–Yafo",
+    "description": "Professional facial skincare, cosmetic treatments and personalised care at Beauty Room, Tel Aviv–Yafo."
+  }
+}

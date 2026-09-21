@@ -1,3 +1,4 @@
+import { initPageLocale } from "@/i18n/pageLocale";
 import type { Metadata } from "next";
 import styles from "./page.module.css";
 export const metadata: Metadata = {
@@ -5,9 +6,10 @@ export const metadata: Metadata = {
   description:
     "Доступность сайта и салона Beauty Room. Настройки доступности и контакты координатора Adam Kanter.",
 };
-export default function AccessibilityPage() {
+export default async function AccessibilityPage({ params }: { params: Promise<{ locale: string }> }) {
+  await initPageLocale(params);
   return (
-    <main id="main-content" className={styles.page}>
+    <main dir="ltr" id="main-content" className={styles.page}>
       <h1>Заявление о доступности</h1>
       <p lang="he" dir="rtl">
         הצהרת נגישות — Beauty Room

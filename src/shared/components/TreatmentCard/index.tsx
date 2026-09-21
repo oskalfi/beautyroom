@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale } from "next-intl";
+import { getPathname } from "@/i18n/navigation";
 import Image from "next/image";
 import { Button } from "@/shared/components/Button";
 import type { Treatment } from "@/shared/model/types";
@@ -15,7 +17,8 @@ export const TreatmentCard = ({
 }: {
   treatment: TreatmentCardData;
 }) => {
-  const href = `/treatments/${treatment.id}`;
+  const locale = useLocale();
+  const href = getPathname({ locale, href: `/treatments/${treatment.id}` });
   const details = [
     treatment.priceILS != null ? `₪ ${treatment.priceILS}` : "Цена по запросу",
     treatment.durationMinutes != null

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import styles from "./Select.module.css";
 import { mockTreatments } from "@/shared/mocks/treatments";
 import clsx from "clsx";
@@ -12,9 +12,11 @@ type SelectProps = {
   options?: { id: number; name: string }[];
   allLabel?: string;
   label?: string;
+  triggerContent?: ReactNode;
+  placement?: "bottom" | "top";
 };
 
-export const Select = ({ className, value, onChange, options = mockTreatments, allLabel, label = "Выберите процедуру" }: SelectProps) => {
+export const Select = ({ className, value, onChange, options = mockTreatments, allLabel, label = "Выберите процедуру", triggerContent, placement = "bottom" }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const [internalValue, setInternalValue] = useState<number | null>(null);
@@ -67,16 +69,18 @@ export const Select = ({ className, value, onChange, options = mockTreatments, a
   }, [isOpen, highlightedIndex]);
 
   return (
-    <div ref={containerRef} className={clsx(styles.select, className, { [styles.isOpen]: isOpen })}
+    <div ref={containerRef} className={clsx(styles.select, className, { [styles.isOpen]: isOpen, [styles.opensUp]: placement === "top" })}
       onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setIsOpen(false); }}>
       <button ref={buttonRef} type="button" role="combobox" aria-label={label}
         aria-haspopup="listbox" aria-controls={listId} aria-expanded={isOpen}
         aria-activedescendant={isOpen && items.length ? `${listId}-${highlightedIndex}` : undefined}
-        className={styles.openButton} onClick={() => isOpen ? setIsOpen(false) : open()} onKeyDown={handleKeyDown}>
+        className={clsx(styles.openButton, { [styles.iconButton]: triggerContent !== undefined })} onClick={() => isOpen ? setIsOpen(false) : open()} onKeyDown={handleKeyDown}>
+        {triggerContent ?? <>
         <span className={styles.buttonText}>{items[selectedIndex]?.name ?? label}</span>
         <svg aria-hidden="true" width="15" height="8" viewBox="0 0 15 8" className={styles.buttonArrow}>
           <path d="M1 7L7.5 1L14 7" fill="none" stroke="currentColor" />
         </svg>
+        </>}
       </button>
       {isOpen && <ul ref={listRef} id={listId} role="listbox" aria-label={label} className={styles.selectList}>
         {items.map((item, index) => <li key={item.id ?? "all"} id={`${listId}-${index}`} role="option"

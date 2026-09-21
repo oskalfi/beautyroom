@@ -1,3 +1,4 @@
+import { initPageLocale } from "@/i18n/pageLocale";
 import type { Metadata } from "next";
 import { BOOKING_URL } from "@/shared/config/booking";
 import { useId } from "react";
@@ -42,9 +43,10 @@ function ContactIcon({ type }: { type: typeof contacts[number]["icon"] }) {
   );
 }
 
-export default function ContactsPage() {
+export default async function ContactsPage({ params }: { params: Promise<{ locale: string }> }) {
+  await initPageLocale(params);
   return (
-    <main className={styles.page}>
+    <main dir="ltr" className={styles.page}>
       <div className={styles.container}>
         <h1 className={styles.title}>Контакты</h1>
         <ul className={styles.contacts}>

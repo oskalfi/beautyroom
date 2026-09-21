@@ -16,7 +16,7 @@
   border-right-color: var(--media-loader-spinner-border-right-color);
   border-radius: 50%;
   background: var(--media-loader-spinner-background-color);
-  animation: spin 0.8s linear infinite;
+  animation: spin var(--media-loader-duration, 0.8s) linear infinite;
 }
 
 @keyframes spin {

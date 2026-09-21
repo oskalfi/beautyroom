@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+import { initPageLocale } from "@/i18n/pageLocale";
 import type { Metadata } from "next";
 import styles from "./page.module.css";
 import { IntroduceSection } from "@/sections/introduceSection";
@@ -8,16 +10,17 @@ import { BeforeAfterSection } from "@/sections/beforeAfterSection";
 import { InstagramSection } from "@/sections/instagramSection";
 import { AddressSection } from "@/sections/addressSection";
 
-export const metadata: Metadata = {
-  title: "Beauty Room — уход за лицом в Тель-Авиве — Яффо",
-  description:
-    "Студия Beauty Room в Тель-Авиве — Яффо: процедуры для ухода за лицом, описание услуг, результаты и запись. Ждём вас по адресу Jerusalem Blvd 33.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = await initPageLocale(params);
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+  return { title: t("title"), description: t("description") };
+}
 
-export default function Home() {
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  await initPageLocale(params);
   return (
-    <main className={styles.mainPage}>
-      <link rel="preload" href="/main_bg.avif" as="image" fetchPriority="high" />
+    <main dir="ltr" className={styles.mainPage}>
+      <link rel="preload" href="/main_bg.avif" as="fetch" crossOrigin="anonymous" fetchPriority="high" />
       <link rel="preload" href="/fonts/MontserratAlternates/MontserratAlternates-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       <link rel="preload" href="/fonts/MontserratVariable/Montserrat-Variable.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       <WelcomeSection />

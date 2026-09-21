@@ -1,19 +1,21 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { BOOKING_URL } from "@/shared/config/booking";
 import { LazyImage } from "@/shared/components/LazyImage";
 
 import styles from "./Footer.module.css";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 import clsx from "clsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const Footer = () => {
+  const t = useTranslations("Navigation");
   const logoRef = useRef(null);
   const footerRef = useRef(null);
   const pathname = usePathname();
@@ -42,12 +44,12 @@ export const Footer = () => {
       <div className={styles.linksWrapper}>
         <nav aria-labelledby="site-navigation-title">
           <h2 className={styles.heading} id="site-navigation-title">
-            Navigation
+            {t("navigation")}
           </h2>
           <ul className={styles.linksList}>
             <li className={styles.navigationItem}>
               <a href={BOOKING_URL} className={styles.navigationLink}>
-                Запись
+                {t("booking")}
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
                 </svg>
@@ -61,7 +63,7 @@ export const Footer = () => {
                   pathname === "/procedures" && styles.activeLink,
                 )}
               >
-                Процедуры
+                {t("procedures")}
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
                 </svg>
@@ -75,7 +77,7 @@ export const Footer = () => {
                   pathname === "/cosmetics" && styles.activeLink,
                 )}
               >
-                Косметика
+                {t("cosmetics")}
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
                 </svg>
@@ -89,7 +91,7 @@ export const Footer = () => {
                   pathname === "/address" && styles.activeLink,
                 )}
               >
-                Расположение
+                {t("address")}
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
                 </svg>
@@ -103,7 +105,7 @@ export const Footer = () => {
                   pathname === "/accessibility" && styles.activeLink,
                 )}
               >
-                Доступность
+                {t("accessibility")}
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
                 </svg>
@@ -113,7 +115,7 @@ export const Footer = () => {
         </nav>
         <section aria-labelledby="contact-title">
           <h2 className={styles.heading} id="contact-title">
-            For any questions
+            {t("questions")}
           </h2>
           <ul className={styles.linksList}>
             <li className={styles.navigationItem}>
@@ -139,7 +141,7 @@ export const Footer = () => {
         </section>
         <section aria-labelledby="social-title" className={styles.socialWebs}>
           <h2 className={styles.heading} id="social-title">
-            Social webs
+            {t("social")}
           </h2>
           <ul className={styles.linksList}>
             <li className={styles.navigationItem}>
@@ -170,7 +172,7 @@ export const Footer = () => {
         </section>
       </div>
       <p className={styles.copyright}>
-        <small>Copyright © 2026 Beauty Room. All rights reserved.</small>
+        <small>{t("copyright", { year: 2026 })}</small>
       </p>
     </footer>
   );

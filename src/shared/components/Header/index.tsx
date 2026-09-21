@@ -1,8 +1,9 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { BOOKING_URL } from "@/shared/config/booking";
 import styles from "./Header.module.css";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { BeautyRoomSVG } from "@/shared/assets/svg/BeautyRoom";
@@ -11,9 +12,10 @@ import { Button } from "@/shared/components/Button";
 import { paintSilhouette } from "./animations/collapseHeader";
 import { MenuButton } from "../menuButton";
 import clsx from "clsx";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 
 export const Header = () => {
+  const t = useTranslations("Navigation");
   const [isOpen, setIsOpen] = useState(false);
   const header = useRef<HTMLElement | null>(null);
   const pathname = usePathname();
@@ -108,7 +110,7 @@ export const Header = () => {
                 )}
                 onClick={() => setIsOpen(false)}
               >
-                Процедуры
+                {t("procedures")}
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
                 </svg>
@@ -123,7 +125,7 @@ export const Header = () => {
                 )}
                 onClick={() => setIsOpen(false)}
               >
-                Косметика
+                {t("cosmetics")}
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
                 </svg>
@@ -138,7 +140,7 @@ export const Header = () => {
                 )}
                 onClick={() => setIsOpen(false)}
               >
-                Расположение
+                {t("address")}
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
                 </svg>
@@ -153,7 +155,7 @@ export const Header = () => {
                 )}
                 onClick={() => setIsOpen(false)}
               >
-                Связаться
+                {t("contacts")}
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
                 </svg>
@@ -166,14 +168,14 @@ export const Header = () => {
                 type="primary"
                 onClick={() => setIsOpen(false)}
               >
-                ЗАПИСЬ
+                {t("booking")}
               </Button>
             </li>
           </ul>
         </nav>
         <div className={styles.desktopBooking}>
           <Button href={BOOKING_URL} className={styles.button} type="primary">
-            ЗАПИСЬ
+            {t("booking")}
           </Button>
         </div>
       </div>

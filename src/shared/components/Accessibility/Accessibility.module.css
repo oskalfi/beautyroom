@@ -1,6 +1,6 @@
 .trigger {
   position: fixed;
-  inset-inline-end: 16px;
+  right: max(16px, env(safe-area-inset-right));
   bottom: max(32px, env(safe-area-inset-bottom));
   z-index: 10000;
   width: 56px;
@@ -105,14 +105,15 @@
   text-decoration: underline;
   margin-top: 20px;
 }
-.trigger:focus-visible,
+
 .panel :focus-visible,
 .skip:focus-visible {
   outline: 3px solid var(--a11y-focus);
   outline-offset: 3px;
 }
 .trigger:focus-visible {
-  outline: 6px solid white;
+  outline-offset: 6px;
+  outline: 6px solid var(--brown);
 }
 .skip {
   position: fixed;

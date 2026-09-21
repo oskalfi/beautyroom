@@ -1,0 +1,18 @@
+.container {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: grid;
+  place-items: center;
+  background: var(--white);
+  pointer-events: none;
+}
+
+.label {
+  margin: 0;
+  padding: 0 24px;
+  transform: translateY(52px);
+  color: var(--brown);
+  font-size: var(--select-open-button-font-size);
+  text-align: center;
+}

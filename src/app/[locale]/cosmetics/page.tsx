@@ -1,5 +1,6 @@
+import { initPageLocale } from "@/i18n/pageLocale";
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -8,9 +9,10 @@ export const metadata: Metadata = {
     "Подбор косметики и домашнего ухода в Beauty Room после консультации или процедуры. Рекомендации с учётом типа и состояния вашей кожи. Тель-Авив — Яффо.",
 };
 
-export default function CosmeticsPage() {
+export default async function CosmeticsPage({ params }: { params: Promise<{ locale: string }> }) {
+  await initPageLocale(params);
   return (
-    <main className={styles.page}>
+    <main dir="ltr" className={styles.page}>
       <div className={styles.container}>
         <section className={styles.hero} aria-labelledby="cosmetics-title">
           <p className={styles.eyebrow}>Beauty Room · Домашний уход</p>

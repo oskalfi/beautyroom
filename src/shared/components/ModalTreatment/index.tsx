@@ -1,3 +1,5 @@
+import { useLocale } from "next-intl";
+import { getPathname } from "@/i18n/navigation";
 import { BOOKING_URL } from "@/shared/config/booking";
 import { mockTreatments as mockData } from "@/shared/mocks/treatments";
 import { Button } from "../Button";
@@ -13,12 +15,13 @@ const ModalTreatment = ({
   id,
   headingLevel: Heading = "h2",
 }: ModalTreatmentProps) => {
+  const locale = useLocale();
   const treatmentInfo = mockData.find((mockTreatment) => {
     return mockTreatment.id === id;
   });
 
   return (
-    <div className={styles.modalTreatment}>
+    <div className={styles.modalTreatment} dir="ltr">
       {treatmentInfo?.imgPath && (
         <TreatmentPhoto
           key={treatmentInfo.imgPath}
@@ -33,7 +36,7 @@ const ModalTreatment = ({
         <div className={styles.descriptionWrapper}>
           <p className={styles.description}>{treatmentInfo?.description}</p>
           <div className={styles.infButton}>
-            <a href={`/treatments/${id}`} className={styles.buttonText}>
+            <a href={getPathname({ locale, href: `/treatments/${id}` })} className={styles.buttonText}>
               Узнать подробнее
             </a>
             <svg className={styles.arrow} width="6" height="12" viewBox="0 0 6 12" fill="none" aria-hidden="true" focusable="false">

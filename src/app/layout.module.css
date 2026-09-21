@@ -2,3 +2,23 @@
   position: relative;
   touch-action: pan-y;
 }
+
+.siteContent {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.pageContent {
+  flex: 1 0 auto;
+  min-width: 0;
+  /* Header is positioned outside the flow. Keep the page's space while loading. */
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.siteContent > footer {
+  flex-shrink: 0;
+  margin-top: auto;
+}

@@ -1,0 +1,31 @@
+.switcher {
+  position: fixed;
+  left: max(16px, env(safe-area-inset-left));
+  bottom: max(32px, env(safe-area-inset-bottom));
+  z-index: 10000;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: url("/langButton.svg") center / contain no-repeat;
+  box-shadow: 0 3px 14px #0003;
+  border: 2px solid var(--brown);
+}
+
+.select {
+  width: 100%;
+  height: 100%;
+}
+
+.switcher:has(button:focus-visible) {
+  --header-gradient-start-color-noRGBa: transparent;
+  outline-offset: 6px;
+  outline: 6px solid var(--brown);
+}
+
+@media (max-width: 769px) {
+  .switcher {
+    bottom: max(21px, env(safe-area-inset-bottom));
+    width: 42px;
+    height: 42px;
+  }
+}

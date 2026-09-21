@@ -1,0 +1,24 @@
+{
+  "Navigation": {
+    "procedures": "Процедуры",
+    "cosmetics": "Косметика",
+    "address": "Расположение",
+    "contacts": "Связаться",
+    "booking": "Запись",
+    "accessibility": "Доступность",
+    "navigation": "Навигация",
+    "questions": "По всем вопросам",
+    "social": "Социальные сети",
+    "copyright": "Copyright © {year} Beauty Room. Все права защищены.",
+    "language": "Язык",
+    "menu": "Меню",
+    "toggleMenu": "Открыть или закрыть меню",
+    "loading": "Загрузка…",
+    "preparing": "Подготовка…",
+    "imageDownload": "Загрузка фотографии"
+  },
+  "Metadata": {
+    "title": "Beauty Room — уход за лицом в Тель-Авиве — Яффо",
+    "description": "Профессиональный уход за кожей лица, косметологические процедуры и индивидуальный подбор ухода в Beauty Room, Тель-Авив — Яффо."
+  }
+}

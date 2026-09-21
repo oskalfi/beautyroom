@@ -1,11 +1,11 @@
 .welcomeSection {
   position: relative;
   overflow: hidden;
+  background-color: var(--brown);
 }
 
 .backgroundImage {
   height: 96svh;
-  background-image: url("/main_bg.avif");
   background-attachment: fixed;
   background-size: cover;
   will-change: transform;
@@ -227,4 +227,14 @@
 
 .glassRenderer[data-glass-strategy="webgl"] {
   opacity: 1;
+}
+
+.backgroundLoader {
+  --media-loader-duration: 1.2s;
+  display: grid;
+  place-items: center;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--white);
 }

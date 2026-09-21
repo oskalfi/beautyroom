@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useRef, type Dispatch, type SetStateAction } from "react";
 import Image from "next/image";
 import styles from "./MenuButton.module.css";
@@ -24,6 +25,7 @@ export const MenuButton = ({
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const t = useTranslations("Navigation");
   const svgRef = useRef<SVGSVGElement | null>(null);
   const morphPathRef = useRef<SVGPathElement | null>(null);
 
@@ -52,7 +54,7 @@ export const MenuButton = ({
       className={styles.menuButton}
       onClick={toggleMenu}
       aria-expanded={isOpen}
-      aria-label="Toggle menu"
+      aria-label={t("toggleMenu")}
     >
       <Image src="/Menu.svg" alt="Menu" width={31} height={11} />
       <svg

@@ -1,0 +1,24 @@
+{
+  "Navigation": {
+    "procedures": "טיפולים",
+    "cosmetics": "מוצרי טיפוח",
+    "address": "מיקום",
+    "contacts": "יצירת קשר",
+    "booking": "קביעת תור",
+    "accessibility": "נגישות",
+    "navigation": "ניווט",
+    "questions": "לכל שאלה",
+    "social": "רשתות חברתיות",
+    "copyright": "© {year} Beauty Room. כל הזכויות שמורות.",
+    "language": "שפה",
+    "menu": "תפריט",
+    "toggleMenu": "פתיחה או סגירה של התפריט",
+    "loading": "טוען…",
+    "preparing": "בהכנה…",
+    "imageDownload": "הורדת תמונה"
+  },
+  "Metadata": {
+    "title": "Beauty Room — טיפולי פנים בתל אביב–יפו",
+    "description": "טיפולי פנים מקצועיים והתאמת שגרת טיפוח אישית ב־Beauty Room, תל אביב–יפו."
+  }
+}

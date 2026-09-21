@@ -1,6 +1,7 @@
+import { initPageLocale } from "@/i18n/pageLocale";
 import { BOOKING_URL } from "@/shared/config/booking";
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTreatmentById } from "@/shared/api/treatments";
@@ -9,8 +10,9 @@ import styles from "./page.module.css";
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; locale: string }>;
 }): Promise<Metadata> {
+  await initPageLocale(params);
   const { id } = await params;
   const treatment = await getTreatmentById(id);
   if (!treatment) notFound();
@@ -24,14 +26,15 @@ export async function generateMetadata({
 export default async function TreatmentPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; locale: string }>;
 }) {
+  await initPageLocale(params);
   const { id } = await params;
   const treatment = await getTreatmentById(id);
   if (!treatment) notFound();
 
   return (
-    <main className={styles.page}>
+    <main dir="ltr" className={styles.page}>
       <nav aria-label="Хлебные крошки" className={styles.breadcrumbs}>
         <Link href="/">Главная</Link><span aria-hidden="true">/</span>
         <Link href="/procedures">Процедуры</Link><span aria-hidden="true">/</span>

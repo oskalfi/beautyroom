@@ -9,7 +9,8 @@ import { moveBlockToTop } from "../treatmentsItem/animations/moveBlockToTop";
 import { setStartingPosition } from "../treatmentsItem/animations/setStartingPosition";
 import { isCursorEnteredFromTop } from "../../utils/isCursorEnteredFromTop";
 import { treatmentDataProps } from "../../../../shared/model/types";
-import { useRouter } from "next/navigation";
+import { useRouter, getPathname } from "@/i18n/navigation";
+import { useLocale } from "next-intl";
 
 function handleMouseEnter(event: React.MouseEvent<HTMLLIElement>) {
   if (event.currentTarget.dataset.focusActive === "true") return;
@@ -56,6 +57,7 @@ function handleMouseLeave(event: React.MouseEvent<HTMLLIElement>) {
 export const TreatmentItem = ({ id, name }: treatmentDataProps) => {
   const router = useRouter();
   const href = `/treatments/${id}`;
+  const locale = useLocale();
   return (
     <li
       id={`${id}`}
@@ -66,7 +68,7 @@ export const TreatmentItem = ({ id, name }: treatmentDataProps) => {
     >
       <a
         data-treatment-link
-        href={href}
+        href={getPathname({ locale, href })}
         className={styles.link}
         onClick={(event) => {
           if (

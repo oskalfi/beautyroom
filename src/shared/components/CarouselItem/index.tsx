@@ -1,3 +1,4 @@
+import { useMotionStopped } from "@/shared/components/Accessibility/store";
 import clsx from "clsx";
 import styles from "./CarouselItem.module.css";
 import { useEffect, useRef, useState } from "react";
@@ -31,6 +32,7 @@ export const CarouselItem = ({
   soundEnabled,
   onEnableSound,
 }: TCarouselItem) => {
+  const motionStopped = useMotionStopped();
   const volumeRef = useRef<HTMLImageElement>(null);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -72,7 +74,7 @@ export const CarouselItem = ({
   const tl = gsap.timeline();
 
   const handleVideoClick = () => {
-    if (!isActive || !videoRef.current) return;
+    if (motionStopped || !isActive || !videoRef.current) return;
 
     const currentTime = Date.now();
     const timeDifference = currentTime - lastClickTime.current;
@@ -110,7 +112,7 @@ export const CarouselItem = ({
     }
   };
 
-  const shouldLoad = shouldPreload && isNear;
+  const shouldLoad = !motionStopped && shouldPreload && isNear;
 
   // Release media only when its URL changes or the item unmounts. Leaving
   // the preload window must not clear a still-visible frame in Safari.
@@ -136,7 +138,7 @@ export const CarouselItem = ({
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    if (shouldLoad && isActive && isVisible) {
+    if (shouldLoad && isActive && isVisible && !motionStopped) {
       void video.play().catch((error: unknown) => {
         // A pause/navigation can cancel a pending play; autoplay may be blocked.
         if (
@@ -160,7 +162,7 @@ export const CarouselItem = ({
       video.pause();
       stopLoop();
     };
-  }, [shouldLoad, isActive, isVisible]);
+  }, [shouldLoad, isActive, isVisible, motionStopped]);
 
   useEffect(() => {
     if (!pathRef.current) return;
@@ -183,7 +185,7 @@ export const CarouselItem = ({
           styles.videoWrapper,
         )}
       >
-        {isActive && (
+        {isActive && !motionStopped && (
           <SoundHint
             hintTrigger={hintTrigger}
             isActive={isActive}

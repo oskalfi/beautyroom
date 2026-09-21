@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-export function enableScrollParallax(backgroundImageClass: string): void {
+export function enableScrollParallax(backgroundImageClass: HTMLElement): () => void {
   gsap.registerPlugin(ScrollTrigger);
   const mm = gsap.matchMedia();
 
@@ -44,4 +44,6 @@ export function enableScrollParallax(backgroundImageClass: string): void {
       },
     });
   });
+
+  return () => mm.revert();
 }

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./styles/globals.css";
+import "./styles/accessibility.css";
+import { Accessibility } from "@/shared/components/Accessibility";
 import styles from "./layout.module.css";
 import { Header } from "@/shared/components/Header";
 import { Footer } from "@/shared/components/Footer";
@@ -20,10 +22,13 @@ export default async function RootLayout({
   return (
     <html lang="ru">
       <body className={styles.body}>
+        <Accessibility />
+        <div id="site-content">
         <Header />
         {children}
         <Footer />
         {modal}
+        </div>
       </body>
     </html>
   );

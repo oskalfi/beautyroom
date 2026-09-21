@@ -55,9 +55,12 @@ export const Header = () => {
         const lastLink = links[links.length - 1];
 
         // Если фокус на последней ссылке — принудительно переносим на ПЕРВУЮ ссылку списка
-        if (document.activeElement === lastLink) {
+        if (!e.shiftKey && document.activeElement === lastLink) {
           e.preventDefault();
           firstLink.focus();
+        } else if (e.shiftKey && document.activeElement === firstLink) {
+          e.preventDefault();
+          lastLink.focus();
         }
       }
     };

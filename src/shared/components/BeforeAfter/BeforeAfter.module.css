@@ -56,3 +56,13 @@
     aspect-ratio: 9 / 16;
   }
 }
+
+/* Указатель не нуждается в рамке фокуса; клавиатурный фокус сохраняем. */
+.slider:focus:not(:focus-visible),
+.slider.isDragging {
+  outline: none !important;
+}
+.slider:focus-visible:not(.isDragging) {
+  outline: 3px solid var(--a11y-focus);
+  outline-offset: 3px;
+}

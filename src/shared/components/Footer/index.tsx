@@ -2,7 +2,6 @@
 import { BOOKING_URL } from "@/shared/config/booking";
 import { LazyImage } from "@/shared/components/LazyImage";
 
-
 import styles from "./Footer.module.css";
 import Link from "next/link";
 import gsap from "gsap";
@@ -31,7 +30,12 @@ export const Footer = () => {
 
   return (
     <footer className={styles.footer} ref={footerRef}>
-      <LazyImage src="/flag.svg" alt="Logo" className={styles.logo} ref={logoRef} />
+      <LazyImage
+        src="/flag.svg"
+        alt="Logo"
+        className={styles.logo}
+        ref={logoRef}
+      />
       <div className={styles.linksWrapper}>
         <nav aria-labelledby="site-navigation-title">
           <h2 className={styles.heading} id="site-navigation-title">
@@ -65,6 +69,14 @@ export const Footer = () => {
             <li className={styles.navigationItem}>
               <Link href="/address" className={styles.navigationLink}>
                 Расположение
+                <svg className={styles.border}>
+                  <rect x="0" y="0" width="100%" height="100%" rx="16" />
+                </svg>
+              </Link>
+            </li>
+            <li className={styles.navigationItem}>
+              <Link href="/accessibility" className={styles.navigationLink}>
+                Доступность
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
                 </svg>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useAccessibility, useMotionStopped } from "@/shared/components/Accessibility/store";
 import { WelcomeBookingButton } from "./WelcomeBookingButton";
 import styles from "./WelcomeSection.module.css";
 import gsap from "gsap";
@@ -12,12 +13,18 @@ import { enableScrollParallax } from "./animations/enableScrollParallax";
 export const WelcomeSection = () => {
   const welcomeSection = useRef<HTMLElement>(null);
   const background = useRef<HTMLDivElement>(null);
+  const motionStopped = useMotionStopped();
+
+  useEffect(() => {
+    // Read the persisted setting too: hydration may precede the hook's next render.
+    const stopped = useAccessibility.getState().motion ?? window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (motionStopped || stopped) return;
+    return enableScrollParallax(background.current!);
+  }, [motionStopped]);
 
   useEffect(() => {
     let cancelled = false;
-    const context = gsap.context(() => {
-      enableScrollParallax(`.${styles.backgroundImage}`);
-    }, welcomeSection);
+    const context = gsap.context(() => {}, welcomeSection);
     void Promise.allSettled([
       loadElementFont(
         welcomeSection.current?.querySelector(`.${styles.h1}`) ?? null,

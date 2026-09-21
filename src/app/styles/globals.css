@@ -618,3 +618,18 @@ h2 {
 html {
   font-size: var(--font-size-root);
 }
+
+:root {
+  /* Виджет доступности: поверхность, текст, выбранные настройки и фокус */
+  --a11y-panel: #fff9f5;
+  --a11y-text: #422b23;
+  --a11y-selected: #ffc0c9;
+  --a11y-focus: #075bb5;
+}
+
+:root {
+  /* Заявление о доступности: основной текст и заголовки */
+  --accessibility-statement-text-size: 18px;
+  --accessibility-statement-title-size: 36px;
+  --accessibility-statement-heading-size: 26px;
+}

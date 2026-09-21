@@ -127,9 +127,10 @@ export const Carousel = () => {
       </div>
 
       <button
+        aria-label="Предыдущее видео"
         onClick={() => {
           itemRefs.current[Math.max(0, activeIndex - 1)]?.scrollIntoView({
-            behavior: "smooth",
+            behavior: document.documentElement.dataset.a11yMotion === "true" ? "instant" : "smooth",
             inline: "center",
             block: "nearest",
           });
@@ -143,11 +144,12 @@ export const Carousel = () => {
         <ArrowSVG className={styles.arrow} />
       </button>
       <button
+        aria-label="Следующее видео"
         onClick={() => {
           itemRefs.current[
             Math.min(activeIndex + 1, MOCKDATA.length - 1)
           ]?.scrollIntoView({
-            behavior: "smooth",
+            behavior: document.documentElement.dataset.a11yMotion === "true" ? "instant" : "smooth",
             inline: "center",
             block: "nearest",
           });

@@ -1,5 +1,6 @@
 "use client";
 
+import { useMotionStopped } from "@/shared/components/Accessibility/store";
 import dynamic from "next/dynamic";
 import { useSyncExternalStore, type RefObject } from "react";
 import { FingerprintSVG } from "@/shared/assets/svg/Fingerprint";
@@ -17,6 +18,7 @@ const getSnapshot = () => window.matchMedia(mobileQuery).matches;
 const getServerSnapshot = () => false;
 
 export function WelcomeBookingButton({ backdropRef }: { backdropRef: RefObject<HTMLDivElement | null> }) {
+  const motionStopped = useMotionStopped();
   const isMobile = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   return (
     <a
@@ -24,7 +26,7 @@ export function WelcomeBookingButton({ backdropRef }: { backdropRef: RefObject<H
       className={styles.bookingButton}
     >
       <span className={styles.glassSurface} aria-hidden="true">
-        {isMobile && <GlassSurface backdropRef={backdropRef} />}
+        {isMobile && !motionStopped && <GlassSurface backdropRef={backdropRef} />}
       </span>
       <span className={styles.bookingFingerprint} aria-hidden="true">
         <FingerprintSVG className={styles.fingerprint} />

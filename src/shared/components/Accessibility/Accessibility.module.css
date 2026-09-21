@@ -1,0 +1,147 @@
+.trigger {
+  position: fixed;
+  inset-inline-start: 16px;
+  bottom: max(64px, env(safe-area-inset-bottom));
+  z-index: 10000;
+  width: 56px;
+  height: 56px;
+  border: 2px solid var(--a11y-text);
+  border-radius: 50%;
+  padding: 0;
+  background: var(--a11y-panel);
+  cursor: pointer;
+  box-shadow: 0 3px 14px #0003;
+}
+.trigger img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.panel {
+  position: fixed;
+  inset: auto;
+  left: 16px;
+  bottom: 132px;
+  width: min(380px, calc(100vw - 32px));
+  max-height: calc(100dvh - 154px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  margin: 0;
+  padding: 20px;
+  border: 2px solid var(--a11y-text);
+  border-radius: 18px;
+  background: var(--a11y-panel);
+  color: var(--a11y-text);
+  font:
+    16px/1.5 Arial,
+    sans-serif;
+  box-shadow: 0 10px 40px #0004;
+}
+.panel::backdrop {
+  background: #0005;
+}
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.titleRow h2 {
+  font:
+    300 24px/1.3 Arial,
+    sans-serif;
+}
+.panel fieldset {
+  border: 0;
+  padding: 12px 0;
+  margin: 12px 0;
+  display: grid;
+  gap: 8px;
+  border-top: 1px solid var(--a11y-text);
+}
+.panel legend {
+  font-weight: 700;
+  padding: 0 8px 0 0;
+}
+.panel button,
+.panel select {
+  font: inherit;
+  min-height: 44px;
+  padding: 9px 12px;
+  border: 1px solid var(--a11y-text);
+  border-radius: 8px;
+  color: var(--a11y-text);
+  background: var(--a11y-panel);
+  cursor: pointer;
+  white-space: normal;
+}
+.panel button[aria-pressed="true"] {
+  background: var(--a11y-selected);
+  color: var(--a11y-text);
+  border-width: 2px;
+}
+.panel button[aria-pressed="true"]::before {
+  content: "✓ ";
+}
+.panel button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.panel p {
+  font:
+    14px/1.5 Arial,
+    sans-serif;
+  margin: 0;
+}
+.fontSize {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.statement {
+  display: block;
+  color: var(--a11y-text);
+  text-decoration: underline;
+  margin-top: 20px;
+}
+.trigger:focus-visible,
+.panel :focus-visible,
+.skip:focus-visible {
+  outline: 3px solid var(--a11y-focus);
+  outline-offset: 3px;
+}
+.trigger:focus-visible {
+  outline: 6px solid white;
+}
+.skip {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 10001;
+  padding: 12px;
+  background: var(--a11y-panel);
+  color: var(--a11y-text);
+  font:
+    16px Arial,
+    sans-serif;
+  transform: translateY(-200%);
+}
+.skip:focus {
+  transform: none;
+}
+.ruler {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  --reading-y: 50vh;
+  background: linear-gradient(
+    to bottom,
+    #0009 0,
+    #0009 calc(var(--reading-y) - 44px),
+    transparent calc(var(--reading-y) - 44px),
+    transparent calc(var(--reading-y) + 44px),
+    #0009 calc(var(--reading-y) + 44px)
+  );
+}

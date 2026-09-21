@@ -43,6 +43,28 @@ export const BeforeAfter = ({ className, beforeSrc, afterSrc, name }: TBeforeAft
       slider.classList.remove(styles.isDragging);
     };
 
+    const setPosition = (percent: number) => {
+      if (!container) return;
+      const width = container.getBoundingClientRect().width;
+      const x = Math.max(15, Math.min(width * percent / 100, width - 15));
+      const position = x / width * 100;
+      slider.style.left = `${position}%`;
+      beforeImage.style.clipPath = `inset(0 ${100 - position}% 0 0)`;
+      slider.setAttribute("aria-valuenow", String(Math.round((x - 15) / (width - 30) * 100)));
+    };
+    slider.setAttribute("role", "slider");
+    slider.setAttribute("tabindex", "0");
+    slider.setAttribute("aria-label", "Сравнение фото до и после");
+    slider.setAttribute("aria-valuemin", "0");
+    slider.setAttribute("aria-valuemax", "100");
+    slider.setAttribute("aria-valuenow", "0");
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+      const current = parseFloat(slider.style.left) || 0;
+      setPosition(event.key === "Home" ? 0 : event.key === "End" ? 100 : current + (event.key === "ArrowRight" ? 5 : -5));
+    };
+    slider.addEventListener("keydown", onKeyDown);
     const onPointerMove = (e: PointerEvent) => {
       if (!isDragging) return;
 
@@ -51,14 +73,14 @@ export const BeforeAfter = ({ className, beforeSrc, afterSrc, name }: TBeforeAft
       let x = e.clientX - rect.left;
       x = Math.max(15, Math.min(x, rect.width - 15));
       const sliderPosition = (x / rect.width) * 100;
-      slider.style.left = `${sliderPosition}%`;
-      beforeImage.style.clipPath = `inset(0 ${100 - sliderPosition}% 0 0)`;
+      setPosition(sliderPosition);
     };
     slider?.addEventListener("pointerdown", onPointerDown);
     slider?.addEventListener("pointerup", onPointerUp);
     slider?.addEventListener("pointercancel", onPointerCancel);
     container?.addEventListener("pointermove", onPointerMove);
     return () => {
+      slider.removeEventListener("keydown", onKeyDown);
       slider?.removeEventListener("pointerdown", onPointerDown);
       slider?.removeEventListener("pointerup", onPointerUp);
       slider?.removeEventListener("pointercancel", onPointerCancel);

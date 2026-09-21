@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BOOKING_URL } from "@/shared/config/booking";
 import { useId } from "react";
 import styles from "./page.module.css";
 
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 
 const contacts = [
   { app: "Номер телефона", contact: "+972-53-225-80-55", href: "tel:+972532258055", icon: "phone" },
-  { app: "WhatsApp", contact: "+972-53-225-80-55", href: "https://wa.me/972532258055", icon: "whatsapp" },
+  { app: "WhatsApp", contact: "+972-53-225-80-55", href: BOOKING_URL, icon: "whatsapp" },
   { app: "Instagram", contact: "@kristina_beautician", href: "https://ig.me/m/kristina_beautician", icon: "instagram" },
 ] as const;
 

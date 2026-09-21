@@ -5,7 +5,7 @@
   z-index: 10000;
   width: 56px;
   height: 56px;
-  border: 2px solid var(--a11y-text);
+  border: 2px solid var(--brown);
   border-radius: 50%;
   padding: 0;
   background: var(--a11y-panel);

@@ -9,8 +9,7 @@ import { moveBlockToTop } from "../treatmentsItem/animations/moveBlockToTop";
 import { setStartingPosition } from "../treatmentsItem/animations/setStartingPosition";
 import { isCursorEnteredFromTop } from "../../utils/isCursorEnteredFromTop";
 import { treatmentDataProps } from "../../../../shared/model/types";
-import { useRouter, getPathname } from "@/i18n/navigation";
-import { useLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 function handleMouseEnter(event: React.MouseEvent<HTMLLIElement>) {
   if (event.currentTarget.dataset.focusActive === "true") return;
@@ -55,20 +54,21 @@ function handleMouseLeave(event: React.MouseEvent<HTMLLIElement>) {
 }
 
 export const TreatmentItem = ({ id, name }: treatmentDataProps) => {
-  const router = useRouter();
   const href = `/treatments/${id}`;
-  const locale = useLocale();
   return (
     <li
       id={`${id}`}
       data-treatment-item
+      data-press-feedback
       className={styles.button}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <a
+      <Link
         data-treatment-link
-        href={getPathname({ locale, href })}
+        href={href}
+        prefetch={true}
+        scroll={false}
         className={styles.link}
         onClick={(event) => {
           if (
@@ -81,9 +81,9 @@ export const TreatmentItem = ({ id, name }: treatmentDataProps) => {
           )
             return;
           // Full navigation on phones opens the standalone treatment page.
-          if (window.matchMedia("(min-width: 768px)").matches) {
+          if (window.matchMedia("(max-width: 767px)").matches) {
             event.preventDefault();
-            router.push(href, { scroll: false });
+            window.location.assign(event.currentTarget.href);
           }
         }}
       >
@@ -109,7 +109,7 @@ export const TreatmentItem = ({ id, name }: treatmentDataProps) => {
         </div>
         <span className={styles.buttonText}>{name}</span>
         <div className={styles.invisibleBlock} />
-      </a>
+      </Link>
     </li>
   );
 };

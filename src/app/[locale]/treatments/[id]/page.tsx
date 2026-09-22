@@ -49,7 +49,7 @@ export default async function TreatmentPage({
           <p className={styles.eyebrow}>Beauty Room / Уход за лицом</p>
           <h1 id="treatment-title" className={styles.title}>{treatment.name}</h1>
           <p className={styles.description}>{treatment.description}</p>
-          <a href={BOOKING_URL} className={styles.primaryLink}>Записаться на процедуру <span aria-hidden="true">↗</span></a>
+          <a data-press-feedback href={BOOKING_URL} className={styles.primaryLink}>Записаться на процедуру <span aria-hidden="true">↗</span></a>
           <p className={styles.caption}>Начинаем с оценки состояния вашей кожи</p>
         </div>
       </section>
@@ -113,7 +113,7 @@ export default async function TreatmentPage({
           <h2 id="booking-title">Начнём со знакомства</h2>
           <p>Обсудим вашу кожу и подберём подходящий уход.</p>
         </div>
-        <a href={BOOKING_URL} className={styles.primaryLink}>Записаться в WhatsApp <span aria-hidden="true">↗</span></a>
+        <a data-press-feedback href={BOOKING_URL} className={styles.primaryLink}>Записаться в WhatsApp <span aria-hidden="true">↗</span></a>
       </section>
     </main>
   );

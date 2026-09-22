@@ -35,6 +35,7 @@
 }
 
 .mapWrapper {
+  display: block;
   grid-area: map;
 }
 
@@ -70,9 +71,6 @@
   transform: scale(1.05);
 }
 
-.contentWrapper:active {
-  transform: scale(1);
-}
 
 .wazeIcon {
   user-select: none;

@@ -48,7 +48,7 @@ export const Footer = () => {
           </h2>
           <ul className={styles.linksList}>
             <li className={styles.navigationItem}>
-              <a href={BOOKING_URL} className={styles.navigationLink}>
+              <a data-press-feedback href={BOOKING_URL} className={styles.navigationLink}>
                 {t("booking")}
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
@@ -57,6 +57,7 @@ export const Footer = () => {
             </li>
             <li className={styles.navigationItem}>
               <Link
+                data-press-feedback
                 href="/procedures"
                 className={clsx(
                   styles.navigationLink,
@@ -71,6 +72,7 @@ export const Footer = () => {
             </li>
             <li className={styles.navigationItem}>
               <Link
+                data-press-feedback
                 href="/cosmetics"
                 className={clsx(
                   styles.navigationLink,
@@ -85,6 +87,7 @@ export const Footer = () => {
             </li>
             <li className={styles.navigationItem}>
               <Link
+                data-press-feedback
                 href="/address"
                 className={clsx(
                   styles.navigationLink,
@@ -99,6 +102,7 @@ export const Footer = () => {
             </li>
             <li className={styles.navigationItem}>
               <Link
+                data-press-feedback
                 href="/accessibility"
                 className={clsx(
                   styles.navigationLink,
@@ -119,7 +123,7 @@ export const Footer = () => {
           </h2>
           <ul className={styles.linksList}>
             <li className={styles.navigationItem}>
-              <a href="tel:+972532258055" className={styles.navigationLink}>
+              <a data-press-feedback href="tel:+972532258055" className={styles.navigationLink}>
                 +972-53-225-80-55
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
@@ -128,6 +132,7 @@ export const Footer = () => {
             </li>
             <li className={styles.navigationItem}>
               <a
+                data-press-feedback
                 href="mailto:beautyroom@gmail.com"
                 className={styles.navigationLink}
               >
@@ -145,7 +150,7 @@ export const Footer = () => {
           </h2>
           <ul className={styles.linksList}>
             <li className={styles.navigationItem}>
-              <a href="..." className={styles.navigationLink}>
+              <a data-press-feedback href="..." className={styles.navigationLink}>
                 Instagram
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
@@ -153,7 +158,7 @@ export const Footer = () => {
               </a>
             </li>
             <li className={styles.navigationItem}>
-              <a href="..." className={styles.navigationLink}>
+              <a data-press-feedback href="..." className={styles.navigationLink}>
                 Facebook
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
@@ -161,7 +166,7 @@ export const Footer = () => {
               </a>
             </li>
             <li className={styles.navigationItem}>
-              <a href="..." className={styles.navigationLink}>
+              <a data-press-feedback href="..." className={styles.navigationLink}>
                 Whatsapp
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />

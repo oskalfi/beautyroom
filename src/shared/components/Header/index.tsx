@@ -103,6 +103,7 @@ export const Header = () => {
           <ul className={styles.navigationList}>
             <li className={styles.navigationItem}>
               <Link
+                data-press-feedback
                 href="/procedures"
                 className={clsx(
                   styles.navigationLink,
@@ -118,6 +119,7 @@ export const Header = () => {
             </li>
             <li className={styles.navigationItem}>
               <Link
+                data-press-feedback
                 href="/cosmetics"
                 className={clsx(
                   styles.navigationLink,
@@ -133,6 +135,7 @@ export const Header = () => {
             </li>
             <li className={styles.navigationItem}>
               <Link
+                data-press-feedback
                 href="/address"
                 className={clsx(
                   styles.navigationLink,
@@ -148,6 +151,7 @@ export const Header = () => {
             </li>
             <li className={styles.navigationItem}>
               <Link
+                data-press-feedback
                 href="/contacts"
                 className={clsx(
                   styles.navigationLink,

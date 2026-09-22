@@ -5,6 +5,8 @@
   background: transparent;
   overflow: hidden;
   cursor: pointer;
+  scale: 1;
+  transform-origin: center;
 }
 
 .buttonText {
@@ -130,4 +132,15 @@
     /* Переопределяем только старт, --anim-mid: 5px унаследуется из 580px */
     --anim-start: -3px;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    scale: 1;
+    transition: none;
+  }
+}
+
+:global(html[data-a11y-motion="true"]) .button {
+  scale: 1;
 }

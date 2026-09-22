@@ -35,7 +35,7 @@ const ModalTreatment = ({
         </Heading>
         <div className={styles.descriptionWrapper}>
           <p className={styles.description}>{treatmentInfo?.description}</p>
-          <div className={styles.infButton}>
+          <div className={styles.infButton} data-press-feedback>
             <a href={getPathname({ locale, href: `/treatments/${id}` })} className={styles.buttonText}>
               Узнать подробнее
             </a>

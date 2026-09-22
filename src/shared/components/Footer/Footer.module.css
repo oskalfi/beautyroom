@@ -61,6 +61,7 @@
 }
 
 .navigationLink {
+  display: inline-block;
   position: relative;
   padding: 8px 14px;
   white-space: nowrap;

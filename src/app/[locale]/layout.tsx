@@ -9,6 +9,7 @@ import { LanguageSwitcher } from "@/shared/components/LanguageSwitcher";
 import { FirstScreenLoader } from "@/shared/components/FirstScreenLoader";
 import { Accessibility } from "@/shared/components/Accessibility";
 import styles from "@/app/layout.module.css";
+import { PressFeedback } from "@/shared/components/PressFeedback";
 import { Header } from "@/shared/components/Header";
 import { Footer } from "@/shared/components/Footer";
 
@@ -39,6 +40,7 @@ export default async function RootLayout({
     <html lang={locale} dir={locale === "he" ? "rtl" : "ltr"}>
       <body className={styles.body}>
         <NextIntlClientProvider>
+        <PressFeedback />
         <Accessibility />
         <LanguageSwitcher />
         <div id="site-content" className={styles.siteContent}>

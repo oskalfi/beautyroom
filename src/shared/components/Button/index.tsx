@@ -31,14 +31,14 @@ export const Button = (props: ButtonProps) => {
 
   if (props.href !== undefined) {
     return (
-      <a href={props.href} onClick={props.onClick} aria-label={ariaLabel} className={buttonClassName}>
+      <a data-press-feedback href={props.href} onClick={props.onClick} aria-label={ariaLabel} className={buttonClassName}>
         {content}
       </a>
     );
   }
 
   return (
-    <button type="button" onClick={props.onClick} aria-label={ariaLabel} className={buttonClassName}>
+    <button data-press-feedback type="button" onClick={props.onClick} aria-label={ariaLabel} className={buttonClassName}>
       {content}
     </button>
   );

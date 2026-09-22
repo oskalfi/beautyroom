@@ -77,6 +77,7 @@
 }
 
 .navigationLink {
+  display: inline-block;
   position: relative;
   font-weight: var(--header-navigation-link-font-weight);
   padding: 8px 14px;

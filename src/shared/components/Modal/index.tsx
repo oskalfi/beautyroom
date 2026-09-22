@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useLayoutEffect, useRef } from "react";
 import type { ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./Modal.module.css";
@@ -10,7 +10,7 @@ export const Modal = ({ children, label }: { children: ReactNode; label: string 
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const router = useRouter();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const element = dialog.current;
     if (!element) return;
     if (!element.open) element.showModal();

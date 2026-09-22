@@ -102,6 +102,7 @@ export const AddressSection = () => {
       </div>
 
       <a
+        data-press-feedback
         aria-label="Построить маршрут в Waze"
         target="_blank"
         href="https://waze.com/ul?q=Jerusalem%20Blvd%2033%2C%20Tel%20Aviv-Yafo&navigate=yes"
@@ -135,6 +136,7 @@ export const AddressSection = () => {
         </address>
       </a>
       <a
+        data-press-feedback
         aria-label="Открыть карту в Google Maps"
         target="_blank"
         className={styles.mapWrapper}

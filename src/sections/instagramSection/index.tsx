@@ -57,6 +57,7 @@ export const InstagramSection = () => {
 
       <Carousel />
       <a
+        data-press-feedback
         onClick={handleClick}
         href="https://www.instagram.com/kristina_beautician/"
         className={styles.buttonWrapper}

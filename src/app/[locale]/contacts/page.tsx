@@ -52,7 +52,7 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
         <ul className={styles.contacts}>
           {contacts.map(({ app, contact, href, icon }) => (
             <li key={icon}>
-              <a className={styles.contactLink} href={href}>
+              <a data-press-feedback className={styles.contactLink} href={href}>
                 <span className={styles.icon}><ContactIcon type={icon} /></span>
                 <span className={styles.label}>{app}. <span className={styles.contact}>{contact}</span></span>
                 <span className={styles.arrow} aria-hidden="true">↗</span>

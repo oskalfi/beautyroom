@@ -25,7 +25,7 @@ export default async function CosmeticsPage({ params }: { params: Promise<{ loca
             средства после консультации или процедуры — с учётом типа кожи, её
             текущего состояния и ваших пожеланий.
           </p>
-          <Link href="/contacts" className={styles.button}>
+          <Link data-press-feedback href="/contacts" className={styles.button}>
             Обсудить подбор ухода <span aria-hidden="true">↗</span>
           </Link>
         </section>
@@ -56,7 +56,7 @@ export default async function CosmeticsPage({ params }: { params: Promise<{ loca
             </h2>
             <p>
               После{" "}
-              <Link href="/procedures" className={styles.link}>
+              <Link data-press-feedback href="/procedures" className={styles.link}>
                 косметологических процедур
               </Link>{" "}
               потребности кожи могут отличаться от привычных. Специалист
@@ -83,9 +83,9 @@ export default async function CosmeticsPage({ params }: { params: Promise<{ loca
           </p>
           <p>
             Принимаем в Тель-Авиве — Яффо:{" "}
-            <Link href="/address">Jerusalem Blvd 33</Link>.
+            <Link data-press-feedback href="/address">Jerusalem Blvd 33</Link>.
           </p>
-          <Link href="/contacts" className={styles.button}>
+          <Link data-press-feedback href="/contacts" className={styles.button}>
             Связаться со специалистом <span aria-hidden="true">↗</span>
           </Link>
         </section>

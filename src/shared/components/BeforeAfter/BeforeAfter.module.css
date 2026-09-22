@@ -35,7 +35,7 @@
   top: 0;
   left: 15px;
   transform: translateX(-50%);
-  cursor: pointer;
+  cursor: grab;
   touch-action: none;
   user-select: none;
   color: var(--before-after-slider-color);
@@ -43,6 +43,10 @@
   transition: 0.1s transform ease;
   padding: 0 24px;
   -webkit-tap-highlight-color: transparent;
+}
+
+.slider:active {
+  cursor: grabbing;
 }
 
 .isDragging {

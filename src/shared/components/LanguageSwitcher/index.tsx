@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { getPathname, usePathname } from "@/i18n/navigation";
+import { getPathname, usePathname, useRouter } from "@/i18n/navigation";
 import { Select } from "@/shared/components/Select";
 import styles from "./LanguageSwitcher.module.css";
 
@@ -14,6 +14,7 @@ const languages = [
 export function LanguageSwitcher() {
   const locale = useLocale();
   const pathname = usePathname();
+  const router = useRouter();
   const t = useTranslations("Navigation");
 
   return (
@@ -29,6 +30,12 @@ export function LanguageSwitcher() {
         onChange={id => {
           const next = languages.find(language => language.id === id)?.locale;
           if (!next || next === locale) return;
+          const suffix = window.location.search + window.location.hash;
+          if (document.querySelector("main[data-not-found]")) {
+            // Keep the app mounted instead of reloading fonts, scripts and widgets.
+            router.replace(pathname + suffix, { locale: next, scroll: false });
+            return;
+          }
           // Full navigation also resets intercepted modal slots when changing language.
           window.location.assign(getPathname({ locale: next, href: pathname }) + window.location.search + window.location.hash);
         }}

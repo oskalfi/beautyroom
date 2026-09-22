@@ -162,7 +162,7 @@ export const Footer = () => {
             <li className={styles.navigationItem}>
               <a
                 data-press-feedback
-                href="..."
+                href="https://www.instagram.com/kristina_beautician/"
                 className={styles.navigationLink}
               >
                 Instagram
@@ -174,19 +174,7 @@ export const Footer = () => {
             <li className={styles.navigationItem}>
               <a
                 data-press-feedback
-                href="..."
-                className={styles.navigationLink}
-              >
-                Facebook
-                <svg className={styles.border}>
-                  <rect x="0" y="0" width="100%" height="100%" rx="16" />
-                </svg>
-              </a>
-            </li>
-            <li className={styles.navigationItem}>
-              <a
-                data-press-feedback
-                href="..."
+                href={BOOKING_URL}
                 className={styles.navigationLink}
               >
                 Whatsapp

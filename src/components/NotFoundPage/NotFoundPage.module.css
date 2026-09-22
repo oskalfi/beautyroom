@@ -1,0 +1,121 @@
+.page {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100svh;
+  background: var(--white);
+  color: var(--primary-color);
+  padding: 20px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  --button-secondary-text-color: var(--brown);
+  --button-secondary-outline-color: var(--brown);
+  --button-fingerprint-color: var(--primary-color);
+  --button-hover-background-color: var(--primary-color);
+  --button-hover-text-color: var(--brown);
+  --button-hover-fingerprint-text-color: var(--white);
+  --button-focus-visible-outline-color: var(--brown);
+}
+.logoLink {
+  display: block;
+  position: relative;
+  z-index: 1;
+  color: var(--primary-color);
+}
+.logoLink:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 8px;
+}
+.content {
+  width: 100%;
+  margin-block: clamp(60px, 17.5vh, 175px) auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 64px;
+  z-index: 1;
+}
+.title {
+  margin: 0;
+  width: min(654px, 70vw);
+}
+.number {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.message {
+  margin: 12px 0 0;
+  font-family:
+    var(--font-family-montserrat-alternates, "MontserratAlternates"), sans-serif;
+  font-size: clamp(18px, 1.25vw, 24px);
+  line-height: 1.6;
+  font-weight: 400;
+}
+.page .homeButton {
+  padding: 16px 30px;
+  text-transform: none;
+  font-size: 16px;
+}
+.topLeaf,
+.bottomLeaf {
+  position: absolute;
+  height: auto;
+  pointer-events: none;
+  z-index: 0;
+}
+.topLeaf {
+  width: min(23vw, 437px);
+  top: 10px;
+  right: 0;
+}
+.bottomLeaf {
+  width: min(15vw, 287px);
+  bottom: 0;
+  left: 0;
+}
+/* The localized not-found boundary is rendered inside the shared layout. */
+:global(#site-content):has(.page) > :global(header),
+:global(#site-content):has(.page) > :global(footer) {
+  display: none;
+}
+@media (max-width: 600px) {
+  .page {
+    padding: 5vw 6vw 43vw;
+    min-height: max(100svh, 169.5vw);
+  }
+  .logoLink {
+    --logo-width: 34vw;
+  }
+  .content {
+    margin-top: 35vw;
+    margin-bottom: 0;
+    gap: 7.7vw;
+  }
+  .title {
+    width: 67.5vw;
+  }
+  .message {
+    margin: 0;
+    max-width: 64vw;
+    font-size: clamp(18px, 4.58vw, 27px);
+    line-height: 1.25;
+  }
+  .page .homeButton {
+    margin-top: 2vw;
+    width: 45vw;
+    min-height: 52px;
+  }
+  .topLeaf {
+    width: 55vw;
+    top: -5vw;
+    right: -16vw;
+  }
+  .bottomLeaf {
+    width: 40vw;
+    left: -7vw;
+    bottom: -19vw;
+  }
+}

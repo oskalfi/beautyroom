@@ -267,3 +267,5 @@
 
 .desktopBooking { display: flex; align-items: center; gap: 12px; }
 @media (max-width: 960px) { .desktopBooking { display: none; } }
+
+.logoArtwork { display: contents; }

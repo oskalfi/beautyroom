@@ -1,0 +1,22 @@
+.logo {
+  display: block;
+  position: relative;
+  width: var(--logo-width, 254px);
+  height: auto;
+  aspect-ratio: 254 / 119;
+  color: inherit;
+}
+.text {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  left: 0;
+  top: 40.336%;
+}
+.silhouette {
+  position: absolute;
+  width: 16.535%;
+  height: 100%;
+  top: 0;
+  left: 46.457%;
+}

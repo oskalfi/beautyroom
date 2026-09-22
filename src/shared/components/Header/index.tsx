@@ -6,8 +6,7 @@ import styles from "./Header.module.css";
 import { Link } from "@/i18n/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
-import { BeautyRoomSVG } from "@/shared/assets/svg/BeautyRoom";
-import { SilhouetteSVG } from "@/shared/assets/svg/Silhouette";
+import { Logo } from "@/components/Logo";
 import { Button } from "@/shared/components/Button";
 import { paintSilhouette } from "./animations/collapseHeader";
 import { MenuButton } from "../menuButton";
@@ -94,9 +93,8 @@ export const Header = () => {
           <MenuButton isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
 
-        <Link href="/" className={styles.logo} onClick={() => setIsOpen(false)}>
-          <BeautyRoomSVG className={styles.logoText} />
-          <SilhouetteSVG className={styles.logoSilhouette} />
+        <Link href="/" aria-label="Beauty Room" className={styles.logo} onClick={() => setIsOpen(false)}>
+          <Logo className={styles.logoArtwork} textClassName={styles.logoText} silhouetteClassName={styles.logoSilhouette} />
         </Link>
 
         <nav className={styles.navigation}>

@@ -22,12 +22,12 @@ export const Footer = () => {
 
   useGSAP(() => {
     gsap.from(logoRef.current, {
-      y: "-100%",
+      yPercent: -100,
       duration: 2,
       ease: "bounce.inOut",
       scrollTrigger: {
         trigger: footerRef.current,
-        start: "start bottom",
+        start: "top bottom",
         toggleActions: "play none none none",
       },
     });
@@ -37,6 +37,8 @@ export const Footer = () => {
     <footer className={styles.footer} ref={footerRef}>
       <LazyImage
         src="/flag.svg"
+        width={212}
+        height={295}
         alt="Logo"
         className={styles.logo}
         ref={logoRef}

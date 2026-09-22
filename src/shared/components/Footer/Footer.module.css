@@ -26,7 +26,8 @@
 
 .logo {
   display: block;
-  height: fit-content;
+  height: auto;
+  align-self: flex-start;
 }
 
 .linksWrapper {

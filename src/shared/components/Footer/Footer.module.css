@@ -24,6 +24,11 @@
   overflow: hidden;
 }
 
+.logo {
+  display: block;
+  height: fit-content;
+}
+
 .linksWrapper {
   display: flex;
   width: 100%;

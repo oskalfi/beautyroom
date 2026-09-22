@@ -13,10 +13,11 @@ type SelectProps = {
   allLabel?: string;
   label?: string;
   triggerContent?: ReactNode;
+  pressFeedback?: boolean;
   placement?: "bottom" | "top";
 };
 
-export const Select = ({ className, value, onChange, options = mockTreatments, allLabel, label = "Выберите процедуру", triggerContent, placement = "bottom" }: SelectProps) => {
+export const Select = ({ className, value, onChange, options = mockTreatments, allLabel, label = "Выберите процедуру", triggerContent, pressFeedback = false, placement = "bottom" }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const [internalValue, setInternalValue] = useState<number | null>(null);
@@ -71,7 +72,7 @@ export const Select = ({ className, value, onChange, options = mockTreatments, a
   return (
     <div ref={containerRef} className={clsx(styles.select, className, { [styles.isOpen]: isOpen, [styles.opensUp]: placement === "top" })}
       onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setIsOpen(false); }}>
-      <button ref={buttonRef} type="button" role="combobox" aria-label={label}
+      <button data-press-feedback={pressFeedback || undefined} ref={buttonRef} type="button" role="combobox" aria-label={label}
         aria-haspopup="listbox" aria-controls={listId} aria-expanded={isOpen}
         aria-activedescendant={isOpen && items.length ? `${listId}-${highlightedIndex}` : undefined}
         className={clsx(styles.openButton, { [styles.iconButton]: triggerContent !== undefined })} onClick={() => isOpen ? setIsOpen(false) : open()} onKeyDown={handleKeyDown}>

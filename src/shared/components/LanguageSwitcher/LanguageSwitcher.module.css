@@ -5,6 +5,9 @@
   z-index: 10000;
   width: 56px;
   height: 56px;
+}
+
+.switcher .select > button {
   border-radius: 50%;
   background: url("/langButton.svg") center / contain no-repeat;
   box-shadow: 0 3px 14px #0003;

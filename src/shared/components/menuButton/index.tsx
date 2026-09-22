@@ -50,6 +50,7 @@ export const MenuButton = ({
 
   return (
     <button
+      data-press-feedback
       type="button"
       className={styles.menuButton}
       onClick={toggleMenu}

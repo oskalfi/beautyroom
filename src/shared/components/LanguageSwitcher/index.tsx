@@ -19,6 +19,7 @@ export function LanguageSwitcher() {
   return (
     <div className={styles.switcher} dir="ltr">
       <Select
+        pressFeedback
         className={styles.select}
         label={t("language")}
         value={languages.find(language => language.locale === locale)?.id}

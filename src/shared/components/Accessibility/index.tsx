@@ -75,6 +75,7 @@ export function Accessibility() {
         <div ref={ruler} className={styles.ruler} aria-hidden="true" />
       )}
       <button
+        data-press-feedback
         className={styles.trigger}
         type="button"
         aria-label="Настройки доступности"

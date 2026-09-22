@@ -9,6 +9,7 @@ import { mockVideos as MOCKDATA } from "@/shared/mocks/videos";
 import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { animateAppearance } from "./animations";
+import { useMouseDrag } from "./useMouseDrag";
 import { useNearViewport } from "@/shared/hooks/useNearViewport";
 import { CarouselItem } from "../CarouselItem";
 import { useMotionStopped } from "@/shared/components/Accessibility/store";
@@ -22,6 +23,8 @@ export const Carousel = () => {
 
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useMouseDrag(mediaContainer, motionStopped);
 
   const isNear = useNearViewport(mediaContainer, false);
 

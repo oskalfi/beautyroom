@@ -156,3 +156,19 @@
     transform: translateX(-5px) scale(0.9);
   }
 }
+
+@media (any-pointer: fine) {
+  .mediaContainer {
+    cursor: grab;
+  }
+}
+
+.mediaContainer[data-dragging="true"] {
+  cursor: grabbing;
+}
+
+.mediaContainer[data-dragging="true"],
+.mediaContainer[data-settling="true"] {
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}

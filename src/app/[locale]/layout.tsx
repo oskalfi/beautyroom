@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import "@/app/styles/globals.css";
 import "@/app/styles/accessibility.css";
 import { LanguageSwitcher } from "@/shared/components/LanguageSwitcher";
+import { FirstScreenLoader } from "@/shared/components/FirstScreenLoader";
 import { Accessibility } from "@/shared/components/Accessibility";
 import styles from "@/app/layout.module.css";
 import { Header } from "@/shared/components/Header";
@@ -42,9 +43,12 @@ export default async function RootLayout({
         <LanguageSwitcher />
         <div id="site-content" className={styles.siteContent}>
         <Header />
-        <div className={styles.pageContent}>{children}</div>
+        <div className={styles.pageContent} data-page-content>
+          {children}
+          <FirstScreenLoader />
+          {modal}
+        </div>
         <Footer />
-        {modal}
         </div>
         </NextIntlClientProvider>
       </body>

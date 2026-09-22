@@ -229,12 +229,6 @@
   opacity: 1;
 }
 
-.backgroundLoader {
-  --media-loader-duration: 1.2s;
-  display: grid;
-  place-items: center;
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: var(--white);
+.welcomeSection[data-first-screen-ready="false"] {
+  background-color: var(--white);
 }

@@ -15,7 +15,8 @@
     "toggleMenu": "Open or close menu",
     "loading": "Loading…",
     "preparing": "Preparing…",
-    "imageDownload": "Image download"
+    "imageDownload": "Image download",
+    "loadingAssets": "Loading images and fonts from the server"
   },
   "Metadata": {
     "title": "Beauty Room — facial skincare in Tel Aviv–Yafo",

@@ -5,14 +5,17 @@ import { DelayedLoading } from "@/shared/components/DelayedLoading";
 import { MediaLoader } from "@/shared/components/MediaLoader";
 import styles from "./PageLoader.module.css";
 
-export function PageLoader() {
+export function PageLoader({ delayed = true }: { delayed?: boolean }) {
   const t = useTranslations("Navigation");
-  return (
-    <DelayedLoading>
+  const loader = (
     <div className={styles.container}>
-      <MediaLoader label={t("loading")} />
-      <p className={styles.label} aria-hidden="true">{t("loading")}</p>
+      <div className={styles.indicator}>
+        <div className={styles.spinner}><MediaLoader label={t("loadingAssets")} /></div>
+        <p className={styles.label} aria-hidden="true">
+          {t("loadingAssets")}<span className={styles.dots} dir="ltr"><span>.</span><span>.</span><span>.</span></span>
+        </p>
+      </div>
     </div>
-    </DelayedLoading>
   );
+  return delayed ? <DelayedLoading>{loader}</DelayedLoading> : loader;
 }

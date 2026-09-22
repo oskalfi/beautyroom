@@ -15,7 +15,8 @@
     "toggleMenu": "פתיחה או סגירה של התפריט",
     "loading": "טוען…",
     "preparing": "בהכנה…",
-    "imageDownload": "הורדת תמונה"
+    "imageDownload": "הורדת תמונה",
+    "loadingAssets": "טוענים תמונות וגופנים מהשרת"
   },
   "Metadata": {
     "title": "Beauty Room — טיפולי פנים בתל אביב–יפו",

@@ -6,10 +6,7 @@ import styles from "./WelcomeSection.module.css";
 import gsap from "gsap";
 import { loadElementFont } from "@/shared/utils/loadElementFont";
 import { useEffect, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
 import { loadBackground } from "./loadBackground";
-import { DelayedLoading } from "@/shared/components/DelayedLoading";
-import { MediaLoader } from "@/shared/components/MediaLoader";
 import { UnderlineSVG } from "@/shared/assets/svg/Underline";
 import { revealWelcomeText } from "./animations/revealWelcomeText";
 import { enableScrollParallax } from "./animations/enableScrollParallax";
@@ -18,7 +15,6 @@ export const WelcomeSection = () => {
   const welcomeSection = useRef<HTMLElement>(null);
   const background = useRef<HTMLDivElement>(null);
   const motionStopped = useMotionStopped();
-  const t = useTranslations("Navigation");
   const [backgroundLoading, setBackgroundLoading] = useState(true);
 
   useEffect(() => {
@@ -71,18 +67,10 @@ export const WelcomeSection = () => {
     };
   }, []);
 
-  const loadingLabel = t("loading");
 
   return (
-    <section className={styles.welcomeSection} ref={welcomeSection}>
+    <section className={styles.welcomeSection} ref={welcomeSection} data-first-screen-ready={!backgroundLoading}>
       <div ref={background} className={styles.backgroundImage} />
-      {backgroundLoading && (
-        <div className={styles.backgroundLoader}>
-          <DelayedLoading>
-            <MediaLoader label={loadingLabel} />
-          </DelayedLoading>
-        </div>
-      )}
       <div className={styles.welcomeText} inert={backgroundLoading} style={{ opacity: backgroundLoading ? 0 : 1 }}>
         <h1 className={styles.h1}>
           <span className={styles.nowrap}>Beautiful skin</span>{" "}

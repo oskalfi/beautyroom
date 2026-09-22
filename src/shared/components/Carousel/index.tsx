@@ -11,8 +11,10 @@ import { useGSAP } from "@gsap/react";
 import { animateAppearance } from "./animations";
 import { useNearViewport } from "@/shared/hooks/useNearViewport";
 import { CarouselItem } from "../CarouselItem";
+import { useMotionStopped } from "@/shared/components/Accessibility/store";
 
 export const Carousel = () => {
+  const motionStopped = useMotionStopped();
   const mediaContainer = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(
     Math.floor((MOCKDATA.length - 1) / 2),
@@ -82,7 +84,7 @@ export const Carousel = () => {
   const [hintTrigger, setHintTrigger] = useState(0);
 
   useEffect(() => {
-    if (soundEnabled) return;
+    if (!isVisible || soundEnabled || motionStopped) return;
     let timeoutId: ReturnType<typeof setTimeout>;
 
     const triggerHint = () => {
@@ -91,14 +93,15 @@ export const Carousel = () => {
       timeoutId = setTimeout(triggerHint, 20000);
     };
 
-    // первый запуск через 2 секунды, последующие через 20
+    // Start only after entering the actual viewport, not the preload zone.
+    // First hint after 2 seconds; repeat every 20 seconds while visible.
 
     timeoutId = setTimeout(triggerHint, 2000);
 
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [activeIndex, soundEnabled]);
+  }, [activeIndex, soundEnabled, isVisible, motionStopped]);
 
   return (
     <div className={styles.carousel} ref={carouselRef}>

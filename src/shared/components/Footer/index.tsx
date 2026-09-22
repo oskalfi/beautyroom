@@ -27,7 +27,7 @@ export const Footer = () => {
       ease: "bounce.inOut",
       scrollTrigger: {
         trigger: footerRef.current,
-        start: "top bottom",
+        start: "99% bottom",
         toggleActions: "play none none none",
       },
     });
@@ -50,7 +50,11 @@ export const Footer = () => {
           </h2>
           <ul className={styles.linksList}>
             <li className={styles.navigationItem}>
-              <a data-press-feedback href={BOOKING_URL} className={styles.navigationLink}>
+              <a
+                data-press-feedback
+                href={BOOKING_URL}
+                className={styles.navigationLink}
+              >
                 {t("booking")}
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
@@ -125,7 +129,11 @@ export const Footer = () => {
           </h2>
           <ul className={styles.linksList}>
             <li className={styles.navigationItem}>
-              <a data-press-feedback href="tel:+972532258055" className={styles.navigationLink}>
+              <a
+                data-press-feedback
+                href="tel:+972532258055"
+                className={styles.navigationLink}
+              >
                 +972-53-225-80-55
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
@@ -152,7 +160,11 @@ export const Footer = () => {
           </h2>
           <ul className={styles.linksList}>
             <li className={styles.navigationItem}>
-              <a data-press-feedback href="..." className={styles.navigationLink}>
+              <a
+                data-press-feedback
+                href="..."
+                className={styles.navigationLink}
+              >
                 Instagram
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
@@ -160,7 +172,11 @@ export const Footer = () => {
               </a>
             </li>
             <li className={styles.navigationItem}>
-              <a data-press-feedback href="..." className={styles.navigationLink}>
+              <a
+                data-press-feedback
+                href="..."
+                className={styles.navigationLink}
+              >
                 Facebook
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
@@ -168,7 +184,11 @@ export const Footer = () => {
               </a>
             </li>
             <li className={styles.navigationItem}>
-              <a data-press-feedback href="..." className={styles.navigationLink}>
+              <a
+                data-press-feedback
+                href="..."
+                className={styles.navigationLink}
+              >
                 Whatsapp
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />

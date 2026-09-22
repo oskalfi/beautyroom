@@ -27,7 +27,7 @@ export const Footer = () => {
       ease: "bounce.inOut",
       scrollTrigger: {
         trigger: footerRef.current,
-        start: "99% bottom",
+        start: "1% bottom",
         toggleActions: "play none none none",
       },
     });

@@ -10,6 +10,7 @@ import { FirstScreenLoader } from "@/shared/components/FirstScreenLoader";
 import { Accessibility } from "@/shared/components/Accessibility";
 import styles from "@/app/layout.module.css";
 import { PressFeedback } from "@/shared/components/PressFeedback";
+import { ConnectionGuard } from "@/components/ConnectionGuard";
 import { Header } from "@/shared/components/Header";
 import { Footer } from "@/shared/components/Footer";
 
@@ -41,6 +42,7 @@ export default async function RootLayout({
       <body className={styles.body}>
         <NextIntlClientProvider>
         <PressFeedback />
+        <ConnectionGuard />
         <Accessibility />
         <LanguageSwitcher />
         <div id="site-content" className={styles.siteContent}>

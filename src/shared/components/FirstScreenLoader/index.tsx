@@ -10,6 +10,7 @@ function ScreenLoadingState() {
   useEffect(() => {
     let started = performance.now();
     let finished = false;
+    let slowReported = false;
     let timer: ReturnType<typeof setTimeout>;
     let cancelled = false;
 
@@ -29,12 +30,18 @@ function ScreenLoadingState() {
 
       if (!pending) {
         finished = true;
+        slowReported = false;
+        window.dispatchEvent(new Event("beauty:screen-ready"));
         setVisible(false);
         return;
       }
       if (finished) {
         started = performance.now();
         finished = false;
+      }
+      if (!slowReported && performance.now() - started >= 15000) {
+        slowReported = true;
+        window.dispatchEvent(new Event("beauty:screen-slow"));
       }
       if (performance.now() - started >= 1000) setVisible(true);
       timer = setTimeout(check, 100);
@@ -53,6 +60,7 @@ function ScreenLoadingState() {
       cancelled = true;
       observer.disconnect();
       document.fonts.removeEventListener("loading", check);
+      window.dispatchEvent(new Event("beauty:screen-ready"));
       cancelAnimationFrame(frame);
       clearTimeout(timer);
     };

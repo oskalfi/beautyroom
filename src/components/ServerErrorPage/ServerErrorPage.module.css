@@ -1,0 +1,8 @@
+.message { max-width: 850px; }
+.phone { display: inline-block; color: inherit; white-space: nowrap; text-decoration: underline; text-underline-offset: 4px; }
+.phone:focus-visible { outline: 2px solid var(--brown); outline-offset: 4px; }
+.actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
+@media (max-width: 600px) {
+  .actions { flex-direction: column; align-items: center; width: 100%; }
+  .actions > :is(a, button) { width: auto; max-width: 100%; }
+}

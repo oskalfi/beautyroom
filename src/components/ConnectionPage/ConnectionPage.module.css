@@ -1,0 +1,8 @@
+.title { margin: 0; }
+.icon { display: block; width: clamp(115px, 16vw, 232px); height: auto; }
+.page .message { max-width: 720px; }
+@media (max-width: 600px) {
+  .icon { width: 30vw; }
+  .page .message { max-width: 82vw; font-size: 18px; }
+  .page a:last-child, .page button { width: auto; max-width: 90%; }
+}

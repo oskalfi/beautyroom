@@ -5,7 +5,13 @@ import type { ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./Modal.module.css";
 
-export const Modal = ({ children, label }: { children: ReactNode; label: string }) => {
+export const Modal = ({
+  children,
+  label,
+}: {
+  children: ReactNode;
+  label: string;
+}) => {
   const dialog = useRef<HTMLDialogElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const router = useRouter();
@@ -42,9 +48,12 @@ export const Modal = ({ children, label }: { children: ReactNode; label: string 
         if (event.target !== event.currentTarget) return;
         const rect = event.currentTarget.getBoundingClientRect();
         if (
-          event.clientX < rect.left || event.clientX > rect.right ||
-          event.clientY < rect.top || event.clientY > rect.bottom
-        ) close();
+          event.clientX < rect.left ||
+          event.clientX > rect.right ||
+          event.clientY < rect.top ||
+          event.clientY > rect.bottom
+        )
+          close();
       }}
       onCancel={(event) => {
         event.preventDefault();
@@ -53,6 +62,7 @@ export const Modal = ({ children, label }: { children: ReactNode; label: string 
     >
       <div id="modal-content" className={styles.contentWrapper}>
         <button
+          data-press-feedback
           className={styles.closeButton}
           aria-label="Закрыть"
           onClick={close}

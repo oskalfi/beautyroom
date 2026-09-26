@@ -84,6 +84,7 @@ export const Header = () => {
       <div className={styles.contentContainer}>
         <div className={styles.mobileLayout}>
           <Link
+            data-press-feedback
             href="/"
             className={styles.headerTitle}
             onClick={() => setIsOpen(false)}
@@ -93,8 +94,18 @@ export const Header = () => {
           <MenuButton isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
 
-        <Link href="/" aria-label="Beauty Room" className={styles.logo} onClick={() => setIsOpen(false)}>
-          <Logo className={styles.logoArtwork} textClassName={styles.logoText} silhouetteClassName={styles.logoSilhouette} />
+        <Link
+          data-press-feedback
+          href="/"
+          aria-label="Beauty Room"
+          className={styles.logo}
+          onClick={() => setIsOpen(false)}
+        >
+          <Logo
+            className={styles.logoArtwork}
+            textClassName={styles.logoText}
+            silhouetteClassName={styles.logoSilhouette}
+          />
         </Link>
 
         <nav className={styles.navigation}>

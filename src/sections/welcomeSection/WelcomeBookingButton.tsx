@@ -22,6 +22,7 @@ export function WelcomeBookingButton({ backdropRef }: { backdropRef: RefObject<H
   const isMobile = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   return (
     <a
+      data-press-feedback
       href={BOOKING_URL}
       className={styles.bookingButton}
     >

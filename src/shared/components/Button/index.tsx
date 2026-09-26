@@ -13,7 +13,12 @@ type ButtonProps = {
 );
 
 export const Button = (props: ButtonProps) => {
-  const { children, type = "primary", className, "aria-label": ariaLabel } = props;
+  const {
+    children,
+    type = "primary",
+    className,
+    "aria-label": ariaLabel,
+  } = props;
   const buttonClassName = `${styles.button} ${styles[type]} ${className}`;
   const content = (
     <>
@@ -31,14 +36,26 @@ export const Button = (props: ButtonProps) => {
 
   if (props.href !== undefined) {
     return (
-      <a data-press-feedback href={props.href} onClick={props.onClick} aria-label={ariaLabel} className={buttonClassName}>
+      <a
+        data-press-feedback
+        href={props.href}
+        onClick={props.onClick}
+        aria-label={ariaLabel}
+        className={buttonClassName}
+      >
         {content}
       </a>
     );
   }
 
   return (
-    <button data-press-feedback type="button" onClick={props.onClick} aria-label={ariaLabel} className={buttonClassName}>
+    <button
+      data-press-feedback
+      type="button"
+      onClick={props.onClick}
+      aria-label={ariaLabel}
+      className={buttonClassName}
+    >
       {content}
     </button>
   );

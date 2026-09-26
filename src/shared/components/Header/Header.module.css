@@ -150,10 +150,6 @@
   .navigationLink {
     font-size: var(--header-navigation-link-font-size-to-1024);
   }
-
-  .button {
-    font-size: var(--header-button-font-size-to-1024);
-  }
 }
 
 @media (max-width: 960px) {
@@ -265,7 +261,17 @@
   }
 }
 
-.desktopBooking { display: flex; align-items: center; gap: 12px; }
-@media (max-width: 960px) { .desktopBooking { display: none; } }
+.desktopBooking {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+@media (max-width: 960px) {
+  .desktopBooking {
+    display: none;
+  }
+}
 
-.logoArtwork { display: contents; }
+.logoArtwork {
+  display: contents;
+}

@@ -6,6 +6,7 @@
 
 .backgroundImage {
   height: 96svh;
+  background-image: url("/main_bg.avif");
   background-attachment: fixed;
   background-size: cover;
   will-change: transform;
@@ -24,8 +25,7 @@
 }
 
 .h1 {
-  visibility: hidden;
-  font-family: var(--welcome-title-font-family);
+  font-family: var(--welcome-title-font-family), Arial, sans-serif;
   max-width: 800px;
   font-size: var(--welcome-title-font-size);
   letter-spacing: 0.04em;
@@ -37,7 +37,6 @@
 }
 
 .address {
-  visibility: hidden;
   font-weight: var(--welcome-address-font-weight);
   max-width: 530px;
   text-align: center;
@@ -63,7 +62,7 @@
 }
 
 .clip {
-  width: 0;
+  width: 100%;
 }
 
 @media (max-width: 1500px) {
@@ -112,7 +111,7 @@
   }
 
   .h1 {
-    padding: 0 52px;
+    padding: 0 16px;
   }
 }
 
@@ -137,7 +136,6 @@
 
 @media (max-width: 960px) {
   .backgroundImage {
-    /* Совпадение координат фотографии и её снимка для WebGL. */
     background-attachment: scroll;
   }
 
@@ -216,19 +214,4 @@
   .bookingButton:active .fingerprint {
     transform: scale(0.8);
   }
-}
-
-/* Оставляем постоянный CSS-фон на время загрузки. Матовый fallback
-   библиотеки не показываем: проявляем только готовый кадр WebGL. */
-.glassRenderer {
-  opacity: 0;
-  transition: opacity 240ms ease-out;
-}
-
-.glassRenderer[data-glass-strategy="webgl"] {
-  opacity: 1;
-}
-
-.welcomeSection[data-first-screen-ready="false"] {
-  background-color: var(--white);
 }

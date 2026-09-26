@@ -19,14 +19,17 @@ function ScreenLoadingState() {
       clearTimeout(timer);
       const content = document.querySelector("[data-page-content]");
       const main = content?.querySelector("main");
+      // The home hero is visible in server HTML; decorative assets must not
+      // bring back an overlay over content that is already usable.
+      const firstScreenReady = !!main?.querySelector('[data-first-screen-ready="true"]');
       const images = Array.from(main?.querySelectorAll("img") ?? []).filter(image => {
         const rect = image.getBoundingClientRect();
         return rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.top < window.innerHeight;
       });
       const pending = !main || !!content?.querySelector("[data-page-loading]") ||
         !!main.querySelector('[data-first-screen-ready="false"]') ||
-        document.fonts.status === "loading" ||
-        images.some(image => !image.currentSrc || !image.complete);
+        (!firstScreenReady && (document.fonts.status === "loading" ||
+          images.some(image => !image.currentSrc || !image.complete)));
 
       if (!pending) {
         finished = true;

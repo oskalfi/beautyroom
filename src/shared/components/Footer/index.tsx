@@ -1,4 +1,5 @@
 "use client";
+import { useNearViewport } from "@/shared/hooks/useNearViewport";
 import { useTranslations } from "next-intl";
 import { BOOKING_URL } from "@/shared/config/booking";
 import { LazyImage } from "@/shared/components/LazyImage";
@@ -20,7 +21,9 @@ export const Footer = () => {
   const footerRef = useRef(null);
   const pathname = usePathname();
 
+  const near = useNearViewport(footerRef, true, "200px 0px");
   useGSAP(() => {
+    if (!near) return;
     gsap.from(logoRef.current, {
       yPercent: -100,
       duration: 2,
@@ -31,7 +34,7 @@ export const Footer = () => {
         toggleActions: "play none none none",
       },
     });
-  });
+  }, { scope: footerRef, dependencies: [near], revertOnUpdate: true });
 
   return (
     <footer className={styles.footer} ref={footerRef}>

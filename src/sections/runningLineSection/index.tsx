@@ -1,5 +1,7 @@
 "use client";
 
+import { useNearViewport } from "@/shared/hooks/useNearViewport";
+
 import { mockFacts } from "@/shared/mocks/facts";
 
 import { MaleFaceSilhouetteSVG } from "@/shared/assets/svg/MaleFaceSilhouette";
@@ -14,11 +16,13 @@ import { revealTextAndSVG } from "./animations/revealText&SVG";
 
 export const RunningLineSection = () => {
   const ref = useRef<HTMLElement | null>(null);
+  const near = useNearViewport(ref, true, "200px 0px");
   useGSAP(
     () => {
+      if (!near) return;
       revealTextAndSVG(styles.heading, styles.maleFace, styles.femaleFace);
     },
-    { scope: ref },
+    { scope: ref, dependencies: [near], revertOnUpdate: true },
   );
   return (
     <section className={styles.sectionContainer} ref={ref}>

@@ -28,3 +28,29 @@ The baseline LCP node was a SplitText line, “is not a dream”; the modified v
 An earlier run of the modified version using Lighthouse's default *simulated* throttling returned Performance 71, LCP 8.0 s, TBT 50 ms and CLS 0. Those results use a different measurement method and must not be mixed with the DevTools-throttled comparison above. Local results do not guarantee the deployed Vercel score; repeat the production audit after deployment.
 
 Full comparison reports from this session: `/tmp/beauty-room-before.report.html` and `/tmp/beauty-room-after.report.html` (with corresponding JSON files). Changes have not been deployed.
+
+## TBT follow-up — 2026-09-26
+
+Following a deployed Lighthouse result of 700 ms TBT, removed repeated inline vector paths for the wordmark and fingerprint. The components now reference cached external SVG groups through `<use>`, retaining currentColor, dimensions and vector geometry. Animated silhouette paths remain inline.
+
+Deferred SplitText/ScrollTrigger preparation for the introduction, treatment headings, results heading, shared reveal headings and footer until their sections approach the viewport. Carousel positioning/animation preparation and geometry measurements also wait until it approaches the viewport. Animations retain GSAP context cleanup.
+
+Home page build output, uncompressed:
+
+| Quantity | Before | After |
+| --- | ---: | ---: |
+| HTML bytes | 592,060 | 127,488 |
+| Inline script bytes | 222,044 | 43,119 |
+| Inline path elements | 509 | 43 |
+
+Two sequential comparison pairs, Lighthouse 12.8.2 mobile defaults with `--throttling-method=devtools`, Next.js 16.2.3 production builds on localhost. The control was exported from HEAD before this follow-up and used a copy of the same installed dependencies; `.env.local` was not copied. These are not measurements of the Vercel deployment and do not establish a change from the user's 700 ms result.
+
+| Metric | Before #1 | After #1 | Before #2 | After #2 |
+| --- | ---: | ---: | ---: | ---: |
+| Performance | 88 | 93 | 86 | 94 |
+| TBT | 250 ms | 140 ms | 340 ms | 130 ms |
+| LCP | 2.4 s | 2.2 s | 2.2 s | 2.2 s |
+| Speed Index | 3.6 s | 3.1 s | 4.0 s | 3.1 s |
+| CLS | 0.087 | 0.087 | 0.087 | 0.087 |
+
+Build/TypeScript, ESLint (existing Header image warning only), and diff whitespace checks passed. Visually checked desktop wordmark and buttons, the mobile Lighthouse screenshot, introduction/results headings and the video carousel after scrolling into view. The first HTML reports are `/tmp/beauty-tbt-before.report.html` and `/tmp/beauty-tbt-after.report.html`; repeat JSON reports are `/tmp/beauty-tbt-before-repeat` and `/tmp/beauty-tbt-after-repeat`.

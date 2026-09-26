@@ -27,18 +27,20 @@ export const Carousel = () => {
   useMouseDrag(mediaContainer, motionStopped);
 
   const isNear = useNearViewport(mediaContainer, false);
+  const prepareAnimation = useNearViewport(mediaContainer);
 
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   useGSAP(() => {
+    if (!prepareAnimation) return;
     animateAppearance(mediaContainer, activeIndex);
-  });
+  }, { scope: carouselRef, dependencies: [prepareAnimation], revertOnUpdate: true });
 
   // Determine the nearest item horizontally, even while preparing offscreen.
   useEffect(() => {
     const container = mediaContainer.current;
-    if (!container) return;
+    if (!container || !isNear) return;
     const updateActive = () => {
       const bounds = container.getBoundingClientRect();
       const center = bounds.left + bounds.width / 2;
@@ -62,7 +64,7 @@ export const Carousel = () => {
       container.removeEventListener("scroll", updateActive);
       window.removeEventListener("resize", updateActive);
     };
-  }, []);
+  }, [isNear]);
 
   // пауза на активном видео, когда карусель выходит из области видимости
   useEffect(() => {

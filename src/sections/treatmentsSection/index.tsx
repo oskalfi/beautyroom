@@ -1,5 +1,7 @@
 "use client";
 
+import { useNearViewport } from "@/shared/hooks/useNearViewport";
+
 import styles from "./TreatmentsSection.module.css";
 
 import { revealHeading } from "./animations/revealHeading";
@@ -18,8 +20,10 @@ export let previousCursorYCoord = 0;
 export const TreatmentsSection = () => {
   const ref = useRef<HTMLDivElement | null>(null);
 
+  const near = useNearViewport(ref, true, "200px 0px");
   useGSAP(
     () => {
+      if (!near) return;
       revealHeading(styles.heading, styles.decorativeDescription);
 
       const section = ref.current;
@@ -29,12 +33,12 @@ export const TreatmentsSection = () => {
       section?.addEventListener("mousemove", trackCursor);
       return () => section?.removeEventListener("mousemove", trackCursor);
     },
-    { scope: ref },
+    { scope: ref, dependencies: [near], revertOnUpdate: true },
   );
 
   useEffect(() => {
     const section = ref.current;
-    if (!section) return;
+    if (!section || !near) return;
 
     const touch = window.matchMedia("(any-pointer: coarse)");
     let stopObserving = () => {};
@@ -160,7 +164,7 @@ export const TreatmentsSection = () => {
       stopObserving();
       touch.removeEventListener("change", configure);
     };
-  }, []);
+  }, [near]);
 
   return (
     <section className={styles.treatmentsSection} ref={ref} id="treatmentsList">

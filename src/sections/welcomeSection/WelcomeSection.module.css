@@ -1,7 +1,7 @@
 .welcomeSection {
   position: relative;
   overflow: hidden;
-  background-color: var(--brown);
+  background-color: var(--white);
 }
 
 .backgroundImage {
@@ -22,6 +22,7 @@
   left: 50%;
   top: 55%;
   transform: translateY(-50%);
+  padding-right: 40px;
 }
 
 .h1 {

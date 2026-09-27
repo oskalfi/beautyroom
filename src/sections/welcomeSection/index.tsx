@@ -6,8 +6,11 @@ import styles from "./WelcomeSection.module.css";
 import { useEffect, useRef } from "react";
 import { UnderlineSVG } from "@/shared/assets/svg/Underline";
 import { enableScrollParallax } from "./animations/enableScrollParallax";
+import { useWelcomeReveal } from "./useWelcomeReveal";
 
 export const WelcomeSection = () => {
+  const section = useRef<HTMLElement>(null);
+  useWelcomeReveal(section);
   const background = useRef<HTMLDivElement>(null);
   const motionStopped = useMotionStopped();
 
@@ -19,7 +22,7 @@ export const WelcomeSection = () => {
   }, [motionStopped]);
 
   return (
-    <section className={styles.welcomeSection} data-first-screen-ready="true">
+    <section ref={section} className={styles.welcomeSection} data-first-screen-ready="true">
       <div ref={background} className={styles.backgroundImage} />
       <div className={styles.welcomeText}>
         <h1 className={styles.h1}>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useNearViewport } from "@/shared/hooks/useNearViewport";
+import { loadElementFont } from "@/shared/utils/loadElementFont";
 
 import styles from "./TreatmentsSection.module.css";
 
@@ -22,16 +23,26 @@ export const TreatmentsSection = () => {
 
   const near = useNearViewport(ref, true, "200px 0px");
   useGSAP(
-    () => {
+    (context) => {
       if (!near) return;
-      revealHeading(styles.heading, styles.decorativeDescription);
+      let cancelled = false;
+      const reveal = () => {
+        if (!cancelled) context.add(() => revealHeading(styles.heading, styles.decorativeDescription));
+      };
+      // The decorative font is enabled only near the viewport. Split its text
+      // after loading so GSAP measures the final font, with a fallback on error.
+      void loadElementFont(ref.current?.querySelector(`.${styles.decorativeDescription}`) ?? null)
+        .then(reveal, reveal);
 
       const section = ref.current;
       const trackCursor = (e: MouseEvent) => {
         previousCursorYCoord = e.clientY;
       };
       section?.addEventListener("mousemove", trackCursor);
-      return () => section?.removeEventListener("mousemove", trackCursor);
+      return () => {
+        cancelled = true;
+        section?.removeEventListener("mousemove", trackCursor);
+      };
     },
     { scope: ref, dependencies: [near], revertOnUpdate: true },
   );
@@ -167,7 +178,7 @@ export const TreatmentsSection = () => {
   }, [near]);
 
   return (
-    <section className={styles.treatmentsSection} ref={ref} id="treatmentsList">
+    <section className={styles.treatmentsSection} ref={ref} id="treatmentsList" data-near-viewport={near}>
       <div className={styles.decorativeDescription}>
         During your consultation, we’ll create a personalized care plan.
       </div>

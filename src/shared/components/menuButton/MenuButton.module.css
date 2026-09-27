@@ -17,3 +17,8 @@
 .menuButton:focus-visible {
   outline: 3px solid var(--brown);
 }
+
+.menuTitle {
+  font-family: var(--font-family-display);
+  color: var(--white);
+}

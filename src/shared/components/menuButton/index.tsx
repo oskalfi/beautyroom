@@ -41,12 +41,14 @@ export const MenuButton = ({
         overwrite: true,
       });
 
-      return () => { tween.kill(); };
+      return () => {
+        tween.kill();
+      };
     },
     { dependencies: [isOpen], scope: svgRef },
   );
 
-  const toggleMenu = () => setIsOpen(current => !current);
+  const toggleMenu = () => setIsOpen((current) => !current);
 
   return (
     <button
@@ -57,7 +59,7 @@ export const MenuButton = ({
       aria-expanded={isOpen}
       aria-label={t("toggleMenu")}
     >
-      <Image src="/Menu.svg" alt="Menu" width={31} height={11} />
+      <span className={styles.menuTitle}>Menu</span>
       <svg
         ref={svgRef}
         className={styles.burgerSvg}
@@ -66,7 +68,11 @@ export const MenuButton = ({
         height="12"
         viewBox="0 0 300 180"
       >
-        <path ref={morphPathRef} fill="var(--menu-toggle-icon-color)" d={HAMBURGER_PATH} />
+        <path
+          ref={morphPathRef}
+          fill="var(--menu-toggle-icon-color)"
+          d={HAMBURGER_PATH}
+        />
       </svg>
     </button>
   );

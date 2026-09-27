@@ -14,13 +14,17 @@
   visibility: hidden;
   position: absolute;
   right: 0;
-  font-family: var(--treatments-decorative-description-font-family);
+  font-family: Arial, sans-serif;
   font-size: var(--treatments-decorative-description-font-size);
   max-width: 8.772em;
   height: auto;
   transform: translateX(-50%) translateY(50%) rotate(-25deg);
   color: var(--treatments-decorative-description-text-color);
   z-index: 1;
+}
+
+.treatmentsSection[data-near-viewport="true"] .decorativeDescription {
+  font-family: var(--treatments-decorative-description-font-family);
 }
 
 .heading {

@@ -114,7 +114,7 @@ export const AddressSection = () => {
             <div className={styles.plateContent}>
               <Image
                 className={styles.logo}
-                src="/logoKY-920.png"
+                src="/logoKY-920.svg"
                 sizes="(max-width: 480px) 150px, (max-width: 768px) 180px, 230px"
                 quality={90}
                 alt="«Beauty Room» salon street sign"
@@ -144,7 +144,8 @@ export const AddressSection = () => {
       >
         <LazyImage
           src="/map.png"
-          width={2722} height={1590}
+          width={2722}
+          height={1590}
           sizes="(max-width: 768px) calc(100vw - 20px), (max-width: 1280px) 60vw, 815px"
           quality={90}
           alt="«Beauty Room» salon on map"

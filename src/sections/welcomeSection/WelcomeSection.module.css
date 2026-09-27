@@ -125,7 +125,7 @@
 
 @media (width <= 440px) {
   .backgroundImage {
-    background-image: url("/proba.avif");
+    background-image: url("/main_bg_phone.avif");
   }
 }
 

@@ -30,7 +30,7 @@ export default async function Home({
     <main dir="ltr" className={styles.mainPage}>
       <link
         rel="preload"
-        href="/proba.avif"
+        href="/main_bg_phone.avif"
         as="image"
         media="(width <= 440px)"
         fetchPriority="high"

@@ -2,6 +2,10 @@
 
 ## Returning-visitor reveal — 2026-09-27
 
+Cache correction: localStorage is only a scheduling hint. Playback now additionally requires Resource Timing evidence that the newly imported scripts came from cache (`transferSize === 0`, `decodedBodySize > 0`), or an animation module already loaded in the current document. A network response, revalidation, or missing timing evidence skips playback for that mount. Concurrent script downloads are treated conservatively and can also skip playback. This fixes the case where DevTools Disable cache leaves localStorage intact.
+
+Verified in Chrome against the production build: initial visit stayed static; ordinary reload produced three SplitText line wrappers; with Network → Disable cache checked, reload produced no wrappers and the heading stayed visible. Restored the original unchecked DevTools setting afterward. Four resource-classification regression tests passed, alongside production build/TypeScript and lint (existing Header warning only).
+
 The hero reveal has been restored at the user's request, for returning visitors only. On the first visit, server-rendered text remains visible and the animation module is imported after window load during idle time. A localStorage marker is written after successful preparation. Later visits import the module using the browser's normal HTTP cache and replay the original line fade/slide, subtitle fade and underline reveal after fonts are ready. Content is not hidden while awaiting resources. Cache eviction or a new deployment can require another download; the marker is not proof that an HTTP cache entry still exists. Disabled storage falls back to the static first-visit experience. Reduced motion disables playback.
 
 Validation: production build/TypeScript and lint passed (existing Header image warning). On a fresh localhost origin, the first heading remained visible without SplitText wrappers; after reload it had three animated line wrappers, with the complete accessible label preserved. No deployment was performed. Earlier performance measurements below predate this opt-in returning-visitor behavior.

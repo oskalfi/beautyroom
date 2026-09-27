@@ -6,13 +6,19 @@ import styles from "./WelcomeSection.module.css";
 import { useEffect, useRef } from "react";
 import { UnderlineSVG } from "@/shared/assets/svg/Underline";
 import { enableScrollParallax } from "./animations/enableScrollParallax";
-import { useWelcomeReveal } from "./useWelcomeReveal";
+import { revealWelcomeUnderline } from "./animations/revealWelcomeUnderline";
 
 export const WelcomeSection = () => {
   const section = useRef<HTMLElement>(null);
-  useWelcomeReveal(section);
   const background = useRef<HTMLDivElement>(null);
   const motionStopped = useMotionStopped();
+
+  useEffect(() => {
+    const stopped = useAccessibility.getState().motion ?? window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (motionStopped || stopped) return;
+    const mask = section.current?.querySelector<SVGElement>(`.${styles.clip}`);
+    if (mask) return revealWelcomeUnderline(mask);
+  }, [motionStopped]);
 
   useEffect(() => {
     // Read the persisted setting too: hydration may precede the hook's next render.

@@ -198,10 +198,6 @@
     display: block;
   }
 
-  .isOpen .mobileBooking {
-    animation: revealMenuLink 0.35s ease-out 0.55s both;
-  }
-
   .navigation {
     position: absolute;
     top: 50%;
@@ -222,32 +218,22 @@
   .navigationLink {
     font-weight: var(--header-navigation-link-font-weight-to-960);
     font-size: var(--header-navigation-link-font-size-to-960);
-    opacity: 0;
   }
 
-  .isOpen .navigationLink {
-    opacity: 1;
-    animation: revealMenuLink 0.35s ease-out both;
-    animation-delay: 0.15s;
-  }
-
-  .isOpen .navigationItem:nth-child(2) .navigationLink {
-    animation-delay: 0.25s;
-  }
-  .isOpen .navigationItem:nth-child(3) .navigationLink {
-    animation-delay: 0.35s;
-  }
-  .isOpen .navigationItem:nth-child(4) .navigationLink {
-    animation-delay: 0.45s;
+  .isOpen .navigationItem {
+    animation: revealMenuLink 1200ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--menu-order, 0) * 100ms);
   }
 }
 
 @keyframes revealMenuLink {
   from {
     opacity: 0;
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -255,8 +241,7 @@
   .contentContainer {
     transition: none;
   }
-  .isOpen .navigationLink,
-  .isOpen .mobileBooking {
+  .isOpen .navigationItem {
     animation: none;
   }
 }

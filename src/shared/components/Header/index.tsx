@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { BOOKING_URL } from "@/shared/config/booking";
 import styles from "./Header.module.css";
 import { Link } from "@/i18n/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useGSAP } from "@gsap/react";
 import { Logo } from "@/shared/components/Logo";
 import { Button } from "@/shared/components/Button";
@@ -12,6 +12,8 @@ import { paintSilhouette } from "./animations/collapseHeader";
 import { MenuButton } from "../menuButton";
 import clsx from "clsx";
 import { usePathname } from "@/i18n/navigation";
+
+const navigationItems = ["procedures", "cosmetics", "address", "contacts"] as const;
 
 export const Header = () => {
   const t = useTranslations("Navigation");
@@ -110,71 +112,32 @@ export const Header = () => {
 
         <nav className={styles.navigation}>
           <ul className={styles.navigationList}>
-            <li className={styles.navigationItem}>
-              <Link
-                data-press-feedback
-                href="/procedures"
-                className={clsx(
-                  styles.navigationLink,
-                  pathname === "/procedures" && styles.activeLink,
-                )}
-                onClick={() => setIsOpen(false)}
+            {navigationItems.map((item, index) => (
+              <li
+                key={item}
+                className={styles.navigationItem}
+                style={{ "--menu-order": index } as CSSProperties}
               >
-                {t("procedures")}
-                <svg className={styles.border}>
-                  <rect x="0" y="0" width="100%" height="100%" rx="16" />
-                </svg>
-              </Link>
-            </li>
-            <li className={styles.navigationItem}>
-              <Link
-                data-press-feedback
-                href="/cosmetics"
-                className={clsx(
-                  styles.navigationLink,
-                  pathname === "/cosmetics" && styles.activeLink,
-                )}
-                onClick={() => setIsOpen(false)}
-              >
-                {t("cosmetics")}
-                <svg className={styles.border}>
-                  <rect x="0" y="0" width="100%" height="100%" rx="16" />
-                </svg>
-              </Link>
-            </li>
-            <li className={styles.navigationItem}>
-              <Link
-                data-press-feedback
-                href="/address"
-                className={clsx(
-                  styles.navigationLink,
-                  pathname === "/address" && styles.activeLink,
-                )}
-                onClick={() => setIsOpen(false)}
-              >
-                {t("address")}
-                <svg className={styles.border}>
-                  <rect x="0" y="0" width="100%" height="100%" rx="16" />
-                </svg>
-              </Link>
-            </li>
-            <li className={styles.navigationItem}>
-              <Link
-                data-press-feedback
-                href="/contacts"
-                className={clsx(
-                  styles.navigationLink,
-                  pathname === "/contacts" && styles.activeLink,
-                )}
-                onClick={() => setIsOpen(false)}
-              >
-                {t("contacts")}
-                <svg className={styles.border}>
-                  <rect x="0" y="0" width="100%" height="100%" rx="16" />
-                </svg>
-              </Link>
-            </li>
-            <li className={clsx(styles.navigationItem, styles.mobileBooking)}>
+                <Link
+                  data-press-feedback
+                  href={`/${item}`}
+                  className={clsx(
+                    styles.navigationLink,
+                    pathname === `/${item}` && styles.activeLink,
+                  )}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {t(item)}
+                  <svg className={styles.border}>
+                    <rect x="0" y="0" width="100%" height="100%" rx="16" />
+                  </svg>
+                </Link>
+              </li>
+            ))}
+            <li
+              className={clsx(styles.navigationItem, styles.mobileBooking)}
+              style={{ "--menu-order": navigationItems.length } as CSSProperties}
+            >
               <Button
                 href={BOOKING_URL}
                 className={styles.button}

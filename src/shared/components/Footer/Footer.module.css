@@ -28,8 +28,6 @@
   display: block;
   flex-shrink: 0;
   align-self: flex-start;
-  width: 212px;
-  height: 295px;
 }
 
 .linksWrapper {

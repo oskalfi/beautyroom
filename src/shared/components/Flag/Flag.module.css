@@ -1,7 +1,15 @@
 .flag {
   display: block;
   width: 212px;
-  height: 295px;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 212 / 295;
   overflow: visible;
   color: #fdfbfb;
+}
+
+@media (max-width: 1120px) {
+  .flag {
+    width: clamp(140px, 18vw, 180px);
+  }
 }

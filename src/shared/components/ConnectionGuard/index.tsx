@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useLocale } from "next-intl";
-import { ConnectionPage } from "@/components/ConnectionPage";
+import { ConnectionPage } from "@/shared/components/ConnectionPage";
 import type { Locale } from "@/i18n/routing";
 import styles from "./ConnectionGuard.module.css";
 

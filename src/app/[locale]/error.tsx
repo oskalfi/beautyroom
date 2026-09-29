@@ -1,6 +1,6 @@
 "use client";
-import { ServerErrorPage } from "@/components/ServerErrorPage";
-import { useErrorLocale } from "@/components/ServerErrorPage/useErrorLocale";
+import { ServerErrorPage } from "@/shared/components/ServerErrorPage";
+import { useErrorLocale } from "@/shared/components/ServerErrorPage/useErrorLocale";
 
 export default function ErrorPage({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
   const locale = useErrorLocale();

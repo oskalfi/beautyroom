@@ -10,7 +10,7 @@ import { FirstScreenLoader } from "@/shared/components/FirstScreenLoader";
 import { Accessibility } from "@/shared/components/Accessibility";
 import styles from "@/app/layout.module.css";
 import { PressFeedback } from "@/shared/components/PressFeedback";
-import { ConnectionGuard } from "@/components/ConnectionGuard";
+import { ConnectionGuard } from "@/shared/components/ConnectionGuard";
 import { Header } from "@/shared/components/Header";
 import { Footer } from "@/shared/components/Footer";
 

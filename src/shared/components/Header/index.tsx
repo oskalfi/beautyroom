@@ -6,7 +6,7 @@ import styles from "./Header.module.css";
 import { Link } from "@/i18n/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
-import { Logo } from "@/components/Logo";
+import { Logo } from "@/shared/components/Logo";
 import { Button } from "@/shared/components/Button";
 import { paintSilhouette } from "./animations/collapseHeader";
 import { MenuButton } from "../menuButton";

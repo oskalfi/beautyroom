@@ -26,8 +26,10 @@
 
 .logo {
   display: block;
-  height: auto;
+  flex-shrink: 0;
   align-self: flex-start;
+  width: 212px;
+  height: 295px;
 }
 
 .linksWrapper {
@@ -111,10 +113,6 @@
     gap: 90px;
   }
 
-  .logo {
-    width: 160px;
-  }
-
   .heading {
     font-size: var(--footer-heading-font-size-to-1350);
   }
@@ -193,7 +191,6 @@
 
 @media (max-width: 479px) {
   .logo {
-    width: 112px;
     position: absolute;
   }
 

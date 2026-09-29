@@ -1,7 +1,7 @@
 "use client";
 import "@/app/styles/globals.css";
-import { ServerErrorPage } from "@/components/ServerErrorPage";
-import { useErrorLocale } from "@/components/ServerErrorPage/useErrorLocale";
+import { ServerErrorPage } from "@/shared/components/ServerErrorPage";
+import { useErrorLocale } from "@/shared/components/ServerErrorPage/useErrorLocale";
 import { PressFeedback } from "@/shared/components/PressFeedback";
 
 export default function GlobalError({ reset }: { error: Error & { digest?: string }; reset: () => void }) {

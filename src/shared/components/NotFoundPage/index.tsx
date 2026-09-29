@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Logo } from "@/components/Logo";
+import { Logo } from "@/shared/components/Logo";
 import { Button } from "@/shared/components/Button";
 import { getPathname } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";

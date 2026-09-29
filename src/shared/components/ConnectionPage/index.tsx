@@ -1,10 +1,10 @@
 "use client";
 
-import { Logo } from "@/components/Logo";
+import { Logo } from "@/shared/components/Logo";
 import { Button } from "@/shared/components/Button";
 import { getPathname } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import styles from "@/components/NotFoundPage/NotFoundPage.module.css";
+import styles from "@/shared/components/NotFoundPage/NotFoundPage.module.css";
 import connectionStyles from "./ConnectionPage.module.css";
 
 const copy = {

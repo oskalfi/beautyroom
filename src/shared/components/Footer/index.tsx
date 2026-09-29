@@ -2,7 +2,6 @@
 import { useNearViewport } from "@/shared/hooks/useNearViewport";
 import { useTranslations } from "next-intl";
 import { BOOKING_URL } from "@/shared/config/booking";
-import { LazyImage } from "@/shared/components/LazyImage";
 
 import styles from "./Footer.module.css";
 import { Link } from "@/i18n/navigation";
@@ -12,6 +11,7 @@ import { useRef } from "react";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import { usePathname } from "@/i18n/navigation";
 import clsx from "clsx";
+import { Flag } from "../Flag";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,30 +22,26 @@ export const Footer = () => {
   const pathname = usePathname();
 
   const near = useNearViewport(footerRef, true, "200px 0px");
-  useGSAP(() => {
-    if (!near) return;
-    gsap.from(logoRef.current, {
-      yPercent: -100,
-      duration: 2,
-      ease: "bounce.inOut",
-      scrollTrigger: {
-        trigger: footerRef.current,
-        start: "1% bottom",
-        toggleActions: "play none none none",
-      },
-    });
-  }, { scope: footerRef, dependencies: [near], revertOnUpdate: true });
+  useGSAP(
+    () => {
+      if (!near) return;
+      gsap.from(logoRef.current, {
+        yPercent: -100,
+        duration: 2,
+        ease: "bounce.inOut",
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: "1% bottom",
+          toggleActions: "play none none none",
+        },
+      });
+    },
+    { scope: footerRef, dependencies: [near], revertOnUpdate: true },
+  );
 
   return (
     <footer className={styles.footer} ref={footerRef}>
-      <LazyImage
-        src="/flag.svg"
-        width={212}
-        height={295}
-        alt="Logo"
-        className={styles.logo}
-        ref={logoRef}
-      />
+      <Flag className={styles.logo} ref={logoRef} />
       <div className={styles.linksWrapper}>
         <nav aria-labelledby="site-navigation-title">
           <h2 className={styles.heading} id="site-navigation-title">

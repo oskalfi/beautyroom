@@ -1,7 +1,7 @@
-import { Logo } from "@/components/Logo";
+import { Logo } from "@/shared/components/Logo";
 import { Button } from "@/shared/components/Button";
 import type { Locale } from "@/i18n/routing";
-import styles from "@/components/NotFoundPage/NotFoundPage.module.css";
+import styles from "@/shared/components/NotFoundPage/NotFoundPage.module.css";
 import errorStyles from "./ServerErrorPage.module.css";
 
 const copy = {

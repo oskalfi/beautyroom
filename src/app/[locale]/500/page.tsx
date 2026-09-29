@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { initPageLocale } from "@/i18n/pageLocale";
-import { ServerErrorPage } from "@/components/ServerErrorPage";
+import { ServerErrorPage } from "@/shared/components/ServerErrorPage";
 export const metadata: Metadata = { title: "500 | Beauty Room", robots: { index: false, follow: false } };
 
 // A preview of the error design, without deliberately crashing the application.

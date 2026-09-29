@@ -13,7 +13,12 @@ import { MenuButton } from "../menuButton";
 import clsx from "clsx";
 import { usePathname } from "@/i18n/navigation";
 
-const navigationItems = ["procedures", "cosmetics", "address", "contacts"] as const;
+const navigationItems = [
+  "procedures",
+  "cosmetics",
+  "address",
+  "contacts",
+] as const;
 
 export const Header = () => {
   const t = useTranslations("Navigation");
@@ -90,7 +95,10 @@ export const Header = () => {
             data-press-feedback
             href="/"
             className={styles.headerTitle}
-            onClick={() => setIsOpen(false)}
+            onClick={() => {
+              setIsOpen(false);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
           >
             <img src="/headerTitle.svg" alt="Beauty Room" />
           </Link>
@@ -137,7 +145,9 @@ export const Header = () => {
             ))}
             <li
               className={clsx(styles.navigationItem, styles.mobileBooking)}
-              style={{ "--menu-order": navigationItems.length } as CSSProperties}
+              style={
+                { "--menu-order": navigationItems.length } as CSSProperties
+              }
             >
               <Button
                 href={BOOKING_URL}

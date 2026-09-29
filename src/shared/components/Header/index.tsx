@@ -81,6 +81,7 @@ export const Header = () => {
   return (
     <header
       className={clsx(styles.header, { [styles.isOpen]: isOpen })}
+      style={{ "--menu-last-index": navigationItems.length } as CSSProperties}
       ref={header}
     >
       <div className={styles.contentContainer}>

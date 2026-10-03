@@ -1,4 +1,6 @@
 "use client";
+import { useTranslations } from "next-intl";
+
 
 import { Suspense, useLayoutEffect, useRef } from "react";
 import type { ReactNode } from "react";
@@ -12,6 +14,7 @@ export const Modal = ({
   children: ReactNode;
   label: string;
 }) => {
+  const t = useTranslations("Media");
   const dialog = useRef<HTMLDialogElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const router = useRouter();
@@ -64,12 +67,12 @@ export const Modal = ({
         <button
           data-press-feedback
           className={styles.closeButton}
-          aria-label="Закрыть"
+          aria-label={t("close")}
           onClick={close}
         >
           ✕
         </button>
-        <Suspense fallback={<div className={styles.suspense}>Загрузка...</div>}>
+        <Suspense fallback={<div className={styles.suspense}>{t("loading")}</div>}>
           {children}
         </Suspense>
       </div>

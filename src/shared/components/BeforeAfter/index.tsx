@@ -1,4 +1,6 @@
 "use client";
+import { useTranslations } from "next-intl";
+
 import { LazyImage } from "@/shared/components/LazyImage";
 
 import { SliderSVG } from "@/shared/assets/svg/Slider";
@@ -18,6 +20,7 @@ export const BeforeAfter = ({
   afterSrc,
   name,
 }: TBeforeAfterProps) => {
+  const t = useTranslations("Media");
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -57,7 +60,7 @@ export const BeforeAfter = ({
     };
     slider.setAttribute("role", "slider");
     slider.setAttribute("tabindex", "0");
-    slider.setAttribute("aria-label", "Сравнение фото до и после");
+    slider.setAttribute("aria-label", t("compare"));
     slider.setAttribute("aria-valuemin", "0");
     slider.setAttribute("aria-valuemax", "100");
     const initialWidth = container?.getBoundingClientRect().width ?? 0;
@@ -97,7 +100,7 @@ export const BeforeAfter = ({
       slider?.removeEventListener("pointercancel", onPointerCancel);
       container?.removeEventListener("pointermove", onPointerMove);
     };
-  }, []);
+  }, [t]);
 
   return (
     <div className={`${styles.beforeAfterComponent} ${className}`} ref={ref}>
@@ -108,13 +111,13 @@ export const BeforeAfter = ({
         height={1672}
         sizes="(max-width: 540px) calc(100vw - 20px), 520px"
         quality={90}
-        alt={`${name}: после`}
+        alt={t("after", { name })}
       />
       <div className={styles.beforeImage}>
         <LazyImage
           className={styles.afterImage}
           src={beforeSrc}
-          alt={`${name}: до`}
+          alt={t("before", { name })}
           width={941}
           height={1672}
           sizes="(max-width: 540px) calc(100vw - 20px), 520px"

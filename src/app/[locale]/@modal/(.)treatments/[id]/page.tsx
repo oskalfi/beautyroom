@@ -2,7 +2,7 @@ import { initPageLocale } from "@/i18n/pageLocale";
 import { notFound } from "next/navigation";
 import { Modal } from "@/shared/components/Modal";
 import ModalTreatment from "@/shared/components/ModalTreatment";
-import { mockTreatments as mockData } from "@/shared/mocks/treatments";
+import { getTreatmentById } from "@/shared/api/treatments";
 
 export default async function TreatmentModalPage({
   params,
@@ -11,7 +11,7 @@ export default async function TreatmentModalPage({
 }) {
   await initPageLocale(params);
   const { id } = await params;
-  const treatment = mockData.find((item) => String(item.id) === id);
+  const treatment = await getTreatmentById(id);
   if (!treatment) notFound();
 
   return (

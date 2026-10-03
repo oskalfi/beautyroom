@@ -29,10 +29,11 @@
   background: transparent;
   font-size: var(--instagram-button-wrapper-font-size);
   position: relative;
-  width: 262.8px;
-  height: 42px;
+  width: max-content;
   cursor: pointer;
-  --button-start-width: 51px;
+  --button-padding: 12px;
+  --button-arrow-width: 27px;
+  --button-start-width: calc(var(--button-arrow-width) + 2 * var(--button-padding));
   border-radius: 9px;
 }
 
@@ -41,7 +42,7 @@
   position: absolute;
   z-index: 1;
   display: flex;
-  gap: 12px;
+  gap: var(--button-padding);
   align-items: center;
   background: linear-gradient(
     to right,
@@ -50,7 +51,9 @@
   );
   overflow: hidden;
   width: var(--button-start-width);
-  padding: 12px;
+  padding: var(--button-padding);
+  inset-block: 0;
+  box-sizing: border-box;
   will-change: width;
   transition: width 0.6s ease;
 }
@@ -75,8 +78,9 @@
 
 .buttonTextBlack {
   color: var(--instagram-button-text-black-text-color);
-  position: absolute;
-  transform: translateX(var(--button-start-width));
+  display: block;
+  padding-block: var(--button-padding);
+  padding-inline: var(--button-start-width) var(--button-padding);
 }
 
 .buttonWrapper:hover .toInstButton,
@@ -99,4 +103,19 @@
   .heading {
     font-size: var(--instagram-heading-font-size-to-480);
   }
+}
+
+.toInstButton {
+  inset-inline-start: 0;
+}
+.arrow {
+  flex-shrink: 0;
+  width: var(--button-arrow-width);
+  height: 18px;
+}
+.buttonWrapper:dir(rtl) {
+  text-align: right;
+}
+.buttonWrapper:dir(rtl) .arrow {
+  transform: rotate(180deg);
 }

@@ -13,13 +13,13 @@ export const RunningLine = ({ facts }: RunningLineProps) => {
   return (
     <div ref={ref} className={styles.runningLine} data-media-ready={near}>
       <div className={styles.factsWrapper}>
-        {[...facts, ...facts].map((fact, index) => {
-          return (
-            <span className={styles.fact} key={index}>
-              {fact}
-            </span>
-          );
-        })}
+        {[0, 1].map((copy) => (
+          <div className={styles.factGroup} key={copy} aria-hidden={copy === 1 ? true : undefined}>
+            {facts.map((fact, index) => (
+              <span className={styles.fact} key={index}>{fact}</span>
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   );

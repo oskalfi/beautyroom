@@ -1,93 +1,41 @@
 import { initPageLocale } from "@/i18n/pageLocale";
+import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import styles from "./page.module.css";
-
-export const metadata: Metadata = {
-  title: "Косметика для лица | Beauty Room",
-  description:
-    "Подбор косметики и домашнего ухода в Beauty Room после консультации или процедуры. Рекомендации с учётом типа и состояния вашей кожи. Тель-Авив — Яффо.",
-};
-
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = await initPageLocale(params);
+  const t = await getTranslations({ locale, namespace: "Cosmetics" });
+  return { title: t("metaTitle"), description: t("metaDescription") };
+}
 export default async function CosmeticsPage({ params }: { params: Promise<{ locale: string }> }) {
-  await initPageLocale(params);
+  const locale = await initPageLocale(params);
+  const t = await getTranslations({ locale, namespace: "Cosmetics" });
   return (
-    <main dir="ltr" className={styles.page}>
+    <main className={styles.page}>
       <div className={styles.container}>
         <section className={styles.hero} aria-labelledby="cosmetics-title">
-          <p className={styles.eyebrow}>Beauty Room · Домашний уход</p>
-          <h1 id="cosmetics-title" className={styles.title}>
-            Косметика, подобранная для вашей кожи
-          </h1>
-          <p className={styles.lead}>
-            Найти подходящий уход проще, когда вы понимаете, что нужно именно
-            вашей коже. В Beauty Room специалист поможет подобрать косметические
-            средства после консультации или процедуры — с учётом типа кожи, её
-            текущего состояния и ваших пожеланий.
-          </p>
-          <Link data-press-feedback href="/contacts" className={styles.button}>
-            Обсудить подбор ухода <span aria-hidden="true">↗</span>
-          </Link>
+          <p className={styles.eyebrow}>{t("eyebrow")}</p>
+          <h1 id="cosmetics-title" className={styles.title}>{t("title")}</h1>
+          <p className={styles.lead}>{t("lead")}</p>
+          <Link data-press-feedback href="/contacts" className={styles.button}>{t("discuss")} <span aria-hidden="true">↗</span></Link>
         </section>
-
         <div className={styles.sections}>
-          <section
-            className={styles.panel}
-            aria-labelledby="personal-care-title"
-          >
-            <h2 id="personal-care-title">Уход, в котором есть смысл</h2>
-            <p>
-              Сухость, жирный блеск, чувствительность и ощущение стянутости —
-              поводы пересмотреть привычный уход. Выбор средств зависит не
-              только от типа кожи, но и от того, в каком она сейчас состоянии.
-            </p>
-            <p>
-              На консультации расскажите, какой косметикой вы уже пользуетесь,
-              что вам нравится и какие средства вызывают дискомфорт. Это поможет
-              специалисту предложить понятную схему домашнего ухода.
-            </p>
+          <section className={styles.panel} aria-labelledby="personal-care-title">
+            <h2 id="personal-care-title">{t("careTitle")}</h2>
+            <p>{t("care1")}</p><p>{t("care2")}</p>
           </section>
-          <section
-            className={styles.panel}
-            aria-labelledby="after-treatment-title"
-          >
-            <h2 id="after-treatment-title">
-              Что использовать после процедуры?
-            </h2>
-            <p>
-              После{" "}
-              <Link data-press-feedback href="/procedures" className={styles.link}>
-                косметологических процедур
-              </Link>{" "}
-              потребности кожи могут отличаться от привычных. Специалист
-              подскажет, какие средства подходят в этот период, как их применять
-              и когда можно возвращаться к привычному уходу.
-            </p>
-            <p>
-              Обсудите очищение, увлажнение, защиту от солнца и дополнительные
-              средства, если они потребуются. Рекомендации подбираются
-              индивидуально, с учётом проведённой процедуры и реакции кожи.
-            </p>
+          <section className={styles.panel} aria-labelledby="after-treatment-title">
+            <h2 id="after-treatment-title">{t("afterTitle")}</h2>
+            <p>{t.rich("after1", { procedures: (chunks) => <Link data-press-feedback href="/procedures" className={styles.link}>{chunks}</Link> })}</p>
+            <p>{t("after2")}</p>
           </section>
         </div>
-
-        <section
-          className={styles.booking}
-          aria-labelledby="consultation-title"
-        >
-          <h2 id="consultation-title">Начните с консультацию</h2>
-          <p>
-            Не знаете, с чего начать или что добавть в свою косметичку?
-            Свяжитесь с Beauty Room, чтобы проконсультироваться или записаться
-            процедуру.
-          </p>
-          <p>
-            Принимаем в Тель-Авиве — Яффо:{" "}
-            <Link data-press-feedback href="/address">Jerusalem Blvd 33</Link>.
-          </p>
-          <Link data-press-feedback href="/contacts" className={styles.button}>
-            Связаться со специалистом <span aria-hidden="true">↗</span>
-          </Link>
+        <section className={styles.booking} aria-labelledby="consultation-title">
+          <h2 id="consultation-title">{t("consultTitle")}</h2>
+          <p>{t("consult")}</p>
+          <p>{t.rich("location", { address: (chunks) => <Link data-press-feedback href="/address">{chunks}</Link> })}</p>
+          <Link data-press-feedback href="/contacts" className={styles.button}>{t("contact")} <span aria-hidden="true">↗</span></Link>
         </section>
       </div>
     </main>

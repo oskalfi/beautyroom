@@ -1,11 +1,13 @@
 type UnderlineSVGProps = {
   svgClassName: string;
   clipClassName: string;
+  rtl?: boolean;
 };
 
 export const UnderlineSVG = ({
   svgClassName,
   clipClassName,
+  rtl = false,
 }: UnderlineSVGProps) => {
   return (
     <svg
@@ -18,7 +20,7 @@ export const UnderlineSVG = ({
     >
       <defs>
         <clipPath id="reveal">
-          <rect x="0" y="0" width="0" height="12" className={clipClassName} />
+          <rect x="0" y="0" width="0" height="12" transform={rtl ? "translate(228 0) scale(-1 1)" : undefined} className={clipClassName} />
         </clipPath>
       </defs>
       <path

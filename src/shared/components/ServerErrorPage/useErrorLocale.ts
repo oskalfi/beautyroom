@@ -1,11 +1,11 @@
 "use client";
 import { useSyncExternalStore } from "react";
-import type { Locale } from "@/i18n/routing";
+import { routing, type Locale } from "@/i18n/routing";
 const subscribe = () => () => {};
 const getLocale = (): Locale => {
   const segment = window.location.pathname.split("/")[1];
-  return segment === "ru" || segment === "he" ? segment : "en";
+  return routing.locales.includes(segment as Locale) ? segment as Locale : routing.defaultLocale;
 };
 export function useErrorLocale() {
-  return useSyncExternalStore(subscribe, getLocale, (): Locale => "en");
+  return useSyncExternalStore(subscribe, getLocale, (): Locale => routing.defaultLocale);
 }

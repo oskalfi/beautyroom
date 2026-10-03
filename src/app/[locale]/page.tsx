@@ -25,9 +25,9 @@ export default async function Home({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  await initPageLocale(params);
+  const locale = await initPageLocale(params);
   return (
-    <main dir="ltr" className={styles.mainPage}>
+    <main className={styles.mainPage}>
       <link
         rel="preload"
         href="/main_bg_phone.avif"
@@ -49,7 +49,7 @@ export default async function Home({
         media="(width > 1024px)"
         fetchPriority="high"
       />
-      <link
+      {locale !== "he" && <><link
         rel="preload"
         href="/fonts/MontserratAlternates/MontserratAlternates-Light.woff2"
         as="font"
@@ -63,6 +63,7 @@ export default async function Home({
         type="font/woff2"
         crossOrigin="anonymous"
       />
+      </>}
       <WelcomeSection />
       <IntroduceSection />
       <TreatmentsSection />

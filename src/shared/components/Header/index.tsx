@@ -1,7 +1,7 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { BOOKING_URL } from "@/shared/config/booking";
+import { useTranslations, useLocale } from "next-intl";
+import { getBookingUrl } from "@/shared/config/booking";
 import styles from "./Header.module.css";
 import { Link } from "@/i18n/navigation";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
@@ -22,6 +22,7 @@ const navigationItems = [
 
 export const Header = () => {
   const t = useTranslations("Navigation");
+  const locale = useLocale();
   const [isOpen, setIsOpen] = useState(false);
   const header = useRef<HTMLElement | null>(null);
   const pathname = usePathname();
@@ -150,7 +151,7 @@ export const Header = () => {
               }
             >
               <Button
-                href={BOOKING_URL}
+                href={getBookingUrl(locale)}
                 className={styles.button}
                 type="primary"
                 onClick={() => setIsOpen(false)}
@@ -161,7 +162,7 @@ export const Header = () => {
           </ul>
         </nav>
         <div className={styles.desktopBooking}>
-          <Button href={BOOKING_URL} className={styles.button} type="primary">
+          <Button href={getBookingUrl(locale)} className={styles.button} type="primary">
             {t("booking")}
           </Button>
         </div>

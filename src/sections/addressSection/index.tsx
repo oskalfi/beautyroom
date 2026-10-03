@@ -1,4 +1,6 @@
 "use client";
+import { useTranslations } from "next-intl";
+
 import { LazyImage } from "@/shared/components/LazyImage";
 
 import Image from "next/image";
@@ -11,6 +13,7 @@ import { ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);
 
 export const AddressSection = () => {
+  const t = useTranslations("Home");
   const headingRef = useRef(null);
   const rectRef = useRef<SVGRectElement>(null);
   const containerRef = useRef(null);
@@ -85,7 +88,7 @@ export const AddressSection = () => {
     <section className={styles.section}>
       <div className={styles.headerWrapper} ref={containerRef}>
         <h2 className={styles.heading} ref={headingRef}>
-          Расположение
+          {t("addressTitle")}
         </h2>
 
         <svg className={styles.borderSvg}>
@@ -103,7 +106,7 @@ export const AddressSection = () => {
 
       <a
         data-press-feedback
-        aria-label="Построить маршрут в Waze"
+        aria-label={t("waze")}
         target="_blank"
         href="https://waze.com/ul?q=Jerusalem%20Blvd%2033%2C%20Tel%20Aviv-Yafo&navigate=yes"
         className={styles.contentWrapper}
@@ -117,7 +120,7 @@ export const AddressSection = () => {
                 src="/logoKY-920.svg"
                 sizes="(max-width: 480px) 150px, (max-width: 768px) 180px, 230px"
                 quality={90}
-                alt="«Beauty Room» salon street sign"
+                alt={t("signAlt")}
                 width={230}
                 height={230}
               />
@@ -132,12 +135,12 @@ export const AddressSection = () => {
             alt="Waze icon"
             className={styles.wazeIcon}
           />
-          Jerusalem Blvd 33, Tel Aviv-Yafo
+          {t("address")}
         </address>
       </a>
       <a
         data-press-feedback
-        aria-label="Открыть карту в Google Maps"
+        aria-label={t("maps")}
         target="_blank"
         className={styles.mapWrapper}
         href="https://maps.app.goo.gl/WLxLtpTQESe6Jx4C7"
@@ -148,7 +151,7 @@ export const AddressSection = () => {
           height={1590}
           sizes="(max-width: 768px) calc(100vw - 20px), (max-width: 1280px) 60vw, 815px"
           quality={90}
-          alt="«Beauty Room» salon on map"
+          alt={t("mapAlt")}
           ref={mapRef}
           className={styles.map}
         />

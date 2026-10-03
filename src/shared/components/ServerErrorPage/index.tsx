@@ -1,6 +1,6 @@
 import { Logo } from "@/shared/components/Logo";
 import { Button } from "@/shared/components/Button";
-import type { Locale } from "@/i18n/routing";
+import { routing, type Locale } from "@/i18n/routing";
 import styles from "@/shared/components/NotFoundPage/NotFoundPage.module.css";
 import errorStyles from "./ServerErrorPage.module.css";
 
@@ -11,9 +11,9 @@ const copy = {
 };
 
 // No translation provider or image optimizer is required by the error UI.
-export function ServerErrorPage({ locale = "en", reset }: { locale?: Locale; reset?: () => void }) {
+export function ServerErrorPage({ locale = routing.defaultLocale, reset }: { locale?: Locale; reset?: () => void }) {
   const text = copy[locale];
-  const home = locale === "en" ? "/" : `/${locale}`;
+  const home = locale === routing.defaultLocale ? "/" : `/${locale}`;
   return (
     <main className={styles.page} data-server-error dir={locale === "he" ? "rtl" : "ltr"}>
       <a href={home} className={styles.logoLink} aria-label={`Beauty Room — ${text.home}`} data-press-feedback><Logo /></a>

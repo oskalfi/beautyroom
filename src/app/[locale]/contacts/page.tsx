@@ -1,14 +1,16 @@
+import { getTranslations } from "next-intl/server";
 import { initPageLocale } from "@/i18n/pageLocale";
 import type { Metadata } from "next";
-import { BOOKING_URL } from "@/shared/config/booking";
+import { getBookingUrl } from "@/shared/config/booking";
 import { useId } from "react";
 import styles from "./page.module.css";
 import { ContactLink } from "./ContactLink";
 
-export const metadata: Metadata = {
-  title: "Контакты | Beauty Room",
-  description: "Свяжитесь с Beauty Room по телефону, в WhatsApp или Instagram.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = await initPageLocale(params);
+  const t = await getTranslations({ locale, namespace: "Contacts" });
+  return { title: `${t("title")} | Beauty Room`, description: t("description") };
+}
 
 const contacts = [
   {
@@ -20,7 +22,7 @@ const contacts = [
   {
     app: "WhatsApp",
     contact: "+972-53-225-80-55",
-    href: BOOKING_URL,
+    href: "",
     icon: "whatsapp",
   },
   {
@@ -102,23 +104,24 @@ export default async function ContactsPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  await initPageLocale(params);
+  const locale = await initPageLocale(params);
+  const t = await getTranslations({ locale, namespace: "Contacts" });
   return (
-    <main dir="ltr" className={styles.page}>
+    <main className={styles.page}>
       <div className={styles.container}>
-        <h1 className={styles.title}>Контакты</h1>
+        <h1 className={styles.title}>{t("title")}</h1>
         <ul className={styles.contacts}>
           {contacts.map(({ app, contact, href, icon }) => (
             <li key={icon}>
               <ContactLink
                 className={styles.contactLink}
-                href={href}
+                href={icon === "whatsapp" ? getBookingUrl(locale) : href}
               >
                 <span className={styles.icon}>
                   <ContactIcon type={icon} />
                 </span>
                 <span className={styles.label}>
-                  {app}. <span className={styles.contact}>{contact}</span>
+                  {icon === "phone" ? t("phone") : app}. <span dir="ltr" className={styles.contact}>{contact}</span>
                 </span>
                 <span className={styles.arrow} aria-hidden="true">
                   ↗

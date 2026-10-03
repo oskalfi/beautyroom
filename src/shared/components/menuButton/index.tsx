@@ -59,7 +59,7 @@ export const MenuButton = ({
       aria-expanded={isOpen}
       aria-label={t("toggleMenu")}
     >
-      <span className={styles.menuTitle}>Menu</span>
+      <span className={styles.menuTitle}>{t("menu")}</span>
       <svg
         ref={svgRef}
         className={styles.burgerSvg}

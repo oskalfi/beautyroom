@@ -1,7 +1,9 @@
-import { useLocale } from "next-intl";
+"use client";
+
+import { useLocale, useTranslations } from "next-intl";
 import { getPathname } from "@/i18n/navigation";
-import { BOOKING_URL } from "@/shared/config/booking";
-import { mockTreatments as mockData } from "@/shared/mocks/treatments";
+import { getBookingUrl } from "@/shared/config/booking";
+import { useLocalizedTreatments } from "@/shared/hooks/useLocalizedTreatments";
 import { Button } from "../Button";
 import styles from "./ModalTreatment.module.css";
 import { TreatmentPhoto } from "./TreatmentPhoto";
@@ -16,12 +18,15 @@ const ModalTreatment = ({
   headingLevel: Heading = "h2",
 }: ModalTreatmentProps) => {
   const locale = useLocale();
+  const t = useTranslations("Treatment");
+  const booking = useTranslations("Navigation");
+  const mockData = useLocalizedTreatments();
   const treatmentInfo = mockData.find((mockTreatment) => {
     return mockTreatment.id === id;
   });
 
   return (
-    <div className={styles.modalTreatment} dir="ltr">
+    <div className={styles.modalTreatment} dir={locale === "he" ? "rtl" : "ltr"}>
       {treatmentInfo?.imgPath && (
         <TreatmentPhoto
           key={treatmentInfo.imgPath}
@@ -40,7 +45,7 @@ const ModalTreatment = ({
               href={getPathname({ locale, href: `/treatments/${id}` })}
               className={styles.buttonText}
             >
-              Узнать подробнее
+              {t("more")}
             </a>
             <svg
               className={styles.arrow}
@@ -61,8 +66,8 @@ const ModalTreatment = ({
           </div>
         </div>
 
-        <Button href={BOOKING_URL} type="secondary" className={styles.button}>
-          Запись
+        <Button href={getBookingUrl(locale)} type="secondary" className={styles.button}>
+          {booking("booking")}
         </Button>
       </div>
     </div>

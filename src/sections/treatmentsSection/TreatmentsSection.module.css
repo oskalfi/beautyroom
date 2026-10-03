@@ -65,3 +65,9 @@
     font-size: var(--treatments-decorative-description-font-size-to-425);
   }
 }
+
+@media (min-width: 936px) {
+  .decorativeDescription:dir(rtl) {
+    top: 40px;
+  }
+}

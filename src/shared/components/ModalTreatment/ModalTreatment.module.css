@@ -128,3 +128,6 @@
     --treatment-modal-button-outline-color
   );
 }
+
+.modalTreatment:dir(rtl) .arrow { transform: translateY(1px) rotate(180deg); }
+.modalTreatment:lang(he) .description { letter-spacing: normal; }

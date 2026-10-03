@@ -51,6 +51,8 @@
   position: absolute;
   display: flex;
   right: -50%;
+  direction: ltr;
+  gap: 0;
   transition:
     right 0.3s ease,
     gap 0.3s ease;
@@ -118,4 +120,21 @@
 }
 .treatmentCard:hover .text {
   transform: none;
+}
+
+/* Mirror the whole arrow group, preserving the LTR spacing between its children. */
+.primary:dir(rtl) .arrowsContainer {
+  transform: rotate(180deg);
+  left: -50%;
+  right: auto;
+  transition: left 0.3s ease, gap 0.3s ease;
+}
+.primary:dir(rtl):hover .arrowsContainer,
+.primary:dir(rtl):focus-visible .arrowsContainer {
+  left: 15%;
+  right: auto;
+}
+.primary:dir(rtl):hover .text,
+.primary:dir(rtl):focus-visible .text {
+  transform: translateX(16px);
 }

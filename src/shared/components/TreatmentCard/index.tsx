@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getPathname } from "@/i18n/navigation";
 import Image from "next/image";
 import { Button } from "@/shared/components/Button";
@@ -18,12 +18,13 @@ export const TreatmentCard = ({
   treatment: TreatmentCardData;
 }) => {
   const locale = useLocale();
+  const t = useTranslations("Treatment");
   const href = getPathname({ locale, href: `/treatments/${treatment.id}` });
   const details = [
-    treatment.priceILS != null ? `₪ ${treatment.priceILS}` : "Цена по запросу",
+    treatment.priceILS != null ? `₪ ${treatment.priceILS}` : t("priceRequest"),
     treatment.durationMinutes != null
-      ? `${treatment.durationMinutes} мин`
-      : "Длительность по запросу",
+      ? t("minutes", { count: treatment.durationMinutes })
+      : t("durationRequest"),
   ];
   return (
     <article
@@ -47,10 +48,10 @@ export const TreatmentCard = ({
         <Button
           type="treatmentCard"
           className={styles.button}
-          aria-label={`Выбрать: ${treatment.name}`}
+          aria-label={t("chooseNamed", { name: treatment.name })}
           onClick={() => window.location.assign(`${href}#treatment-booking`)}
         >
-          Выбрать
+          {t("choose")}
         </Button>
       </div>
       <p className={styles.description}>{treatment.description}</p>
@@ -58,9 +59,9 @@ export const TreatmentCard = ({
         <a
           href={href}
           className={styles.details}
-          aria-label={`Уточнить детали: ${treatment.name}`}
+          aria-label={t("detailsNamed", { name: treatment.name })}
         >
-          Уточнить детали
+          {t("details")}
         </a>
         <p className={styles.meta}>{details.join(" | ")}</p>
       </div>

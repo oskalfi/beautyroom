@@ -154,3 +154,10 @@
     height: 42px;
   }
 }
+
+.panel:dir(rtl) {
+  inset: 0;
+  margin: auto;
+  height: fit-content;
+  max-height: calc(100dvh - 32px);
+}

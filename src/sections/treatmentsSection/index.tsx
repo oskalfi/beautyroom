@@ -1,4 +1,6 @@
 "use client";
+import { useTranslations } from "next-intl";
+
 
 import { useNearViewport } from "@/shared/hooks/useNearViewport";
 import { loadElementFont } from "@/shared/utils/loadElementFont";
@@ -15,10 +17,12 @@ import { moveBlockToBottom } from "./components/treatmentsItem/animations/moveBl
 import { setStartingPosition } from "./components/treatmentsItem/animations/setStartingPosition";
 import { useGSAP } from "@gsap/react";
 import { TreatmentsMenu } from "./components/treatmentsMenu";
-import { mockTreatments as mockData } from "@/shared/mocks/treatments";
+import { useLocalizedTreatments } from "@/shared/hooks/useLocalizedTreatments";
 export let previousCursorYCoord = 0;
 
 export const TreatmentsSection = () => {
+  const t = useTranslations("Home");
+  const mockData = useLocalizedTreatments();
   const ref = useRef<HTMLDivElement | null>(null);
 
   const near = useNearViewport(ref, true, "200px 0px");
@@ -180,9 +184,9 @@ export const TreatmentsSection = () => {
   return (
     <section className={styles.treatmentsSection} ref={ref} id="treatmentsList" data-near-viewport={near}>
       <div className={styles.decorativeDescription}>
-        During your consultation, we’ll create a personalized care plan.
+        {t("plan")}
       </div>
-      <h2 className={styles.heading}>Treatments</h2>
+      <h2 className={styles.heading}>{t("treatments")}</h2>
       <TreatmentsMenu data={mockData} />
     </section>
   );

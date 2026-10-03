@@ -44,3 +44,5 @@
   opacity: 0.8;
   z-index: 1;
 }
+
+.hintText:lang(he) { direction: rtl; }

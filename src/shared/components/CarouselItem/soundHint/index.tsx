@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import styles from "./SoundHint.module.css";
 import { useGSAP } from "@gsap/react";
@@ -16,6 +17,7 @@ export const SoundHint = ({
   soundIconRef: React.RefObject<HTMLImageElement | null>;
   soundEnabled: boolean;
 }) => {
+  const t = useTranslations("Media");
   const hintTextRef = useRef<HTMLParagraphElement>(null);
   const ripple1Ref = useRef<HTMLDivElement>(null);
   const ripple2Ref = useRef<HTMLDivElement>(null);
@@ -162,7 +164,7 @@ export const SoundHint = ({
             src="/volume.svg"
             width={90}
             height={82}
-            alt="Иконка звука"
+            alt={t("sound")}
             className={styles.volumeSvg}
           />
           <Image
@@ -170,13 +172,13 @@ export const SoundHint = ({
             src="/volume_mute.svg"
             width={90}
             height={82}
-            alt="Иконка выключеного звука"
+            alt={t("muted")}
             className={styles.volumeSvg}
           />
         </div>
 
         <div ref={hintTextRef} className={styles.hintText}>
-          Активируйте звук двойным нажатием
+          {t("soundHint")}
         </div>
       </div>
     </div>

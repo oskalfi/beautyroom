@@ -49,7 +49,7 @@
 .message {
   margin: 12px 0 0;
   font-family:
-    var(--font-family-montserrat-alternates, "MontserratAlternates"), sans-serif;
+    var(--font-family-display), Arial, sans-serif;
   font-size: clamp(18px, 1.25vw, 24px);
   line-height: 1.6;
   font-weight: 400;

@@ -1,4 +1,6 @@
 "use client";
+import { useLocale, useTranslations } from "next-intl";
+
 
 import { useAccessibility, useMotionStopped } from "@/shared/components/Accessibility/store";
 import { WelcomeBookingButton } from "./WelcomeBookingButton";
@@ -9,6 +11,8 @@ import { enableScrollParallax } from "./animations/enableScrollParallax";
 import { revealWelcomeUnderline } from "./animations/revealWelcomeUnderline";
 
 export const WelcomeSection = () => {
+  const t = useTranslations("Home");
+  const locale = useLocale();
   const section = useRef<HTMLElement>(null);
   const background = useRef<HTMLDivElement>(null);
   const motionStopped = useMotionStopped();
@@ -32,16 +36,16 @@ export const WelcomeSection = () => {
       <div ref={background} className={styles.backgroundImage} />
       <div className={styles.welcomeText}>
         <h1 className={styles.h1}>
-          <span className={styles.nowrap}>Beautiful skin</span>{" "}
-          <span className={styles.nowrap}>is not a dream</span>{" "}
-          <span>— it&apos;s a result</span>
+          <span className={styles.nowrap}>{t("hero1")}</span>{" "}
+          <span className={styles.nowrap}>{t("hero2")}</span>{" "}
+          <span className={styles.nowrap}>{t("hero3")}</span>
         </h1>
         <div className={styles.address}>
-          Facial skin care and{" "}
-          <span className={styles.nowrap}>treatment studio</span> based{" "}
+          {t("locationIntro")}{" "}
           <span className={styles.underlinedText}>
-            in Tel Aviv - Yafo.
+            {t("locationCity")}
             <UnderlineSVG
+              rtl={locale === "he"}
               svgClassName={styles.underline}
               clipClassName={styles.clip}
             />

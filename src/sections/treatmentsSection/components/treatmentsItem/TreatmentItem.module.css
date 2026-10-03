@@ -144,3 +144,12 @@
 :global(html[data-a11y-motion="true"]) .button {
   scale: 1;
 }
+
+.button:dir(rtl) .movingArrow {
+  right: auto;
+  left: 50px;
+  scale: -1 1;
+}
+.button:dir(rtl) .movingBlock .text { padding-inline-end: 90px; }
+.button:dir(rtl)[data-focus-active="true"] .buttonText,
+.button:dir(rtl)[data-scroll-active="true"] .buttonText { transform: translateX(-15px); }

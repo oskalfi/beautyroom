@@ -1,7 +1,7 @@
 "use client";
 import { useNearViewport } from "@/shared/hooks/useNearViewport";
-import { useTranslations } from "next-intl";
-import { BOOKING_URL } from "@/shared/config/booking";
+import { useTranslations, useLocale } from "next-intl";
+import { getBookingUrl } from "@/shared/config/booking";
 
 import styles from "./Footer.module.css";
 import { Link } from "@/i18n/navigation";
@@ -17,6 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const Footer = () => {
   const t = useTranslations("Navigation");
+  const locale = useLocale();
   const logoRef = useRef(null);
   const footerRef = useRef(null);
   const pathname = usePathname();
@@ -51,7 +52,7 @@ export const Footer = () => {
             <li className={styles.navigationItem}>
               <a
                 data-press-feedback
-                href={BOOKING_URL}
+                href={getBookingUrl(locale)}
                 className={styles.navigationLink}
               >
                 {t("booking")}
@@ -173,7 +174,7 @@ export const Footer = () => {
             <li className={styles.navigationItem}>
               <a
                 data-press-feedback
-                href={BOOKING_URL}
+                href={getBookingUrl(locale)}
                 className={styles.navigationLink}
               >
                 Whatsapp

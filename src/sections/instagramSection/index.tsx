@@ -1,4 +1,6 @@
 "use client";
+import { useTranslations } from "next-intl";
+
 import { LazyImage } from "@/shared/components/LazyImage";
 
 import { Carousel } from "@/shared/components/Carousel";
@@ -12,6 +14,7 @@ import { SplitText } from "gsap/all";
 gsap.registerPlugin(SplitText);
 
 export const InstagramSection = () => {
+  const t = useTranslations("Home");
   const refWhiteText = useRef<HTMLSpanElement | null>(null);
   const isAnimating = useRef(false);
 
@@ -45,7 +48,7 @@ export const InstagramSection = () => {
   return (
     <section className={styles.sectionContainer}>
       <div className={styles.wrapper}>
-        <RevealHeading className={styles.heading}>Следите за нами в Instagram</RevealHeading>
+        <RevealHeading className={styles.heading}>{t("instagram")}</RevealHeading>
         <Image
           src="/instagram.png"
           width={36}
@@ -64,15 +67,15 @@ export const InstagramSection = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <div className={styles.toInstButton}>
-          <LazyImage src="/arrowInst.svg" alt="arrow" className={styles.arrow} />
+        <div className={styles.toInstButton} aria-hidden="true">
+          <LazyImage src="/arrowInst.svg" alt="" className={styles.arrow} />
           <div className={styles.buttonTextWrapper}>
             <span className={styles.buttonTextWhite} ref={refWhiteText}>
-              Перейти в instagram
+              {t("visitInstagram")}
             </span>
           </div>
         </div>
-        <span className={styles.buttonTextBlack}>Перейти в instagram</span>
+        <span className={styles.buttonTextBlack}>{t("visitInstagram")}</span>
       </a>
     </section>
   );

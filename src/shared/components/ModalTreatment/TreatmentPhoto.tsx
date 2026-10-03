@@ -1,11 +1,13 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import Image from "next/image";
 import { MediaLoader } from "../MediaLoader";
 import styles from "./ModalTreatment.module.css";
 
 export function TreatmentPhoto({ src, alt }: { src: string; alt: string }) {
+  const t = useTranslations("Media");
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
 
   return (
@@ -22,9 +24,9 @@ export function TreatmentPhoto({ src, alt }: { src: string; alt: string }) {
         onLoad={() => setStatus("ready")}
         onError={() => setStatus("error")}
       />
-      {status === "loading" && <MediaLoader label="Загрузка фотографии" />}
+      {status === "loading" && <MediaLoader label={t("imageLoading")} />}
       {status === "error" && (
-        <p className={styles.imageError} role="status">Не удалось загрузить фотографию</p>
+        <p className={styles.imageError} role="status">{t("imageError")}</p>
       )}
     </div>
   );

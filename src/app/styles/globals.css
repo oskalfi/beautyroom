@@ -633,3 +633,11 @@ html {
   --accessibility-statement-title-size: 36px;
   --accessibility-statement-heading-size: 26px;
 }
+
+/* Hebrew glyphs use a consistent local fallback without downloading Latin-only fonts. */
+:root:lang(he) {
+  --font-family-sans: Arial;
+  --font-family-display: Arial;
+  --font-family-decorative: Arial;
+}
+html:lang(he) body { letter-spacing: normal; }

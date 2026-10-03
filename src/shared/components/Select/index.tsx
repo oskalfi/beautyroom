@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import styles from "./Select.module.css";
-import { mockTreatments } from "@/shared/mocks/treatments";
+import { useTranslations } from "next-intl";
 import clsx from "clsx";
 
 type SelectProps = {
@@ -17,7 +17,9 @@ type SelectProps = {
   placement?: "bottom" | "top";
 };
 
-export const Select = ({ className, value, onChange, options = mockTreatments, allLabel, label = "Выберите процедуру", triggerContent, pressFeedback = false, placement = "bottom" }: SelectProps) => {
+export const Select = ({ className, value, onChange, options = [], allLabel, label: customLabel, triggerContent, pressFeedback = false, placement = "bottom" }: SelectProps) => {
+  const t = useTranslations("Treatment");
+  const label = customLabel ?? t("select");
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const [internalValue, setInternalValue] = useState<number | null>(null);

@@ -1,4 +1,6 @@
 "use client";
+import { useTranslations } from "next-intl";
+
 
 import { useNearViewport } from "@/shared/hooks/useNearViewport";
 
@@ -11,6 +13,7 @@ import { useRef } from "react";
 import { flowersNTextReveal } from "./animations/flowers&textReveal";
 
 export const IntroduceSection = () => {
+  const t = useTranslations("Home");
   const introduceSection = useRef<HTMLElement>(null);
   const near = useNearViewport(introduceSection, true, "0px");
   useGSAP(
@@ -36,8 +39,7 @@ export const IntroduceSection = () => {
     <section ref={introduceSection} className={styles.introduceSection}>
       <TopFlowerSVG className={styles.topFlower} />
       <h2 className={styles.heading}>
-        Let me introduce you to professional care with clinically proven
-        results.
+        {t("intro")}
       </h2>
       <BottomFlowerSVG className={styles.bottomFlower} />
     </section>

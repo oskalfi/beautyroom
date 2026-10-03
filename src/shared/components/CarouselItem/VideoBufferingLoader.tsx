@@ -1,3 +1,5 @@
+"use client";
+import { useTranslations } from "next-intl";
 import { useEffect, useState, type RefObject } from "react";
 import { MediaLoader } from "../MediaLoader";
 
@@ -10,6 +12,7 @@ export function VideoBufferingLoader({
 }: {
   videoRef: RefObject<HTMLVideoElement | null>;
 }) {
+  const t = useTranslations("Media");
   const [showLoader, setShowLoader] = useState(false);
 
   useEffect(() => {
@@ -22,5 +25,5 @@ export function VideoBufferingLoader({
     return () => window.clearTimeout(timeout);
   }, [videoRef]);
 
-  return showLoader ? <MediaLoader label="Загрузка видео" /> : null;
+  return showLoader ? <MediaLoader label={t("videoLoading")} /> : null;
 }

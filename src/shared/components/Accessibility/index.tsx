@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { usePathname } from "next/navigation";
@@ -7,6 +8,7 @@ import { useAccessibilityEffects } from "./effects";
 import styles from "./Accessibility.module.css";
 
 export function Accessibility() {
+  const t = useTranslations("Accessibility");
   const settings = useAccessibility();
   const stopped = useMotionStopped();
   const dialog = useRef<HTMLDialogElement>(null);
@@ -69,7 +71,7 @@ export function Accessibility() {
           }
         }}
       >
-        Перейти к основному содержимому
+        {t("skip")}
       </a>
       {settings.ruler && !open && (
         <div ref={ruler} className={styles.ruler} aria-hidden="true" />
@@ -78,7 +80,7 @@ export function Accessibility() {
         data-press-feedback
         className={styles.trigger}
         type="button"
-        aria-label="Настройки доступности"
+        aria-label={t("settings")}
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-controls="accessibility-menu"
@@ -131,25 +133,25 @@ export function Accessibility() {
         }}
       >
         <div className={styles.titleRow}>
-          <h2 id="accessibility-title">Доступность</h2>
+          <h2 id="accessibility-title">{t("title")}</h2>
           <button
             type="button"
-            aria-label="Закрыть настройки доступности"
+            aria-label={t("close")}
             onClick={() => dialog.current?.close()}
           >
             ✕
           </button>
         </div>
         <button type="button" onClick={settings.reset}>
-          Сбросить настройки
+          {t("reset")}
         </button>
 
         <fieldset>
-          <legend>Текст</legend>
+          <legend>{t("text")}</legend>
           <div className={styles.fontSize}>
             <button
               type="button"
-              aria-label="Уменьшить текст"
+              aria-label={t("smaller")}
               disabled={settings.textScale <= 100}
               onClick={() =>
                 settings.update({
@@ -162,7 +164,7 @@ export function Accessibility() {
             <output aria-live="polite">{settings.textScale}%</output>
             <button
               type="button"
-              aria-label="Увеличить текст"
+              aria-label={t("larger")}
               disabled={settings.textScale >= 200}
               onClick={() =>
                 settings.update({
@@ -173,13 +175,13 @@ export function Accessibility() {
               A+
             </button>
           </div>
-          {toggle("lineSpacing", "Увеличить межстрочный интервал")}
-          {toggle("letterSpacing", "Увеличить межбуквенный интервал")}
-          {toggle("readableFont", "Читабельный шрифт Arial")}
+          {toggle("lineSpacing", t("lineSpacing"))}
+          {toggle("letterSpacing", t("letterSpacing"))}
+          {toggle("readableFont", t("readableFont"))}
         </fieldset>
         <fieldset>
-          <legend>Цвет и контраст</legend>
-          <label htmlFor="a11y-contrast">Цветовой режим</label>
+          <legend>{t("colour")}</legend>
+          <label htmlFor="a11y-contrast">{t("colourMode")}</label>
           <select
             id="a11y-contrast"
             value={settings.contrast}
@@ -189,35 +191,33 @@ export function Accessibility() {
               })
             }
           >
-            <option value="normal">Обычные цвета</option>
-            <option value="dark">Светлый текст на тёмном</option>
-            <option value="light">Тёмный текст на светлом</option>
-            <option value="invert">Инверсия цветов</option>
-            <option value="mono">Оттенки серого</option>
+            <option value="normal">{t("normalColours")}</option>
+            <option value="dark">{t("dark")}</option>
+            <option value="light">{t("light")}</option>
+            <option value="invert">{t("invert")}</option>
+            <option value="mono">{t("mono")}</option>
           </select>
         </fieldset>
         <fieldset>
-          <legend>Ориентирование</legend>
-          {toggle("underline", "Подчеркнуть все ссылки")}
-          {toggle("headings", "Выделить заголовки")}
-          {toggle("keyboard", "Усиленная клавиатурная навигация")}
+          <legend>{t("orientation")}</legend>
+          {toggle("underline", t("underline"))}
+          {toggle("headings", t("headings"))}
+          {toggle("keyboard", t("keyboard"))}
           <p>
-            Tab / Shift + Tab — переход; Enter — открыть ссылку; пробел — нажать
-            кнопку; Esc — закрыть меню. В усиленном режиме ↑ / ↓ переходят между
-            элементами вне полей ввода.
+            {t("keyboardHelp")}
           </p>
         </fieldset>
         <fieldset>
-          <legend>Движение и чтение</legend>
+          <legend>{t("movement")}</legend>
           <button
             type="button"
             aria-pressed={stopped}
             onClick={() => settings.update({ motion: !stopped })}
           >
-            Остановить анимации и видео
+            {t("stop")}
           </button>
-          {toggle("ruler", "Линейка для чтения")}
-          <label htmlFor="a11y-cursor">Курсор</label>
+          {toggle("ruler", t("ruler"))}
+          <label htmlFor="a11y-cursor">{t("cursor")}</label>
           <select
             id="a11y-cursor"
             value={settings.cursor}
@@ -227,16 +227,13 @@ export function Accessibility() {
               })
             }
           >
-            <option value="normal">Обычный</option>
-            <option value="black">Увеличенный чёрный</option>
-            <option value="white">Увеличенный белый</option>
+            <option value="normal">{t("normal")}</option>
+            <option value="black">{t("black")}</option>
+            <option value="white">{t("white")}</option>
           </select>
         </fieldset>
         <Link className={styles.statement} href="/accessibility">
-          Заявление о доступности /{" "}
-          <span lang="he" dir="rtl">
-            הצהרת נגישות
-          </span>
+          {t("statement")}
         </Link>
       </dialog>
     </>

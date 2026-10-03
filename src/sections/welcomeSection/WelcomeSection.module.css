@@ -229,3 +229,18 @@
     transform: scale(0.8);
   }
 }
+
+/* Keep the approved three-line composition in these languages. */
+.h1:lang(ru) > span,
+.h1:lang(he) > span {
+  display: block;
+  white-space: nowrap;
+}
+.h1:lang(ru) {
+  font-size: clamp(24px, 4.1vw, 72px);
+}
+@media (max-width: 770px) {
+  .h1:lang(ru) {
+    font-size: clamp(24px, 8vw, 48px);
+  }
+}

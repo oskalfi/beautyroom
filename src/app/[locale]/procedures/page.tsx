@@ -1,16 +1,18 @@
 import { initPageLocale } from "@/i18n/pageLocale";
 import type { Metadata } from "next";
-import { mockTreatments } from "@/shared/mocks/treatments";
+import { getTreatments } from "@/shared/api/treatments";
+import { getTranslations } from "next-intl/server";
 import { TreatmentsCatalog } from "./TreatmentsCatalog";
 
-export const metadata: Metadata = {
-  title: "Процедуры  | Beauty Room",
-  description:
-    "Выберите процедуру для лица в Beauty Room: чистка, аппаратный уход и другие услуги. Узнайте, как проходит процедура, кому подходит и как записаться. Тель-Авив — Яффо",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = await initPageLocale(params);
+  const t = await getTranslations({ locale, namespace: "Treatment" });
+  return { title: t("procedures") + " | Beauty Room", description: t("catalogDescription") };
+}
 
 export default async function ProceduresPage({ params }: { params: Promise<{ locale: string }> }) {
-  await initPageLocale(params);
+  const locale = await initPageLocale(params);
+  const mockTreatments = await getTreatments(locale);
   const treatments = mockTreatments.map(
     ({ id, name, imgPath, description, priceILS, durationMinutes }) => ({
       id,

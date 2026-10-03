@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Logo } from "@/shared/components/Logo";
 import { Button } from "@/shared/components/Button";
 import { getPathname } from "@/i18n/navigation";
-import type { Locale } from "@/i18n/routing";
+import { routing, type Locale } from "@/i18n/routing";
 import styles from "./NotFoundPage.module.css";
 
 const copy = {
@@ -11,7 +11,7 @@ const copy = {
   he: { title: "העמוד לא נמצא", message: "לא קיים עמוד בכתובת הזו.", home: "לעמוד הבית" },
 };
 
-export function NotFoundPage({ locale = "en" }: { locale?: Locale }) {
+export function NotFoundPage({ locale = routing.defaultLocale }: { locale?: Locale }) {
   const text = copy[locale];
   const home = getPathname({ locale, href: "/" });
   return (

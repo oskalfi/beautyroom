@@ -1,4 +1,6 @@
 "use client";
+import { useTranslations } from "next-intl";
+
 
 import clsx from "clsx";
 import styles from "./Carousel.module.css";
@@ -15,6 +17,7 @@ import { CarouselItem } from "../CarouselItem";
 import { useMotionStopped } from "@/shared/components/Accessibility/store";
 
 export const Carousel = () => {
+  const t = useTranslations("Media");
   const motionStopped = useMotionStopped();
   const mediaContainer = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(
@@ -135,7 +138,7 @@ export const Carousel = () => {
       </div>
 
       <button
-        aria-label="Предыдущее видео"
+        aria-label={t("previous")}
         onClick={() => {
           itemRefs.current[Math.max(0, activeIndex - 1)]?.scrollIntoView({
             behavior:
@@ -155,7 +158,7 @@ export const Carousel = () => {
         <ArrowSVG className={styles.arrow} />
       </button>
       <button
-        aria-label="Следующее видео"
+        aria-label={t("next")}
         onClick={() => {
           itemRefs.current[
             Math.min(activeIndex + 1, MOCKDATA.length - 1)

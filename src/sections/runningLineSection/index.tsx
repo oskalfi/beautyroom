@@ -1,8 +1,10 @@
 "use client";
+import { useTranslations } from "next-intl";
+
 
 import { useNearViewport } from "@/shared/hooks/useNearViewport";
 
-import { mockFacts } from "@/shared/mocks/facts";
+
 
 import { MaleFaceSilhouetteSVG } from "@/shared/assets/svg/MaleFaceSilhouette";
 import styles from "./RunningLineSection.module.css";
@@ -15,6 +17,7 @@ import { revealTextAndSVG } from "./animations/revealText&SVG";
 
 
 export const RunningLineSection = () => {
+  const t = useTranslations("Home");
   const ref = useRef<HTMLElement | null>(null);
   const near = useNearViewport(ref, true, "200px 0px");
   useGSAP(
@@ -26,11 +29,11 @@ export const RunningLineSection = () => {
   );
   return (
     <section className={styles.sectionContainer} ref={ref}>
-      <RunningLine facts={mockFacts} />
+      <RunningLine facts={t.raw("facts") as string[]} />
       <div className={styles.headingContainer}>
         <MaleFaceSilhouetteSVG className={styles.maleFace} />
         <h2 className={styles.heading}>
-          До и после: видимый результат благодаря регулярному уходу.
+          {t("results")}
         </h2>
         <FemaleFaceSilhouetteSVG className={styles.femaleFace} />
       </div>

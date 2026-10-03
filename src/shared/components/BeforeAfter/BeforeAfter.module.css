@@ -26,14 +26,14 @@
   left: 0;
   height: 100%;
   width: 100%;
-  clip-path: inset(0 calc(100% - 15px) 0 0);
+  clip-path: inset(0 calc(100% - 150px) 0 0);
 }
 
 .slider {
   position: absolute;
   height: 100%;
   top: 0;
-  left: 15px;
+  left: 150px;
   transform: translateX(-50%);
   cursor: grab;
   touch-action: none;
@@ -47,10 +47,6 @@
 
 .slider:active {
   cursor: grabbing;
-}
-
-.isDragging {
-  transform: translateX(-50%);
 }
 
 @media (max-width: 370px) {

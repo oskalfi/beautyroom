@@ -27,7 +27,7 @@ export default async function Home({
 }) {
   const locale = await initPageLocale(params);
   return (
-    <main className={styles.mainPage}>
+    <main id="main-content" tabIndex={-1} className={styles.mainPage}>
       <link
         rel="preload"
         href="/main_bg_phone.avif"

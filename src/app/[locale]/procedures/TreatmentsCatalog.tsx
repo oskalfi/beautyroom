@@ -11,7 +11,7 @@ export function TreatmentsCatalog({ treatments }: { treatments: TreatmentCardDat
   const t = useTranslations("Treatment");
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const visibleTreatments = selectedId === null ? treatments : treatments.filter(treatment => treatment.id === selectedId);
-  return <main className={styles.page}>
+  return <main id="main-content" tabIndex={-1} className={styles.page}>
     <div className={styles.container}>
       <h1 className={styles.title}>{t("select")}</h1>
       <Select className={styles.filter} value={selectedId} onChange={setSelectedId} options={treatments} allLabel={t("all")} />

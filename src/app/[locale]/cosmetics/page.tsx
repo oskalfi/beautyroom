@@ -12,7 +12,7 @@ export default async function CosmeticsPage({ params }: { params: Promise<{ loca
   const locale = await initPageLocale(params);
   const t = await getTranslations({ locale, namespace: "Cosmetics" });
   return (
-    <main className={styles.page}>
+    <main id="main-content" tabIndex={-1} className={styles.page}>
       <div className={styles.container}>
         <section className={styles.hero} aria-labelledby="cosmetics-title">
           <p className={styles.eyebrow}>{t("eyebrow")}</p>

@@ -62,7 +62,7 @@ export function Accessibility() {
         className={styles.skip}
         href="#main-content"
         onClick={(event) => {
-          const main = document.querySelector("main");
+          const main = document.getElementById("main-content");
           if (main) {
             event.preventDefault();
             main.tabIndex = -1;

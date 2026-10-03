@@ -11,7 +11,7 @@ export default async function AccessibilityPage({ params }: { params: Promise<{ 
   const locale = await initPageLocale(params);
   const t = await getTranslations({ locale, namespace: "AccessibilityPage" });
   return (
-    <main id="main-content" className={styles.page}>
+    <main id="main-content" tabIndex={-1} className={styles.page}>
       <h1>{t("text0")}</h1>
       <p>{t("text1")}</p>
       <h2>{t("text2")}</h2>

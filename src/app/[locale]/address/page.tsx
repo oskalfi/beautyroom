@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function AddressPage({ params }: { params: Promise<{ locale: string }> }) {
   await initPageLocale(params);
   return (
-    <main className={styles.page}>
+    <main id="main-content" tabIndex={-1} className={styles.page}>
       <AddressSection />
     </main>
   );

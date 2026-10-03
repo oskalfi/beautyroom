@@ -15,7 +15,7 @@ export function ServerErrorPage({ locale = routing.defaultLocale, reset }: { loc
   const text = copy[locale];
   const home = locale === routing.defaultLocale ? "/" : `/${locale}`;
   return (
-    <main className={styles.page} data-server-error dir={locale === "he" ? "rtl" : "ltr"}>
+    <main id="main-content" tabIndex={-1} className={styles.page} data-server-error dir={locale === "he" ? "rtl" : "ltr"}>
       <a href={home} className={styles.logoLink} aria-label={`Beauty Room — ${text.home}`} data-press-feedback><Logo /></a>
       {/* eslint-disable @next/next/no-img-element */}
       <img src="/not-found/topLeaf.svg" className={styles.topLeaf} width="437" height="345" alt="" />

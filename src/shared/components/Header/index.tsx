@@ -101,7 +101,7 @@ export const Header = () => {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
-            <img src="/headerTitle.svg" alt="Beauty Room" />
+            <img src="/headerTitle.svg" width="139" height="16" alt="Beauty Room" />
           </Link>
           <MenuButton isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>

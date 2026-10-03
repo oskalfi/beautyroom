@@ -18,7 +18,7 @@ export const SoundHint = ({
   soundEnabled: boolean;
 }) => {
   const t = useTranslations("Media");
-  const hintTextRef = useRef<HTMLParagraphElement>(null);
+  const hintTextRef = useRef<HTMLDivElement>(null);
   const ripple1Ref = useRef<HTMLDivElement>(null);
   const ripple2Ref = useRef<HTMLDivElement>(null);
 
@@ -31,6 +31,7 @@ export const SoundHint = ({
 
     const split = SplitText.create(hintTextRef.current, {
       type: "chars lines",
+      aria: "none",
     });
 
     const tl = gsap.timeline({
@@ -177,7 +178,8 @@ export const SoundHint = ({
           />
         </div>
 
-        <div ref={hintTextRef} className={styles.hintText}>
+        <span className={styles.srOnly}>{t("soundHint")}</span>
+        <div ref={hintTextRef} className={styles.hintText} aria-hidden="true">
           {t("soundHint")}
         </div>
       </div>

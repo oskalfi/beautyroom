@@ -12,7 +12,8 @@ export const TreatmentsMenu = ({ data }: { data: treatmentDataProps[] }) => {
   });
   return (
     <div className={styles.menu} {...keyboardNavigation}>
-      <div className={styles.menuCoverBlock} />
+      <div className={styles.menuCoverBlock} aria-hidden="true" />
+      <ul className={styles.list} role="list">
       {data.map((treatment) => {
         return (
           <TreatmentItem
@@ -22,6 +23,7 @@ export const TreatmentsMenu = ({ data }: { data: treatmentDataProps[] }) => {
           />
         );
       })}
+      </ul>
     </div>
   );
 };

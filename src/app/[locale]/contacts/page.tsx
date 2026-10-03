@@ -107,7 +107,7 @@ export default async function ContactsPage({
   const locale = await initPageLocale(params);
   const t = await getTranslations({ locale, namespace: "Contacts" });
   return (
-    <main className={styles.page}>
+    <main id="main-content" tabIndex={-1} className={styles.page}>
       <div className={styles.container}>
         <h1 className={styles.title}>{t("title")}</h1>
         <ul className={styles.contacts}>

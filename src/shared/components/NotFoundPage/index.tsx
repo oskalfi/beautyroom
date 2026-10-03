@@ -15,7 +15,7 @@ export function NotFoundPage({ locale = routing.defaultLocale }: { locale?: Loca
   const text = copy[locale];
   const home = getPathname({ locale, href: "/" });
   return (
-    <main className={styles.page} data-not-found dir={locale === "he" ? "rtl" : "ltr"}>
+    <main id="main-content" tabIndex={-1} className={styles.page} data-not-found dir={locale === "he" ? "rtl" : "ltr"}>
       <a className={styles.logoLink} href={home} aria-label={`Beauty Room — ${text.home}`} data-press-feedback>
         <Logo />
       </a>

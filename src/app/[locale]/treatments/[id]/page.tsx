@@ -36,7 +36,7 @@ export default async function TreatmentPage({
 
   const t = await getTranslations("Treatment");
   return (
-    <main className={styles.page}>
+    <main id="main-content" tabIndex={-1} className={styles.page}>
       <nav aria-label={t("breadcrumb")} className={styles.breadcrumbs}>
         <Link href="/">{t("home")}</Link><span aria-hidden="true">/</span>
         <Link href="/procedures">{t("procedures")}</Link><span aria-hidden="true">/</span>

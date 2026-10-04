@@ -22,7 +22,25 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   const t = await getTranslations({ locale, namespace: "Metadata" });
-  return { title: t("title"), description: t("description") };
+  return {
+    title: t("title"),
+    description: t("description"),
+    openGraph: {
+      title: t("title"),
+      description: t("description"),
+      siteName: "Beauty Room",
+      images: [
+        {
+          url: "https://beautyroomky.com/og-image.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Beauty Room by Yael Kanter",
+        },
+      ],
+      locale: { he: "he_IL", en: "en_US", ru: "ru_RU" }[locale],
+      type: "website",
+    },
+  };
 }
 
 export default async function RootLayout({

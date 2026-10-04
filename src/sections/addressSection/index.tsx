@@ -96,8 +96,6 @@ export const AddressSection = () => {
             ref={rectRef}
             x="1"
             y="1"
-            width="calc(100% - 2px)"
-            height="calc(100% - 2px)"
             rx="16"
             className={styles.borderRect}
           />

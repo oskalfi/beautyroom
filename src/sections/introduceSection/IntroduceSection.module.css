@@ -79,5 +79,6 @@
 @media (max-width: 450px) {
   .heading {
     font-size: var(--introduce-heading-font-size-to-450);
+    padding: 0 4px;
   }
 }

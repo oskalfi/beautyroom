@@ -3,11 +3,45 @@
     "name": "Manual facial cleansing",
     "description": "Targeted pore cleansing for a more even skin surface. The practitioner extracts suitable comedones and selects finishing skincare to leave the skin looking well cared for.",
     "concernsDescription": "Treatment of open and closed comedones. Cleansing complements skincare but does not replace treatment for inflammatory acne.",
-    "concerns": [["Blackheads", "Removing the contents of open comedones helps clear blocked pores."], ["Closed comedones", "Suitable non-inflamed comedones are extracted after a skin assessment."], ["Bumps caused by comedones", "Clearing blocked pores may reduce the associated bumps."]],
-    "steps": [["Skin assessment", "The practitioner assesses the degree of skin congestion."], ["Preparation", "The skin is cleansed and prepared for comedone extraction."], ["Comedone extraction", "Selected comedones are treated using aseptic technique; some discomfort is possible."], ["Finishing care", "The practitioner selects skincare and explains how to reduce the likelihood of pores becoming blocked again."]],
+    "concerns": [
+      [
+        "Blackheads",
+        "Removing the contents of open comedones helps clear blocked pores."
+      ],
+      [
+        "Closed comedones",
+        "Suitable non-inflamed comedones are extracted after a skin assessment."
+      ],
+      [
+        "Bumps caused by comedones",
+        "Clearing blocked pores may reduce the associated bumps."
+      ]
+    ],
+    "steps": [
+      [
+        "Skin assessment",
+        "The practitioner assesses the degree of skin congestion."
+      ],
+      [
+        "Preparation",
+        "The skin is cleansed and prepared for comedone extraction."
+      ],
+      [
+        "Comedone extraction",
+        "Selected comedones are treated using aseptic technique; some discomfort is possible."
+      ],
+      [
+        "Finishing care",
+        "The practitioner selects skincare and explains how to reduce the likelihood of pores becoming blocked again."
+      ]
+    ],
     "skinTypes": ["Oily", "Combination", "Normal"],
     "skinDescription": "Suitable when comedones are present: oiliness alone is not an indication. For dry or sensitive skin, suitability is assessed individually.",
-    "contraindications": ["Active infection, herpes or open wounds in the treatment area.", "Significant irritation or a dermatitis flare-up: treatment is postponed.", "Deep inflammatory nodules and cysts require a dermatologist’s treatment rather than routine cleansing."],
+    "contraindications": [
+      "Active infection, herpes or open wounds in the treatment area.",
+      "Significant irritation or a dermatitis flare-up: treatment is postponed.",
+      "Deep inflammatory nodules and cysts require a dermatologist’s treatment rather than routine cleansing."
+    ],
     "contraindicationsNote": "Please disclose isotretinoin use, topical retinoids and recent peels.",
     "stepsDescription": ""
   },
@@ -15,99 +49,373 @@
     "name": "Microcurrent facial massage",
     "description": "Gentle device-based care for those who prefer treatments without injections. Microcurrent treatment is combined with facial massage. Current settings are selected individually according to the condition of the skin.",
     "concernsDescription": "Skincare goals are discussed individually.",
-    "concerns": [["Tired appearance", "The treatment aims to improve appearance. Noticeable lifting after 6–10 sessions, depending on the degree of facial contour sagging."], ["Puffiness", "Improves the drainage of excess fluid from the tissues. Improves skin tone and freshness."]],
-    "steps": [["Consultation", "Discussion of puffiness and a tired appearance."], ["Skin preparation", "The skin is cleansed and a contact medium is applied."], ["Device-based care", "The practitioner carries out the treatment using special gloves."], ["Finishing care", "The contact medium is removed, a soothing mask is applied and home skincare is selected."]],
+    "concerns": [
+      [
+        "Tired appearance",
+        "The treatment aims to improve appearance. Noticeable lifting after 6–10 sessions, depending on the degree of facial contour sagging."
+      ],
+      [
+        "Puffiness",
+        "Improves the drainage of excess fluid from the tissues. Improves skin tone and freshness."
+      ]
+    ],
+    "steps": [
+      ["Consultation", "Discussion of puffiness and a tired appearance."],
+      [
+        "Skin preparation",
+        "The skin is cleansed and a contact medium is applied."
+      ],
+      [
+        "Device-based care",
+        "The practitioner carries out the treatment using special gloves."
+      ],
+      [
+        "Finishing care",
+        "The contact medium is removed, a soothing mask is applied and home skincare is selected."
+      ]
+    ],
     "skinTypes": ["All skin types"],
     "skinDescription": "Skin type does not determine tolerance to electrical stimulation.",
-    "contraindications": ["Electronic implants, including a pacemaker: compatibility must be checked against the device instructions.", "Injuries, infection or active dermatitis in the treatment area.", "Intolerance to the contact medium.", "During pregnancy or in people with epilepsy, treatment is not scheduled without checking the manufacturer’s restrictions and consulting a doctor."],
-    "contraindicationsNote": "", "stepsDescription": ""
+    "contraindications": [
+      "Electronic implants, including a pacemaker: compatibility must be checked against the device instructions.",
+      "Injuries, infection or active dermatitis in the treatment area.",
+      "Intolerance to the contact medium.",
+      "During pregnancy or in people with epilepsy, treatment is not scheduled without checking the manufacturer’s restrictions and consulting a doctor."
+    ],
+    "contraindicationsNote": "",
+    "stepsDescription": ""
   },
   "1": {
     "name": "La Fontaine / Bloomea",
     "description": "Skincare combining mechanical exfoliation, microvibration and LED light for a smoother skin surface. Treatment intensity is selected individually.",
     "concernsDescription": "The main goal is to improve surface texture.",
-    "concerns": [["Roughness", "Controlled exfoliation helps address roughness."], ["Dull appearance and fine lines", "Removing surface cells may refresh dull-looking skin and helps make its surface smoother."], ["Enlarged pores", "Pores become less noticeable."], ["Post-acne changes", "Smooths skin texture and reduces the visibility of deep scars."]],
-    "steps": [["Assessment", "Skin sensitivity and recent treatments are checked."], ["Cleansing and exfoliation", "The skin is treated with a suitable disposable tip."], ["Microvibration and LED", "These steps follow the manufacturer’s protocol."], ["Hydration and protection", "A soothing mask, moisturiser and sunscreen are applied."]],
+    "concerns": [
+      ["Roughness", "Controlled exfoliation helps address roughness."],
+      [
+        "Dull appearance and fine lines",
+        "Removing surface cells may refresh dull-looking skin and helps make its surface smoother."
+      ],
+      ["Enlarged pores", "Pores become less noticeable."],
+      [
+        "Post-acne changes",
+        "Smooths skin texture and reduces the visibility of deep scars."
+      ]
+    ],
+    "steps": [
+      ["Assessment", "Skin sensitivity and recent treatments are checked."],
+      [
+        "Cleansing and exfoliation",
+        "The skin is treated with a suitable disposable tip."
+      ],
+      [
+        "Microvibration and LED",
+        "These steps follow the manufacturer’s protocol."
+      ],
+      [
+        "Hydration and protection",
+        "A soothing mask, moisturiser and sunscreen are applied."
+      ]
+    ],
     "skinTypes": ["Mature", "Normal", "Combination", "Oily"],
     "skinDescription": "For intact skin without pronounced sensitivity; treatment intensity is selected particularly carefully if the skin is prone to pigmentation.",
-    "contraindications": ["Infection, herpes, skin injuries or sunburn.", "Active inflammation, a dermatitis flare-up or pronounced sensitivity.", "A changing, bleeding or unassessed lesion in the treatment area.", "Isotretinoin use, a tendency to scar or photosensitivity require individual assessment before treatment."],
-    "contraindicationsNote": "Please disclose retinoid use and recent peels in advance.", "stepsDescription": ""
+    "contraindications": [
+      "Infection, herpes, skin injuries or sunburn.",
+      "Active inflammation, a dermatitis flare-up or pronounced sensitivity.",
+      "A changing, bleeding or unassessed lesion in the treatment area.",
+      "Isotretinoin use, a tendency to scar or photosensitivity require individual assessment before treatment."
+    ],
+    "contraindicationsNote": "Please disclose retinoid use and recent peels in advance.",
+    "stepsDescription": ""
   },
   "3": {
     "name": "Electroporation",
     "description": "Non-injection skincare with individually selected serums. The treatment is used to deliver targeted ingredients into the skin.",
     "concernsDescription": "Electroporation is studied as a way to increase skin permeability.",
-    "concerns": [["Dehydration", "A suitable moisturising formulation may reduce tightness and hydrate the skin."], ["Pigmentation", "An appropriate serum formulation may help eliminate pigmentation spots."], ["Sensitivity and redness", "Soothes irritated, sensitive skin and reduces redness."]],
-    "steps": [["Selecting skincare", "Discussion of treatment goals and known allergies to ingredients in the serum."], ["Cleansing", "Preparing the skin and applying the product."], ["Electroporation", "Device-based treatment."], ["Finishing care", "A soothing mask, moisturiser and sunscreen are applied, followed by advice on further skincare."]],
+    "concerns": [
+      [
+        "Dehydration",
+        "A suitable moisturising formulation may reduce tightness and hydrate the skin."
+      ],
+      [
+        "Pigmentation",
+        "An appropriate serum formulation may help eliminate pigmentation spots."
+      ],
+      [
+        "Sensitivity and redness",
+        "Soothes irritated, sensitive skin and reduces redness."
+      ]
+    ],
+    "steps": [
+      [
+        "Selecting skincare",
+        "Discussion of treatment goals and known allergies to ingredients in the serum."
+      ],
+      ["Cleansing", "Preparing the skin and applying the product."],
+      ["Electroporation", "Device-based treatment."],
+      [
+        "Finishing care",
+        "A soothing mask, moisturiser and sunscreen are applied, followed by advice on further skincare."
+      ]
+    ],
     "skinTypes": ["Normal", "Dry", "Combination", "Oily"],
     "skinDescription": "Selection depends on skin barrier integrity and the serum formulation; sensitive skin requires a prior assessment of tolerance.",
-    "contraindications": ["Allergy to ingredients in the product used.", "Infection, injuries or active dermatitis in the treatment area.", "Electronic implants: suitability must be checked against the device instructions.", "Pregnancy and epilepsy require checking the restrictions for the specific device."],
-    "contraindicationsNote": "Only formulations specified in the device protocol are used; the procedure is not equivalent to injecting a preparation.", "stepsDescription": ""
+    "contraindications": [
+      "Allergy to ingredients in the product used.",
+      "Infection, injuries or active dermatitis in the treatment area.",
+      "Electronic implants: suitability must be checked against the device instructions.",
+      "Pregnancy and epilepsy require checking the restrictions for the specific device."
+    ],
+    "contraindicationsNote": "Only formulations specified in the device protocol are used; the procedure is not equivalent to injecting a preparation.",
+    "stepsDescription": ""
   },
   "2": {
     "name": "Microcurrent therapy",
     "description": "Device-based skincare for those choosing a non-invasive approach. The treatment increases blood flow to the targeted muscles and supports facial contours.",
     "concernsDescription": "Unlike microcurrent facial massage (lymphatic drainage massage), microcurrent therapy acts on muscle tissue, increasing blood flow to the targeted muscles.",
-    "concerns": [["Loss of tone", "The degree of improvement is assessed individually."], ["Fine lines", "Lines may become less noticeable with accompanying skincare."]],
-    "steps": [["Consultation", "Discussion of medical conditions and the presence of implants."], ["Contact skincare", "Cleansing the skin and applying a conductive medium."], ["Microcurrent treatment", "Treating the selected areas."], ["Finishing care", "A soothing mask, moisturiser and sunscreen are applied, followed by a discussion of further skincare."]],
+    "concerns": [
+      ["Loss of tone", "The degree of improvement is assessed individually."],
+      [
+        "Fine lines",
+        "Lines may become less noticeable with accompanying skincare."
+      ]
+    ],
+    "steps": [
+      [
+        "Consultation",
+        "Discussion of medical conditions and the presence of implants."
+      ],
+      [
+        "Contact skincare",
+        "Cleansing the skin and applying a conductive medium."
+      ],
+      ["Microcurrent treatment", "Treating the selected areas."],
+      [
+        "Finishing care",
+        "A soothing mask, moisturiser and sunscreen are applied, followed by a discussion of further skincare."
+      ]
+    ],
     "skinTypes": ["All skin types"],
     "skinDescription": "Suitability depends on skin condition and contraindications to the device, not just skin type.",
-    "contraindications": ["Electronic implants: compatibility with the device must be checked.", "Infection, injuries or significant irritation in the treatment area.", "Allergy to the contact medium.", "During pregnancy or in people with epilepsy, the manufacturer’s restrictions must be checked."],
-    "contraindicationsNote": "", "stepsDescription": ""
+    "contraindications": [
+      "Electronic implants: compatibility with the device must be checked.",
+      "Infection, injuries or significant irritation in the treatment area.",
+      "Allergy to the contact medium.",
+      "During pregnancy or in people with epilepsy, the manufacturer’s restrictions must be checked."
+    ],
+    "contraindicationsNote": "",
+    "stepsDescription": ""
   },
   "6": {
     "name": "Facial cryotherapy",
     "description": "Refreshing care with controlled skin cooling to soothe the skin and achieve a lifting effect.",
     "concernsDescription": "This describes superficial cosmetic cooling, not freezing lesions with liquid nitrogen.",
-    "concerns": [["Irritation and discomfort", "Soothes and reduces redness."], ["Puffiness", "Helps the skin look firmer and tighter. Cooling may reduce puffiness."]],
-    "steps": [["Tolerance assessment", "Discussion of reactions to cold, sensitivity and recent treatments."], ["Preparation", "Cleansing the skin and selecting the cooling intensity."], ["Controlled cooling", "Applying serum and using the device at low temperatures (−15 to −20 degrees). Assessing the skin’s reaction."], ["Finishing care", "A soothing mask, moisturiser and sunscreen are applied."]],
+    "concerns": [
+      ["Irritation and discomfort", "Soothes and reduces redness."],
+      [
+        "Puffiness",
+        "Helps the skin look firmer and tighter. Cooling may reduce puffiness."
+      ]
+    ],
+    "steps": [
+      [
+        "Tolerance assessment",
+        "Discussion of reactions to cold, sensitivity and recent treatments."
+      ],
+      [
+        "Preparation",
+        "Cleansing the skin and selecting the cooling intensity."
+      ],
+      [
+        "Controlled cooling",
+        "Applying serum and using the device at low temperatures (−15 to −20 degrees). Assessing the skin’s reaction."
+      ],
+      [
+        "Finishing care",
+        "A soothing mask, moisturiser and sunscreen are applied."
+      ]
+    ],
     "skinTypes": ["All skin types"],
     "skinDescription": "Not for very sensitive skin or skin with visibly dilated capillaries.",
-    "contraindications": ["Cold urticaria or a known abnormal reaction to cold.", "Pronounced sensitivity, injuries or skin irritation. Couperose.", "Recovery after a peel, laser treatment or surgery without the treating doctor’s permission.", "A pronounced vascular reaction to cold or visibly dilated capillaries."],
-    "contraindicationsNote": "", "stepsDescription": ""
+    "contraindications": [
+      "Cold urticaria or a known abnormal reaction to cold.",
+      "Pronounced sensitivity, injuries or skin irritation. Couperose.",
+      "Recovery after a peel, laser treatment or surgery without the treating doctor’s permission.",
+      "A pronounced vascular reaction to cold or visibly dilated capillaries."
+    ],
+    "contraindicationsNote": "",
+    "stepsDescription": ""
   },
   "7": {
-    "name": "Non-invasive CO₂ carboxytherapy",
+    "name": "Non-invasive carboxytherapy",
     "description": "Non-injection skincare with CO₂. The practitioner assesses the skin and explains what results can be expected from the specific protocol.",
     "concernsDescription": "Improvement of microcirculation and overall skin condition. The effect is more pronounced with a course of treatments.",
-    "concerns": [["Dull appearance", "Refreshes dull, tired-looking skin, giving it a healthy glow."], ["Post-acne changes and uneven texture", "The skin looks smoother."]],
-    "steps": [["Preparation", "Cleansing the skin."], ["Non-injection stage", "Applying a special gel and performing the treatment."], ["Finishing care", "A mask suited to the skin type, moisturiser and sunscreen are applied."]],
+    "concerns": [
+      [
+        "Dull appearance",
+        "Refreshes dull, tired-looking skin, giving it a healthy glow."
+      ],
+      ["Post-acne changes and uneven texture", "The skin looks smoother."]
+    ],
+    "steps": [
+      ["Preparation", "Cleansing the skin."],
+      [
+        "Non-injection stage",
+        "Applying a special gel and performing the treatment."
+      ],
+      [
+        "Finishing care",
+        "A mask suited to the skin type, moisturiser and sunscreen are applied."
+      ]
+    ],
     "skinTypes": ["Normal", "Dry", "Combination", "Oily"],
     "skinDescription": "The decision depends on skin sensitivity and its reaction after the first treatment.",
-    "contraindications": ["Intolerance to the ingredients.", "Injuries, infection or active skin inflammation in the treatment area.", "Pregnancy or significant chronic conditions require individual assessment and checking the device instructions."],
-    "contraindicationsNote": "", "stepsDescription": ""
+    "contraindications": [
+      "Intolerance to the ingredients.",
+      "Injuries, infection or active skin inflammation in the treatment area.",
+      "Pregnancy or significant chronic conditions require individual assessment and checking the device instructions."
+    ],
+    "contraindicationsNote": "",
+    "stepsDescription": ""
   },
   "8": {
     "name": "Fractional microneedling",
     "description": "A device-based treatment to improve skin texture. Fine needles in a disposable cartridge create controlled micro-punctures, stimulating repair processes and collagen production. This may gradually reduce the visibility of acne scars and fine lines.",
     "concernsDescription": "Microneedling aims to gradually improve skin texture. The extent of the result depends on the initial skin condition and treatment settings.",
-    "concerns": [["Acne scars", "May reduce the visibility of certain atrophic scars and make skin texture more even."], ["Uneven texture", "Stimulating skin repair helps improve smoothness."], ["Fine lines", "New collagen formation may gradually reduce their prominence."], ["Enlarged pores", "Improved skin texture may make pores appear less noticeable."]],
-    "steps": [["Consultation", "The practitioner assesses the skin, checks contraindications and discusses the expected result."], ["Preparation", "The skin is cleansed and treated with an antiseptic; local anaesthesia is used if necessary."], ["Microneedling treatment", "Selected areas are treated using a device with a sterile disposable cartridge and individually selected settings."], ["Finishing care", "Explanation of recovery guidance, sun protection and signs of an unwanted reaction."]],
+    "concerns": [
+      [
+        "Acne scars",
+        "May reduce the visibility of certain atrophic scars and make skin texture more even."
+      ],
+      ["Uneven texture", "Stimulating skin repair helps improve smoothness."],
+      [
+        "Fine lines",
+        "New collagen formation may gradually reduce their prominence."
+      ],
+      [
+        "Enlarged pores",
+        "Improved skin texture may make pores appear less noticeable."
+      ]
+    ],
+    "steps": [
+      [
+        "Consultation",
+        "The practitioner assesses the skin, checks contraindications and discusses the expected result."
+      ],
+      [
+        "Preparation",
+        "The skin is cleansed and treated with an antiseptic; local anaesthesia is used if necessary."
+      ],
+      [
+        "Microneedling treatment",
+        "Selected areas are treated using a device with a sterile disposable cartridge and individually selected settings."
+      ],
+      [
+        "Finishing care",
+        "Explanation of recovery guidance, sun protection and signs of an unwanted reaction."
+      ]
+    ],
     "skinTypes": ["Normal", "Dry", "Combination", "Oily"],
     "skinDescription": "When indicated. Skin barrier condition, absence of active inflammation and the skin’s ability to heal are more important. Sensitivity and a tendency to pigmentation require individual assessment.",
-    "contraindications": ["Active infection, herpes, open wounds or inflammatory breakouts in the treatment area.", "A flare-up of eczema, psoriasis or another inflammatory skin condition.", "A tendency to form keloid scars and impaired healing.", "Bleeding disorders, anticoagulant use or a weakened immune system require medical assessment.", "Pregnancy and breastfeeding: treatment is postponed.", "Isotretinoin use and recent procedures that injure the skin must be discussed in advance.", "Allergy to the anaesthetic or skincare products used."],
-    "contraindicationsNote": "Redness, swelling, sensitivity and peeling may occur after treatment.", "stepsDescription": ""
+    "contraindications": [
+      "Active infection, herpes, open wounds or inflammatory breakouts in the treatment area.",
+      "A flare-up of eczema, psoriasis or another inflammatory skin condition.",
+      "A tendency to form keloid scars and impaired healing.",
+      "Bleeding disorders, anticoagulant use or a weakened immune system require medical assessment.",
+      "Pregnancy and breastfeeding: treatment is postponed.",
+      "Isotretinoin use and recent procedures that injure the skin must be discussed in advance.",
+      "Allergy to the anaesthetic or skincare products used."
+    ],
+    "contraindicationsNote": "Redness, swelling, sensitivity and peeling may occur after treatment.",
+    "stepsDescription": ""
   },
   "9": {
     "name": "Jet Peel",
     "description": "Device-based care for cleansing, gentle exfoliation and skin hydration. A directed stream of gas and tiny droplets of solution treats the surface without needles. Product formulations and treatment intensity are selected individually.",
     "concernsDescription": "The treatment aims to improve skin smoothness, hydration and appearance. Results depend on the chosen protocol and initial skin condition.",
-    "concerns": [["Roughness", "Exfoliating surface dead skin cells helps make the skin smoother."], ["Dehydration", "Moisturising care helps reduce dryness and tightness."], ["Dull appearance", "Cleansing and exfoliation help give the skin a fresher appearance."]],
-    "steps": [["Skin assessment", "The practitioner checks sensitivity, allergies and recent treatments and selects a suitable protocol."], ["Preparation", "Removing makeup and cleansing the skin."], ["Gas–liquid treatment", "Performing the treatment according to the protocol."], ["Finishing care", "Applying sunscreen, assessing the skin’s reaction and providing home skincare advice."]],
+    "concerns": [
+      [
+        "Roughness",
+        "Exfoliating surface dead skin cells helps make the skin smoother."
+      ],
+      ["Dehydration", "Moisturising care helps reduce dryness and tightness."],
+      [
+        "Dull appearance",
+        "Cleansing and exfoliation help give the skin a fresher appearance."
+      ]
+    ],
+    "steps": [
+      [
+        "Skin assessment",
+        "The practitioner checks sensitivity, allergies and recent treatments and selects a suitable protocol."
+      ],
+      ["Preparation", "Removing makeup and cleansing the skin."],
+      [
+        "Gas–liquid treatment",
+        "Performing the treatment according to the protocol."
+      ],
+      [
+        "Finishing care",
+        "Applying sunscreen, assessing the skin’s reaction and providing home skincare advice."
+      ]
+    ],
     "skinTypes": ["Normal", "Dry", "Combination", "Oily"],
     "skinDescription": "Sensitivity alone does not rule out treatment, but requires careful selection of the solution and intensity. An impaired skin barrier or a flare-up of a skin condition requires prior assessment.",
-    "contraindications": ["Active infection, including herpes, and open skin wounds.", "Significant irritation, sunburn or a flare-up of a skin condition.", "Allergy to ingredients in the products used.", "Pronounced intolerance to cold.", "Skin growths in the treatment area.", "Pregnancy and breastfeeding: the manufacturer does not provide for use of the system in these groups."],
-    "contraindicationsNote": "Please disclose recent peels, laser treatments and other procedures that injure the skin in advance. The full list of restrictions is checked against the instructions for the specific device and selected products.", "stepsDescription": ""
+    "contraindications": [
+      "Active infection, including herpes, and open skin wounds.",
+      "Significant irritation, sunburn or a flare-up of a skin condition.",
+      "Allergy to ingredients in the products used.",
+      "Pronounced intolerance to cold.",
+      "Skin growths in the treatment area.",
+      "Pregnancy and breastfeeding: the manufacturer does not provide for use of the system in these groups."
+    ],
+    "contraindicationsNote": "Please disclose recent peels, laser treatments and other procedures that injure the skin in advance. The full list of restrictions is checked against the instructions for the specific device and selected products.",
+    "stepsDescription": ""
   },
   "10": {
     "name": "IPL — light therapy",
     "description": "A device-based treatment using intense pulsed light to reduce the visibility of pigmentation spots, dilated vessels and redness.",
     "concernsDescription": "IPL helps even out skin tone by reducing specific pigmentary and vascular changes. It is important to identify the cause of skin changes before treatment.",
-    "concerns": [["Sun-induced pigmentation spots", "Light treatment reduces the visibility of pigmentation."], ["Dilated superficial vessels", "Light acting on haemoglobin helps make vessels less visible."], ["Persistent redness", "IPL may reduce redness associated with the vascular manifestations of rosacea."]],
-    "steps": [["Consultation", "Assessment of the skin and medications taken. A test treatment is performed if necessary. Expected reactions are explained."], ["Preparation", "Cleansing the skin and providing eye protection for the patient and practitioner."], ["Light treatment", "Selected areas are treated according to the device protocol. Warmth and tingling may be felt."], ["Finishing care", "A soothing mask and sunscreen are applied, followed by advice on further skincare."]],
+    "concerns": [
+      [
+        "Sun-induced pigmentation spots",
+        "Light treatment reduces the visibility of pigmentation."
+      ],
+      [
+        "Dilated superficial vessels",
+        "Light acting on haemoglobin helps make vessels less visible."
+      ],
+      [
+        "Persistent redness",
+        "IPL may reduce redness associated with the vascular manifestations of rosacea."
+      ]
+    ],
+    "steps": [
+      [
+        "Consultation",
+        "Assessment of the skin and medications taken. A test treatment is performed if necessary. Expected reactions are explained."
+      ],
+      [
+        "Preparation",
+        "Cleansing the skin and providing eye protection for the patient and practitioner."
+      ],
+      [
+        "Light treatment",
+        "Selected areas are treated according to the device protocol. Warmth and tingling may be felt."
+      ],
+      [
+        "Finishing care",
+        "A soothing mask and sunscreen are applied, followed by advice on further skincare."
+      ]
+    ],
     "skinTypes": ["Normal", "Dry", "Combination", "Oily"],
     "skinDescription": "Skin phototype, tanning and the type of pigmentation are decisive. Darker phototypes require a particularly cautious approach.",
-    "contraindications": ["A recent tan or sunburn.", "Suspicious or unassessed pigmented lesions.", "Active infection, herpes or open wounds in the treatment area.", "Significant irritation or a flare-up of a skin condition.", "Photosensitivity and use of medications that increase it require medical assessment."],
+    "contraindications": [
+      "A recent tan or sunburn.",
+      "Suspicious or unassessed pigmented lesions.",
+      "Active infection, herpes or open wounds in the treatment area.",
+      "Significant irritation or a flare-up of a skin condition.",
+      "Photosensitivity and use of medications that increase it require medical assessment."
+    ],
     "contraindicationsNote": "Medications and recent treatments must be disclosed in advance. IPL for melasma is considered separately: pigmentation may worsen or recur, so melasma should not be described as ordinary sun spots. Eye protection is essential. Redness and swelling may occur after treatment.",
     "stepsDescription": ""
   },
@@ -115,11 +423,43 @@
     "name": "RF therapy — radiofrequency skin tightening",
     "description": "A non-invasive device-based treatment to improve skin firmness. Radiofrequency energy heats tissue, stimulating collagen remodelling. This may gradually make the skin denser and tighter.",
     "concernsDescription": "The treatment aims for a moderate improvement in firmness at the early signs of skin laxity. Results develop gradually.",
-    "concerns": [["Skin laxity", "Controlled heating may reduce the degree of skin sagging."], ["Loss of firmness", "Collagen remodelling may improve skin density and appearance."]],
-    "steps": [["Consultation", "The practitioner assesses skin condition, checks contraindications, implants and recent aesthetic treatments."], ["Preparation", "The skin is cleansed and prepared according to the device instructions."], ["Radiofrequency treatment", "Selected areas are treated with a handpiece while monitoring heat and sensations."], ["Finishing care", "Applying a moisturising mask and assessing the skin’s reaction. Discussing further skincare."]],
+    "concerns": [
+      [
+        "Skin laxity",
+        "Controlled heating may reduce the degree of skin sagging."
+      ],
+      [
+        "Loss of firmness",
+        "Collagen remodelling may improve skin density and appearance."
+      ]
+    ],
+    "steps": [
+      [
+        "Consultation",
+        "The practitioner assesses skin condition, checks contraindications, implants and recent aesthetic treatments."
+      ],
+      [
+        "Preparation",
+        "The skin is cleansed and prepared according to the device instructions."
+      ],
+      [
+        "Radiofrequency treatment",
+        "Selected areas are treated with a handpiece while monitoring heat and sensations."
+      ],
+      [
+        "Finishing care",
+        "Applying a moisturising mask and assessing the skin’s reaction. Discussing further skincare."
+      ]
+    ],
     "skinTypes": ["Normal", "Dry", "Combination", "Oily"],
     "skinDescription": "The decision depends on the degree of skin laxity and skin health.",
-    "contraindications": ["Pregnancy: elective treatment is postponed.", "Active infection, open wounds or significant inflammation in the treatment area.", "A pacemaker or other electronic implants.", "Metal implants in the treatment area: compatibility is checked against the device instructions.", "Reduced sensation in the area being heated."],
+    "contraindications": [
+      "Pregnancy: elective treatment is postponed.",
+      "Active infection, open wounds or significant inflammation in the treatment area.",
+      "A pacemaker or other electronic implants.",
+      "Metal implants in the treatment area: compatibility is checked against the device instructions.",
+      "Reduced sensation in the area being heated."
+    ],
     "contraindicationsNote": "Fillers, threads and recent treatments must be disclosed in advance. Redness, swelling and thermal skin injury are possible; settings and intervals are selected individually.",
     "stepsDescription": ""
   },
@@ -127,22 +467,91 @@
     "name": "RF microneedling skin tightening",
     "description": "A device-based treatment combining microneedling with radiofrequency tissue heating. Needle electrodes deliver energy to a selected depth, stimulating repair and collagen remodelling.",
     "concernsDescription": "The treatment is used to address certain textural irregularities and age-related skin changes. Its capabilities depend on the device, scar type and selected settings.",
-    "concerns": [["Atrophic acne scars", "May reduce the visibility of certain scars and smooth the surrounding texture."], ["Uneven texture", "Recovery after controlled treatment may make the skin surface more even."], ["Fine lines", "Collagen remodelling may gradually reduce their prominence."]],
-    "steps": [["Consultation", "The skin and scars are assessed, and expected results, alternatives and recovery are discussed."], ["Preparation and anaesthesia", "Cleansing, antiseptic preparation and anaesthesia are carried out according to the selected protocol."], ["RF microneedling treatment", "A sterile disposable cartridge and individually selected settings are used."], ["Recovery", "Advice on skincare, sun protection and symptoms that require medical attention."]],
+    "concerns": [
+      [
+        "Atrophic acne scars",
+        "May reduce the visibility of certain scars and smooth the surrounding texture."
+      ],
+      [
+        "Uneven texture",
+        "Recovery after controlled treatment may make the skin surface more even."
+      ],
+      [
+        "Fine lines",
+        "Collagen remodelling may gradually reduce their prominence."
+      ]
+    ],
+    "steps": [
+      [
+        "Consultation",
+        "The skin and scars are assessed, and expected results, alternatives and recovery are discussed."
+      ],
+      [
+        "Preparation and anaesthesia",
+        "Cleansing, antiseptic preparation and anaesthesia are carried out according to the selected protocol."
+      ],
+      [
+        "RF microneedling treatment",
+        "A sterile disposable cartridge and individually selected settings are used."
+      ],
+      [
+        "Recovery",
+        "Advice on skincare, sun protection and symptoms that require medical attention."
+      ]
+    ],
     "skinTypes": ["Normal", "Dry", "Combination", "Oily"],
     "skinDescription": "After assessment of indications. The skin’s ability to heal and its tendency to scarring and post-inflammatory pigmentation are important. Settings are selected individually for each phototype.",
-    "contraindications": ["Active infection, herpes, open wounds or inflammatory breakouts in the treatment area.", "A tendency to form keloid scars and impaired healing.", "Bleeding disorders, anticoagulant use or immunodeficiency.", "Electronic implants.", "Pregnancy: treatment is postponed.", "Isotretinoin use and recent procedures that injure the skin require individual assessment."],
-    "contraindicationsNote": "Redness, swelling and crusting may occur after treatment.", "stepsDescription": ""
+    "contraindications": [
+      "Active infection, herpes, open wounds or inflammatory breakouts in the treatment area.",
+      "A tendency to form keloid scars and impaired healing.",
+      "Bleeding disorders, anticoagulant use or immunodeficiency.",
+      "Electronic implants.",
+      "Pregnancy: treatment is postponed.",
+      "Isotretinoin use and recent procedures that injure the skin require individual assessment."
+    ],
+    "contraindicationsNote": "Redness, swelling and crusting may occur after treatment.",
+    "stepsDescription": ""
   },
   "14": {
     "name": "Electrocoagulation (papilloma removal)",
     "description": "Targeted removal of suitable benign skin growths after a doctor’s examination. The method helps eliminate raised lesions that catch on clothing or interfere with skincare.",
     "concernsDescription": "The treatment allows selected growths to be removed after their benign nature is confirmed. Electrocoagulation is suitable only in certain cases.",
-    "concerns": [["Raised skin growths", "Suitable lesions can be removed so they interfere less with everyday skincare."], ["Repeated trauma", "Removing a growth prevents it from catching on clothing, jewellery or a razor."], ["Cosmetic concerns", "Removing a selected lesion may improve the area’s appearance, although a mark or scar may remain."]],
-    "steps": [["Diagnosis", "A doctor must first examine the growth and decide whether dermoscopy or a biopsy is needed."], ["Preparation", "Antiseptic preparation and local anaesthesia."], ["Removal", "The growth is treated precisely."], ["Wound care", "Wound care, sun protection and signs of complications are explained."]],
+    "concerns": [
+      [
+        "Raised skin growths",
+        "Suitable lesions can be removed so they interfere less with everyday skincare."
+      ],
+      [
+        "Repeated trauma",
+        "Removing a growth prevents it from catching on clothing, jewellery or a razor."
+      ],
+      [
+        "Cosmetic concerns",
+        "Removing a selected lesion may improve the area’s appearance, although a mark or scar may remain."
+      ]
+    ],
+    "steps": [
+      [
+        "Diagnosis",
+        "A doctor must first examine the growth and decide whether dermoscopy or a biopsy is needed."
+      ],
+      ["Preparation", "Antiseptic preparation and local anaesthesia."],
+      ["Removal", "The growth is treated precisely."],
+      [
+        "Wound care",
+        "Wound care, sun protection and signs of complications are explained."
+      ]
+    ],
     "skinTypes": [],
     "skinDescription": "The diagnosis of the growth, not skin type, is decisive; additional risks are discussed if there is a tendency to scar.",
-    "contraindications": ["An unclear diagnosis or suspected malignancy: diagnosis is required first.", "Infection in the treatment area.", "Bleeding disorders and anticoagulant use require a doctor’s decision.", "A pacemaker or another electronic implant.", "Allergy to the anaesthetic used requires a change to the anaesthesia plan."],
-    "contraindicationsNote": "Scarring and pigmentation changes may occur after treatment.", "stepsDescription": ""
+    "contraindications": [
+      "An unclear diagnosis or suspected malignancy: diagnosis is required first.",
+      "Infection in the treatment area.",
+      "Bleeding disorders and anticoagulant use require a doctor’s decision.",
+      "A pacemaker or another electronic implant.",
+      "Allergy to the anaesthetic used requires a change to the anaesthesia plan."
+    ],
+    "contraindicationsNote": "Scarring and pigmentation changes may occur after treatment.",
+    "stepsDescription": ""
   }
 }

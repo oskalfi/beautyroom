@@ -339,7 +339,7 @@ export const mockTreatments: Treatment[] = [
     priceFrom: false,
     durationMinutes: 75,
     durationFrom: true,
-    name: "Неинвазивная карбокситерапия CO₂",
+    name: "Неинвазивная карбокситерапия",
     imgPath: "/treatmentsPhoto/carboxi.jpg",
     description:
       "Безынъекционный уход с CO₂. Специалист оценит кожу и объяснит, каких результатов можно ожидать от конкретного протокола.",
@@ -385,7 +385,7 @@ export const mockTreatments: Treatment[] = [
     priceFrom: false,
     durationMinutes: 75,
     durationFrom: true,
-    name: "Фракционная микроигольчатая терапия",
+    name: "Фракционная мезотерапия",
     imgPath: "/treatmentsPhoto/mesotherapy.jpg",
     description:
       "Аппаратная процедура для улучшения текстуры кожи. Тонкие иглы одноразового картриджа создают контролируемые микропроколы, стимулируя процессы восстановления и образование коллагена. Это может постепенно уменьшить заметность рубцов постакне и мелких морщин.",

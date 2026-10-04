@@ -25,9 +25,11 @@ export const AddressSection = () => {
       const rect = rectRef.current;
       if (!rect) return;
       const length = rect.getTotalLength();
+      // Keep offsets positive: WebKit can jump when an SVG dash offset crosses zero.
+      // With a dash and gap of equal length, 3L -> 2L -> L is equivalent to L -> 0 -> -L.
       gsap.set(rect, {
-        strokeDasharray: length,
-        strokeDashoffset: length,
+        strokeDasharray: `${length} ${length}`,
+        strokeDashoffset: length * 3,
         opacity: 0,
       });
 
@@ -52,14 +54,14 @@ export const AddressSection = () => {
         .to(
           rect,
           {
-            strokeDashoffset: 0,
+            strokeDashoffset: length * 2,
             duration: 0.5,
             ease: "power4.in",
           },
           0,
         )
         .to(rect, {
-          strokeDashoffset: -length, // Линия уходит дальше вперед на всю длину
+          strokeDashoffset: length,
           duration: 0.5,
           ease: "power2.out",
         })

@@ -10,7 +10,7 @@
   padding: 0 0 90px 0;
 }
 
-.decorativeDescription {
+/* .decorativeDescription {
   visibility: hidden;
   position: absolute;
   right: 0;
@@ -21,6 +21,15 @@
   transform: translateX(-50%) translateY(50%) rotate(-25deg);
   color: var(--treatments-decorative-description-text-color);
   z-index: 1;
+} */
+
+.decorativeDescription {
+  visibility: hidden;
+  font-family: Arial, sans-serif;
+  font-size: var(--treatments-decorative-description-font-size);
+  height: auto;
+  color: var(--treatments-decorative-description-text-color);
+  margin-bottom: 40px;
 }
 
 .treatmentsSection[data-near-viewport="true"] .decorativeDescription {
@@ -29,51 +38,30 @@
 
 .heading {
   visibility: hidden;
-  margin: 70px 0 100px 0;
+  margin: 70px 0 40px 0;
   position: relative;
   color: var(--brown);
 }
 
 @media (max-width: 935px) {
   .decorativeDescription {
-    transform: translateX(0%) translateY(50%) rotate(-25deg);
-  }
-}
-
-@media (max-width: 720px) {
-  .decorativeDescription {
     font-size: var(--treatments-decorative-description-font-size-to-720);
-    transform: translateX(0%) translateY(100%) rotate(-25deg);
-  }
-}
-@media (max-width: 600px) {
-  .decorativeDescription {
-    transform: translateX(0%) translateY(100%) rotate(-25deg);
   }
 }
 
 @media (max-width: 470px) {
   .decorativeDescription {
-    transform: translateX(0%) translateY(130%) rotate(-25deg);
     font-size: var(--treatments-decorative-description-font-size-to-470);
   }
 }
 
 @media (max-width: 425px) {
   .decorativeDescription {
-    transform: translateX(0%) translateY(160%) rotate(-25deg);
     font-size: var(--treatments-decorative-description-font-size-to-425);
   }
 }
 
 @media (max-width: 425px) {
   .decorativeDescription {
-    transform: translateX(0%) translateY(300%) rotate(-25deg);
-  }
-}
-
-@media (min-width: 936px) {
-  .decorativeDescription:dir(rtl) {
-    top: 40px;
   }
 }

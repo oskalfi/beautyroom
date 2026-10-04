@@ -1,7 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
 
-
 import { useNearViewport } from "@/shared/hooks/useNearViewport";
 import { loadElementFont } from "@/shared/utils/loadElementFont";
 
@@ -31,12 +30,16 @@ export const TreatmentsSection = () => {
       if (!near) return;
       let cancelled = false;
       const reveal = () => {
-        if (!cancelled) context.add(() => revealHeading(styles.heading, styles.decorativeDescription));
+        if (!cancelled)
+          context.add(() =>
+            revealHeading(styles.heading, styles.decorativeDescription),
+          );
       };
       // The decorative font is enabled only near the viewport. Split its text
       // after loading so GSAP measures the final font, with a fallback on error.
-      void loadElementFont(ref.current?.querySelector(`.${styles.decorativeDescription}`) ?? null)
-        .then(reveal, reveal);
+      void loadElementFont(
+        ref.current?.querySelector(`.${styles.decorativeDescription}`) ?? null,
+      ).then(reveal, reveal);
 
       const section = ref.current;
       const trackCursor = (e: MouseEvent) => {
@@ -62,7 +65,9 @@ export const TreatmentsSection = () => {
       stopObserving();
       if (!touch.matches && navigator.maxTouchPoints === 0) return;
 
-      const items = Array.from(section.querySelectorAll<HTMLElement>("[data-treatment-item]"));
+      const items = Array.from(
+        section.querySelectorAll<HTMLElement>("[data-treatment-item]"),
+      );
       let active: HTMLElement | undefined;
       let lastScrollY = window.scrollY;
       let direction: "down" | "up" = "down";
@@ -74,12 +79,17 @@ export const TreatmentsSection = () => {
       });
       const trackScroll = () => {
         const nextY = window.scrollY;
-        if (nextY !== lastScrollY) direction = nextY > lastScrollY ? "down" : "up";
+        if (nextY !== lastScrollY)
+          direction = nextY > lastScrollY ? "down" : "up";
         lastScrollY = nextY;
       };
       const updateActive = () => {
         // External keyboards on touch devices must not fight scroll activation.
-        if (section.querySelector('[data-focus-active="true"] [data-treatment-link]:focus')) {
+        if (
+          section.querySelector(
+            '[data-focus-active="true"] [data-treatment-link]:focus',
+          )
+        ) {
           active = undefined;
           return;
         }
@@ -97,7 +107,10 @@ export const TreatmentsSection = () => {
         if (active) {
           const { block, text } = parts(active);
           if (block && text) {
-            (direction === "down" ? moveBlockToBottom : moveBlockToTop)(block, text);
+            (direction === "down" ? moveBlockToBottom : moveBlockToTop)(
+              block,
+              text,
+            );
           }
           delete active.dataset.scrollActive;
         }
@@ -182,11 +195,17 @@ export const TreatmentsSection = () => {
   }, [near]);
 
   return (
-    <section className={styles.treatmentsSection} ref={ref} id="treatmentsList" data-near-viewport={near}>
-      <div className={styles.decorativeDescription}>
-        {t("plan")}
-      </div>
+    <section
+      className={styles.treatmentsSection}
+      ref={ref}
+      id="treatmentsList"
+      data-near-viewport={near}
+    >
+      {/* <div className={styles.wrapper}>
+        
+      </div> */}
       <h2 className={styles.heading}>{t("treatments")}</h2>
+      <div className={styles.decorativeDescription}>{t("plan")}</div>
       <TreatmentsMenu data={mockData} />
     </section>
   );

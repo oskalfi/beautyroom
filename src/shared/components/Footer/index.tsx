@@ -42,7 +42,14 @@ export const Footer = () => {
 
   return (
     <footer className={styles.footer} ref={footerRef}>
-      <Flag className={styles.logo} ref={logoRef} />
+      <Flag
+        data-press-feedback
+        className={styles.logo}
+        ref={logoRef}
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      />
       <div className={styles.linksWrapper}>
         <nav aria-labelledby="site-navigation-title">
           <h2 className={styles.heading} id="site-navigation-title">

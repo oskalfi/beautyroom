@@ -28,6 +28,12 @@
   display: block;
   flex-shrink: 0;
   align-self: flex-start;
+  transition: transform 0.2s ease;
+  transform-origin: center;
+}
+
+.logo:hover {
+  cursor: pointer;
 }
 
 .linksWrapper {

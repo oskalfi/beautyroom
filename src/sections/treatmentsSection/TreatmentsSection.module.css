@@ -66,6 +66,12 @@
   }
 }
 
+@media (max-width: 425px) {
+  .decorativeDescription {
+    transform: translateX(0%) translateY(300%) rotate(-25deg);
+  }
+}
+
 @media (min-width: 936px) {
   .decorativeDescription:dir(rtl) {
     top: 40px;

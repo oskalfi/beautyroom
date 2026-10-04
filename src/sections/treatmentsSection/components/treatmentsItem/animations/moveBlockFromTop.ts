@@ -3,5 +3,5 @@ export function moveBlockFromTop(
   movingBlockText: HTMLElement,
 ): void {
   movingBlock.style.transform = "translateY(0)";
-  movingBlockText.style.transform = "translateY(0) translateX(15px)";
+  movingBlockText.style.transform = "translateY(0) translateX(var(--treatment-text-shift, 15px))";
 }

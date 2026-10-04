@@ -35,7 +35,7 @@
 }
 
 .movingBlock .text {
-  font-weight: var(--treatment-item-moving-block-text-font-weight);
+  /* font-weight: var(--treatment-item-moving-block-text-font-weight); */
   padding: 20px;
   inset: 0;
   position: absolute;
@@ -150,6 +150,28 @@
   left: 50px;
   scale: -1 1;
 }
-.button:dir(rtl) .movingBlock .text { padding-inline-end: 90px; }
+.button:dir(rtl) .movingBlock .text {
+  padding-inline-end: 90px;
+}
 .button:dir(rtl)[data-focus-active="true"] .buttonText,
-.button:dir(rtl)[data-scroll-active="true"] .buttonText { transform: translateX(-15px); }
+.button:dir(rtl)[data-scroll-active="true"] .buttonText {
+  transform: translateX(-15px);
+}
+
+@media (max-width: 767px) {
+  .button:dir(rtl) {
+    --treatment-text-shift: -15px;
+  }
+
+  .button:dir(rtl) .movingArrow {
+    left: auto;
+    right: 6px;
+    width: 18px;
+    --anim-start: -3px;
+    --anim-mid: 5px;
+  }
+
+  .button:dir(rtl) .movingBlock .text {
+    padding-inline-end: 20px;
+  }
+}

@@ -89,7 +89,8 @@
     "select": "Choose a treatment",
     "all": "View all",
     "count": "Treatments shown: {count}",
-    "catalogDescription": "Choose facial treatments at Beauty Room: cleansing, device-based skincare and more. Learn how each treatment works, who it suits and how to book. Tel Aviv–Yafo."
+    "catalogDescription": "Choose facial treatments at Beauty Room: cleansing, device-based skincare and more. Learn how each treatment works, who it suits and how to book. Tel Aviv–Yafo.",
+    "minutesFrom": "{count}+ min"
   },
   "Media": {
     "before": "{name}: before",

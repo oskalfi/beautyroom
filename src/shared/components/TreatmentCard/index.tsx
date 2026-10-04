@@ -9,7 +9,7 @@ import styles from "./TreatmentCard.module.css";
 
 export type TreatmentCardData = Pick<
   Treatment,
-  "id" | "name" | "imgPath" | "description" | "priceILS" | "durationMinutes"
+  "id" | "name" | "imgPath" | "description" | "priceILS" | "priceFrom" | "durationMinutes" | "durationFrom"
 >;
 
 export const TreatmentCard = ({
@@ -21,9 +21,9 @@ export const TreatmentCard = ({
   const t = useTranslations("Treatment");
   const href = getPathname({ locale, href: `/treatments/${treatment.id}` });
   const details = [
-    treatment.priceILS != null ? `₪ ${treatment.priceILS}` : t("priceRequest"),
+    treatment.priceILS != null ? `₪ ${treatment.priceILS}${treatment.priceFrom ? "+" : ""}` : t("priceRequest"),
     treatment.durationMinutes != null
-      ? t("minutes", { count: treatment.durationMinutes })
+      ? t(treatment.durationFrom ? "minutesFrom" : "minutes", { count: treatment.durationMinutes })
       : t("durationRequest"),
   ];
   return (
@@ -63,7 +63,7 @@ export const TreatmentCard = ({
         >
           {t("details")}
         </a>
-        <p className={styles.meta}>{details.join(" | ")}</p>
+        <p className={styles.meta} dir="ltr">{details.join(" | ")}</p>
       </div>
     </article>
   );

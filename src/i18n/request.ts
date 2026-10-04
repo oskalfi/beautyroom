@@ -13,8 +13,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
   const treatments = await getTreatments(locale);
   // Client components need only short cards, never all clinical copy or other languages.
-  const summaries = treatments.map(({ id, name, description, imgPath, priceILS, durationMinutes }) =>
-    ({ id, name, description, imgPath, priceILS, durationMinutes }));
+  const summaries = treatments.map(({ id, name, description, imgPath, priceILS, priceFrom, durationMinutes, durationFrom }) =>
+    ({ id, name, description, imgPath, priceILS, priceFrom, durationMinutes, durationFrom }));
   return { locale, timeZone: "Asia/Jerusalem", messages: {
     ...(await messages[locale]()).default,
     TreatmentSummaries: summaries,

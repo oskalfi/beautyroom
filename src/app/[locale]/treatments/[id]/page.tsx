@@ -1,3 +1,4 @@
+import { TreatmentMeta } from "@/shared/components/TreatmentMeta";
 import { getTranslations } from "next-intl/server";
 import { initPageLocale } from "@/i18n/pageLocale";
 import { getBookingUrl } from "@/shared/config/booking";
@@ -47,6 +48,7 @@ export default async function TreatmentPage({
         {treatment.imgPath ? <Image src={treatment.imgPath} alt={treatment.name} width={525} height={700}
           sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1180px) 45vw, 525px"
           quality={85} preload className={styles.photo} /> : <div className={`${styles.photo} ${styles.photoPlaceholder}`}>{t("photo")}</div>}
+        <TreatmentMeta treatment={treatment} className={styles.heroMeta} />
         <div className={styles.heroCopy}>
           <p className={styles.eyebrow}>Beauty Room / {t("facialCare")}</p>
           <h1 id="treatment-title" className={styles.title}>{treatment.name}</h1>

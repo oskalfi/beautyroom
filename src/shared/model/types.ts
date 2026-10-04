@@ -14,7 +14,9 @@ export type Treatment = {
   imgPath: string;
   description: string;
   priceILS?: number;
+  priceFrom?: boolean;
   durationMinutes?: number;
+  durationFrom?: boolean;
   concernsDescription: string;
   concerns: TreatmentTextPair[];
   stepsDescription: string;

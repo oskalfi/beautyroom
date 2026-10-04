@@ -36,6 +36,8 @@
   padding-bottom: 64px;
 }
 .photo {
+  grid-column: 1;
+  grid-row: 1;
   display: block;
   width: 100%;
   height: auto;
@@ -44,7 +46,15 @@
   border-radius: 16px;
 }
 .heroCopy {
+  grid-column: 2;
+  grid-row: 1;
+  padding-top: 40px;
   min-width: 0;
+}
+.heroMeta {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
 }
 .photoPlaceholder {
   display: grid;
@@ -294,8 +304,14 @@
     gap: 28px;
     padding-bottom: 40px;
   }
-  .heroCopy {
+  .heroMeta {
+    grid-column: 1;
     grid-row: 1;
+  }
+  .heroCopy {
+    grid-column: 1;
+    grid-row: 2;
+    padding-top: 0;
   }
   .title {
     font-size: var(--treatment-page-title-font-size-to-767);
@@ -307,6 +323,7 @@
     margin-bottom: 24px;
   }
   .photo {
+    grid-row: 3;
     max-width: 525px;
     margin-inline: auto;
   }

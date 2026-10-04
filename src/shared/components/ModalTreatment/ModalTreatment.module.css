@@ -1,11 +1,13 @@
 .modalTreatment {
   display: flex;
+  width: 100%;
+  min-width: 0;
   background: var(--treatment-modal-background-color);
 }
 
 .imageWrapper {
   position: relative;
-  flex: 1 1 50%;
+  flex: 0 0 50%;
   width: 50%;
   min-width: 0;
   aspect-ratio: 3 / 4;
@@ -32,7 +34,9 @@
 }
 
 .info {
-  flex: 1 1 50%;
+  position: relative;
+  min-width: 0;
+  flex: 0 0 50%;
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -103,8 +107,9 @@
     max-height: 420px;
   }
   .info {
+    flex: none;
     width: 100%;
-    padding: 32px 24px;
+    padding: 56px 24px 32px;
     gap: 24px;
   }
   .treatmentName {
@@ -131,3 +136,14 @@
 
 .modalTreatment:dir(rtl) .arrow { transform: translateY(1px) rotate(180deg); }
 .modalTreatment:lang(he) .description { letter-spacing: normal; }
+
+.info .meta {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  width: auto;
+}
+@media (min-width: 768px) {
+  .info:dir(ltr) .meta { right: 52px; }
+}

@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { getPathname } from "@/i18n/navigation";
 import { getBookingUrl } from "@/shared/config/booking";
 import { useLocalizedTreatments } from "@/shared/hooks/useLocalizedTreatments";
+import { TreatmentMeta } from "../TreatmentMeta";
 import { Button } from "../Button";
 import styles from "./ModalTreatment.module.css";
 import { TreatmentPhoto } from "./TreatmentPhoto";
@@ -35,6 +36,7 @@ const ModalTreatment = ({
         />
       )}
       <div className={styles.info}>
+        {treatmentInfo && <TreatmentMeta treatment={treatmentInfo} className={styles.meta} />}
         <Heading className={styles.treatmentName}>
           {treatmentInfo?.name}
         </Heading>

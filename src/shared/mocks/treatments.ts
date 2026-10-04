@@ -5,8 +5,10 @@ export const mockTreatments: Treatment[] = [
   {
     id: 5,
     // Временные значения для макета.
-    priceILS: 300,
-    durationMinutes: 20,
+    priceILS: 400,
+    priceFrom: false,
+    durationMinutes: 75,
+    durationFrom: true,
     name: "Мануальная чистка лица",
     imgPath: "/treatmentsPhoto/facialСleansing.jpg",
     description:
@@ -61,8 +63,10 @@ export const mockTreatments: Treatment[] = [
   {
     id: 4,
     // Временные значения для макета.
-    priceILS: 550,
-    durationMinutes: 35,
+    priceILS: 500,
+    priceFrom: false,
+    durationMinutes: 75,
+    durationFrom: true,
     name: "Микротоковый массаж лица",
     imgPath: "/treatmentsPhoto/MicrocurrentLymphaticDrainage.jpg",
     description:
@@ -113,7 +117,9 @@ export const mockTreatments: Treatment[] = [
     id: 1,
     // Временные значения для макета.
     priceILS: 500,
-    durationMinutes: 30,
+    priceFrom: false,
+    durationMinutes: 75,
+    durationFrom: true,
     name: "La Fontaine / Bloomea",
     imgPath: "/treatmentsPhoto/lafontaine.jpg",
     description:
@@ -168,8 +174,10 @@ export const mockTreatments: Treatment[] = [
   {
     id: 3,
     // Временные значения для макета.
-    priceILS: 300,
-    durationMinutes: 60,
+    priceILS: 500,
+    priceFrom: false,
+    durationMinutes: 75,
+    durationFrom: true,
     name: "Электропорация",
     imgPath: "/treatmentsPhoto/electroporation.jpg",
     description:
@@ -225,8 +233,10 @@ export const mockTreatments: Treatment[] = [
   {
     id: 2,
     // Временные значения для макета.
-    priceILS: 250,
-    durationMinutes: 50,
+    priceILS: 500,
+    priceFrom: false,
+    durationMinutes: 75,
+    durationFrom: true,
     name: "Микротоковая терапия",
     imgPath: "/treatmentsPhoto/microcurrent.jpg",
     description:
@@ -271,8 +281,10 @@ export const mockTreatments: Treatment[] = [
   {
     id: 6,
     // Временные значения для макета.
-    priceILS: 200,
-    durationMinutes: 20,
+    priceILS: 500,
+    priceFrom: false,
+    durationMinutes: 75,
+    durationFrom: true,
     name: "Криотерапия лица",
     imgPath: "/treatmentsPhoto/crio.jpg",
     description:
@@ -323,8 +335,10 @@ export const mockTreatments: Treatment[] = [
   {
     id: 7,
     // Временные значения для макета.
-    priceILS: 250,
-    durationMinutes: 35,
+    priceILS: 500,
+    priceFrom: false,
+    durationMinutes: 75,
+    durationFrom: true,
     name: "Неинвазивная карбокситерапия CO₂",
     imgPath: "/treatmentsPhoto/carboxi.jpg",
     description:
@@ -367,8 +381,10 @@ export const mockTreatments: Treatment[] = [
   {
     id: 8,
     // Временные значения для макета.
-    priceILS: 500,
-    durationMinutes: 60,
+    priceILS: 550,
+    priceFrom: false,
+    durationMinutes: 75,
+    durationFrom: true,
     name: "Фракционная микроигольчатая терапия",
     imgPath: "/treatmentsPhoto/mesotherapy.jpg",
     description:
@@ -437,8 +453,10 @@ export const mockTreatments: Treatment[] = [
   {
     id: 9,
     // Временные значения для макета.
-    priceILS: 150,
+    priceILS: 600,
+    priceFrom: false,
     durationMinutes: 60,
+    durationFrom: true,
     name: "Jet Peel",
     imgPath: "/treatmentsPhoto/jetpeel.jpg",
     description:
@@ -496,8 +514,10 @@ export const mockTreatments: Treatment[] = [
   {
     id: 10,
     // Временные значения для макета.
-    priceILS: 450,
-    durationMinutes: 60,
+    priceILS: 350,
+    priceFrom: true,
+    durationMinutes: 30,
+    durationFrom: true,
     name: "IPL — фототерапия",
     imgPath: "/treatmentsPhoto/venusviva.jpg",
     description:
@@ -560,8 +580,10 @@ export const mockTreatments: Treatment[] = [
   {
     id: 11,
     // Временные значения для макета.
-    priceILS: 800,
-    durationMinutes: 35,
+    priceILS: 600,
+    priceFrom: false,
+    durationMinutes: 60,
+    durationFrom: true,
     name: "RF-терапия — радиочастотный лифтинг",
     imgPath: "/treatmentsPhoto/RF.jpg",
     description:
@@ -620,8 +642,10 @@ export const mockTreatments: Treatment[] = [
   {
     id: 12,
     // Временные значения для макета.
-    priceILS: 850,
-    durationMinutes: 40,
+    priceILS: 1000,
+    priceFrom: true,
+    durationMinutes: 30,
+    durationFrom: true,
     name: "Микроигольчатый RF-лифтинг",
     imgPath: "/treatmentsPhoto/rf-needle.jpg",
     description:
@@ -685,8 +709,10 @@ export const mockTreatments: Treatment[] = [
   {
     id: 14,
     // Временные значения для макета.
-    priceILS: 150,
-    durationMinutes: 30,
+    priceILS: 250,
+    priceFrom: true,
+    durationMinutes: 15,
+    durationFrom: true,
     name: "Электрокоагуляция (удаление папилом)",
     imgPath: "/treatmentsPhoto/electrocoagulation.jpg",
     description:

@@ -3,6 +3,9 @@ body:has(.modalWindow[open]) {
 }
 
 .modalWindow {
+  position: fixed;
+  inset: 0;
+  padding: 0;
   margin: auto;
   transition:
     opacity 1s ease,
@@ -55,6 +58,8 @@ body:has(.modalWindow[open]) {
 .closeButton {
   position: absolute;
   right: 15px;
+  left: auto;
+  z-index: 2;
   top: 10px;
   color: var(--modal-close-button-text-color);
   background-color: transparent;

@@ -9,7 +9,6 @@ type FlagProps = Omit<
 
 const logoWidth = 180;
 const logoHeight = (logoWidth * 119) / 254;
-const logoBottomOffset = 30;
 
 export function Flag({ className, ...props }: FlagProps) {
   const gradientId = `${useId()}-flag-gradient`;

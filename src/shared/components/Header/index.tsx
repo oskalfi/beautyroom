@@ -101,6 +101,8 @@ export const Header = () => {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
+            {/* The small SVG is served directly; intrinsic dimensions reserve its space. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/headerTitle.svg" width="139" height="16" alt="Beauty Room" />
           </Link>
           <MenuButton isOpen={isOpen} setIsOpen={setIsOpen} />

@@ -1,6 +1,6 @@
 /* Offline fallback only: normal pages and API responses are never cached here. */
-const CACHE = "beauty-connection-v1";
-const PAGES = ["/connection", "/ru/connection", "/he/connection"];
+const CACHE = "beauty-connection-v2";
+const PAGES = ["/connection", "/ru/connection", "/en/connection"];
 
 self.addEventListener("install", event => {
   event.waitUntil((async () => {
@@ -17,7 +17,7 @@ self.addEventListener("install", event => {
       // The saved fallback works without React hydration or a network connection.
       html = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
         .replace(/<link\b[^>]*\bas="script"[^>]*>/gi, "");
-      html = html.replace("</head>", '<style>body > :is(button,dialog), body > div:not(#site-content), body > a {display:none!important}</style></head>');
+      html = html.replace("</head>", '<style>body > :is(button,dialog), body > div:not(#site-content), body > a {display:none!important} body, body * {font-family:Arial,sans-serif!important}</style></head>');
       html = html.replace("</body>", `<script>
         const retry = document.querySelector('[data-connection-error] a:last-child');
         if (retry) retry.addEventListener('click', event => { event.preventDefault(); location.reload(); });
@@ -43,10 +43,11 @@ self.addEventListener("install", event => {
       const css = await response.text();
       for (const match of css.matchAll(/url\(["']?([^)'"\s]+)["']?\)/g)) {
         const url = new URL(match[1], new URL(asset, self.location.origin));
-        if (url.origin === self.location.origin && /\.(woff2?|svg)(?:\?|$)/.test(url.pathname)) assets.add(url.pathname + url.search);
+        if (url.origin === self.location.origin && /\.svg(?:\?|$)/.test(url.pathname)) assets.add(url.pathname + url.search);
       }
     }
-    await cache.addAll([...assets]);
+    // Styles are already cached above. The offline page uses system fonts only.
+    await cache.addAll([...assets].filter(asset => !asset.includes(".css")));
     await self.skipWaiting();
   })());
 });
@@ -71,7 +72,7 @@ self.addEventListener("fetch", event => {
       try { return await fetch(request, { signal: controller.signal }); }
       catch {
         const locale = url.pathname.split('/')[1];
-        const path = locale === "ru" || locale === "he" ? `/${locale}/connection` : "/connection";
+        const path = locale === "ru" || locale === "en" ? `/${locale}/connection` : "/connection";
         const cached = await (await caches.open(CACHE)).match(path);
         return cached ? new Response(await cached.text(), { status: 503, headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store", "X-Robots-Tag": "noindex" } }) : Response.error();
       } finally { clearTimeout(timeout); }

@@ -57,13 +57,22 @@ export function ConnectionGuard() {
     window.addEventListener("beauty:screen-ready", ready);
     if (!navigator.onLine) offline();
     poll();
-    // Never cache development bundles or interfere with hot reload.
+    // Prepare the fallback after the initial load, without competing with LCP.
+    let offlineTimer: ReturnType<typeof setTimeout> | undefined;
+    const prepareOffline = () => {
+      offlineTimer = setTimeout(() => {
+        void navigator.serviceWorker.register("/connection-sw.js").catch(console.warn);
+      }, 3000);
+    };
     if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
-      void navigator.serviceWorker.register("/connection-sw.js").catch(console.warn);
+      if (document.readyState === "complete") prepareOffline();
+      else window.addEventListener("load", prepareOffline, { once: true });
     }
     return () => {
       disposed = true;
       clearTimeout(retryTimer);
+      clearTimeout(offlineTimer);
+      window.removeEventListener("load", prepareOffline);
       controller?.abort();
       window.removeEventListener("offline", offline);
       window.removeEventListener("online", online);

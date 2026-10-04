@@ -18,9 +18,8 @@ export const InstagramSection = () => {
   const refWhiteText = useRef<HTMLSpanElement | null>(null);
   const isAnimating = useRef(false);
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const href = e.currentTarget.href;
+  const handleClick = () => {
+    // Let the anchor open synchronously; delayed window.open can be blocked.
 
     // Защита от повторных кликов во время анимации
     if (isAnimating.current || !refWhiteText.current) return;
@@ -39,8 +38,6 @@ export const InstagramSection = () => {
         split.revert(); // Очищаем временные span-теги в DOM
         isAnimating.current = false;
 
-        // Переход точно после завершения анимации
-        window.open(href, "_blank", "noopener,noreferrer");
       },
     });
   };

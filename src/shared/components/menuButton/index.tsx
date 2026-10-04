@@ -2,7 +2,6 @@
 
 import { useTranslations } from "next-intl";
 import { useRef, type Dispatch, type SetStateAction } from "react";
-import Image from "next/image";
 import styles from "./MenuButton.module.css";
 import gsap from "gsap";
 import { MorphSVGPlugin } from "gsap/all";

@@ -17,7 +17,7 @@ export function ConnectionPage({ locale, onRetry, checking = false }: { locale: 
   const text = copy[locale];
   const home = getPathname({ locale, href: "/" });
   return (
-    <main className={`${styles.page} ${connectionStyles.page}`} data-connection-error dir={locale === "he" ? "rtl" : "ltr"}>
+    <main id={onRetry ? undefined : "main-content"} tabIndex={-1} className={`${styles.page} ${connectionStyles.page}`} data-connection-error dir={locale === "he" ? "rtl" : "ltr"}>
       <a className={styles.logoLink} href={home} aria-label="Beauty Room"><Logo /></a>
       {/* Plain SVG images are also usable in the script-free offline fallback. */}
       {/* eslint-disable @next/next/no-img-element */}

@@ -49,7 +49,11 @@ export const TreatmentCard = ({
           type="treatmentCard"
           className={styles.button}
           aria-label={t("chooseNamed", { name: treatment.name })}
-          onClick={() => window.location.assign(`${href}#treatment-booking`)}
+          onClick={() => {
+            // A document navigation bypasses the intercepted modal route and opens the booking section.
+            // eslint-disable-next-line @next/next/no-location-assign-relative-destination
+            window.location.assign(`${href}#treatment-booking`);
+          }}
         >
           {t("choose")}
         </Button>

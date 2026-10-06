@@ -14,13 +14,18 @@
     "db:deploy": "prisma migrate deploy",
     "db:studio": "prisma studio",
     "db:check": "tsx scripts/database/check.ts",
-    "db:lesson": "tsx scripts/database/lesson.ts"
+    "db:lesson": "tsx scripts/database/lesson.ts",
+    "db:import-treatments": "tsx scripts/database/import-treatments.ts",
+    "owner:create": "tsx scripts/database/create-owner.ts",
+    "test:crm": "tsx scripts/database/crm-smoke.ts"
   },
   "dependencies": {
+    "@better-auth/prisma-adapter": "^1.7.7",
     "@gsap/react": "^2.1.2",
     "@prisma/adapter-pg": "^7.10.0",
     "@prisma/client": "^7.10.0",
     "@vercel/speed-insights": "^2.0.0",
+    "better-auth": "^1.7.7",
     "clsx": "^2.1.1",
     "dotenv": "^18.0.5",
     "gsap": "^3.14.2",
@@ -31,6 +36,7 @@
     "react-dom": "19.2.3",
     "server-only": "^0.0.1",
     "simple-liquid-glass": "5.3.0",
+    "zod": "^4.6.5",
     "zustand": "^5.0.12"
   },
   "devDependencies": {

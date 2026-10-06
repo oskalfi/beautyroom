@@ -46,6 +46,7 @@ export default async function TreatmentPage({
 
       <section className={styles.hero} aria-labelledby="treatment-title">
         {treatment.imgPath ? <Image src={treatment.imgPath} alt={treatment.name} width={525} height={700}
+          unoptimized={treatment.imgPath.startsWith("https://")}
           sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1180px) 45vw, 525px"
           quality={85} preload className={styles.photo} /> : <div className={`${styles.photo} ${styles.photoPlaceholder}`}>{t("photo")}</div>}
         <TreatmentMeta treatment={treatment} className={styles.heroMeta} />

@@ -13,6 +13,7 @@ export function TreatmentPhoto({ src, alt }: { src: string; alt: string }) {
   return (
     <div className={styles.imageWrapper} aria-busy={status === "loading"}>
       <Image
+        unoptimized={src.startsWith("https://")}
         sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 932px) calc((100vw - 32px) / 2), 450px"
         quality={85}
         width={1575}

@@ -15,6 +15,11 @@
 .image {
   object-fit: cover;
 }
+.photoPlaceholder {
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
 .headingRow {
   display: flex;
   align-items: center;

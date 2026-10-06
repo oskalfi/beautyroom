@@ -14,13 +14,15 @@ export default async function ProceduresPage({ params }: { params: Promise<{ loc
   const locale = await initPageLocale(params);
   const mockTreatments = await getTreatments(locale);
   const treatments = mockTreatments.map(
-    ({ id, name, imgPath, description, priceILS, durationMinutes }) => ({
+    ({ id, name, imgPath, description, priceILS, priceFrom, durationMinutes, durationFrom }) => ({
       id,
       name,
       imgPath,
       description,
       priceILS,
+      priceFrom,
       durationMinutes,
+      durationFrom,
     }),
   );
   return <TreatmentsCatalog treatments={treatments} />;

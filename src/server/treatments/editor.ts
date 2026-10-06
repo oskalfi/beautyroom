@@ -12,7 +12,7 @@ function pairs(value: unknown): TreatmentTextPair[] {
 export async function getTreatmentForEditor(id: number): Promise<TreatmentEditorData | null> {
   await requireOwner();
   const treatment = await getDb().treatment.findFirst({
-    where: { id, archivedAt: null },
+    where: { id },
     include: { translations: true, photos: { orderBy: [{ sortOrder: "asc" }, { id: "asc" }], take: 1 } },
   });
   if (!treatment) return null;
@@ -26,7 +26,7 @@ export async function getTreatmentForEditor(id: number): Promise<TreatmentEditor
     };
   }
   return {
-    id, version: treatment.updatedAt.toISOString(), priceILS: treatment.priceILS?.toString() ?? "",
+    id, archived: treatment.archivedAt !== null, version: treatment.updatedAt.toISOString(), priceILS: treatment.priceILS?.toString() ?? "",
     priceFrom: treatment.priceFrom, durationMinutes: treatment.durationMinutes?.toString() ?? "",
     durationFrom: treatment.durationFrom, sortOrder: treatment.sortOrder, isPublished: treatment.isPublished,
     photoUrl: treatment.photos[0]?.url ?? "", translations,

@@ -4,7 +4,7 @@ import { useTranslations, useLocale } from "next-intl";
 
 import { getBookingUrl } from "@/shared/config/booking";
 import { useState } from "react";
-import { skinProblems } from "@/shared/mocks/skinProblems";
+import { skinProblems } from "@/shared/data/skinProblems";
 import { Button } from "@/shared/components/Button";
 import { RevealHeading } from "@/shared/components/RevealHeading";
 import styles from "./BeforeAfterSection.module.css";

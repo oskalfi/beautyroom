@@ -12,8 +12,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function ProceduresPage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = await initPageLocale(params);
-  const mockTreatments = await getTreatments(locale);
-  const treatments = mockTreatments.map(
+  const publishedTreatments = await getTreatments(locale);
+  const treatments = publishedTreatments.map(
     ({ id, name, imgPath, description, priceILS, priceFrom, durationMinutes, durationFrom }) => ({
       id,
       name,

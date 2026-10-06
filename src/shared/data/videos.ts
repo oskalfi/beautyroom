@@ -1,4 +1,4 @@
-export const mockVideos: string[] = [
+export const videos: string[] = [
   "/video/guinot.mp4",
   "/video/jetpeel.mp4",
   "/video/outside.mp4",

@@ -6,7 +6,7 @@ import clsx from "clsx";
 import styles from "./Carousel.module.css";
 import { ArrowSVG } from "@/shared/assets/svg/Arrow";
 
-import { mockVideos as MOCKDATA } from "@/shared/mocks/videos";
+import { videos } from "@/shared/data/videos";
 
 import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
@@ -21,7 +21,7 @@ export const Carousel = () => {
   const motionStopped = useMotionStopped();
   const mediaContainer = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(
-    Math.floor((MOCKDATA.length - 1) / 2),
+    Math.floor((videos.length - 1) / 2),
   );
 
   const carouselRef = useRef<HTMLDivElement | null>(null);
@@ -114,7 +114,7 @@ export const Carousel = () => {
   return (
     <div className={styles.carousel} ref={carouselRef}>
       <div ref={mediaContainer} className={styles.mediaContainer}>
-        {MOCKDATA.map((link, index) => {
+        {videos.map((link, index) => {
           return (
             <CarouselItem
               ref={(el) => {
@@ -161,7 +161,7 @@ export const Carousel = () => {
         aria-label={t("next")}
         onClick={() => {
           itemRefs.current[
-            Math.min(activeIndex + 1, MOCKDATA.length - 1)
+            Math.min(activeIndex + 1, videos.length - 1)
           ]?.scrollIntoView({
             behavior:
               document.documentElement.dataset.a11yMotion === "true"
@@ -174,7 +174,7 @@ export const Carousel = () => {
         className={clsx(
           styles.button,
           styles.forwardButton,
-          activeIndex === MOCKDATA.length - 1 && styles.outOfViewport,
+          activeIndex === videos.length - 1 && styles.outOfViewport,
         )}
       >
         <ArrowSVG className={styles.arrow} />

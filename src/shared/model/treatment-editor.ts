@@ -25,6 +25,7 @@ const photoUrl = z.string().trim().max(2_000).refine((value) => {
 }, "Укажите путь к фото на сайте или HTTPS-ссылку.");
 
 export const treatmentEditorSchema = z.object({
+  archived: z.boolean().optional(),
   id: z.number().int().positive().nullable(),
   version: z.string().datetime().nullable(),
   priceILS: z.string().trim().refine(v => v === "" || /^\d{1,7}(\.\d{1,2})?$/.test(v), "Цена: положительное число, максимум два знака после точки."),
@@ -49,7 +50,7 @@ export const treatmentEditorSchema = z.object({
 
 export type TreatmentEditorData = z.infer<typeof treatmentEditorSchema>;
 export type TranslationEditorData = TreatmentEditorData["translations"]["ru"];
-export type EditorState = { error?: string; saved?: boolean; version?: string };
+export type EditorState = { error?: string; saved?: boolean; version?: string; isPublished?: boolean };
 
 export function emptyTranslation(): TranslationEditorData {
   return { name: "", description: "", concernsDescription: "", concerns: [], stepsDescription: "", steps: [], skinTypes: [], skinDescription: "", contraindications: [], contraindicationsNote: "" };

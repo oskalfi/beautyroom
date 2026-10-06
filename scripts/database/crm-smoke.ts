@@ -7,7 +7,8 @@ import { PrismaClient } from "../../src/generated/prisma/client";
 import { emptyTreatment, type TreatmentEditorData } from "../../src/shared/model/treatment-editor";
 
 config({ path: [".env.local", ".env"], quiet: true });
-const base = "http://localhost:3000";
+const base = process.env.CRM_TEST_BASE_URL ?? "http://localhost:3000";
+if (!/^http:\/\/localhost:\d+$/.test(base)) throw new Error("CRM tests require a local server.");
 const ids = [randomUUID(), randomUUID()];
 const emails = ids.map(id => `crm-test-${id}@example.invalid`);
 const password = randomBytes(24).toString("base64url");
@@ -16,7 +17,10 @@ const ip = `198.18.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random()
 const db = new PrismaClient({ adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }) });
 
 async function request(path: string, cookie = "", options: RequestInit = {}) {
-  return fetch(base + path, { ...options, redirect: "manual", headers: { Origin: base, "x-forwarded-for": ip, Cookie: cookie, ...options.headers } });
+  const response = await fetch(base + path, { ...options, signal: AbortSignal.timeout(30_000), redirect: "manual", headers: { Origin: base, "x-forwarded-for": ip, Cookie: cookie, ...options.headers } });
+  // Server-rendered HTML can stream headers before the action has finished.
+  await response.clone().arrayBuffer();
+  return response;
 }
 
 async function signIn(email: string, suppliedPassword = password) {
@@ -28,8 +32,8 @@ function decode(value: string) {
   return value.replace(/&quot;/g, '"').replace(/&#x27;|&#39;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
 }
 
-function actionForm(html: string, data: TreatmentEditorData) {
-  const form = html.match(/<form\b[^>]*>([\s\S]*?)<\/form>/)?.[1];
+function actionForm(html: string, data: TreatmentEditorData, formIndex = 0) {
+  const form = [...html.matchAll(/<form\b[^>]*>([\s\S]*?)<\/form>/g)][formIndex]?.[1];
   assert.ok(form, "Editor form is missing");
   const result = new FormData();
   for (const tag of form.match(/<input\b[^>]*>/g) ?? []) {
@@ -87,6 +91,8 @@ async function main() {
     assert.equal(row.isPublished, false);
     assert.equal(row.translations.length, 3);
     assert.equal(row.priceILS?.toString(), "321.45");
+    assert.ok((await (await request("/crm?draft=1", owner.cookie)).text()).includes(testName), "Draft is missing from the drafts tab");
+    assert.ok(!(await (await request("/crm", owner.cookie)).text()).includes(testName), "Draft must not appear in the published tab");
     const draft = await request(`/en/treatments/${row.id}`);
     const draftHtml = await draft.text();
     assert.ok(draft.status === 404 || draftHtml.includes("NEXT_HTTP_ERROR_FALLBACK;404"), "Draft must resolve to not-found");
@@ -96,11 +102,15 @@ async function main() {
     data.id = row.id; data.version = row.updatedAt.toISOString(); data.isPublished = true;
     const englishName = data.translations.en.name;
     data.translations.en.name = "";
-    const incomplete = await request(editPath, owner.cookie, { method: "POST", body: actionForm(editHtml, data) });
+    const publishForm = () => { const form = actionForm(editHtml, data); form.set("publication", "publish"); return form; };
+    const incomplete = await request(editPath, owner.cookie, { method: "POST", body: publishForm() });
     assert.ok((await incomplete.text()).includes("Для публикации заполните"));
     assert.equal((await db.treatment.findUniqueOrThrow({ where: { id: row.id } })).isPublished, false);
     data.translations.en.name = englishName;
-    await request(editPath, owner.cookie, { method: "POST", body: actionForm(editHtml, data) });
+    data.isPublished = false; // The explicit publish button overrides the hidden draft value.
+    await request(editPath, owner.cookie, { method: "POST", body: publishForm() });
+    assert.ok((await (await request("/crm", owner.cookie)).text()).includes(testName));
+    assert.ok(!(await (await request("/crm?draft=1", owner.cookie)).text()).includes(testName));
     assert.equal((await db.treatment.findUniqueOrThrow({ where: { id: row.id } })).isPublished, true);
     for (const locale of ["ru", "he", "en"]) {
       const path = locale === "he" ? `/treatments/${row.id}` : `/${locale}/treatments/${row.id}`;
@@ -115,15 +125,33 @@ async function main() {
     const stale = await request(editPath, owner.cookie, { method: "POST", body: actionForm(editHtml, data) });
     assert.ok((await stale.text()).includes("уже изменена"));
     assert.equal((await db.treatment.findUniqueOrThrow({ where: { id: row.id } })).priceILS?.toString(), "321.45");
-    // Unpublish through the real action before cleanup, invalidating public caches.
-    data.priceILS = "321.45";
-    data.isPublished = false;
+    // Removing the old status control must also prevent status/order tampering.
+    data.priceILS = "321.45"; data.isPublished = false; data.sortOrder = 9999;
     data.version = (await db.treatment.findUniqueOrThrow({ where: { id: row.id } })).updatedAt.toISOString();
     const freshHtml = await (await request(editPath, owner.cookie)).text();
+    const previousOrder = (await db.treatment.findUniqueOrThrow({ where: { id: row.id } })).sortOrder;
     await request(editPath, owner.cookie, { method: "POST", body: actionForm(freshHtml, data) });
+    const preserved = await db.treatment.findUniqueOrThrow({ where: { id: row.id } });
+    assert.equal(preserved.isPublished, true); assert.equal(preserved.sortOrder, previousOrder);
+    const forbiddenDraft = actionForm(freshHtml, data); forbiddenDraft.set("publication", "draft");
+    await request(editPath, owner.cookie, { method: "POST", body: forbiddenDraft });
+    assert.equal((await db.treatment.findUniqueOrThrow({ where: { id: row.id } })).isPublished, true);
+    // Archive through the real action, then restore as a draft. Clear public caches.
+    const archiveHtml = await (await request(editPath, owner.cookie)).text();
+    const archiveForm = actionForm(archiveHtml, data, 1);
+    archiveForm.set("id", String(row.id)); archiveForm.set("version", preserved.updatedAt.toISOString());
+    const archivedResponse = await request(editPath, owner.cookie, { method: "POST", body: archiveForm });
+    assert.equal(archivedResponse.status, 303);
     assert.equal((await db.treatment.findUniqueOrThrow({ where: { id: row.id } })).isPublished, false);
-    const hiddenCatalog = await request("/en/procedures");
-    assert.ok(!(await hiddenCatalog.text()).includes(testName), "Unpublished procedure is still in the catalog");
+    assert.ok(!(await (await request("/en/procedures")).text()).includes(testName));
+    console.log("Checking archived editor...");
+    const archivedHtml = await (await request(editPath, owner.cookie)).text();
+    assert.ok(archivedHtml.includes("Процедура в архиве"));
+    console.log("Checking restore action...");
+    const restoreForm = actionForm(archivedHtml, data, 1); restoreForm.set("id", String(row.id));
+    const restoredResponse = await request(editPath, owner.cookie, { method: "POST", body: restoreForm });
+    assert.equal(restoredResponse.status, 303);
+    assert.ok((await (await request("/crm?draft=1", owner.cookie)).text()).includes(testName));
     const blockedOrigin = await request("/api/auth/sign-in/email", "", { method: "POST", headers: { Origin: "https://untrusted.example", "Content-Type": "application/json" }, body: JSON.stringify({ email: emails[0], password }) });
     assert.equal(blockedOrigin.status, 403);
     await request("/api/auth/sign-out", owner.cookie, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });

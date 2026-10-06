@@ -17,7 +17,16 @@ export function LoginForm() {
         email: String(data.get("email")).trim(), password: String(data.get("password")), rememberMe: false,
       });
       if (result.error) {
-        setError(result.error.status === 429 ? "Слишком много попыток. Подождите минуту и попробуйте снова." : "Не удалось войти. Проверьте email и пароль.");
+        const status = result.error.status;
+        setError(status === 429
+          ? "Слишком много попыток. Подождите минуту и попробуйте снова."
+          : status === 403
+            ? "Вход с этого адреса запрещён. Проверьте адрес сайта в настройках входа."
+            : status >= 500
+              ? "Ошибка сервера входа. Проверьте настройки сервера и подключение к базе."
+              : status === 401
+                ? "Не удалось войти. Проверьте email и пароль."
+                : "Не удалось выполнить вход. Попробуйте ещё раз или обратитесь к разработчику.");
         return;
       }
       router.replace("/crm"); router.refresh();

@@ -21,9 +21,9 @@ const ModalTreatment = ({
   const locale = useLocale();
   const t = useTranslations("Treatment");
   const booking = useTranslations("Navigation");
-  const mockData = useLocalizedTreatments();
-  const treatmentInfo = mockData.find((mockTreatment) => {
-    return mockTreatment.id === id;
+  const treatments = useLocalizedTreatments();
+  const treatmentInfo = treatments.find((treatment) => {
+    return treatment.id === id;
   });
 
   return (

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useActionState, useState } from "react";
+import { RestoreButton } from "./RestoreButton";
 import { saveTreatment, archiveTreatment } from "../actions";
 import type { EditorState, TreatmentEditorData, TranslationEditorData } from "@/shared/model/treatment-editor";
 import type { TreatmentTextPair } from "@/shared/model/types";
@@ -29,6 +30,8 @@ export function TreatmentEditor({ initial }: { initial: TreatmentEditorData }) {
   const [confirmArchive, setConfirmArchive] = useState(false);
   const [dirty, setDirty] = useState(false);
   const version = state.version ?? data.version;
+  const published = state.isPublished ?? data.isPublished;
+  const archived = initial.archived ?? false;
   const copy = data.translations[locale];
   const change = (values: Partial<TreatmentEditorData>) => { setDirty(true); setData(current => ({ ...current, ...values })); };
   const changeCopy = (values: Partial<TranslationEditorData>) => {
@@ -36,18 +39,18 @@ export function TreatmentEditor({ initial }: { initial: TreatmentEditorData }) {
   };
   const textField = (key: keyof Pick<TranslationEditorData, "description" | "concernsDescription" | "stepsDescription" | "skinDescription" | "contraindicationsNote">, label: string) => <label>{label}<textarea rows={key === "description" ? 4 : 2} value={copy[key]} maxLength={10_000} onChange={e => changeCopy({ [key]: e.target.value })} /></label>;
   return <>
-    <Link className="crm-back" href="/crm">← Все процедуры</Link>
-    <div className="crm-title-row"><div><p className="crm-eyebrow">Редактор процедуры</p><h1>{data.id === null ? "Новая процедура" : data.translations.ru.name || `Процедура №${data.id}`}</h1><p className="crm-muted">Черновик виден только в CRM. Опубликованная процедура доступна на сайте.</p></div></div>
+    <Link className="crm-back" href={archived ? "/crm?archive=1" : published ? "/crm" : "/crm?draft=1"}>← К списку процедур</Link>
+    <div className="crm-title-row"><div><p className="crm-eyebrow">Редактор процедуры</p><h1>{data.id === null ? "Новая процедура" : data.translations.ru.name || `Процедура №${data.id}`}</h1><p className="crm-muted">{archived ? "Процедура в архиве. Восстановите её, чтобы редактировать." : published ? "Процедура опубликована. Сохранение изменений обновляет сайт." : "Это черновик. Данные сохраняются в CRM и скрыты от посетителей сайта."}</p></div></div>
     {/* React resets native form controls after an action; remount them with saved controlled values. */}
     <form key={version ?? "new"} action={action} className="crm-editor" onSubmit={() => setDirty(false)}>
-      <input type="hidden" name="data" value={JSON.stringify({ ...data, version })} />
-      <fieldset className="crm-panel" disabled={pending || archiving}><legend>Общие параметры</legend>
+      <input type="hidden" name="data" value={JSON.stringify({ ...data, version, isPublished: published })} />
+      <fieldset className="crm-panel" disabled={pending || archiving || archived}><legend>Общие параметры</legend>
         <div className="crm-grid"><label>Цена, ₪<input type="number" min="0" max="9999999" step="0.01" value={data.priceILS} onChange={e => change({ priceILS: e.target.value })} /></label><label>Длительность, минут<input type="number" min="1" max="1440" step="1" value={data.durationMinutes} onChange={e => change({ durationMinutes: e.target.value })} /></label></div>
         <div className="crm-grid"><label className="crm-check"><input type="checkbox" checked={data.priceFrom} onChange={e => change({ priceFrom: e.target.checked })} />Цена «от»</label><label className="crm-check"><input type="checkbox" checked={data.durationFrom} onChange={e => change({ durationFrom: e.target.checked })} />Длительность «от»</label></div>
-        <div className="crm-grid"><label>Порядок в списке<input type="number" min="0" max="9999" value={data.sortOrder} onChange={e => change({ sortOrder: Number(e.target.value) })} /><small>Меньшее число — выше в списке.</small></label><label>Статус<select value={data.isPublished ? "published" : "draft"} onChange={e => change({ isPublished: e.target.value === "published" })}><option value="draft">Черновик</option><option value="published">Опубликовано</option></select></label></div>
+
         <label>Фотография<input value={data.photoUrl} maxLength={2000} placeholder="/treatmentsPhoto/example.jpg или https://…" onChange={e => change({ photoUrl: e.target.value })} /><small>Ссылка на готовое фото. Загрузку файлов добавим отдельным этапом.</small></label>
       </fieldset>
-      <fieldset className="crm-panel" disabled={pending || archiving}><legend>Тексты и переводы</legend>
+      <fieldset className="crm-panel" disabled={pending || archiving || archived}><legend>Тексты и переводы</legend>
         <div className="crm-language-tabs" aria-label="Язык перевода">{(Object.keys(languages) as Locale[]).map(language => <button type="button" key={language} aria-pressed={locale === language} onClick={() => setLocale(language)}>{languages[language]}</button>)}</div>
         <div className="crm-translation" dir={locale === "he" ? "rtl" : "ltr"} key={locale}>
           <label>Название<input value={copy.name} maxLength={200} onChange={e => changeCopy({ name: e.target.value })} /></label>
@@ -62,8 +65,9 @@ export function TreatmentEditor({ initial }: { initial: TreatmentEditorData }) {
           {textField("contraindicationsNote", "Примечание к противопоказаниям")}
         </div>
       </fieldset>
-      <div className="crm-save-bar"><div aria-live="polite">{pending ? "Сохраняем…" : dirty ? "Есть несохранённые изменения" : state.saved ? "Изменения сохранены" : "Публикация требует названия и описания на всех трёх языках."}{state.error && <p className="crm-error" role="alert">{state.error}</p>}</div><button type="submit" className="crm-primary" disabled={pending || archiving}>{pending ? "Сохраняем…" : "Сохранить изменения"}</button></div>
+      <div className="crm-save-bar"><div aria-live="polite">{pending ? "Сохраняем…" : dirty ? "Есть несохранённые изменения" : state.saved ? "Изменения сохранены" : "Публикация требует названия и описания на всех трёх языках."}{state.error && <p className="crm-error" role="alert">{state.error}</p>}</div>{!archived && <div className="crm-save-actions"><button type="submit" className={published ? "crm-primary" : "crm-secondary"} disabled={pending || archiving || archived}>{pending ? "Сохраняем…" : published ? "Сохранить изменения" : "Сохранить черновик"}</button>{!published && <button type="submit" name="publication" value="publish" className="crm-primary" disabled={pending || archiving}>Опубликовать</button>}</div>}</div>
     </form>
-    {data.id !== null && <section className="crm-archive"><h2>Убрать процедуру с сайта</h2><p className="crm-muted">Архивирование сохраняет тексты и историю посещений. Процедуру можно восстановить.</p>{confirmArchive ? <form action={archiveAction}><input type="hidden" name="id" value={data.id} /><input type="hidden" name="version" value={version ?? ""} /><p>Перенести эту процедуру в архив?</p><button className="crm-danger" disabled={archiving || pending}>{archiving ? "Архивируем…" : "Да, архивировать"}</button> <button className="crm-secondary" type="button" onClick={() => setConfirmArchive(false)} disabled={archiving}>Отмена</button></form> : <button className="crm-secondary" onClick={() => setConfirmArchive(true)} disabled={pending}>Перенести в архив</button>}{archiveState.error && <p role="alert" className="crm-error">{archiveState.error}</p>}</section>}
+    {archived && data.id !== null && <section className="crm-archive"><h2>Вернуть процедуру</h2><p className="crm-muted">После восстановления процедура появится в черновиках.</p><RestoreButton id={data.id} /></section>}
+    {!archived && data.id !== null && <section className="crm-archive"><h2>Убрать процедуру с сайта</h2><p className="crm-muted">Архивирование сохраняет тексты и историю посещений. Процедуру можно восстановить.</p>{!confirmArchive && <button className="crm-secondary" onClick={() => setConfirmArchive(true)} disabled={pending}>Перенести в архив</button>}<form action={archiveAction} hidden={!confirmArchive}><input type="hidden" name="id" value={data.id} /><input type="hidden" name="version" value={version ?? ""} /><p>Перенести эту процедуру в архив?</p><button className="crm-danger" disabled={archiving || pending}>{archiving ? "Архивируем…" : "Да, архивировать"}</button> <button className="crm-secondary" type="button" onClick={() => setConfirmArchive(false)} disabled={archiving}>Отмена</button></form>{archiveState.error && <p role="alert" className="crm-error">{archiveState.error}</p>}</section>}
   </>;
 }

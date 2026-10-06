@@ -15,9 +15,9 @@
     "db:studio": "prisma studio",
     "db:check": "tsx scripts/database/check.ts",
     "db:lesson": "tsx scripts/database/lesson.ts",
-    "db:import-treatments": "tsx scripts/database/import-treatments.ts",
     "owner:create": "tsx scripts/database/create-owner.ts",
-    "test:crm": "tsx scripts/database/crm-smoke.ts"
+    "test:crm": "tsx scripts/database/crm-smoke.ts",
+    "test:crm-order": "node scripts/database/crm-order.test.mjs"
   },
   "dependencies": {
     "@better-auth/prisma-adapter": "^1.7.7",

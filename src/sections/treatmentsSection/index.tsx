@@ -21,7 +21,7 @@ export let previousCursorYCoord = 0;
 
 export const TreatmentsSection = () => {
   const t = useTranslations("Home");
-  const mockData = useLocalizedTreatments();
+  const treatments = useLocalizedTreatments();
   const ref = useRef<HTMLDivElement | null>(null);
 
   const near = useNearViewport(ref, true, "200px 0px");
@@ -206,7 +206,7 @@ export const TreatmentsSection = () => {
       </div> */}
       <h2 className={styles.heading}>{t("treatments")}</h2>
       <div className={styles.decorativeDescription}>{t("plan")}</div>
-      <TreatmentsMenu data={mockData} />
+      <TreatmentsMenu data={treatments} />
     </section>
   );
 };

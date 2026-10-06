@@ -50,7 +50,7 @@ export const Footer = () => {
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
       />
-      <div className={styles.linksWrapper}>
+      <div className={styles.linksWrapper} data-nosnippet="">
         <nav aria-labelledby="site-navigation-title">
           <h2 className={styles.heading} id="site-navigation-title">
             {t("navigation")}
@@ -194,7 +194,7 @@ export const Footer = () => {
         </section>
       </div>
       <p className={styles.copyright}>
-        <small>{t("copyright", { year: 2026 })}</small>
+        <small><span data-nosnippet="">{t("copyright", { year: 2026 })}</span></small>
       </p>
     </footer>
   );

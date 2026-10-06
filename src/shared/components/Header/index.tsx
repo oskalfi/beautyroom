@@ -90,7 +90,7 @@ export const Header = () => {
       style={{ "--menu-last-index": navigationItems.length } as CSSProperties}
       ref={header}
     >
-      <div className={styles.contentContainer}>
+      <div className={styles.contentContainer} data-nosnippet="">
         <div className={styles.mobileLayout}>
           <Link
             data-press-feedback

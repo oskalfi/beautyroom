@@ -5,7 +5,9 @@ import { redirect } from "next/navigation";
 import { getAuth } from "./config";
 
 export const getOwner = cache(async () => {
-  const session = await getAuth().api.getSession({ headers: await headers() });
+  // Read request data first so build-time prerendering stops before auth setup.
+  const requestHeaders = await headers();
+  const session = await getAuth().api.getSession({ headers: requestHeaders });
   return session?.user.isOwner === true ? session.user : null;
 });
 

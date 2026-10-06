@@ -150,10 +150,10 @@ export const Footer = () => {
             <li className={styles.navigationItem}>
               <a
                 data-press-feedback
-                href="mailto:beautyroom@gmail.com"
+                href="mailto:kristina@beautyroomky.com"
                 className={styles.navigationLink}
               >
-                beautyroom@gmail.com
+                kristina@beautyroomky.com
                 <svg className={styles.border}>
                   <rect x="0" y="0" width="100%" height="100%" rx="16" />
                 </svg>

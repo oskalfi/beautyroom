@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/shared/config/seo";
 import { getTranslations } from "next-intl/server";
 import { initPageLocale } from "@/i18n/pageLocale";
 import type { Metadata } from "next";
@@ -9,7 +10,7 @@ import { ContactLink } from "./ContactLink";
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const locale = await initPageLocale(params);
   const t = await getTranslations({ locale, namespace: "Contacts" });
-  return { title: `${t("title")} | Beauty Room`, description: t("description") };
+  return pageMetadata({ locale, path: "/contacts", title: `${t("title")} | Beauty Room`, description: t("description") });
 }
 
 const contacts = [

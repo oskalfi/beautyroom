@@ -35,12 +35,12 @@ export const WelcomeSection = () => {
     <section ref={section} className={styles.welcomeSection} data-first-screen-ready="true">
       <div ref={background} className={styles.backgroundImage} />
       <div className={styles.welcomeText}>
-        <h1 className={styles.h1}>
+        <div className={styles.h1}>
           <span className={styles.nowrap}>{t("hero1")}</span>{" "}
           <span className={styles.nowrap}>{t("hero2")}</span>{" "}
           <span className={styles.nowrap}>{t("hero3")}</span>
-        </h1>
-        <div className={styles.address}>
+        </div>
+        <h1 className={styles.address}>
           {t("locationIntro")}{" "}
           <span className={styles.underlinedText}>
             {t("locationCity")}
@@ -50,7 +50,7 @@ export const WelcomeSection = () => {
               clipClassName={styles.clip}
             />
           </span>
-        </div>
+        </h1>
         <WelcomeBookingButton />
       </div>
     </section>

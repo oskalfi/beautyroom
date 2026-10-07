@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/shared/config/seo";
 import { initPageLocale } from "@/i18n/pageLocale";
 import type { Metadata } from "next";
 import { getTreatments } from "@/shared/api/treatments";
@@ -7,7 +8,7 @@ import { TreatmentsCatalog } from "./TreatmentsCatalog";
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const locale = await initPageLocale(params);
   const t = await getTranslations({ locale, namespace: "Treatment" });
-  return { title: t("procedures") + " | Beauty Room", description: t("catalogDescription") };
+  return pageMetadata({ locale, path: "/procedures", title: t("procedures") + " | Beauty Room", description: t("catalogDescription") });
 }
 
 export default async function ProceduresPage({ params }: { params: Promise<{ locale: string }> }) {

@@ -1,3 +1,4 @@
+import { pageMetadata, businessStructuredData } from "@/shared/config/seo";
 import { getTranslations } from "next-intl/server";
 import { initPageLocale } from "@/i18n/pageLocale";
 import type { Metadata } from "next";
@@ -17,7 +18,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const locale = await initPageLocale(params);
   const t = await getTranslations({ locale, namespace: "Metadata" });
-  return { title: t("title"), description: t("description") };
+  return pageMetadata({ locale, title: t("title"), description: t("description") });
 }
 
 export default async function Home({
@@ -64,6 +65,7 @@ export default async function Home({
         crossOrigin="anonymous"
       />
       </>}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessStructuredData).replace(/</g, "\\u003c") }} />
       <WelcomeSection />
       <IntroduceSection />
       <TreatmentsSection />

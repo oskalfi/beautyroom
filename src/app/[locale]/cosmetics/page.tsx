@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/shared/config/seo";
 import { initPageLocale } from "@/i18n/pageLocale";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
@@ -6,7 +7,7 @@ import styles from "./page.module.css";
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const locale = await initPageLocale(params);
   const t = await getTranslations({ locale, namespace: "Cosmetics" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return pageMetadata({ locale, path: "/cosmetics", title: t("metaTitle"), description: t("metaDescription") });
 }
 export default async function CosmeticsPage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = await initPageLocale(params);

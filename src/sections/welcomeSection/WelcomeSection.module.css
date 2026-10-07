@@ -26,6 +26,7 @@
 }
 
 .h1 {
+  font-weight: var(--font-weight-heading);
   font-family: var(--welcome-title-font-family), Arial, sans-serif;
   max-width: 800px;
   font-size: var(--welcome-title-font-size);
@@ -38,6 +39,8 @@
 }
 
 .address {
+  margin: 0;
+  font-family: var(--font-family-body);
   font-weight: var(--welcome-address-font-weight);
   max-width: 530px;
   text-align: center;

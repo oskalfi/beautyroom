@@ -1,4 +1,4 @@
-import { pageMetadata } from "@/shared/config/seo";
+import { pageMetadata, treatmentMetadataDescription } from "@/shared/config/seo";
 import { TreatmentMeta } from "@/shared/components/TreatmentMeta";
 import { getTranslations } from "next-intl/server";
 import { initPageLocale } from "@/i18n/pageLocale";
@@ -23,7 +23,7 @@ export async function generateMetadata({
   return pageMetadata({
     locale, path: `/treatments/${id}`,
     title: `${treatment.name} | Beauty Room`,
-    description: treatment.description,
+    description: treatmentMetadataDescription(locale, treatment.name),
     image: treatment.imgPath,
   });
 }

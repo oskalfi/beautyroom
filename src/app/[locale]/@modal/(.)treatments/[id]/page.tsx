@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/shared/config/seo";
+import { pageMetadata, treatmentMetadataDescription } from "@/shared/config/seo";
 import { initPageLocale } from "@/i18n/pageLocale";
 import { notFound } from "next/navigation";
 import { Modal } from "@/shared/components/Modal";
@@ -11,7 +11,12 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const treatment = await getTreatmentById(id);
   if (!treatment) notFound();
-  return pageMetadata({ locale, path: `/treatments/${id}`, title: `${treatment.name} | Beauty Room`, description: treatment.description, image: treatment.imgPath });
+  return pageMetadata({
+    locale, path: `/treatments/${id}`,
+    title: `${treatment.name} | Beauty Room`,
+    description: treatmentMetadataDescription(locale, treatment.name),
+    image: treatment.imgPath,
+  });
 }
 
 export default async function TreatmentModalPage({

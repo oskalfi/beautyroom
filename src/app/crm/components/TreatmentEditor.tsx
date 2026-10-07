@@ -6,6 +6,7 @@ import { RestoreButton } from "./RestoreButton";
 import { saveTreatment, archiveTreatment } from "../actions";
 import type { EditorState, TreatmentEditorData, TranslationEditorData } from "@/shared/model/treatment-editor";
 import type { TreatmentTextPair } from "@/shared/model/types";
+import { treatmentFormSnapshot } from "@/shared/model/treatment-form";
 
 const languages = { ru: "Русский", he: "Иврит", en: "English" } as const;
 type Locale = keyof typeof languages;
@@ -24,25 +25,33 @@ function LinesEditor({ label, value, onChange }: { label: string; value: string[
 
 export function TreatmentEditor({ initial }: { initial: TreatmentEditorData }) {
   const [data, setData] = useState(initial);
+  const [savedSnapshot, setSavedSnapshot] = useState(() => treatmentFormSnapshot(initial));
   const [locale, setLocale] = useState<Locale>("ru");
   const [state, action, pending] = useActionState<EditorState, FormData>(saveTreatment, {});
+  const [submittedSnapshot, setSubmittedSnapshot] = useState(savedSnapshot);
+  const [observedState, setObservedState] = useState(state);
+  // Reset the comparison baseline only after a successful server response.
+  if (state !== observedState) {
+    setObservedState(state);
+    if (state.saved) setSavedSnapshot(submittedSnapshot);
+  }
   const [archiveState, archiveAction, archiving] = useActionState<EditorState, FormData>(archiveTreatment, {});
   const [confirmArchive, setConfirmArchive] = useState(false);
-  const [dirty, setDirty] = useState(false);
+  const dirty = treatmentFormSnapshot(data) !== savedSnapshot;
   const version = state.version ?? data.version;
   const published = state.isPublished ?? data.isPublished;
   const archived = initial.archived ?? false;
   const copy = data.translations[locale];
-  const change = (values: Partial<TreatmentEditorData>) => { setDirty(true); setData(current => ({ ...current, ...values })); };
+  const change = (values: Partial<TreatmentEditorData>) => { setData(current => ({ ...current, ...values })); };
   const changeCopy = (values: Partial<TranslationEditorData>) => {
-    setDirty(true); setData(current => ({ ...current, translations: { ...current.translations, [locale]: { ...current.translations[locale], ...values } } }));
+    setData(current => ({ ...current, translations: { ...current.translations, [locale]: { ...current.translations[locale], ...values } } }));
   };
   const textField = (key: keyof Pick<TranslationEditorData, "description" | "concernsDescription" | "stepsDescription" | "skinDescription" | "contraindicationsNote">, label: string) => <label>{label}<textarea rows={key === "description" ? 4 : 2} value={copy[key]} maxLength={10_000} onChange={e => changeCopy({ [key]: e.target.value })} /></label>;
   return <>
     <Link className="crm-back" href={archived ? "/crm?archive=1" : published ? "/crm" : "/crm?draft=1"}>← К списку процедур</Link>
     <div className="crm-title-row"><div><p className="crm-eyebrow">Редактор процедуры</p><h1>{data.id === null ? "Новая процедура" : data.translations.ru.name || `Процедура №${data.id}`}</h1><p className="crm-muted">{archived ? "Процедура в архиве. Восстановите её, чтобы редактировать." : published ? "Процедура опубликована. Сохранение изменений обновляет сайт." : "Это черновик. Данные сохраняются в CRM и скрыты от посетителей сайта."}</p></div></div>
     {/* React resets native form controls after an action; remount them with saved controlled values. */}
-    <form key={version ?? "new"} action={action} className="crm-editor" onSubmit={() => setDirty(false)}>
+    <form key={version ?? "new"} action={action} className="crm-editor" onSubmit={() => setSubmittedSnapshot(treatmentFormSnapshot(data))}>
       <input type="hidden" name="data" value={JSON.stringify({ ...data, version, isPublished: published })} />
       <fieldset className="crm-panel" disabled={pending || archiving || archived}><legend>Общие параметры</legend>
         <div className="crm-grid"><label>Цена, ₪<input type="number" min="0" max="9999999" step="0.01" value={data.priceILS} onChange={e => change({ priceILS: e.target.value })} /></label><label>Длительность, минут<input type="number" min="1" max="1440" step="1" value={data.durationMinutes} onChange={e => change({ durationMinutes: e.target.value })} /></label></div>
@@ -65,7 +74,7 @@ export function TreatmentEditor({ initial }: { initial: TreatmentEditorData }) {
           {textField("contraindicationsNote", "Примечание к противопоказаниям")}
         </div>
       </fieldset>
-      <div className="crm-save-bar"><div aria-live="polite">{pending ? "Сохраняем…" : dirty ? "Есть несохранённые изменения" : state.saved ? "Изменения сохранены" : "Публикация требует названия и описания на всех трёх языках."}{state.error && <p className="crm-error" role="alert">{state.error}</p>}</div>{!archived && <div className="crm-save-actions"><button type="submit" className={published ? "crm-primary" : "crm-secondary"} disabled={pending || archiving || archived}>{pending ? "Сохраняем…" : published ? "Сохранить изменения" : "Сохранить черновик"}</button>{!published && <button type="submit" name="publication" value="publish" className="crm-primary" disabled={pending || archiving}>Опубликовать</button>}</div>}</div>
+      <div className="crm-save-bar"><div aria-live="polite">{pending ? "Сохраняем…" : dirty ? "Есть несохранённые изменения" : state.saved ? "Изменения сохранены" : "Публикация требует названия и описания на всех трёх языках."}{state.error && <p className="crm-error" role="alert">{state.error}</p>}</div>{!archived && <div className="crm-save-actions"><button type="submit" className={published ? "crm-primary" : "crm-secondary"} disabled={pending || archiving || archived || (data.id !== null && !dirty)}>{pending ? "Сохраняем…" : published ? "Сохранить изменения" : "Сохранить черновик"}</button><Link className="crm-secondary" href="/crm" aria-disabled={pending || archiving} onClick={event => { if (pending || archiving) event.preventDefault(); }}>Отменить изменения</Link>{!published && <button type="submit" name="publication" value="publish" className="crm-primary" disabled={pending || archiving}>Опубликовать</button>}</div>}</div>
     </form>
     {archived && data.id !== null && <section className="crm-archive"><h2>Вернуть процедуру</h2><p className="crm-muted">После восстановления процедура появится в черновиках.</p><RestoreButton id={data.id} /></section>}
     {!archived && data.id !== null && <section className="crm-archive"><h2>Убрать процедуру с сайта</h2><p className="crm-muted">Архивирование сохраняет тексты и историю посещений. Процедуру можно восстановить.</p>{!confirmArchive && <button className="crm-secondary" onClick={() => setConfirmArchive(true)} disabled={pending}>Перенести в архив</button>}<form action={archiveAction} hidden={!confirmArchive}><input type="hidden" name="id" value={data.id} /><input type="hidden" name="version" value={version ?? ""} /><p>Перенести эту процедуру в архив?</p><button className="crm-danger" disabled={archiving || pending}>{archiving ? "Архивируем…" : "Да, архивировать"}</button> <button className="crm-secondary" type="button" onClick={() => setConfirmArchive(false)} disabled={archiving}>Отмена</button></form>{archiveState.error && <p role="alert" className="crm-error">{archiveState.error}</p>}</section>}

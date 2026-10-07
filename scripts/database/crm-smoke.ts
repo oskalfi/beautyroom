@@ -59,6 +59,7 @@ async function main() {
     for (const [i, id] of ids.entries()) await db.user.create({ data: { id, email: emails[i], name: "CRM test", isOwner: i === 0,
       accounts: { create: { id: randomUUID(), accountId: id, providerId: "credential", password: hashed } } } });
     await protectedPage("/crm");
+    await protectedPage("/crm?history=1");
     await protectedPage("/crm/treatments/new");
     const wrong = await signIn(emails[0], "Wrong-password-12345");
     assert.equal(wrong.response.status, 401);
@@ -93,6 +94,11 @@ async function main() {
     assert.equal(row.priceILS?.toString(), "321.45");
     assert.equal(row.lastEditedById, ids[0]);
     assert.equal(row.lastEditedByName, "CRM test");
+    const creationHistory = await db.treatmentChange.findMany({ where: { treatmentId: row.id } });
+    assert.ok(creationHistory.some(change => change.action === "create" && change.after === "Черновик"));
+    assert.ok(creationHistory.every(change => change.actorId === ids[0] && change.actorName === "CRM test"));
+    const historyHtml = await (await request(`/crm?history=1&q=${encodeURIComponent(testName)}`, owner.cookie)).text();
+    assert.ok(historyHtml.includes("Было") && historyHtml.includes("Стало") && historyHtml.includes(testName));
     const draftsHtml = await (await request("/crm?draft=1", owner.cookie)).text();
     assert.ok(draftsHtml.includes(testName), "Draft is missing from the drafts tab");
     assert.ok(draftsHtml.includes("Администратор:") && draftsHtml.includes("CRM test"), "Author is missing from the procedure card");
@@ -116,6 +122,7 @@ async function main() {
     assert.ok((await (await request("/crm", owner.cookie)).text()).includes(testName));
     assert.ok(!(await (await request("/crm?draft=1", owner.cookie)).text()).includes(testName));
     assert.equal((await db.treatment.findUniqueOrThrow({ where: { id: row.id } })).isPublished, true);
+    assert.equal(await db.treatmentChange.count({ where: { treatmentId: row.id, action: "publish", before: "Черновик", after: "На сайте" } }), 1);
     for (const locale of ["ru", "he", "en"]) {
       const path = locale === "he" ? `/treatments/${row.id}` : `/${locale}/treatments/${row.id}`;
       const published = await request(path);
@@ -163,6 +170,24 @@ async function main() {
     const restoredRow = await db.treatment.findUniqueOrThrow({ where: { id: row.id } });
     assert.equal(restoredRow.lastEditedById, ids[0]);
     assert.equal(restoredRow.lastEditedByName, "CRM test");
+    assert.equal(await db.treatmentChange.count({ where: { treatmentId: row.id, action: "archive", after: "Архив" } }), 1);
+    assert.equal(await db.treatmentChange.count({ where: { treatmentId: row.id, action: "restore", before: "Архив", after: "Черновик" } }), 1);
+    data.version = restoredRow.updatedAt.toISOString();
+    data.priceILS = "400";
+    data.translations.ru.description = "Новое описание процедуры";
+    const restoredHtml = await (await request(editPath, owner.cookie)).text();
+    await request(editPath, owner.cookie, { method: "POST", body: actionForm(restoredHtml, data) });
+    const fieldChanges = await db.treatmentChange.findMany({ where: { treatmentId: row.id, action: "edit" } });
+    assert.ok(fieldChanges.some(change => change.field === "Цена" && change.before === "321.45 ₪" && change.after === "400.00 ₪"));
+    assert.ok(fieldChanges.some(change => change.field === "Описание" && change.locale === "ru" && change.before === "Test description ru" && change.after === "Новое описание процедуры"));
+    const logCount = await db.treatmentChange.count({ where: { treatmentId: row.id } });
+    // A stale submission must neither change the procedure nor add history.
+    await request(editPath, owner.cookie, { method: "POST", body: actionForm(restoredHtml, data) });
+    assert.equal(await db.treatmentChange.count({ where: { treatmentId: row.id } }), logCount);
+    data.version = (await db.treatment.findUniqueOrThrow({ where: { id: row.id } })).updatedAt.toISOString();
+    const unchangedHtml = await (await request(editPath, owner.cookie)).text();
+    await request(editPath, owner.cookie, { method: "POST", body: actionForm(unchangedHtml, data) });
+    assert.equal(await db.treatmentChange.count({ where: { treatmentId: row.id } }), logCount, "No-op saves must not add history");
     assert.ok((await (await request("/crm?draft=1", owner.cookie)).text()).includes(testName));
     const blockedOrigin = await request("/api/auth/sign-in/email", "", { method: "POST", headers: { Origin: "https://untrusted.example", "Content-Type": "application/json" }, body: JSON.stringify({ email: emails[0], password }) });
     assert.equal(blockedOrigin.status, 403);
@@ -170,6 +195,7 @@ async function main() {
     await protectedPage("/crm", owner.cookie);
     console.log("PASS: login/logout, role protection, disabled signup, protected mutations, draft visibility, publishing in three languages, edit conflict and CSRF protection.");
   } finally {
+    await db.treatmentChange.deleteMany({ where: { actorId: { in: ids } } });
     // Delete only this test's own synthetic records; never touch real owner accounts.
     if (treatmentId) { await db.media.deleteMany({ where: { treatmentId } }); await db.treatment.delete({ where: { id: treatmentId } }); }
     await db.treatment.deleteMany({ where: { translations: { some: { name: { startsWith: testName } } } } });

@@ -6,6 +6,8 @@ import { requireOwner } from "@/server/auth/owner";
 import { getDb } from "@/server/db/client";
 import { z } from "zod";
 import { treatmentEditorSchema, type EditorState } from "@/shared/model/treatment-editor";
+import { randomUUID } from "node:crypto";
+import { historySnapshot, treatmentDiff, treatmentName, writeHistory } from "@/server/treatments/history";
 
 function refreshTreatments() {
   updateTag("treatments");
@@ -31,7 +33,7 @@ export async function saveTreatment(_state: EditorState, formData: FormData): Pr
   try {
     result = await getDb().$transaction(async (tx) => {
       await tx.$queryRaw`SELECT pg_advisory_xact_lock(610071001)::text`;
-      const existing = data.id === null ? null : await tx.treatment.findUnique({ where: { id: data.id } });
+      const existing = data.id === null ? null : await tx.treatment.findUnique({ where: { id: data.id }, include: { translations: true, photos: { orderBy: [{ sortOrder: "asc" }, { id: "asc" }], take: 1 } } });
       if (data.id !== null && (!existing || existing.archivedAt || existing.updatedAt.toISOString() !== data.version)) throw new Error("EDIT_CONFLICT");
       const isPublished = existing?.isPublished === true || publication === "publish";
       treatmentEditorSchema.parse({ ...data, isPublished });
@@ -69,6 +71,10 @@ export async function saveTreatment(_state: EditorState, formData: FormData): Pr
         await tx.media.updateMany({ where: { treatmentId: id }, data: { treatmentId: null } });
       }
       const saved = await tx.treatment.findUniqueOrThrow({ where: { id } });
+      const changes = treatmentDiff(historySnapshot(existing), data);
+      if (!existing) changes.unshift({ field: "Состояние", before: "Не существовала", after: isPublished ? "На сайте" : "Черновик" });
+      else if (publishing) changes.push({ field: "Состояние", before: "Черновик", after: "На сайте" });
+      await writeHistory(tx, owner, id, treatmentName({ translations: Object.entries(data.translations).map(([locale, copy]) => ({ locale, name: copy.name })) }), publishing ? "publish" : !existing ? "create" : "edit", changes);
       return { id, version: saved.updatedAt.toISOString(), isPublished: saved.isPublished };
     }, { maxWait: 10_000, timeout: 20_000 });
   } catch (error) {
@@ -89,10 +95,13 @@ export async function archiveTreatment(_state: EditorState, formData: FormData):
   try {
     const archived = await getDb().$transaction(async tx => {
       await tx.$queryRaw`SELECT pg_advisory_xact_lock(610071001)::text`;
-      return tx.treatment.updateMany({
+      const before = await tx.treatment.findUnique({ where: { id }, include: { translations: true } });
+      const result = await tx.treatment.updateMany({
       where: { id, archivedAt: null, updatedAt: new Date(version) },
       data: { archivedAt: new Date(), isPublished: false, lastEditedById: owner.id, lastEditedByName: owner.name || owner.email },
       });
+      if (result.count === 1 && before) await writeHistory(tx, owner, id, treatmentName(before), "archive", [{ field: "Состояние", before: before.isPublished ? "На сайте" : "Черновик", after: "Архив" }]);
+      return result;
     });
     if (archived.count !== 1) return { error: "Процедура уже изменена. Обновите страницу." };
   } catch { return { error: "Не удалось архивировать процедуру." }; }
@@ -105,7 +114,13 @@ export async function restoreTreatment(_state: EditorState, formData: FormData):
   const id = Number(formData.get("id"));
   if (!Number.isSafeInteger(id) || id <= 0) return { error: "Некорректная процедура." };
   try {
-    const restored = await getDb().treatment.updateMany({ where: { id, archivedAt: { not: null } }, data: { archivedAt: null, isPublished: false, lastEditedById: owner.id, lastEditedByName: owner.name || owner.email } });
+    const restored = await getDb().$transaction(async tx => {
+      await tx.$queryRaw`SELECT pg_advisory_xact_lock(610071001)::text`;
+      const before = await tx.treatment.findUnique({ where: { id }, include: { translations: true } });
+      const result = await tx.treatment.updateMany({ where: { id, archivedAt: { not: null } }, data: { archivedAt: null, isPublished: false, lastEditedById: owner.id, lastEditedByName: owner.name || owner.email } });
+      if (result.count === 1 && before) await writeHistory(tx, owner, id, treatmentName(before), "restore", [{ field: "Состояние", before: "Архив", after: "Черновик" }]);
+      return result;
+    });
     if (restored.count !== 1) return { error: "Процедура уже восстановлена. Обновите страницу." };
   } catch { return { error: "Не удалось восстановить процедуру." }; }
   refreshTreatments();
@@ -126,9 +141,18 @@ export async function reorderTreatments(input: unknown): Promise<{ error?: strin
   try {
     await getDb().$transaction(async tx => {
       await tx.$queryRaw`SELECT pg_advisory_xact_lock(610071001)::text`;
-      const current = await tx.treatment.findMany({ where: { isPublished: true, archivedAt: null }, select: { id: true, updatedAt: true }, orderBy: [{ sortOrder: "asc" }, { id: "asc" }] });
+      const current = await tx.treatment.findMany({ where: { isPublished: true, archivedAt: null }, include: { translations: { select: { locale: true, name: true } } }, orderBy: [{ sortOrder: "asc" }, { id: "asc" }] });
       if (current.length !== expected.length || current.some((row, index) => row.id !== expected[index].id || row.updatedAt.toISOString() !== expected[index].version)) throw new Error("ORDER_CONFLICT");
-      for (const [sortOrder, id] of ids.entries()) await tx.treatment.update({ where: { id }, data: { sortOrder, lastEditedById: owner.id, lastEditedByName: owner.name || owner.email } });
+      const operationId = randomUUID();
+      for (const [sortOrder, id] of ids.entries()) {
+        const oldPosition = current.findIndex(row => row.id === id);
+        if (oldPosition === sortOrder) {
+          if (current[oldPosition].sortOrder !== sortOrder) await tx.treatment.update({ where: { id }, data: { sortOrder, updatedAt: current[oldPosition].updatedAt } });
+          continue;
+        }
+        await tx.treatment.update({ where: { id }, data: { sortOrder, lastEditedById: owner.id, lastEditedByName: owner.name || owner.email } });
+        await writeHistory(tx, owner, id, treatmentName(current[oldPosition]), "reorder", [{ field: "Позиция в списке", before: String(oldPosition + 1), after: String(sortOrder + 1) }], operationId);
+      }
     }, { maxWait: 10_000, timeout: 30_000 });
   } catch (error) {
     return { error: error instanceof Error && error.message === "ORDER_CONFLICT" ? "Список изменился в другой вкладке. Обновите страницу перед изменением порядка." : "Не удалось сохранить порядок. Попробуйте снова." };

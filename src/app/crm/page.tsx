@@ -3,6 +3,7 @@ import { requireOwner } from "@/server/auth/owner";
 import { getDb } from "@/server/db/client";
 import { CrmShell } from "./components/CrmShell";
 import { TreatmentCards } from "./components/TreatmentCards";
+import { TreatmentHistory } from "./components/TreatmentHistory";
 
 const editedAtFormatter = new Intl.DateTimeFormat("ru-RU", {
   dateStyle: "medium",
@@ -18,14 +19,18 @@ export default async function CrmPage({
     draft?: string;
     archive?: string;
     archived?: string;
+    history?: string;
+    page?: string;
   }>;
 }) {
   await requireOwner();
   const query = await searchParams;
-  const archived = query.archive === "1";
-  const drafts = !archived && query.draft === "1";
+  const history = query.history === "1";
+  const page = /^\d{1,5}$/.test(query.page ?? "") ? Math.max(1, Number(query.page)) : 1;
+  const archived = !history && query.archive === "1";
+  const drafts = !history && !archived && query.draft === "1";
   const q = (query.q ?? "").trim().slice(0, 200);
-  const treatments = await getDb().treatment.findMany({
+  const treatments = history ? [] : await getDb().treatment.findMany({
     where: {
       archivedAt: archived ? { not: null } : null,
       ...(!archived ? { isPublished: !drafts } : {}),
@@ -41,7 +46,7 @@ export default async function CrmPage({
         <div>
           <p className="crm-eyebrow">Контент сайта</p>
           <h1>
-            {archived
+            {history ? "Недавние изменения" : archived
               ? "Архив процедур"
               : drafts
                 ? "Черновики процедур"
@@ -65,7 +70,7 @@ export default async function CrmPage({
       <div className="crm-toolbar">
         <nav aria-label="Список процедур">
           <Link
-            aria-current={!archived && !drafts ? "page" : undefined}
+            aria-current={!history && !archived && !drafts ? "page" : undefined}
             href="/crm"
           >
             На сайте
@@ -79,6 +84,7 @@ export default async function CrmPage({
           >
             Архив
           </Link>
+          <Link aria-current={history ? "page" : undefined} href="/crm?history=1">Недавние изменения</Link>
         </nav>
         <form method="get">
           <label className="crm-visually-hidden" htmlFor="search">
@@ -92,6 +98,7 @@ export default async function CrmPage({
           />
           {archived && <input type="hidden" name="archive" value="1" />}
           {drafts && <input type="hidden" name="draft" value="1" />}
+          {history && <input type="hidden" name="history" value="1" />}
           <button className="crm-secondary">Найти</button>
         </form>
       </div>
@@ -134,7 +141,7 @@ export default async function CrmPage({
           </p>
         </section>
       )}
-      <TreatmentCards
+      {history ? <TreatmentHistory query={q} page={page} /> : <TreatmentCards
         key={
           treatments
             .map((t) => `${t.id}:${t.updatedAt.toISOString()}`)
@@ -161,7 +168,7 @@ export default async function CrmPage({
         }))}
         view={archived ? "archive" : drafts ? "drafts" : "published"}
         query={q}
-      />
+      />}
     </CrmShell>
   );
 }

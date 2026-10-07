@@ -183,3 +183,22 @@ model RateLimit {
   count       Int
   lastRequest BigInt
 }
+
+// Append-only CRM history. Snapshots survive renamed or removed users/procedures.
+model TreatmentChange {
+  id            String   @id @default(uuid()) @db.Uuid
+  operationId   String   @db.Uuid
+  createdAt     DateTime @default(now()) @db.Timestamptz(3)
+  actorId       String
+  actorName     String
+  treatmentId   Int
+  treatmentName String
+  action        String
+  field         String
+  locale        Locale?
+  before        String   @db.Text
+  after         String   @db.Text
+
+  @@index([createdAt, id])
+  @@index([treatmentId, createdAt])
+}

@@ -18,7 +18,8 @@
     "owner:create": "tsx scripts/database/create-owner.ts",
     "test:owner": "node scripts/database/create-owner.test.mjs",
     "test:crm": "tsx scripts/database/crm-smoke.ts",
-    "test:crm-order": "node scripts/database/crm-order.test.mjs"
+    "test:crm-order": "node scripts/database/crm-order.test.mjs",
+    "test:crm-history": "node scripts/database/crm-history.test.mjs"
   },
   "dependencies": {
     "@better-auth/prisma-adapter": "^1.7.7",

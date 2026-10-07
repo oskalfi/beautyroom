@@ -92,6 +92,20 @@
 .crm-card-meta dd { margin: 0; }
 .crm-card-edited { grid-column: 1 / -1; margin: 0; color: #78675d; font-size: 12px; }
 .crm-card-edited p { margin: 0; }
+.crm-history-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+.crm-history-entry { min-width: 0; padding: 24px; border: 1px solid #e9ded9; border-radius: 12px; background: white; }
+.crm-history-heading { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.crm-history-entry h2 { font-size: 16px; margin-bottom: 12px; }
+.crm-history-diff { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 16px; margin: 0; }
+.crm-history-diff > dl { margin: 0; min-width: 0; padding: 14px; background: #faf7f5; border-radius: 8px; }
+.crm-history-diff dt { font-weight: 600; margin-bottom: 8px; }
+.crm-history-diff dd { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 320px; overflow: auto; }
+.crm-history-pagination { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 24px; flex-wrap: wrap; }
+@media (max-width: 700px) {
+  .crm-history-entry { padding: 16px; }
+  .crm-history-diff { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .crm-history-diff > span { display: none; }
+}
 .crm-order-button, .crm-drag-handle { display: grid; place-items: center; min-width: 44px; min-height: 44px; border: 0; border-radius: 6px; background: #faf7f5; color: #604537; }
 .crm-order-button:disabled, .crm-drag-handle:disabled { cursor: default; opacity: .35; }
 .crm-drag-handle { touch-action: none !important; user-select: none; cursor: grab !important; }

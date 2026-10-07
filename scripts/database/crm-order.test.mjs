@@ -7,17 +7,27 @@ const require = createRequire(import.meta.url);
 let authorized = true;
 let rows = [1, 2, 3].map((id, sortOrder) => ({ id, sortOrder, updatedAt: new Date("2026-01-01T00:00:00.000Z") }));
 let writes = 0;
+let history = [];
+let failHistory = false;
 const db = { $transaction: async callback => {
   const before = rows.map(r => ({ ...r }));
+  const beforeHistory = [...history];
   try { return await callback({ $queryRaw: async () => [], treatment: {
     findMany: async () => [...rows].sort((a,b) => a.sortOrder - b.sortOrder),
     update: async ({ where, data }) => { writes++; Object.assign(rows.find(r => r.id === where.id), data, { updatedAt: new Date("2026-01-02T00:00:00.000Z") }); },
-  } }); } catch (error) { rows = before; throw error; }
+  } }); } catch (error) { rows = before; history = beforeHistory; throw error; }
 } };
 const context = { Error, exports: {}, require(name) {
   if (name === "next/cache") return { revalidatePath() {}, updateTag() {} };
   if (name === "next/navigation") return { redirect() { throw new Error("redirect"); } };
   if (name.includes("auth/owner")) return { requireOwner: async () => { if (!authorized) throw new Error("denied"); return { id: "test-owner", name: "Тестовый администратор", email: "owner@example.invalid" }; } };
+  if (name.includes("treatments/history")) return {
+    treatmentName: row => `Procedure ${row.id}`,
+    writeHistory: async (_tx, actor, id, _name, action, changes, operationId) => {
+      if (failHistory) throw new Error("history failed");
+      history.push({ actor, id, action, changes, operationId });
+    },
+  };
   if (name.includes("db/client")) return { getDb: () => db };
   if (name.includes("model/treatment-editor")) return {};
   return require(name);
@@ -34,7 +44,22 @@ assert.ok((await reorder({ expected: old.slice(1), ids: [2,3] })).error); assert
 assert.equal((await reorder({ expected: old, ids: [3,1,2], lastEditedById: "forged-owner", lastEditedByName: "Подменённое имя" })).saved, true);
 assert.deepEqual(expected().map(r => r.id), [3,1,2]);
 assert.ok(rows.every(row => row.lastEditedById === "test-owner" && row.lastEditedByName === "Тестовый администратор"), "Author must come from the authenticated session, never from client input");
+assert.equal(history.length, 3);
+assert.equal(new Set(history.map(entry => entry.operationId)).size, 1);
+assert.equal(history.find(entry => entry.id === 3).changes[0].before, "3");
+assert.equal(history.find(entry => entry.id === 3).changes[0].after, "1");
 const writeCount = writes;
 assert.ok((await reorder({ expected: old, ids: [1,2,3] })).error); assert.equal(writes, writeCount);
 assert.deepEqual(expected().map(r => r.id), [3,1,2]);
+const logsBefore = history.length;
+assert.equal((await reorder({ expected: expected(), ids: [3,1,2] })).saved, true);
+assert.equal(history.length, logsBefore, "No-op reorder must not create history");
+failHistory = true;
+assert.ok((await reorder({ expected: expected(), ids: [1,2,3] })).error);
+assert.deepEqual(expected().map(r => r.id), [3,1,2], "A history failure must roll back reordering");
+assert.equal(history.length, logsBefore);
+failHistory = false;
+rows.forEach(row => { row.sortOrder += 10; });
+assert.equal((await reorder({ expected: expected(), ids: [3,2,1] })).saved, true);
+assert.deepEqual(expected().map(r => r.id), [3,2,1], "Ordering must handle gaps in stored positions");
 console.log("PASS: order permissions, complete membership, unique IDs, persisted positions and stale-order protection.");

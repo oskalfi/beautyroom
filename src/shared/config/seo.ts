@@ -25,12 +25,14 @@ export function pageMetadata({
   locale,
   path = "/",
   title,
+  shareTitle = title,
   description,
   image,
 }: {
   locale: string;
   path?: string;
   title: string;
+  shareTitle?: string;
   description: string;
   image?: string;
 }): Metadata {
@@ -43,7 +45,7 @@ export function pageMetadata({
       languages: languageAlternates(path),
     },
     openGraph: {
-      title,
+      title: shareTitle,
       description,
       url: localizedUrl(locale, path),
       siteName: "Beauty Room",
@@ -59,7 +61,7 @@ export function pageMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: shareTitle,
       description,
       images: [imageUrl],
     },

@@ -11,10 +11,12 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const treatment = await getTreatmentById(id);
   if (!treatment) notFound();
+  const description = treatmentMetadataDescription(locale, treatment.name);
   return pageMetadata({
     locale, path: `/treatments/${id}`,
     title: `${treatment.name} | Beauty Room`,
-    description: treatmentMetadataDescription(locale, treatment.name),
+    shareTitle: description,
+    description,
     image: treatment.imgPath,
   });
 }

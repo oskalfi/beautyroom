@@ -90,6 +90,8 @@
 .crm-card-meta { display: flex; gap: 32px; margin: 0; }
 .crm-card-meta dt { font-size: 12px; color: #78675d; margin-bottom: 5px; }
 .crm-card-meta dd { margin: 0; }
+.crm-card-edited { grid-column: 1 / -1; margin: 0; color: #78675d; font-size: 12px; }
+.crm-card-edited p { margin: 0; }
 .crm-order-button, .crm-drag-handle { display: grid; place-items: center; min-width: 44px; min-height: 44px; border: 0; border-radius: 6px; background: #faf7f5; color: #604537; }
 .crm-order-button:disabled, .crm-drag-handle:disabled { cursor: default; opacity: .35; }
 .crm-drag-handle { touch-action: none !important; user-select: none; cursor: grab !important; }

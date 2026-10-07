@@ -42,19 +42,24 @@ model ClientContact {
 
 model Treatment {
   // Numeric IDs preserve the existing /treatments/5 links when content is imported.
-  id              Int                    @id @default(autoincrement())
-  priceILS        Decimal?               @db.Decimal(12, 2)
-  priceFrom       Boolean                @default(false)
-  durationMinutes Int?
-  durationFrom    Boolean                @default(false)
-  isPublished     Boolean                @default(false)
-  archivedAt      DateTime?              @db.Timestamptz(3)
-  sortOrder       Int                    @default(0)
-  createdAt       DateTime               @default(now()) @db.Timestamptz(3)
-  updatedAt       DateTime               @updatedAt @db.Timestamptz(3)
-  translations    TreatmentTranslation[]
-  photos          Media[]
-  records         TreatmentRecord[]
+  id               Int                    @id @default(autoincrement())
+  priceILS         Decimal?               @db.Decimal(12, 2)
+  priceFrom        Boolean                @default(false)
+  durationMinutes  Int?
+  durationFrom     Boolean                @default(false)
+  isPublished      Boolean                @default(false)
+  archivedAt       DateTime?              @db.Timestamptz(3)
+  sortOrder        Int                    @default(0)
+  createdAt        DateTime               @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime               @updatedAt @db.Timestamptz(3)
+  lastEditedById   String?
+  lastEditedByName String?
+  lastEditedBy     User?                  @relation("TreatmentLastEditor", fields: [lastEditedById], references: [id], onDelete: SetNull)
+  translations     TreatmentTranslation[]
+  photos           Media[]
+  records          TreatmentRecord[]
+
+  @@index([lastEditedById])
 }
 
 model TreatmentTranslation {
@@ -114,16 +119,17 @@ model Media {
 
 // Authentication is separate from the CRM's Client records.
 model User {
-  id            String    @id
-  name          String
-  email         String    @unique
-  emailVerified Boolean   @default(false)
-  image         String?
-  isOwner       Boolean   @default(false)
-  createdAt     DateTime  @default(now()) @db.Timestamptz(3)
-  updatedAt     DateTime  @updatedAt @db.Timestamptz(3)
-  sessions      Session[]
-  accounts      Account[]
+  id               String      @id
+  name             String
+  email            String      @unique
+  emailVerified    Boolean     @default(false)
+  image            String?
+  isOwner          Boolean     @default(false)
+  createdAt        DateTime    @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime    @updatedAt @db.Timestamptz(3)
+  sessions         Session[]
+  accounts         Account[]
+  editedTreatments Treatment[] @relation("TreatmentLastEditor")
 }
 
 model Session {

@@ -17,7 +17,7 @@ const db = { $transaction: async callback => {
 const context = { Error, exports: {}, require(name) {
   if (name === "next/cache") return { revalidatePath() {}, updateTag() {} };
   if (name === "next/navigation") return { redirect() { throw new Error("redirect"); } };
-  if (name.includes("auth/owner")) return { requireOwner: async () => { if (!authorized) throw new Error("denied"); } };
+  if (name.includes("auth/owner")) return { requireOwner: async () => { if (!authorized) throw new Error("denied"); return { id: "test-owner", name: "Тестовый администратор", email: "owner@example.invalid" }; } };
   if (name.includes("db/client")) return { getDb: () => db };
   if (name.includes("model/treatment-editor")) return {};
   return require(name);
@@ -31,8 +31,9 @@ authorized = true;
 assert.ok((await reorder({ expected: old, ids: [1,1,3] })).error); assert.equal(writes, 0);
 assert.ok((await reorder({ expected: old, ids: [1,2,4] })).error); assert.equal(writes, 0);
 assert.ok((await reorder({ expected: old.slice(1), ids: [2,3] })).error); assert.equal(writes, 0);
-assert.equal((await reorder({ expected: old, ids: [3,1,2] })).saved, true);
+assert.equal((await reorder({ expected: old, ids: [3,1,2], lastEditedById: "forged-owner", lastEditedByName: "Подменённое имя" })).saved, true);
 assert.deepEqual(expected().map(r => r.id), [3,1,2]);
+assert.ok(rows.every(row => row.lastEditedById === "test-owner" && row.lastEditedByName === "Тестовый администратор"), "Author must come from the authenticated session, never from client input");
 const writeCount = writes;
 assert.ok((await reorder({ expected: old, ids: [1,2,3] })).error); assert.equal(writes, writeCount);
 assert.deepEqual(expected().map(r => r.id), [3,1,2]);

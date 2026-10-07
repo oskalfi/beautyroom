@@ -14,7 +14,7 @@ function refreshTreatments() {
 }
 
 export async function saveTreatment(_state: EditorState, formData: FormData): Promise<EditorState> {
-  await requireOwner();
+  const owner = await requireOwner();
   const raw = formData.get("data");
   if (typeof raw !== "string" || raw.length > 500_000) return { version: _state.version, isPublished: _state.isPublished, error: "Данные формы слишком большие или отсутствуют." };
   let input: unknown;
@@ -42,6 +42,7 @@ export async function saveTreatment(_state: EditorState, formData: FormData): Pr
         priceILS: data.priceILS || null, priceFrom: data.priceFrom,
         durationMinutes: data.durationMinutes ? Number(data.durationMinutes) : null,
         durationFrom: data.durationFrom, sortOrder, isPublished,
+        lastEditedById: owner.id, lastEditedByName: owner.name || owner.email,
       };
       let id = data.id;
       if (id === null) {
@@ -81,7 +82,7 @@ export async function saveTreatment(_state: EditorState, formData: FormData): Pr
 }
 
 export async function archiveTreatment(_state: EditorState, formData: FormData): Promise<EditorState> {
-  await requireOwner();
+  const owner = await requireOwner();
   const id = Number(formData.get("id"));
   const version = String(formData.get("version"));
   if (!Number.isSafeInteger(id) || id <= 0 || !Number.isFinite(Date.parse(version))) return { error: "Некорректная процедура." };
@@ -90,7 +91,7 @@ export async function archiveTreatment(_state: EditorState, formData: FormData):
       await tx.$queryRaw`SELECT pg_advisory_xact_lock(610071001)::text`;
       return tx.treatment.updateMany({
       where: { id, archivedAt: null, updatedAt: new Date(version) },
-      data: { archivedAt: new Date(), isPublished: false },
+      data: { archivedAt: new Date(), isPublished: false, lastEditedById: owner.id, lastEditedByName: owner.name || owner.email },
       });
     });
     if (archived.count !== 1) return { error: "Процедура уже изменена. Обновите страницу." };
@@ -100,11 +101,11 @@ export async function archiveTreatment(_state: EditorState, formData: FormData):
 }
 
 export async function restoreTreatment(_state: EditorState, formData: FormData): Promise<EditorState> {
-  await requireOwner();
+  const owner = await requireOwner();
   const id = Number(formData.get("id"));
   if (!Number.isSafeInteger(id) || id <= 0) return { error: "Некорректная процедура." };
   try {
-    const restored = await getDb().treatment.updateMany({ where: { id, archivedAt: { not: null } }, data: { archivedAt: null, isPublished: false } });
+    const restored = await getDb().treatment.updateMany({ where: { id, archivedAt: { not: null } }, data: { archivedAt: null, isPublished: false, lastEditedById: owner.id, lastEditedByName: owner.name || owner.email } });
     if (restored.count !== 1) return { error: "Процедура уже восстановлена. Обновите страницу." };
   } catch { return { error: "Не удалось восстановить процедуру." }; }
   refreshTreatments();
@@ -117,7 +118,7 @@ const orderSchema = z.object({
 });
 
 export async function reorderTreatments(input: unknown): Promise<{ error?: string; saved?: boolean }> {
-  await requireOwner();
+  const owner = await requireOwner();
   const parsed = orderSchema.safeParse(input);
   if (!parsed.success) return { error: "Некорректный список процедур." };
   const { expected, ids } = parsed.data;
@@ -127,7 +128,7 @@ export async function reorderTreatments(input: unknown): Promise<{ error?: strin
       await tx.$queryRaw`SELECT pg_advisory_xact_lock(610071001)::text`;
       const current = await tx.treatment.findMany({ where: { isPublished: true, archivedAt: null }, select: { id: true, updatedAt: true }, orderBy: [{ sortOrder: "asc" }, { id: "asc" }] });
       if (current.length !== expected.length || current.some((row, index) => row.id !== expected[index].id || row.updatedAt.toISOString() !== expected[index].version)) throw new Error("ORDER_CONFLICT");
-      for (const [sortOrder, id] of ids.entries()) await tx.treatment.update({ where: { id }, data: { sortOrder } });
+      for (const [sortOrder, id] of ids.entries()) await tx.treatment.update({ where: { id }, data: { sortOrder, lastEditedById: owner.id, lastEditedByName: owner.name || owner.email } });
     }, { maxWait: 10_000, timeout: 30_000 });
   } catch (error) {
     return { error: error instanceof Error && error.message === "ORDER_CONFLICT" ? "Список изменился в другой вкладке. Обновите страницу перед изменением порядка." : "Не удалось сохранить порядок. Попробуйте снова." };

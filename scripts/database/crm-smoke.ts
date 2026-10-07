@@ -41,7 +41,7 @@ function actionForm(html: string, data: TreatmentEditorData, formIndex = 0) {
     if (attributes.name?.startsWith("$ACTION_")) result.append(attributes.name, attributes.value ?? "");
   }
   assert.ok([...result.keys()].some(key => key.startsWith("$ACTION_REF_") || key.startsWith("$ACTION_ID_")), "Server action binding is missing");
-  result.set("data", JSON.stringify(data));
+  result.set("data", JSON.stringify({ ...data, lastEditedById: ids[1], lastEditedByName: "Forged author" }));
   return result;
 }
 
@@ -91,7 +91,11 @@ async function main() {
     assert.equal(row.isPublished, false);
     assert.equal(row.translations.length, 3);
     assert.equal(row.priceILS?.toString(), "321.45");
-    assert.ok((await (await request("/crm?draft=1", owner.cookie)).text()).includes(testName), "Draft is missing from the drafts tab");
+    assert.equal(row.lastEditedById, ids[0]);
+    assert.equal(row.lastEditedByName, "CRM test");
+    const draftsHtml = await (await request("/crm?draft=1", owner.cookie)).text();
+    assert.ok(draftsHtml.includes(testName), "Draft is missing from the drafts tab");
+    assert.ok(draftsHtml.includes("Администратор:") && draftsHtml.includes("CRM test"), "Author is missing from the procedure card");
     assert.ok(!(await (await request("/crm", owner.cookie)).text()).includes(testName), "Draft must not appear in the published tab");
     const draft = await request(`/en/treatments/${row.id}`);
     const draftHtml = await draft.text();
@@ -133,6 +137,8 @@ async function main() {
     await request(editPath, owner.cookie, { method: "POST", body: actionForm(freshHtml, data) });
     const preserved = await db.treatment.findUniqueOrThrow({ where: { id: row.id } });
     assert.equal(preserved.isPublished, true); assert.equal(preserved.sortOrder, previousOrder);
+    assert.equal(preserved.lastEditedById, ids[0]);
+    assert.equal(preserved.lastEditedByName, "CRM test");
     const forbiddenDraft = actionForm(freshHtml, data); forbiddenDraft.set("publication", "draft");
     await request(editPath, owner.cookie, { method: "POST", body: forbiddenDraft });
     assert.equal((await db.treatment.findUniqueOrThrow({ where: { id: row.id } })).isPublished, true);
@@ -142,6 +148,9 @@ async function main() {
     archiveForm.set("id", String(row.id)); archiveForm.set("version", preserved.updatedAt.toISOString());
     const archivedResponse = await request(editPath, owner.cookie, { method: "POST", body: archiveForm });
     assert.equal(archivedResponse.status, 303);
+    const archivedRow = await db.treatment.findUniqueOrThrow({ where: { id: row.id } });
+    assert.equal(archivedRow.lastEditedById, ids[0]);
+    assert.equal(archivedRow.lastEditedByName, "CRM test");
     assert.equal((await db.treatment.findUniqueOrThrow({ where: { id: row.id } })).isPublished, false);
     assert.ok(!(await (await request("/en/procedures")).text()).includes(testName));
     console.log("Checking archived editor...");
@@ -151,6 +160,9 @@ async function main() {
     const restoreForm = actionForm(archivedHtml, data, 1); restoreForm.set("id", String(row.id));
     const restoredResponse = await request(editPath, owner.cookie, { method: "POST", body: restoreForm });
     assert.equal(restoredResponse.status, 303);
+    const restoredRow = await db.treatment.findUniqueOrThrow({ where: { id: row.id } });
+    assert.equal(restoredRow.lastEditedById, ids[0]);
+    assert.equal(restoredRow.lastEditedByName, "CRM test");
     assert.ok((await (await request("/crm?draft=1", owner.cookie)).text()).includes(testName));
     const blockedOrigin = await request("/api/auth/sign-in/email", "", { method: "POST", headers: { Origin: "https://untrusted.example", "Content-Type": "application/json" }, body: JSON.stringify({ email: emails[0], password }) });
     assert.equal(blockedOrigin.status, 403);

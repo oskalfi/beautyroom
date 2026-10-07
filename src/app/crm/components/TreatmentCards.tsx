@@ -5,7 +5,7 @@ import { useEffect, useLayoutEffect, useRef, useState, useTransition, type Point
 import { createPortal } from "react-dom";
 import { reorderTreatments } from "../actions";
 
-export type TreatmentCardData = { id: number; version: string; name: string; searchText?: string; price: string; duration: string };
+export type TreatmentCardData = { id: number; version: string; editedAtLabel: string; editedByName: string; name: string; searchText?: string; price: string; duration: string };
 
 export function TreatmentCards({ initial, view, query }: { initial: TreatmentCardData[]; view: "published" | "drafts" | "archive"; query: string }) {
   const [items, setItems] = useState(initial);
@@ -147,6 +147,7 @@ export function TreatmentCards({ initial, view, query }: { initial: TreatmentCar
         <Link className="crm-card-link" href={`/crm/treatments/${item.id}`} aria-label={`${view === "archive" ? "Открыть" : "Редактировать"}: ${item.name}`} aria-disabled={editing || pending || dragging !== null} onClick={e => { if (editing || pending || dragging !== null) e.preventDefault(); }}>
           <strong className="crm-card-name">{item.name}</strong>
           <dl className="crm-card-meta"><div><dt>Цена</dt><dd>{item.price}</dd></div><div><dt>Длительность</dt><dd>{item.duration}</dd></div></dl>
+          <div className="crm-card-edited"><p>Последнее редактирование: <time dateTime={item.version} title="Время Израиля">{item.editedAtLabel}</time></p><p>Администратор: {item.editedByName}</p></div>
         </Link>
       </li>)}
     </ol>

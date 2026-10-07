@@ -4,6 +4,12 @@ import { getDb } from "@/server/db/client";
 import { CrmShell } from "./components/CrmShell";
 import { TreatmentCards } from "./components/TreatmentCards";
 
+const editedAtFormatter = new Intl.DateTimeFormat("ru-RU", {
+  dateStyle: "medium",
+  timeStyle: "short",
+  timeZone: "Asia/Jerusalem",
+});
+
 export default async function CrmPage({
   searchParams,
 }: {
@@ -137,6 +143,8 @@ export default async function CrmPage({
         initial={treatments.map((treatment) => ({
           id: treatment.id,
           version: treatment.updatedAt.toISOString(),
+          editedAtLabel: editedAtFormatter.format(treatment.updatedAt),
+          editedByName: treatment.lastEditedByName ?? "Не указан",
           name:
             treatment.translations.find((copy) => copy.locale === "ru")?.name ||
             treatment.translations.find((copy) => copy.name)?.name ||

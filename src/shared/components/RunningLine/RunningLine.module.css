@@ -60,7 +60,9 @@
   background-image: url("/star.svg");
 }
 
-.fact:lang(he) { direction: rtl; }
+.fact:lang(he) {
+  direction: rtl;
+}
 
 .factGroup {
   display: flex;
@@ -70,4 +72,10 @@
 }
 .runningLine:lang(he) .factsWrapper {
   animation-direction: reverse;
+}
+
+@media (max-width: 470px) {
+  :root {
+    --running-line-fact-font-size: 18px;
+  }
 }

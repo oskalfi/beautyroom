@@ -41,6 +41,7 @@
   justify-content: center;
   align-items: center;
   flex: 1;
+  padding: 0 6px;
 }
 
 .heading {
@@ -73,14 +74,22 @@
 }
 
 @media (max-width: 800px) {
+  .heading {
+    font-size: var(--results-intro-heading-font-size-to-800);
+  }
+  .sectionContainer {
+    height: 90vh;
+  }
+
   .maleFace,
   .femaleFace {
     width: 160px;
   }
 }
 
-@media (max-width: 800px) {
-  .heading {
-    font-size: var(--results-intro-heading-font-size-to-800);
+@media (max-width: 470px) {
+  .maleFace,
+  .femaleFace {
+    width: 130px;
   }
 }

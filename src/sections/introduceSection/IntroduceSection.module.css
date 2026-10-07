@@ -55,6 +55,7 @@
   max-width: 1000px;
   text-align: center;
   font-weight: var(--introduce-heading-font-weight);
+  z-index: 3;
 }
 
 .letter {
@@ -79,6 +80,10 @@
 @media (max-width: 450px) {
   .heading {
     font-size: var(--introduce-heading-font-size-to-450);
-    padding: 0 4px;
+    padding: 0 6px;
+  }
+  .topFlower,
+  .bottomFlower {
+    width: 140px;
   }
 }

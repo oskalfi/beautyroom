@@ -16,6 +16,7 @@
     "db:check": "tsx scripts/database/check.ts",
     "db:lesson": "tsx scripts/database/lesson.ts",
     "owner:create": "tsx scripts/database/create-owner.ts",
+    "test:owner": "node scripts/database/create-owner.test.mjs",
     "test:crm": "tsx scripts/database/crm-smoke.ts",
     "test:crm-order": "node scripts/database/crm-order.test.mjs"
   },

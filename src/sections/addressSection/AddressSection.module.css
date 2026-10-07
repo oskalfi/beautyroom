@@ -37,6 +37,7 @@
 .mapWrapper {
   display: block;
   grid-area: map;
+  min-width: 0;
 }
 
 .map {
@@ -44,15 +45,23 @@
   max-width: 815px;
   width: 100%;
   display: block;
-  justify-self: center;
-  align-self: center;
-  object-fit: cover;
-  object-position: center;
+  border: 0;
   height: 500px;
 }
 
-.mapWrapper:focus-visible {
-  outline: 12px solid var(--primary-color);
+.mapLink {
+  display: block;
+  width: fit-content;
+  margin: 12px auto 0;
+  color: var(--brown);
+  text-align: center;
+  text-decoration: underline;
+}
+
+.map:focus-visible,
+.mapLink:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
 }
 
 .address {
@@ -259,6 +268,10 @@
 }
 
 @media (max-width: 480px) {
+  .map {
+    height: 360px;
+  }
+
   .section {
     padding: 40px 0;
     grid-template-columns: 1fr;

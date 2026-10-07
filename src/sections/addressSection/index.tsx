@@ -1,5 +1,5 @@
 "use client";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import { LazyImage } from "@/shared/components/LazyImage";
 
@@ -14,6 +14,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const AddressSection = () => {
   const t = useTranslations("Home");
+  const locale = useLocale();
+  const mapUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.6117815743755!2d34.75951190000001!3d32.052698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4da6a466a909%3A0xf522fa774f394f73!2sBeauty%20Room%20by%20Yael%20Kanter!5e0!3m2!1s${locale}!2sil!4v1791362469461!5m2!1s${locale}!2sil`;
   const headingRef = useRef(null);
   const rectRef = useRef<SVGRectElement>(null);
   const containerRef = useRef(null);
@@ -138,24 +140,27 @@ export const AddressSection = () => {
           {t("address")}
         </address>
       </a>
-      <a
-        data-press-feedback
-        aria-label={t("maps")}
-        target="_blank"
-        className={styles.mapWrapper}
-        href="https://maps.app.goo.gl/WLxLtpTQESe6Jx4C7"
-      >
-        <LazyImage
-          src="/map.png"
-          width={2722}
-          height={1590}
-          sizes="(max-width: 768px) calc(100vw - 20px), (max-width: 1280px) 60vw, 815px"
-          quality={90}
-          alt={t("mapAlt")}
-          ref={mapRef}
+      <div className={styles.mapWrapper} ref={mapRef}>
+        <iframe
+          src={mapUrl}
+          title={t("mapAlt")}
+          width="815"
+          height="500"
+          loading="lazy"
+          allowFullScreen
+          referrerPolicy="strict-origin-when-cross-origin"
           className={styles.map}
         />
-      </a>
+        <a
+          className={styles.mapLink}
+          dir="auto"
+          href="https://maps.app.goo.gl/WLxLtpTQESe6Jx4C7"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t("maps")}
+        </a>
+      </div>
     </section>
   );
 };

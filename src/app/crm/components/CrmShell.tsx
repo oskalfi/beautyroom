@@ -10,6 +10,6 @@ export async function CrmShell({ children }: { children: React.ReactNode }) {
       <nav aria-label="Навигация кабинета"><Link href="/crm">Процедуры</Link><a href="/" target="_blank" rel="noreferrer">Открыть сайт ↗</a></nav>
       <div className="crm-account"><span>{owner.email}</span><LogoutButton /></div>
     </header>
-    <main className="crm-main">{children}</main>
+    <main className="crm-main" data-crm-owner-area="true">{children}</main>
   </>;
 }

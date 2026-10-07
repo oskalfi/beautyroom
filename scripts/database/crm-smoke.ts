@@ -49,7 +49,7 @@ async function protectedPage(path: string, cookie = "") {
   const response = await request(path, cookie);
   const html = await response.text();
   assert.ok(response.headers.get("location")?.includes("/crm/login") || (html.includes("NEXT_REDIRECT") && html.includes("/crm/login")), `${path} was not protected`);
-  assert.ok(!html.includes("Цены, длительность и тексты на трёх языках."));
+  assert.doesNotMatch(html, /<main\b[^>]*\bdata-crm-owner-area="true"/, `${path} exposed the protected CRM area`);
 }
 
 async function main() {
@@ -74,6 +74,7 @@ async function main() {
     const newPage = await request("/crm/treatments/new", owner.cookie);
     const newHtml = await newPage.text();
     assert.ok(newHtml.includes("Новая процедура"));
+    assert.match(newHtml, /<main\b[^>]*\bdata-crm-owner-area="true"/, "Authorized page must contain the protected CRM area");
     const data = emptyTreatment();
     data.priceILS = "321.45"; data.durationMinutes = "45";
     for (const locale of ["ru", "he", "en"] as const) data.translations[locale] = { ...data.translations[locale], name: `${testName} ${locale}`, description: `Test description ${locale}` };

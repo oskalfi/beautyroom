@@ -26,35 +26,40 @@ export default async function CrmPage({
   await requireOwner();
   const query = await searchParams;
   const history = query.history === "1";
-  const page = /^\d{1,5}$/.test(query.page ?? "") ? Math.max(1, Number(query.page)) : 1;
+  const page = /^\d{1,5}$/.test(query.page ?? "")
+    ? Math.max(1, Number(query.page))
+    : 1;
   const archived = !history && query.archive === "1";
   const drafts = !history && !archived && query.draft === "1";
   const q = (query.q ?? "").trim().slice(0, 200);
-  const treatments = history ? [] : await getDb().treatment.findMany({
-    where: {
-      archivedAt: archived ? { not: null } : null,
-      ...(!archived ? { isPublished: !drafts } : {}),
-    },
-    include: {
-      translations: { select: { locale: true, name: true, description: true } },
-    },
-    orderBy: [{ sortOrder: "asc" }, { id: "asc" }],
-  });
+  const treatments = history
+    ? []
+    : await getDb().treatment.findMany({
+        where: {
+          archivedAt: archived ? { not: null } : null,
+          ...(!archived ? { isPublished: !drafts } : {}),
+        },
+        include: {
+          translations: {
+            select: { locale: true, name: true, description: true },
+          },
+        },
+        orderBy: [{ sortOrder: "asc" }, { id: "asc" }],
+      });
   return (
     <CrmShell>
       <div className="crm-title-row">
         <div>
           <p className="crm-eyebrow">Контент сайта</p>
           <h1>
-            {history ? "Недавние изменения" : archived
-              ? "Архив процедур"
-              : drafts
-                ? "Черновики процедур"
-                : "Процедуры"}
+            {history
+              ? "Недавние изменения"
+              : archived
+                ? "Архив процедур"
+                : drafts
+                  ? "Черновики процедур"
+                  : "Процедуры"}
           </h1>
-          <p className="crm-muted">
-            Цены, длительность и тексты на трёх языках.
-          </p>
         </div>
         {drafts && (
           <Link className="crm-primary" href="/crm/treatments/new">
@@ -84,7 +89,12 @@ export default async function CrmPage({
           >
             Архив
           </Link>
-          <Link aria-current={history ? "page" : undefined} href="/crm?history=1">Недавние изменения</Link>
+          <Link
+            aria-current={history ? "page" : undefined}
+            href="/crm?history=1"
+          >
+            Журнал событий
+          </Link>
         </nav>
         <form method="get">
           <label className="crm-visually-hidden" htmlFor="search">
@@ -141,34 +151,41 @@ export default async function CrmPage({
           </p>
         </section>
       )}
-      {history ? <TreatmentHistory query={q} page={page} /> : <TreatmentCards
-        key={
-          treatments
-            .map((t) => `${t.id}:${t.updatedAt.toISOString()}`)
-            .join(",") + q
-        }
-        initial={treatments.map((treatment) => ({
-          id: treatment.id,
-          version: treatment.updatedAt.toISOString(),
-          editedAtLabel: editedAtFormatter.format(treatment.updatedAt),
-          editedByName: treatment.lastEditedByName ?? "Не указан",
-          name:
-            treatment.translations.find((copy) => copy.locale === "ru")?.name ||
-            treatment.translations.find((copy) => copy.name)?.name ||
-            "Без названия",
-          searchText: treatment.translations.map((copy) => copy.name).join(" "),
-          price:
-            treatment.priceILS === null
-              ? "Не указана"
-              : `${treatment.priceFrom ? "от " : ""}${treatment.priceILS.toString()} ₪`,
-          duration:
-            treatment.durationMinutes === null
-              ? "Не указана"
-              : `${treatment.durationFrom ? "от " : ""}${treatment.durationMinutes} мин`,
-        }))}
-        view={archived ? "archive" : drafts ? "drafts" : "published"}
-        query={q}
-      />}
+      {history ? (
+        <TreatmentHistory query={q} page={page} />
+      ) : (
+        <TreatmentCards
+          key={
+            treatments
+              .map((t) => `${t.id}:${t.updatedAt.toISOString()}`)
+              .join(",") + q
+          }
+          initial={treatments.map((treatment) => ({
+            id: treatment.id,
+            version: treatment.updatedAt.toISOString(),
+            editedAtLabel: editedAtFormatter.format(treatment.updatedAt),
+            editedByName: treatment.lastEditedByName ?? "Не указан",
+            name:
+              treatment.translations.find((copy) => copy.locale === "ru")
+                ?.name ||
+              treatment.translations.find((copy) => copy.name)?.name ||
+              "Без названия",
+            searchText: treatment.translations
+              .map((copy) => copy.name)
+              .join(" "),
+            price:
+              treatment.priceILS === null
+                ? "Не указана"
+                : `${treatment.priceFrom ? "от " : ""}${treatment.priceILS.toString()} ₪`,
+            duration:
+              treatment.durationMinutes === null
+                ? "Не указана"
+                : `${treatment.durationFrom ? "от " : ""}${treatment.durationMinutes} мин`,
+          }))}
+          view={archived ? "archive" : drafts ? "drafts" : "published"}
+          query={q}
+        />
+      )}
     </CrmShell>
   );
 }
